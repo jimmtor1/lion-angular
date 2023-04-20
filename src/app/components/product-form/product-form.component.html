@@ -1,0 +1,88 @@
+<div class="container mt-3">
+
+    <div class="w-50 mx-auto">
+
+        <h2>Novi proizvod</h2>
+
+        <form (ngSubmit)="submit()">
+
+            <!-- <div class="mb-3">
+                <label>kategorija&nbsp;<span class="form-label">*</span></label>
+                <select name="idcategory" (change)="subcategoriesCombo($event)" [(ngModel)]="product.idcategory" class="form-select">
+                    <option value="0">--odaberite kategoriju--</option>
+                    <option value="1">Građevinarstvos</option>
+                    <option value="2">Sve za kuću</option>
+                    <option value="3">Informatika i telekomunikacije</option>
+                    <option value="4">Od glave do pete</option>
+                    <option value="5">Trgovina</option>
+                </select>
+            </div> -->
+
+            <div class="mb-3">
+                <label>Kategorija proizvoda&nbsp;<span class="form-label">*</span></label>
+                <select name="idsubcategory" (change)="selectedSub($event)" [(ngModel)]="product.idsubcategory" class="form-select">    
+                    <option value="">--Odaberite podkategoriju--</option>                
+                    <option *ngFor="let sub of subcategories" value={{sub.idsubcategory}}>{{sub.subcategoryName}}</option>                    
+                </select>
+            </div>
+      
+            <div class="mb-3">
+                <label for="product_name">Ime proizvoda&nbsp;<span class="form-label">*</span></label>
+                <input type="text" class="form-control" name="product_name" id="ime" autocomplete="Ime proizvoda"
+                    value="" [(ngModel)]="product.productName">
+            </div>
+           
+            <div class="mb-3">
+                <!-- <span class="form-label">*</span> -->
+                <label for="description">Opis&nbsp;</label>
+                <textarea class="form-control" id="description" name="description" rows="3" [(ngModel)]="product.description"></textarea>
+            </div>
+
+            <div>
+                <label for="price">Cijena&nbsp;<span class="form-label">*</span></label>
+                <input type="number" class="form-control" name="price" id="price" rows="3" [(ngModel)]="product.price">
+            </div>
+
+            <div>
+                <label for="price">Cijena na&nbsp;<span class="form-label">*</span></label>
+                <input type="number" class="form-control" name="price" id="price" rows="3" [(ngModel)]="product.price">
+            </div>
+
+            <!-- <div class="my-3" style="height: 300px; border: dashed #dc3545;">
+                <h4 data-v-9aa5db88="" _msttexthash="307190" _msthash="1926">Sube fotos aquí...</h4>
+            </div> -->
+
+            <!-- <div (drop)="onDrop($event)" (dragover)="onDragOver($event)" class="drop-zone">
+                <ul #imagelist id="imagelist"></ul>
+            </div> -->
+
+            <!-- <label class="mt-3" for="">odaberite fotografije ili ih prevucite mišem</label> -->
+            <div class="input-group mt-3 mb-2">
+                <input type="file" (change)="onFileSelected($event)" class="form-control" multiple id="imagesInput">
+                <!-- <label class="input-group-text" for="imagesInput">Dodaj</label> -->
+            </div>
+
+            <div class="drop-zone">
+                <ul #imagelist id="imagelist">
+                    <li *ngFor="let image of images;" [id]="image.id">
+                        <div class="d-flex flex-column">
+                            <img [src]="image.link"  width="100">
+                            <button type="button" class="btn btn-danger" (click)="removeImage(image)">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <input type="submit" value="Dodaj" class="btn btn-danger">
+
+            <!-- <input type="file" (change)="onFileSelected($event)" multiple> -->
+            <!-- (change)="onFileSelected($event)" -->
+
+        </form>
+
+    </div>
+
+
+</div>

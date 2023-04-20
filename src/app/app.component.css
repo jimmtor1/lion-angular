@@ -1,0 +1,19 @@
+.search-input {
+    border-radius: 50px 0px 0px 50px;
+}
+
+.search-button {
+    border-radius: 0px 50px 50px 0px;
+}
+
+.dropdown-toggle:hover+.dropdown-menu {
+    display: block;
+}
+
+.dropdown-menu:hover {
+    display: block;
+}
+
+/* .dropdown-menu:active{
+    display: none;
+} */

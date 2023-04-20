@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Category } from 'src/app/models/category';
 import { Product } from 'src/app/models/product';
 import { CategoryService } from 'src/app/services/category.service';
@@ -9,7 +9,7 @@ import { ProductService } from 'src/app/services/product.service';
   templateUrl: './productos-inicio.component.html',
   styleUrls: ['./productos-inicio.component.css']
 })
-export class ProductosInicioComponent {
+export class ProductosInicioComponent implements OnInit {
 
   categories:Category[] = [];
 
@@ -19,14 +19,13 @@ export class ProductosInicioComponent {
 
   private getProductsFromCategory(){
     this.categoryService.getAll().subscribe(data => {
-      this.categories = data;
+      this.categories = data;      
     });
   }
 
   ngOnInit():void{
     this.getProductsFromCategory();
-    console.log(this.categories);
-    
+      
     
     // this.products = [{
 

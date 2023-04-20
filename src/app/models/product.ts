@@ -1,13 +1,18 @@
+import { ProductImage } from "./product-image";
+
 export class Product {
 
-    id:number = 0;
-    idSubcategory:number = 0;
-    productName:String = "";
-    description:String = "";
-    price:number = 0;
-    active:boolean = true;
-    company:String = "";
-    creationDate:String = "";
-
+    idproduct:number = 0;
+    productName:string = "";
+    description:string = "";
+    idcategory:number=0;
+    idsubcategory:number = 0;
+    idprovider:number = 1; 
+    federation:number;
+    city:number;   
+    price:number;
+    active:boolean = true;    
+    creationDate:Date; 
+    productImageList:ProductImage[];
 
 }

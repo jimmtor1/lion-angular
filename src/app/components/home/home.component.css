@@ -2,19 +2,6 @@
     padding: 2em 0;
 }
 
-
-.search-input {
-    border-radius: 50px 0px 0px 50px;
-}
-
-.search-button {
-    border-radius: 0px 50px 50px 0px;
-}
-
-a{
-    color: #333e48;
-}
-
 @media (min-width: 768px){
     /* .bg-cover {
         height: 152px;

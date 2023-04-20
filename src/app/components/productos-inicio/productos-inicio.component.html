@@ -1,15 +1,15 @@
 <div class="container mt-4">
 
     <!-- categoria1 -->
-    <!-- <div *ngFor="let category of categories">        
+    <div *ngFor="let category of categories">        
         <h4 class="text-center text-danger mb-0">{{category.categoryName}}</h4>
         <hr class="mt-1">
         <div class="d-flex justify-content-center">
             <ul *ngFor="let product of category.products.slice(0,4)" class="list-unstyled d-flex overflow-auto flex-nowrap">
                 <li class="flex-row mx-2">
-                    <div class="card" style="width: 16rem;">
-                        <a href="#">
-                            <img src="assets/images/img1.jpg" class="card-img-top" alt="...">
+                    <div class="card" style="width: 14rem;">
+                        <a routerLink="addetails/{{product.idproduct}}">
+                            <img src="./assets/images/{{product.productImageList[0].idimage}}{{product.productImageList[0].extension}}" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title">{{product.productName}}</h5>                                
                             </div>
@@ -18,10 +18,53 @@
                 </li>               
             </ul>
         </div>
+    </div>
+
+    <!-- categoria1 -->
+    <!-- <h4 class="text-center text-danger mb-0">Sve za kuću</h4>
+    <hr class="mt-1">
+    <div>
+        <ul class="list-unstyled d-flex overflow-auto flex-nowrap">
+            <li class="flex-row mx-2">
+                <div class="card" style="width: 16rem;">
+                    <img src="assets/images/img1.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Product name</h5>
+                    </div>
+                </div>
+            </li>
+            <li class="flex-row mx-2">
+                <div class="card" style="width: 16rem;">
+                    <img src="assets/images/img2.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Product name</h5>
+
+                    </div>
+                </div>
+            </li>
+            <li class="flex-row mx-2">
+                <div class="card" style="width: 16rem;">
+                    <img src="assets/images/img3.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Product name</h5>
+
+                    </div>
+                </div>
+            </li>
+            <li class="flex-row mx-2">
+                <div class="card" style="width: 16rem;">
+                    <img src="assets/images/img4.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Product name</h5>
+                    </div>
+                </div>
+            </li>
+        </ul>
     </div> -->
 
-    <!-- categoria1 -->
-    <h4 class="text-center text-danger mb-0">Sve za kuću</h4>
+
+    <!-- categoria2 -->
+    <!-- <h4 class="text-center text-danger mb-0">Informatika i telekomunikacije</h4>
     <hr class="mt-1">
     <div>
         <ul class="list-unstyled d-flex overflow-auto flex-nowrap">
@@ -31,7 +74,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Product name</h5>
 
-                        <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+                       
                     </div>
                 </div>
             </li>
@@ -62,11 +105,10 @@
                 </div>
             </li>
         </ul>
-    </div>
+    </div> -->
 
-
-    <!-- categoria1 -->
-    <h4 class="text-center text-danger mb-0">Informatika i telekomunikacije</h4>
+    <!-- categoria3 -->
+    <!-- <h4 class="text-center text-danger mb-0">Od glave do pete</h4>
     <hr class="mt-1">
     <div>
         <ul class="list-unstyled d-flex overflow-auto flex-nowrap">
@@ -76,7 +118,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Product name</h5>
 
-                        <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+                         <a href="#" class="btn btn-primary">Go somewhere</a> 
                     </div>
                 </div>
             </li>
@@ -107,10 +149,10 @@
                 </div>
             </li>
         </ul>
-    </div>
+    </div> -->
 
-    <!-- categoria1 -->
-    <h4 class="text-center text-danger mb-0">Od glave do pete</h4>
+    <!-- categoria4 -->
+    <!-- <h4 class="text-center text-danger mb-0">Trgovina</h4>
     <hr class="mt-1">
     <div>
         <ul class="list-unstyled d-flex overflow-auto flex-nowrap">
@@ -119,8 +161,6 @@
                     <img src="assets/images/img1.jpg" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Product name</h5>
-
-                        <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
                     </div>
                 </div>
             </li>
@@ -151,51 +191,7 @@
                 </div>
             </li>
         </ul>
-    </div>
-
-    <!-- categoria1 -->
-    <h4 class="text-center text-danger mb-0">Trgovina</h4>
-    <hr class="mt-1">
-    <div>
-        <ul class="list-unstyled d-flex overflow-auto flex-nowrap">
-            <li class="flex-row mx-2">
-                <div class="card" style="width: 16rem;">
-                    <img src="assets/images/img1.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Product name</h5>
-
-                        <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
-                    </div>
-                </div>
-            </li>
-            <li class="flex-row mx-2">
-                <div class="card" style="width: 16rem;">
-                    <img src="assets/images/img2.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Product name</h5>
-
-                    </div>
-                </div>
-            </li>
-            <li class="flex-row mx-2">
-                <div class="card" style="width: 16rem;">
-                    <img src="assets/images/img3.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Product name</h5>
-
-                    </div>
-                </div>
-            </li>
-            <li class="flex-row mx-2">
-                <div class="card" style="width: 16rem;">
-                    <img src="assets/images/img4.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Product name</h5>
-                    </div>
-                </div>
-            </li>
-        </ul>
-    </div>
+    </div> -->
 
 
 </div>
