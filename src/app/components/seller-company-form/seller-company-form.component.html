@@ -1,0 +1,134 @@
+
+<div class="w-75 m-auto">
+
+
+    <div class=" mt-3 mb-4">
+        <label class="form-label" for="">Profile picture</label>
+        <div class="row">
+
+            <input type="file" class="form-control mb-2" id="imagesInput">
+
+            <div class="drop-zone">
+                <img src="./assets/images/company-vision.png" width="100">
+                <!-- <button type="button" class="btn btn-danger">
+                    <i class="fa fa-trash"></i>
+                </button> -->
+            </div>
+        </div>
+    </div>
+
+
+    <p>Schedule:</p>
+    <p class="form-row form-group form-row-wide"> <!-- short biography -->
+        <label for="hours">Hours:<span class="required">*</span></label>
+        <input class="form-control" name="hours" id="hours" value="" required="required"
+            [(ngModel)]="seller.address">
+    </p>
+
+    <p class="form-row form-group form-row-wide"> <!-- short biography -->
+        <label for="annual_leave">Annual leave<span class="required">*</span></label>
+        <input class="form-control" name="annual_leave" id="annual_leave" value="" required="required"
+            [(ngModel)]="seller.address">
+    </p>
+
+    <p class="form-row form-group form-row-wide"> <!-- short biography -->
+        <label for="delivery_cost">Delivery cost<span class="required">*</span></label>
+        <input class="form-control" name="delivery_cost" id="delivery_cost" value="" required="required"
+            [(ngModel)]="seller.address">
+    </p>
+
+    <div class="mb-3">
+        <label for="reg_address">Adresa&nbsp;<span class="form-label">*</span></label>
+        <input type="text" class="form-control" name="reg_address" id="reg_address">
+    </div>
+
+    <div class="mb-3">
+        <label for="street">Street&nbsp;<span class="form-label">*</span></label>
+        <input type="text" class="form-control" name="street" id="street">
+    </div>
+
+    <div class="mb-3">
+        <label for="postal_code">postal code&nbsp;<span class="form-label">*</span></label>
+        <input type="text" class="form-control" name="postal_code" id="postal_code">
+    </div>
+
+    <div class="mb-3">
+        <label>Djelatnost&nbsp;<span class="form-label">*</span></label>
+
+        <!-- [(ngModel)]="product.idcategory" -->
+        <select name="idcategory" (change)="subcategoriesCombo($event)"
+            class="form-select">
+            <option value="0">--odaberite djelatnost--</option>
+            <option value="1">Građevinarstvo</option>
+            <option value="2">Sve za kuću</option>
+            <option value="3">Informatika i telekomunikacije</option>
+            <option value="4">Od glave do pete</option>
+            <!-- <option value="5">Trgovina</option> -->
+        </select>
+    </div>
+
+    <!-- [(ngModel)]="product.idsubcategory" -->
+    <div class="mb-3">
+        <label>Poddjelatnost&nbsp;<span class="form-label">*</span></label>
+        <select name="idsubcategory" (change)="selectedSub($event)" class="form-select">
+            <option value="">--Odaberite poddjelatnost--</option>
+            <option *ngFor="let sub of subcategories" value={{sub.idsubcategory}}>{{sub.subcategoryName}}
+            </option>
+        </select>
+    </div>
+
+    
+    <p class="form-row form-group form-row-wide"> <!-- short biography -->
+        <label for="short_biography">Short biography<span class="required">*</span></label>
+        <textarea rows="4" class="form-control" name="short_biography" id="short_biography" value=""
+            required="required" [(ngModel)]="seller.address">
+        </textarea>
+    </p>
+
+
+     <!-- social networks: -->
+     <label>Social networks:</label>
+     <div class="input-group mb-2">
+         <span class="input-group-text" id="facebook"><i class="fa fa-facebook"></i></span>
+         <input type="text" class="form-control" id="facebook" aria-describedby="facebook">
+     </div>
+
+     <div class="input-group mb-2">
+         <span class="input-group-text" id="instagram"><i class="fa fa-instagram"></i></span>
+         <input type="text" class="form-control" id="instagram" aria-describedby="instagram">
+     </div>
+
+     <div class="input-group mb-3">
+         <span class="input-group-text" id="youtube"><i class="fa fa-youtube"></i></span>
+         <input type="text" class="form-control" id="youtube" aria-describedby="youtube">
+     </div>
+
+     <div class="form-group mb-4">
+        <label class="form-label">Email</label>
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" name="setting_show_email" value="yes" checked="checked">
+            <label> Prikaži email address in store</label>
+        </div>
+    </div>
+
+    <div class="w-50 m-auto text-center mb-4">
+
+        <a class="btn btn-danger mx-3" routerLink="/product">&nbsp;&nbsp;Save&nbsp;&nbsp;</a>        
+
+    </div>
+    
+
+    <!-- <div class="row">
+        <div class="col-6">
+            <a class="btn btn-danger" routerLink="/product">Save</a>
+        </div>
+
+        <div class="col-6">
+            <a class="btn btn-dark" routerLink="/product">Cancel</a>
+        </div>
+
+    </div> -->
+
+
+</div>
+

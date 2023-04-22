@@ -23,7 +23,7 @@ export class RegisterFormComponent implements OnInit {
   subcategories: Subcategory[];
   citiesToCombo: string[] = [];
 
-  isSeller:boolean = false;
+  isSeller:boolean = true;
 
 
   constructor(private buyerService : BuyerService, private router:Router, private categoryService: CategoryService){

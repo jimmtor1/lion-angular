@@ -1,0 +1,68 @@
+<div class="w-75 m-auto">
+    
+    <p class="h2 text-center">{{seller.companyName}}</p>
+
+    <div class="mt-4 mb-4">        
+        <div class="row">
+            <div class="drop-zone m-auto">
+                <img src="./assets/images/company-vision.png" width="100">
+            </div>
+        </div>
+    </div>
+
+    <p> Djelatnost: {{seller.companyCategory}}</p> <!--category-->
+
+    <p> Poddjelatnost: {{seller.companySubcategory}}</p> <!--subcategory-->
+    
+    <p> Ime: {{seller.firstName}} {{seller.lastName}}</p>
+
+    <p> Broj mobitela: {{seller.phone}}</p>
+
+    <p> Adresa: {{seller.address}}</p>
+
+    <p> Street: {{seller.street}}</p>
+
+    <p> Postal code: {{seller.postalCode}}</p>
+
+    <p> Kanton: {{seller.federation}}</p>
+
+    <p> Grad: {{seller.city}}</p>
+
+    <p class="mb-0" disabled="true" >Short biography:</p> <!-- short biography -->
+    <textarea class="mb-3" readonly rows="4" class="form-control">{{seller.biography}}</textarea>
+      
+    <p>Schedule:</p>
+    <p>Hours: {{seller.hours}}</p>
+
+    <p>Annual leave: {{seller.annualLeave}}</p>
+
+    <p>Delivery cost: {{seller.deliveryCost}}</p>
+    
+    
+    <!-- social networks: -->
+    <label>Social networks:</label>
+    <div class="input-group mb-2">
+        <span class="input-group-text" id="facebook"><i class="fa fa-facebook"></i></span>
+        <input disabled type="text" class="form-control" id="facebook" aria-describedby="facebook">
+    </div>
+
+    <div class="input-group mb-2">
+        <span class="input-group-text" id="instagram"><i class="fa fa-instagram"></i></span>
+        <input disabled type="text" class="form-control" id="instagram" aria-describedby="instagram">
+    </div>
+
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="youtube"><i class="fa fa-youtube"></i></span>
+        <input disabled type="text" class="form-control" id="youtube" aria-describedby="youtube">
+    </div>
+
+    <div class="form-group mb-4">
+        <label class="form-label">Email</label>
+        <div class="form-check">
+            <input disabled type="checkbox" class="form-check-input" name="setting_show_email" value="yes" checked="checked">
+            <label> Prikaži email address in store</label>
+        </div>
+    </div>
+
+
+</div>

@@ -1,7 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { Userr } from './models/userr';
-import { LoginComponent } from './components/login/login.component';
-import { environment } from 'src/environment';
+import { Component } from '@angular/core';
+
 import { AuthService } from './services/helper';
 
 @Component({
@@ -12,10 +10,21 @@ import { AuthService } from './services/helper';
 
 export class AppComponent {
 
-  constructor(private auth:AuthService){}
-  
-  get user(): string {
-    return this.auth.user;
+  email: string = "";
+
+  constructor(private auth: AuthService) {
+    const usuarioString = localStorage.getItem("email");    
+    if (usuarioString) {
+      this.email = JSON.parse(usuarioString);      
+    } else {      
+    }
   }
+
+  
+
+
+  // get user(): string {
+  //   return this.auth.user;
+  // }
 
 }

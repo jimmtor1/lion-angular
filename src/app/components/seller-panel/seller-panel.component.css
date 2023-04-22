@@ -1,0 +1,16 @@
+li a{ 
+    color: aliceblue;
+    background-color: black;
+    cursor: pointer;
+}
+
+li a:hover{
+    color: black;
+    background-color: #dc3545;
+}
+
+
+li .active {
+    color: black;
+    background-color: #dc3545;
+}

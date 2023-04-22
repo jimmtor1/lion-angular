@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from 'src/app/models/product';
 import { ProductImage } from 'src/app/models/product-image';
@@ -16,6 +16,8 @@ import { ProductService } from 'src/app/services/product.service';
 export class ProductFormComponent implements OnInit {
   @ViewChild('imagelist') listaimg: ElementRef;
 
+  @Input() id: number;
+
   images: imgclasification[] = [];
   // files: File[] = [];
   // selectedCategory: number;
@@ -29,10 +31,13 @@ export class ProductFormComponent implements OnInit {
   constructor(private renderer2: Renderer2, private categoryService: CategoryService, private productService: ProductService, private router: Router, private auth: AuthService, private route: ActivatedRoute, private datePipe: DatePipe) { }
 
   ngOnInit(): void {
-
+    
     this.route.params.subscribe(params => {
+      
       if (params['id'] != null) {
         this.getUserById(params['id']);
+      }else if(this.id>0){
+        this.getUserById(this.id);
       }
     });
 

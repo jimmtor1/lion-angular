@@ -26,29 +26,27 @@
             <div class="row mb-3">
                 <div class="col">
                     <label for="">Kanton</label>
-                    <select name="federation" (change)="citiesCombo($event)" [(ngModel)]="product.federation" class="form-select" id="select_federation">
-                        <option value="">--Odaberite lokaciju--</option>  
-                        <option [disabled] = "i == 0 || i == 11 || i == 16"
-                            *ngFor="let fed of federations, let i = index" [value]="i">{{fed}}
+                    <select name="federation" (change)="citiesCombo($event)" [(ngModel)]="product.federation"
+                        class="form-select" id="select_federation">
+                        <option value="">--Odaberite lokaciju--</option>
+                        <option [disabled]="i == 0 || i == 11 || i == 16" *ngFor="let fed of federations, let i = index"
+                            [value]="i">{{fed}}
                         </option>
                     </select>
                 </div>
                 <div class="col">
                     <label for="">Grad</label>
-                    <select name="city" (change)="selectedCity($event)" [(ngModel)]="product.city" class="form-select" id="select_federation">
-                        <option value="">--Odaberite Grad--</option>  
+                    <select name="city" (change)="selectedCity($event)" [(ngModel)]="product.city" class="form-select"
+                        id="select_federation">
+                        <option value="">--Odaberite Grad--</option>
                         <option *ngFor="let fed of citiesToCombo, let i = index" [value]="i">{{fed}}</option>
                     </select>
                 </div>
             </div>
-            
+
 
             <div *ngIf="isSeller" class="fadeIn">
 
-                <div class="mb-3">
-                    <label for="reg_password">Adresa&nbsp;<span class="form-label">*</span></label>
-                    <input type="text" class="form-control" name="reg_password" id="reg_password">                    
-                </div>
 
                 <div class="split-row form-row-wide">
                     <p class="form-row form-group">
@@ -70,40 +68,12 @@
                         required="required" [(ngModel)]="seller.companyName">
                 </p>
 
-               
-
-                <p class="form-row form-group form-row-wide">
-                    <label for="address">Broj mobitela<span class="required">*</span></label>
-                    <input type="text" class="input-text form-control" name="address" id="address" value=""
+                <p class="form-row form-group form-row-wide"> <!--mobile number -->
+                    <label for="mobile_phone">Broj mobitela<span class="required">*</span></label>
+                    <input type="text" class="input-text form-control" name="mobile_phone" id="mobile_phone" value=""
                         required="required" [(ngModel)]="seller.address">
                 </p>
-
-                <p class="form-row form-group form-row-wide">
-                    <label for="shop-phone">Fiksni broj<span class="required">*</span></label>
-                    <input type="text" class="input-text form-control" name="phone" id="shop-phone" value=""
-                        required="required" [(ngModel)]="seller.phone">
-                </p>
-
-                <div class="mb-3">
-                    <label>Djelatnost&nbsp;<span class="form-label">*</span></label>
-                    
-                    <select name="idcategory" (change)="subcategoriesCombo($event)" [(ngModel)]="product.idcategory" class="form-select">
-                        <option value="0">--odaberite djelatnost--</option>
-                        <option value="1">Građevinarstvo</option>
-                        <option value="2">Sve za kuću</option>
-                        <option value="3">Informatika i telekomunikacije</option>
-                        <option value="4">Od glave do pete</option>
-                        <!-- <option value="5">Trgovina</option> -->
-                    </select>
-                </div> 
-                
-                <div class="mb-3">
-                    <label>Poddjelatnost&nbsp;<span class="form-label">*</span></label>
-                    <select name="idsubcategory" (change)="selectedSub($event)" [(ngModel)]="product.idsubcategory" class="form-select">    
-                        <option value="">--Odaberite poddjelatnost--</option>                
-                        <option *ngFor="let sub of subcategories" value={{sub.idsubcategory}}>{{sub.subcategoryName}}</option>                    
-                    </select>
-                </div>
+                   
 
             </div>
 
@@ -125,6 +95,7 @@
                     <a href="" class="woocommerce-privacy-policy-link" target="_blank">pravila o privatnosti</a>.
                 </p>
             </div>
+
 
             <button type="submit" name="register" class="btn btn-danger">Registracija</button>
 

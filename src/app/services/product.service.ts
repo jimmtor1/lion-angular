@@ -13,8 +13,8 @@ export class ProductService {
 
   // private URL = "http://localhost:8080/product";
   // private URLimages = "http://localhost:8080/productImage/product"
-  private URL = "http://test1.dcl.ba/product";
-  private URLimages = "http://test1.dcl.ba/productImage/product"
+  private URL = "https://test1.dcl.ba/product";
+  private URLimages = "https://test1.dcl.ba/productImage/product"
 
   constructor(private httpClient: HttpClient) { }
 

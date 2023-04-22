@@ -9,7 +9,7 @@ import { Seller } from '../models/seller';
 export class SellerService {
 
   // private URL = "http://localhost:8080/provider";
-  private URL = "http://test1.dcl.ba/provider";
+  private URL = "https://test1.dcl.ba/provider";
 
   constructor(private http:HttpClient) { }
 

@@ -35,10 +35,10 @@
                     <!-- </a> -->
                     <a routerLink="login" style="color: #dc3545; text-decoration: none;" class="text-center border">
                         <i class="fa fa-user-o fs-5"></i>
-                        <p>{{user}}</p>
+                        <p>{{email}}</p>
                         <!-- <fa-icon [icon]="faUser" size="lg"></fa-icon> -->
                     </a>
-                    <a routerLink="panelAnuncios" style="color: #dc3545; text-decoration: none;" class="text-center border">                       
+                    <a *ngIf="email !== ''" routerLink="sellerpanel" style="color: #dc3545; text-decoration: none;" class="text-center border">                       
                         <i class="fa fa-plus fs-5" style="color: #dc3545;"></i>
                         <p>Vaši oglasi</p>
                     </a>

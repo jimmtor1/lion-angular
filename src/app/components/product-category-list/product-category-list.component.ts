@@ -1,16 +1,16 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Product } from 'src/app/models/product';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-product-list',
-  templateUrl: './product-list.component.html',
-  styleUrls: ['./product-list.component.css']
+  templateUrl: './product-category-list.component.html',
+  styleUrls: ['./product-category-list.component.css']
 })
 
 
-export class ProductListComponent implements OnInit {
+export class ProductCategoryListComponent implements OnInit {
 
   products: Product[] = [];
   category: string = "";
@@ -155,15 +155,6 @@ export class ProductListComponent implements OnInit {
     "Zavjese",
     "Tepisi"];
 
-
-
-
-  // subcategory:String[][] = [
-  //   ["Građevinski radovi","Obrtnički radovi","Instalaterski radovi","Stolarija"],
-  //   ["Građevinski radovi","Obrtnički radovi","Instalaterski radovi","Stolarija","Građevinski radovi"],
-  //   ["Servisiranje uređaja i opreme","Informatičke usluge"],
-  //   ["Obuci se","Zanatski radovi"],
-  // ]
 
 
 }

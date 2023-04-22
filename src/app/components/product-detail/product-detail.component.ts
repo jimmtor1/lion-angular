@@ -1,17 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from 'src/app/models/product';
-import { ProductImage } from 'src/app/models/product-image';
 import { Seller } from 'src/app/models/seller';
 import { ProductService } from 'src/app/services/product.service';
 import { SellerService } from 'src/app/services/seller.service';
 
 @Component({
-  selector: 'product-datails',
-  templateUrl: './product-datails.component.html',
-  styleUrls: ['./product-datails.component.css']
+  selector: 'product-detail',
+  templateUrl: './product-detail.component.html',
+  styleUrls: ['./product-detail.component.css']
 })
-export class ProductDatailsComponent implements OnInit {
+export class ProductDetailComponent implements OnInit {
 
   product: Product = new Product();
   principalImage: string = "./assets/images/";

@@ -35,8 +35,11 @@
   }
 }
 
+
 input,
-button, select {
+button, select, span {
   border-radius: 20px 20px 20px 20px;
 }
+
+
 

@@ -1,25 +1,30 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { HomeComponent } from './components/home/home.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HttpClientModule } from '@angular/common/http';
+import { AppRoutingModule } from './app-routing.module';
+import { FormsModule } from '@angular/forms';
+import { DatePipe } from '@angular/common';
+
+import { AppComponent } from './app.component';
+import { HomeComponent } from './components/home/home.component';
 import { ProductosInicioComponent } from './components/productos-inicio/productos-inicio.component';
 import { ProductFormComponent } from './components/product-form/product-form.component';
 import { RegisterFormComponent } from './components/register-form/register-form.component';
-import { LoginComponent } from './components/login/login.component';
-import { ProductListComponent } from './components/product-list/product-list.component';
-import { FormsModule } from '@angular/forms';
-import { PanelVendedoresComponent } from './components/panel-vendedores/panel-vendedores.component';
-import { DatePipe } from '@angular/common';
-import { ProductDatailsComponent } from './components/product-datails/product-datails.component';
+import { LoginFormComponent } from './components/login-form/login-form.component';
+import { ProductCategoryListComponent } from './components/product-category-list/product-category-list.component';
+import { SellerPanelComponent } from './components/seller-panel/seller-panel.component';
+import { ProductDetailComponent } from './components/product-detail/product-detail.component';
+import { ProductBuyerListComponent } from './components/product-buyer-list/product-buyer-list.component';
+import { SellerCompanyFormComponent } from './components/seller-company-form/seller-company-form.component';
+import { PanelBuyerComponent } from './components/buyer-panel/panel-buyer.component';
+import { SellerDetailComponent } from './components/seller-detail/seller-detail.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent, HomeComponent, ProductosInicioComponent, ProductFormComponent, RegisterFormComponent, LoginComponent, ProductListComponent, PanelVendedoresComponent, ProductDatailsComponent
+    AppComponent, HomeComponent, ProductosInicioComponent, ProductFormComponent, RegisterFormComponent, LoginFormComponent, ProductCategoryListComponent, SellerPanelComponent, ProductDetailComponent, ProductBuyerListComponent, SellerCompanyFormComponent, PanelBuyerComponent, SellerDetailComponent
   ],
   imports: [
     BrowserModule,

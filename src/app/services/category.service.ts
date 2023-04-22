@@ -12,8 +12,8 @@ export class CategoryService {
 
   // private URL = "http://localhost:8080/category";
   // private URL2 = "http://localhost:8080/subcategory/category";
-  private URL = "http://test1.dcl.ba/category";
-  private URL2 = "http://test1.dcl.ba/subcategory/category";
+  private URL = "https://test1.dcl.ba/category";
+  private URL2 = "https://test1.dcl.ba/subcategory/category";
   
 
   constructor(private httpClient:HttpClient) { }
