@@ -37,10 +37,10 @@ export class RegisterFormComponent implements OnInit {
 
       if((<HTMLInputElement>event.target).value=="seller"){
         this.isSeller=true;
-        this.userr.role = 2;
+        this.userr.role.id = 2;
       }else{
         this.isSeller=false;
-        this.userr.role = 1;
+        this.userr.role.id = 1;
       }
 
   }

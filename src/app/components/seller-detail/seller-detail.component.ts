@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Seller } from 'src/app/models/seller';
 import { Subcategory } from 'src/app/models/subcategory';
 import { CategoryService } from 'src/app/services/category.service';
@@ -16,17 +16,42 @@ export class SellerDetailComponent implements OnInit {
   selectedCategory: number;
   subcategories: Subcategory[];
   iduser: number;
+  @Input() id: number;
 
-  constructor(private categoryService: CategoryService, private sellerService: SellerService, private router:Router) { }
+  constructor(private categoryService: CategoryService, private sellerService: SellerService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    const usuarioString = localStorage.getItem("iduser");
-    if (usuarioString) {
-      if (JSON.parse(usuarioString) > 0) {
-        this.iduser = JSON.parse(usuarioString);
+
+    const roleString = localStorage.getItem("role");
+    if (roleString) { //if is role admin
+      if (JSON.parse(roleString) == 3) {
+        this.iduser = this.id;
         this.getSeller();
+      } else { //if role is different admin
+
+        const usuarioString = localStorage.getItem("iduser");
+        if (usuarioString) {
+
+          if (JSON.parse(usuarioString) > 0) {
+            this.iduser = JSON.parse(usuarioString);
+            this.getSeller();
+          }
+        }
       }
+    }else{
+
+      this.route.params.subscribe(param => {
+
+        if (param['id'] != null) {
+          this.iduser = param['id'];
+          this.getSeller();
+        }
+
+      })
+
     }
+
+
   }
 
   getSeller() {

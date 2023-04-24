@@ -1,0 +1,83 @@
+<div class="container mt-3 pt-3">
+
+    <p class="h1 text-center"> Administrative panel</p>
+
+    <div class="row border">
+        <!-- vertical nav -->
+        <div class="col-3">
+            <br>
+            <br>
+            <br>
+            <ul class="nav flex-column bg-black c-white">
+                <li class="nav-item border">
+                    <a class="nav-link" [ngClass]="{'active': currentPage === 'companies'}"                        
+                        (click)="showSellerList()">
+                        <i class="fa fa-industry"></i>
+                        &nbsp;Companies
+                    </a>
+                </li>
+                <li class="nav-item border">
+                    <a class="nav-link" [ngClass]="{'active': currentPage === 'customers'}" id="product-list"
+                        
+                        (click)="showBuyerList()">
+                        <i class="fa fa-buysellads"></i>
+                        &nbsp;Customers
+                    </a>
+                </li>
+                <li class="nav-item border">
+                    <a class="nav-link" [ngClass]="{'active': currentPage === 'customersConfirmation'}"
+                    (click)="showSellerListToConfirm()">
+                        <i class="fa fa-check"></i>
+                        &nbsp;Companies to confirm</a>
+                </li>
+                <li class="nav-item border">
+                    <a class="nav-link" href="#" (click)="logout()">
+                        <i class="fa fa-power-off"></i>
+                        &nbsp;Logout</a>
+                </li>
+
+            </ul>
+
+        </div>
+
+        <div class="col-9">
+
+            <!-- *ngIf="title != ''" -->
+            <div class="row mt-3">
+                <div class="col-6">
+                    <p class="h3">{{title}}</p>
+                </div>
+                <!-- <div class="col-6 d-flex justify-content-end mb-2">
+                    <div>
+                        <a id="actionButon" #butt class="btn btn-danger">{{action}}</a>
+                    </div>
+                </div> -->
+                <hr>
+            </div>
+
+            <div *ngIf="activeSellerList">
+                <seller-list [accepted]="true" (SellerEditEvent)="showSellerDetail($event)"></seller-list>
+            </div>
+
+            <div *ngIf="activeBuyerList">
+                <buyer-list></buyer-list>
+            </div>
+
+            <div *ngIf="activeSellerListToConfirm">
+                <seller-list [accepted]="false" (SellerEditEvent)="showSellerDetail($event)"></seller-list>
+            </div>
+
+            <!-- <div *ngIf="mostrarSellerDetail">
+                <product-form [id]="idproduct" ></product-form>
+            </div> -->
+
+            <div *ngIf="activeSellerDetail">
+                <seller-detail [id]="idseller"></seller-detail>
+            </div>
+
+            <!-- <div #nietoContainer></div> -->
+
+        </div>
+    </div>
+
+</div>

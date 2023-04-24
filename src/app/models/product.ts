@@ -7,7 +7,7 @@ export class Product {
     description:string = "";
     idcategory:number=0;
     idsubcategory:number = 0;
-    idprovider:number = 1; 
+    idprovider:number; 
     federation:number;
     city:number;   
     price:number;

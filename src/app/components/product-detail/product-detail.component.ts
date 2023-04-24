@@ -13,47 +13,51 @@ import { SellerService } from 'src/app/services/seller.service';
 export class ProductDetailComponent implements OnInit {
 
   product: Product = new Product();
-  principalImage: string = "./assets/images/";
+  principalImage: string;
   producByProvider: Product[] = [];
-  seller:Seller;
+  seller: Seller;
 
 
   constructor(private productService: ProductService, private route: ActivatedRoute, private sellerService: SellerService) {
     this.product = new Product();
-    this.seller = new Seller();  
-    this.producByProvider = [];  
-    
+    this.seller = new Seller();
+    this.producByProvider = [];
   }
-
 
   ngOnInit(): void {
 
+    this.principalImage = "";
     this.route.params.subscribe(param => {
       if (param['id'] != null) {
         this.productService.getById(param['id']).subscribe(result => {
           this.product = result;
-          this.principalImage += this.product.productImageList[0].idimage + this.product.productImageList[0].extension;
+          this.principalImage = "./assets/images/" + this.product.productImageList[0].idimage + this.product.productImageList[0].extension;
+
+
+          this.sellerService.getById(this.product.idprovider).subscribe(pro => {
+            this.seller = pro;
+          });
+
+          this.productService.getAllByProvider(this.product.idprovider).subscribe(result => {
+            result.forEach(r => {
+              this.producByProvider.push(r);
+            })
+          });
 
         })
-
-        this.productService.getAllByProvider(this.product.idprovider).subscribe(result => {
-          result.forEach(r => {
-            this.producByProvider.push(r);
-            console.log(this.producByProvider.length);
-          })
-        })
-
-        this.sellerService.getById(this.product.idprovider).subscribe(pro => {        
-          this.seller = pro;
-          console.log(this.product.idprovider);
-        })
-
 
       }
     });
+
   }
 
-  federations: string[] = [
+  chagePrincipalImage(position: number) {
+    this.principalImage = "./assets/images/" + this.product.productImageList[position].idimage + this.product.productImageList[position].extension;
+  }
+
+
+
+  federations = [
     "FEDERACIJA BiH",
     "UNSKO-SANSKI KANTON",
     "Posavski kanton",
@@ -73,8 +77,8 @@ export class ProductDetailComponent implements OnInit {
     "BRČKO DISTRIKT"
   ];
 
-  cities: string[][] = [ 
-    
+  cities = [
+
     ["Bihać", "Bosanska Krupa", "Bosanski Petrovac", "Bužim", "Cazin", "Ključ", "Sanski Most", "Velika Kladuša"],
     ["Šamac", "Odžak", "Orašje"],
     ["Banovići", "Čelić", "Doboj Istok", "Gračanica", "Gradačac", "Kalesija", "Kladanj", "Lukavac", "Sapna", "Srebrenik", "Teočak", "Tuzla", "Živinice"],
@@ -85,7 +89,7 @@ export class ProductDetailComponent implements OnInit {
     ["Grude", "Ljubuški", "Posušje", "Široki Brijeg"],
     ["Hadžići", "Ilidža", "Ilijaš", "Sarajevo - Centar", "Sarajevo - Novi Grad", "Sarajevo - Novo Sarajevo", "Sarajevo - Stari Grad", "Trnovo", "Vogošća"],
     ["Bosansko Grahovo", "Drvar", "Glamoč", "Kupres", "Livno", "Tomislavgrad"],
- //   ["Banjalučka", "Dobojsko-Bijeljinska", "Sarajevsko-Zvornička", "Trebinjsko-Fočanska"],
+    //   ["Banjalučka", "Dobojsko-Bijeljinska", "Sarajevsko-Zvornička", "Trebinjsko-Fočanska"],
     ["Kozarska Dubica", "Krupa na Uni", "Laktaši", "Mrkonjić Grad", "Novi Grad", "Oštra Luka", "Prijedor", "Prnjavor", "Ribnik", "Šipovo", "Srbac"],
     ["Lopare", "Modriča", "Pelagićevo", "Petrovo", "Šamac", "Stanari", "Teslić", "Ugljevik", "Vukosavlje"],
     ["Novo Goražde", "Osmaci", "Pale", "Rogatica", "Rudo", "Šekovići", "Sokolac", "Srebrenica", "Višegrad", "Vlasenica", "Zvornik"],
@@ -93,4 +97,7 @@ export class ProductDetailComponent implements OnInit {
     ["Brčko"]
   ]
 
+
 }
+
+

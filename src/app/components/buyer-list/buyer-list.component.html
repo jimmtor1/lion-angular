@@ -1,0 +1,26 @@
+<div>
+
+    <table class="table table-striped">
+        
+        <thead>
+            <tr>
+              <th >Id</th>
+              <th >Email</th>
+              <th >Action</th>              
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let buyer of buyers">
+              <th>{{buyer.id}}</th>
+              <td>{{buyer.userr.email}}</td>
+              <td>
+                
+                <button class="btn btn-dark" >deactivate</button>
+
+              </td>           
+            </tr>           
+          </tbody>
+
+    </table>
+
+</div>

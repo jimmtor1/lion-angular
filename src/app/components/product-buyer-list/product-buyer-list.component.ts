@@ -10,8 +10,7 @@ import { ProductService } from 'src/app/services/product.service';
 export class ProductBuyerListComponent implements OnInit {
   
   @Output() showProducEditEvent = new EventEmitter<number>();
-  //mostrar = true;
-
+ 
   products: Product[] = [];
   iduser:number;
 
@@ -33,8 +32,7 @@ export class ProductBuyerListComponent implements OnInit {
   }
 
   showEditProductComponente(idproduct:number) {
-    this.showProducEditEvent.emit(idproduct);
-    //this.mostrar = false;
+    this.showProducEditEvent.emit(idproduct);    
   }
 
 }

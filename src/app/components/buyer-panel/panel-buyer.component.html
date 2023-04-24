@@ -1,1 +1,30 @@
-<p>panel-buyer works!</p>
+<div class="container mt-3 pt-3">
+
+    <p class="h1 text-center">Orders</p>
+
+    <table class="table table-striped">
+        
+        <thead>
+            <tr>
+              <th >IdOrder</th>
+              <th >Date</th>
+              <th >Total</th>                
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let order of orders">
+              <th>{{order.id}}</th>
+              <td>{{order.date}}</td>
+              <td>{{order.total}}</td>                     
+              <td>               
+                
+                <button class="btn btn-dark" >see details</button>
+
+              </td>           
+            </tr>           
+          </tbody>
+
+    </table>
+       
+
+</div>

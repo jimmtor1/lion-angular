@@ -9,7 +9,7 @@ import { Product } from 'src/app/models/product';
 })
 export class SellerPanelComponent {
 
-  @ViewChild('nietoContainer', { read: ViewContainerRef }) nietoContainer: ViewContainerRef;
+  // @ViewChild('nietoContainer', { read: ViewContainerRef }) nietoContainer: ViewContainerRef;
   @ViewChild('butt') miEnlace!: ElementRef;
 
   idproduct: number;
@@ -120,8 +120,9 @@ export class SellerPanelComponent {
   }
 
   logout() {
-    localStorage.setItem("iduser", "0");
-    localStorage.setItem("email", "");
+    // localStorage.setItem("iduser", "0");
+    // localStorage.setItem("email", "");
+    localStorage.clear();
   }
 
 

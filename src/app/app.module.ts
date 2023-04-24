@@ -20,11 +20,14 @@ import { ProductBuyerListComponent } from './components/product-buyer-list/produ
 import { SellerCompanyFormComponent } from './components/seller-company-form/seller-company-form.component';
 import { PanelBuyerComponent } from './components/buyer-panel/panel-buyer.component';
 import { SellerDetailComponent } from './components/seller-detail/seller-detail.component';
+import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
+import { BuyerListComponent } from './components/buyer-list/buyer-list.component';
+import { SellerListComponent } from './components/seller-list/seller-list.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent, HomeComponent, ProductosInicioComponent, ProductFormComponent, RegisterFormComponent, LoginFormComponent, ProductCategoryListComponent, SellerPanelComponent, ProductDetailComponent, ProductBuyerListComponent, SellerCompanyFormComponent, PanelBuyerComponent, SellerDetailComponent
+    AppComponent, HomeComponent, ProductosInicioComponent, ProductFormComponent, RegisterFormComponent, LoginFormComponent, ProductCategoryListComponent, SellerPanelComponent, ProductDetailComponent, ProductBuyerListComponent, SellerCompanyFormComponent, PanelBuyerComponent, SellerDetailComponent, AdminPanelComponent, BuyerListComponent, SellerListComponent
   ],
   imports: [
     BrowserModule,

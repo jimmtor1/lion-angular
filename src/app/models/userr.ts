@@ -3,8 +3,13 @@ export class Userr {
     id : number;
     email : string;
     password : string;
-    role : number = 1;
+    role : Role;
     active : boolean;
     creationDate : String;
 
+}
+
+class Role{
+    id:number;
+    roleName:string;
 }

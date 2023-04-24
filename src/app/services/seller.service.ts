@@ -17,4 +17,13 @@ export class SellerService {
     return this.http.get<Seller>(`${this.URL}/${id}`);
   }
 
+  getAllAccepted():Observable<Seller[]>{
+    return this.http.get<Seller[]>(`${this.URL}/accepted`);
+  }
+
+  getAllProcess():Observable<Seller[]>{
+    return this.http.get<Seller[]>(`${this.URL}/process`);
+  }
+
+
 }

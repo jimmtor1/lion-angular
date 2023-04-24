@@ -25,4 +25,8 @@ export class BuyerService {
     return this.http.post<Seller>(this.baseUrl2, seller);
   }
 
+  getAll():Observable<Buyer[]>{
+    return this.http.get<Buyer[]>(`${this.baseUrl}`);
+  }
+
 }

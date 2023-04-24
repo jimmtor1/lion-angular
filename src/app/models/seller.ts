@@ -10,8 +10,7 @@ export class Seller {
     federation:number;
     city:number;
     companyName:string;
-    phone:string;
-    user:Userr;
+    phone:string;    
     postalCode:string;
     biography:string;
     hours:string;
@@ -19,5 +18,6 @@ export class Seller {
     deliveryCost:string;
     companyCategory:number;
     companySubcategory:number;
+    user:Userr;
 
 }

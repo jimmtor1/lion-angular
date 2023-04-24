@@ -1,0 +1,30 @@
+<div>
+
+    <table class="table table-striped">
+        
+        <thead>
+            <tr>
+              <th >Id</th>
+              <th >Company</th>
+              <th >Firs</th>
+              <th >Last</th> 
+              <th >Action</th>     
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let seller of sellers">
+              <th>{{seller.idprovider}}</th>
+              <td>{{seller.companyName}}</td>
+              <td>{{seller.firstName}}</td>
+              <td>{{seller.lastName}}</td>             
+              <td>               
+                
+                <button (click)="emitSellerEdit(seller.idprovider)" class="btn btn-dark" >see details</button>
+
+              </td>           
+            </tr>           
+          </tbody>
+
+    </table>
+
+</div>

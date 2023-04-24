@@ -1,30 +1,4 @@
 <div class="container my-5">
-
-    <!-- <div class="row w-75"> -->
-
-        <!-- <div class="col">
-            <select class="form-select" [(ngModel)]="idcategory">
-                <option [value]="0">sve kategorije</option>
-                <option [value]="1">Građevinarstvos</option>
-                <option [value]="2">Sve za kuću</option>
-                <option [value]="3">Informatika i telekomunikacije</option>
-                <option [value]="4">Od glave do pete</option>
-                <option [value]="5">Trgovina</option>
-            </select>
-        </div> -->
-
-        <!-- <div class="col">
-            <select class="form-select">
-                <option value="0">sve podkategorija</option>
-                <option value="1">podkategorija 2</option>
-                <option value="2">podkategorija 3</option>
-            </select>
-        </div> -->
-        <!-- <div class="col">
-            <button class="btn btn-danger" (click)="getProductList();" >Tražiti</button>
-        </div> -->
-    <!-- </div> -->
-
         <h2>{{category}}</h2>
         <hr class="mt-0" style="color: red;">
         
@@ -39,9 +13,10 @@
             <ul  class="list-unstyled d-flex flex-wrap justify-content-start">
                 <li *ngFor="let product of products" class="mx-2 mb-3">
                     <div class="card" style="width: 16rem;">
-                        <a href="#">
+                        
+                        <a routerLink="../../../addetails/{{product.idproduct}}">
                             <!-- <img src="assets/images/img1.jpg" class="card-img-top" alt="..."> -->
-                            <img src="./assets/images/{{product.idproduct}}-0.jpg" class="card-img-top" alt="image">
+                            <img src="./assets/images/{{product.productImageList[0].idimage}}{{product.productImageList[0].extension}}" class="card-img-top" alt="image">
                             <div class="card-body">
                                 <h5 class="card-title">{{product.productName}}</h5>
                                 <p>{{product.description}}</p>

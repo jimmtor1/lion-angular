@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { AuthService } from './services/helper';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -10,21 +10,40 @@ import { AuthService } from './services/helper';
 
 export class AppComponent {
 
-  email: string = "";
+  email: string = "login";
+  role:number=0;
 
-  constructor(private auth: AuthService) {
+  constructor(private router:Router) {
+
     const usuarioString = localStorage.getItem("email");    
     if (usuarioString) {
       this.email = JSON.parse(usuarioString);      
-    } else {      
+    } 
+
+    const roleString = localStorage.getItem("role"); 
+    if(roleString){
+      this.role = JSON.parse(roleString);
     }
+
   }
 
-  
+  direction(){
+    const roleString = localStorage.getItem("role");    
+    if (roleString) {
+      if(JSON.parse(roleString)==1){
+        this.router.navigate(['buyerPanel']);
+      }
+    } else{
+      this.router.navigate(['login']);
+    }
+    
+  }
 
-
-  // get user(): string {
-  //   return this.auth.user;
-  // }
+  logout(){
+    console.log("wiu")
+    localStorage.clear();
+    location.reload();
+    this.router.navigate(['']);
+  }
 
 }

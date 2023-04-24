@@ -11,6 +11,7 @@ import { PanelBuyerComponent } from './components/buyer-panel/panel-buyer.compon
 import { ProductBuyerListComponent } from './components/product-buyer-list/product-buyer-list.component';
 import { SellerCompanyFormComponent } from './components/seller-company-form/seller-company-form.component';
 import { SellerDetailComponent } from './components/seller-detail/seller-detail.component';
+import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
 
 const routes: Routes = [
   {path:'', component:HomeComponent},
@@ -24,7 +25,9 @@ const routes: Routes = [
   {path: 'buyerpanel', component:PanelBuyerComponent},
   {path: 'adBuyerList', component:ProductBuyerListComponent},
   {path: 'sellerCompanyForm', component:SellerCompanyFormComponent},
-  {path: 'sellerDetail/:id', component:SellerDetailComponent}
+  {path: 'sellerDetail/:id', component:SellerDetailComponent},
+  {path: 'adminPanel', component:AdminPanelComponent},
+  {path: 'buyerPanel', component:PanelBuyerComponent}
 ];
 
 @NgModule({

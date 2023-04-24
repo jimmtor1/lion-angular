@@ -2,7 +2,7 @@
     <div class="card mb-1" style="max-width: 840px;">
         <div class="row g-0">
             <div class="col-md-7">
-                <img [src]="principalImage" class="img-fluid rounded-start" alt="...">
+                <img [src]="principalImage" class="img-fluid rounded-start w-100" alt="...">
             </div>
             <div class="col-md-5">
                 <div class="card-body">
@@ -16,8 +16,9 @@
                     <p class="h4">
                         Lokacija
                     </p>
-                    <!-- <p>Federation: {{federations[seller.federation]}}</p>    -->
-                    <p>Grad: {{cities[seller.federation][seller.city]}}</p> 
+                    
+                    <p *ngIf="seller.federation!=null" >Grad: {{cities[seller.federation][seller.city]}}</p> 
+
                     
                     <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
                 </div>
@@ -27,9 +28,9 @@
 
     <!-- thumbnail image list -->
     <ul class="list-unstyled d-flex overflow-auto flex-nowrap">
-        <li *ngFor="let img of product.productImageList" class="flex-row" style="margin-right: 12px;">
+        <li *ngFor="let img of product.productImageList, let i = index" class="flex-row" style="margin-right: 12px;">
             <div class="card" style="width: 5rem;">
-                <a href="#">
+                <a (click)="chagePrincipalImage(i);">
                     <img src="./assets/images/{{img.idimage}}{{img.extension}}" class="card-img-top" alt="...">
                 </a>
             </div>
@@ -38,7 +39,9 @@
 
     <!-- Seller information -->
     <div class="border border-danger rounded-2 p-2 w-75">
-        <p class="h4">Informacije o firmi</p>
+        <a [routerLink]="['/sellerDetail', product.idprovider]">
+            <p class="h4 text-danger">Informacije o firmi</p>
+        </a>        
 
         <p>Ime firme: {{seller.companyName}}</p>
         <p>Prodavač: {{seller.firstName}} {{seller.lastName}}</p> 

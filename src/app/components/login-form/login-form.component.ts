@@ -18,12 +18,18 @@ export class LoginFormComponent implements OnInit {
   constructor(private userService:UserService, private authService:AuthService, private router:Router){}
   
   ngOnInit(): void {
-    const usuarioString = localStorage.getItem("iduser");    
-    if (usuarioString) {
-      if(JSON.parse(usuarioString)>0){
-        this.router.navigate(['sellerpanel']);        
-      }   
-    } else {      
+    const roleString = localStorage.getItem("role");    
+    if (roleString) {
+     
+      if(JSON.parse(roleString)==1){
+        this.router.navigate(['']);        
+      } else if(JSON.parse(roleString)==2){
+        this.router.navigate(['sellerpanel']);
+      }else if(JSON.parse(roleString)==3){
+        this.router.navigate(['adminPanel']);
+      } 
+    } else {
+           
     }
 
   }
@@ -34,22 +40,20 @@ export class LoginFormComponent implements OnInit {
       if(data){  
         localStorage.setItem("iduser",JSON.stringify(data.id));
         localStorage.setItem("email",JSON.stringify(data.email));
+        
+        localStorage.setItem("role",JSON.stringify(data.role.id));
 
-        //this.user = data;         
-        // this.authService.user = this.user.email;
-        // this.authService.idprovider = this.user.id;
-        //this.access = 1;
         location.reload();
-        this.router.navigate(['']);
-      }else{
-        localStorage.setItem("iduser","0");
-        localStorage.setItem("email","");
-        // this.authService.user = ""; 
-        // this.authService.idprovider = 0;
-        // this.access = 2;
+        // this.router.navigate(['']);
+      }else{    
+        localStorage.clear  
+        this.access = 2;    
       }
     }, error => {console.log(error)})
   }
 
 
+  
+
 }
+
