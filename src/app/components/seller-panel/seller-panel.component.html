@@ -4,39 +4,38 @@
 
     <div class="row border">
         <!-- vertical nav -->
-        <div class="col-3">
+        <div class="col-3 bg-black p-0">
             <br>
             <br>
-            <br>
-            <ul class="nav flex-column bg-black c-white">
-                <li class="nav-item border">
-                    <a class="nav-link" [ngClass]="{'active': currentPage === 'company'}"
-                        
-                        (click)="showSellerDetail()">
-                        <i class="fa fa-industry"></i>
-                        &nbsp;Company
-                    </a>
-                </li>
-                <li class="nav-item border">
-                    <a class="nav-link" [ngClass]="{'active': currentPage === 'adlist'}" id="product-list"
-                        
-                        (click)="showProductList()">
-                        <i class="fa fa-buysellads"></i>
-                        &nbsp;Publications
-                    </a>
-                </li>
-                <li class="nav-item border">
-                    <a class="nav-link" >
-                        <i class="fa fa-comments"></i>
-                        &nbsp;social networks</a>
-                </li>
-                <li class="nav-item border">
-                    <a class="nav-link" href="#" (click)="logout()">
-                        <i class="fa fa-power-off"></i>
-                        &nbsp;Logout</a>
-                </li>
+            <br>                
+                <ul class="nav flex-column bg-black c-white">
+                    <li class="nav-item border">
+                        <a class="nav-link" [ngClass]="{'active': currentPage === 'company'}"
+                            (click)="showSellerDetail()">
+                            <i class="fa fa-industry"></i>
+                            &nbsp;Company
+                        </a>
+                    </li>
+                    <li class="nav-item border">
+                        <a class="nav-link" [ngClass]="{'active': currentPage === 'adlist'}" id="product-list"
+                            (click)="showProductList()">
+                            <i class="fa fa-buysellads"></i>
+                            &nbsp;Publications
+                        </a>
+                    </li>
+                    <li class="nav-item border">
+                        <a class="nav-link">
+                            <i class="fa fa-comments"></i>
+                            &nbsp;social networks</a>
+                    </li>
+                    <li class="nav-item border">
+                        <a class="nav-link" href="#" (click)="logout()">
+                            <i class="fa fa-power-off"></i>
+                            &nbsp;Logout</a>
+                    </li>
 
-            </ul>
+                </ul>
+            
 
         </div>
 
@@ -72,7 +71,7 @@
             </div>
 
             <div *ngIf="mostrarProductEdit">
-                <product-form [id]="idproduct" ></product-form>
+                <product-form [id]="idproduct"></product-form>
             </div>
 
             <div *ngIf="mostrarProductList">
@@ -87,7 +86,7 @@
                 <seller-company-form></seller-company-form>
             </div>
 
-            <div #nietoContainer></div>
+            <!-- <div #nietoContainer></div> -->
 
         </div>
     </div>

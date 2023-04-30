@@ -1,70 +1,180 @@
-<div class="container">
-    <div class="w-75 m-auto">
+<div *ngIf="loading==true" class="text-center">
+    <div class="spinner-grow text-danger" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
+<div *ngIf="loading==false">
+    <div class="container">
+        <div class="w-75 m-auto">
 
-        <p class="h2 text-center">{{seller.companyName}}</p>
+            <p class="h1 text-center">{{seller.companyName}}</p>
 
-        <div class="mt-4 mb-4">
-            <div class="row">
-                <div class="drop-zone m-auto">
-                    <img src="./assets/images/company-vision.png" width="100">
+            <div class="mt-4 mb-4">
+                <div class="row">
+                    <div class="drop-zone m-auto d-flex justify-content-center">
+                        <!-- <img src="./assets/images/company-vision.png" width="100"> -->
+                        <img [src]="image" width="100">
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <p> Djelatnost: {{seller.companyCategory}}</p> <!--category-->
+            <!--category-->
+            <!-- <p class="h6"> Djelatnost: </p> 
+            <p [ngClass]="seller.companyCategory ? 'border p-2 rounded-pill' : 'border p-2 rounded-pill text-danger'">
+                {{seller.companyCategory ? seller.companyCategory : 'You have not completed this data' }}</p> -->
 
-        <p> Poddjelatnost: {{seller.companySubcategory}}</p> <!--subcategory-->
+            <!--subcategory-->
+            <!-- <p class="h6"> Poddjelatnost: </p> 
+            <p
+                [ngClass]="seller.companySubcategory ? 'border p-2 rounded-pill' : 'border p-2 rounded-pill text-danger'">
+                {{seller.companySubcategory ? seller.companySubcategory : 'You have not completed this data' }}</p> -->
 
-        <p> Ime: {{seller.firstName}} {{seller.lastName}}</p>
+           
 
-        <p> Broj mobitela: {{seller.phone}}</p>
+            <p class="h6"> Ime:</p>
+            <p class="border p-2 rounded-pill">{{seller.user.firstName}} {{seller.user.lastName}}</p>
 
-        <p> Adresa: {{seller.address}}</p>
-
-        <p> Street: {{seller.street}}</p>
-
-        <p> Postal code: {{seller.postalCode}}</p>
-
-        <p> Kanton: {{seller.federation}}</p>
-
-        <p> Grad: {{seller.city}}</p>
-
-        <p class="mb-0" disabled="true">Short biography:</p> <!-- short biography -->
-        <textarea class="mb-3" readonly rows="4" class="form-control">{{seller.biography}}</textarea>
-
-        <p>Schedule:</p>
-        <p>Hours: {{seller.hours}}</p>
-
-        <p>Annual leave: {{seller.annualLeave}}</p>
-
-        <p>Delivery cost: {{seller.deliveryCost}}</p>
-
-
-        <!-- social networks: -->
-        <label>Social networks:</label>
-        <div class="input-group mb-2">
-            <span class="input-group-text" id="facebook"><i class="fa fa-facebook"></i></span>
-            <input disabled type="text" class="form-control" id="facebook" aria-describedby="facebook">
-        </div>
-
-        <div class="input-group mb-2">
-            <span class="input-group-text" id="instagram"><i class="fa fa-instagram"></i></span>
-            <input disabled type="text" class="form-control" id="instagram" aria-describedby="instagram">
-        </div>
-
-        <div class="input-group mb-3">
-            <span class="input-group-text" id="youtube"><i class="fa fa-youtube"></i></span>
-            <input disabled type="text" class="form-control" id="youtube" aria-describedby="youtube">
-        </div>
-
-        <div class="form-group mb-4">
-            <label class="form-label">Email</label>
-            <div class="form-check">
-                <input disabled type="checkbox" class="form-check-input" name="setting_show_email" value="yes"
-                    checked="checked">
-                <label> Prikaži email address in store</label>
+            <p class="h6"> Poddjelatnost: </p> 
+            <div class="border rounded p-1 mb-2" style="min-height: 100px;">
+                <span *ngFor="let sel of subcategories" class="badge rounded-pill bg-dark"
+                    style="margin-right: 5px;">{{sel.subcategoryName}}</span>
             </div>
-        </div>
 
+            <p class="h6">Broj mobitela:</p>
+            <p class="border p-2 rounded-pill">{{seller.user.phone}}</p>
+
+            <p class="h6">Adresa:</p>
+            <p [ngClass]="seller.address ? 'border p-2 rounded-pill' : 'border p-2 rounded-pill text-danger'">{{
+                seller.address ? seller.address : 'You have not completed this data' }}</p>
+
+            <p class="h6">Street:</p>
+            <p [ngClass]="seller.street ? 'border p-2 rounded-pill' : 'border p-2 rounded-pill text-danger'">{{
+                seller.street ? seller.street : 'You have not completed this data' }}</p>
+
+            <p class="h6">Postal code:</p>
+            <p [ngClass]="seller.postalCode ? 'border p-2 rounded-pill' : 'border p-2 rounded-pill text-danger'">
+                {{seller.postalCode ? seller.postalCode : 'You have not completed this data' }}
+            </p>
+
+            <p class="h6">Kanton:</p>
+            <p class="border p-2 rounded-pill">{{federations[seller.user.federation]}}</p>
+
+            <p class="h6">Grad:</p>
+            <p class="border p-2 rounded-pill">{{cities[seller.user.federation][seller.user.city]}}</p>
+
+            <p class="mb-0" disabled="true">Short biography:</p> <!-- short biography -->
+            <textarea [ngClass]="seller.biography ? 'form-control rounded' : 'form-control rounded text-danger'"
+                 rows="4">{{seller.biography ? seller.biography : 'You have not completed this data' }}</textarea>
+
+            <p class="mt-3">Schedule:</p>
+            <p>days of the week: </p>
+
+            <div class="form-check form-switch">
+                <input class="form-check-input" [(ngModel)]="seller.monday" type="checkbox" id="flexSwitchCheckDefault"
+                    checked disabled>
+                <label class="form-check-label" for="flexSwitchCheckDefault">Monday</label>
+            </div>
+            <div class="form-check form-switch">
+                <input class="form-check-input" [(ngModel)]="seller.tuesday" type="checkbox" id="flexSwitchCheckChecked"
+                    checked disabled>
+                <label class="form-check-label" for="flexSwitchCheckChecked">Tuesday</label>
+            </div>
+            <div class="form-check form-switch">
+                <input class="form-check-input" [(ngModel)]="seller.wednesday" type="checkbox"
+                    id="flexSwitchCheckDefault" checked disabled>
+                <label class="form-check-label" for="flexSwitchCheckDefault">Wednesday</label>
+            </div>
+            <div class="form-check form-switch">
+                <input class="form-check-input" [(ngModel)]="seller.thursday" type="checkbox"
+                    id="flexSwitchCheckChecked" checked disabled>
+                <label class="form-check-label" for="flexSwitchCheckChecked">Thursday</label>
+            </div>
+            <div class="form-check form-switch">
+                <input class="form-check-input" [(ngModel)]="seller.friday" type="checkbox" id="flexSwitchCheckChecked"
+                    checked disabled>
+                <label class="form-check-label" for="flexSwitchCheckChecked">Friday</label>
+            </div>
+            <div class="form-check form-switch">
+                <input class="form-check-input" [(ngModel)]="seller.saturday" type="checkbox"
+                    id="flexSwitchCheckChecked" disabled>
+                <label class="form-check-label" for="flexSwitchCheckChecked">Saturday</label>
+            </div>
+            <div class="form-check form-switch">
+                <input class="form-check-input" [(ngModel)]="seller.sunday" type="checkbox" id="flexSwitchCheckChecked"
+                    disabled>
+                <label class="form-check-label" for="flexSwitchCheckChecked">Sunday</label>
+            </div>
+
+            <p class="h6 mt-3">Hours:</p>
+            <div class="row">
+                <div class="col-1">
+                    <span>From</span>
+                </div>
+                <div class="col-5">
+                    <select class="form-select rounded-pill" [(ngModel)]="seller.startTime" name="hour-start">
+                        <option value="6">06:00</option>
+                        <option value="7">07:00</option>
+                        <option value="8">08:00</option>
+                        <option value="9">09:00</option>
+                        <option value="10">10:00</option>
+                        <option value="11">11:00</option>
+                    </select>
+                </div>
+                <div class="col-1">
+                    <span>To</span>
+                </div>
+                <div class="col-5">
+                    <select class="form-select rounded-pill" [(ngModel)]="seller.endTime" name="hour-end">
+                        <option value="16">16:00</option>
+                        <option value="17">17:00</option>
+                        <option value="18">18:00</option>
+                        <option value="19">19:00</option>
+                        <option value="20">20:00</option>
+                        <option value="21">21:00</option>
+                    </select>
+                </div>
+            </div>
+
+
+            <p class="mt-3 h6">Annual leave: </p>
+            <p [ngClass]="seller.annualLeave ? 'border p-2 rounded-pill' : 'border p-2 rounded-pill text-danger'">
+                {{seller.annualLeave ? seller.annualLeave : 'You have not completed this data' }}
+            </p>
+
+            <p class="h6">Delivery cost: {{seller.deliveryCost}}</p>
+            <p [ngClass]="seller.deliveryCost ? 'border p-2 rounded-pill' : 'border p-2 rounded-pill text-danger'">
+                {{seller.deliveryCost ? seller.deliveryCost : 'You have not completed this data' }}</p>
+
+
+            <!-- social networks: -->
+            <label class="h6">Social networks:</label>
+            <div class="input-group mb-2">
+                <span class="input-group-text" id="facebook"><i class="fa fa-facebook"></i></span>
+                <input disabled type="text" class="form-control" id="facebook" [(ngModel)]="seller.facebook"
+                    aria-describedby="facebook">
+            </div>
+
+            <div class="input-group mb-2">
+                <span class="input-group-text" id="instagram"><i class="fa fa-instagram"></i></span>
+                <input disabled type="text" class="form-control" [(ngModel)]="seller.instagram" id="instagram"
+                    aria-describedby="instagram">
+            </div>
+
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="youtube"><i class="fa fa-youtube"></i></span>
+                <input disabled type="text" class="form-control" [(ngModel)]="seller.youtube" id="youtube"
+                    aria-describedby="youtube">
+            </div>
+
+            <div class="form-group mb-4">
+                <label class="form-label">Email</label>
+                <div class="form-check">
+                    <input disabled type="checkbox" class="form-check-input" name="setting_show_email" value="yes"
+                        checked="checked">
+                    <label> Prikaži email address in store</label>
+                </div>
+            </div>
+
+        </div>
     </div>
 </div>

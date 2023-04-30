@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 
 export class AppComponent {
 
-  email: string = "login";
+  email: string = "Login";
   role:number=0;
 
   constructor(private router:Router) {
@@ -31,7 +31,7 @@ export class AppComponent {
     const roleString = localStorage.getItem("role");    
     if (roleString) {
       if(JSON.parse(roleString)==1){
-        this.router.navigate(['buyerPanel']);
+        this.router.navigate(['/productCategoryList/5/0']);       
       }
     } else{
       this.router.navigate(['login']);
@@ -39,11 +39,11 @@ export class AppComponent {
     
   }
 
-  logout(){
-    console.log("wiu")
+  logout(){    
     localStorage.clear();
-    location.reload();
-    this.router.navigate(['']);
+    this.router.navigate([''])
+    this.email = "Login"; 
+    // location.reload();    
   }
 
 }

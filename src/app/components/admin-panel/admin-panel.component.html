@@ -10,15 +10,13 @@
             <br>
             <ul class="nav flex-column bg-black c-white">
                 <li class="nav-item border">
-                    <a class="nav-link" [ngClass]="{'active': currentPage === 'companies'}"                        
-                        (click)="showSellerList()">
+                    <a class="nav-link" [ngClass]="{'active': currentPage === 'companies'}" (click)="showSellerList()">
                         <i class="fa fa-industry"></i>
                         &nbsp;Companies
                     </a>
                 </li>
                 <li class="nav-item border">
                     <a class="nav-link" [ngClass]="{'active': currentPage === 'customers'}" id="product-list"
-                        
                         (click)="showBuyerList()">
                         <i class="fa fa-buysellads"></i>
                         &nbsp;Customers
@@ -26,7 +24,7 @@
                 </li>
                 <li class="nav-item border">
                     <a class="nav-link" [ngClass]="{'active': currentPage === 'customersConfirmation'}"
-                    (click)="showSellerListToConfirm()">
+                        (click)="showSellerListToConfirm()">
                         <i class="fa fa-check"></i>
                         &nbsp;Companies to confirm</a>
                 </li>
@@ -60,7 +58,7 @@
             </div>
 
             <div *ngIf="activeBuyerList">
-                <buyer-list></buyer-list>
+                <buyer-list (BuyerEditEvent)="showBuyerDetail($event)"></buyer-list>
             </div>
 
             <div *ngIf="activeSellerListToConfirm">
@@ -75,7 +73,70 @@
                 <seller-detail [id]="idseller"></seller-detail>
             </div>
 
-            <!-- <div #nietoContainer></div> -->
+            <div *ngIf="activeBuyerDetail">
+
+                <div class="w-75 mx-auto">
+
+                    <!-- <div> -->
+                        <span *ngIf="buyer.user.active" class="badge rounded-pill bg-success p-2 mb-3">ACTIVE</span>
+                        <span *ngIf="!buyer.user.active" class="badge rounded-pill bg-danger p-2 mb-3">INACTIVE</span>
+                    <!-- </div> -->
+
+                    <p class="h6">Email:</p>
+                    <input [disabled]="action!=='Save'" type="text" [(ngModel)]="buyer.user.email"
+                        [ngClass]="buyer.user.email==null ? 'mb-3 rounded-pill border text-danger form-control':'mb-3 form-control border rounded-pill'">
+
+                    <p class="h6">Ime:</p>
+                    <!-- <p [ngClass]="buyer.user.firstName==null ? 'rounded-pill border p-2 text-danger':'border p-2 rounded-pill'">
+                      {{buyer.user.firstName ? buyer.user.firstName : 'You have not completed this data' }}
+                    </p> -->
+                    <input [disabled]="action!=='Save'" type="text" [(ngModel)]="buyer.user.firstName"
+                        [ngClass]="buyer.user.firstName==null ? 'mb-3 rounded-pill border text-danger form-control':'mb-3 form-control border rounded-pill'">
+
+                    <p class="h6">Prezime:</p>
+                    <input [disabled]="action!=='Save'" type="text" [(ngModel)]="buyer.user.lastName"
+                        [ngClass]="buyer.user.lastName==null ? 'mb-3 rounded-pill border text-danger form-control':'mb-3 form-control border rounded-pill'">
+
+                    <p class="h6">Broj mobitela:</p>
+                    <input [disabled]="action!=='Save'" type="text" [(ngModel)]="buyer.user.phone"
+                        [ngClass]="buyer.user.phone==null ? 'mb-3 rounded-pill border text-danger form-control':'mb-3 form-control border rounded-pill'">
+
+                    <p class="h6">Federation:</p>
+                    <!-- (change)="citiesCombo($event)" -->
+                    <select [disabled]="action!=='Save'" (change)="citiesCombo($event)" name="federation"
+                        [(ngModel)]="buyer.user.federation" class="form-select rounded-pill mb-3"
+                        id="select_federation">
+                        <option value="">--Odaberite lokaciju--</option>
+                        <option [disabled]="i == 0 || i == 11 || i == 16" *ngFor="let fed of federations, let i = index"
+                            [value]="i">
+                            {{fed}}
+                        </option>
+                    </select>
+
+                    <!-- <input [disabled]="action!=='Save'" type="text" [(ngModel)]="buyer.user.federation"
+                      [ngClass]="buyer.user.federation==null ? 'mb-3 rounded-pill border text-danger form-control':'mb-3 form-control border rounded-pill'"> -->
+
+                    <p class="h6">City:</p>
+
+                    <select [disabled]="action!=='Save'" name="city" (change)="selectedCity($event)"
+                        [(ngModel)]="buyer.user.city" class="form-select rounded-pill mb-3" id="select_federation">
+                        <option value="">--Odaberite Grad--</option>
+                        <option *ngFor="let fed of citiesToCombo, let i = index" [value]="i">{{fed}}</option>
+                    </select>
+
+                    <!-- <input [disabled]="action!=='Save'" type="text" [(ngModel)]="buyer.user.city"
+                      [ngClass]="buyer.user.city==null ? 'mb-3 rounded-pill border text-danger form-control':'mb-3 form-control border rounded-pill'"> -->
+
+                    <p class="h6">Postal code:</p>
+                    <input [disabled]="action!=='Save'" type="text" [(ngModel)]="buyer.postalCode"
+                        [ngClass]="buyer.postalCode==null ? 'mb-3 rounded-pill border text-danger form-control':' mb-3form-control border rounded-pill'">
+
+                    
+                    
+
+                </div>
+
+            </div>
 
         </div>
     </div>

@@ -1,30 +1,136 @@
 <div class="container mt-3 pt-3">
 
-    <p class="h1 text-center">Orders</p>
+  <p class="h1 text-center">Customer Panel</p>
 
-    <table class="table table-striped">
-        
+  <div class="row border">
+
+    <div class="col-3 bg-black p-0">
+      <br>
+      <br>
+      <br>
+      <ul class="nav flex-column bg-black c-white">
+        <li class="nav-item border">
+          <a class="nav-link" [ngClass]="{'active': currentPage === 'profile'}" (click)="showBuyerDetail()">
+            <i class="fa fa-industry"></i>
+            &nbsp;Profile
+          </a>
+        </li>
+        <li class="nav-item border">
+          <a class="nav-link" [ngClass]="{'active': currentPage === 'orders'}" (click)="showOrderList()">
+            <i class="fa fa-buysellads"></i>
+            &nbsp;Orders
+          </a>
+        </li>
+        <li class="nav-item border">
+          <a class="nav-link" href="#" (click)="logout()">
+            <i class="fa fa-power-off"></i>
+            &nbsp;Logout</a>
+        </li>
+
+      </ul>
+
+
+    </div>
+
+    <div class="col-9" *ngIf="currentPage =='orders'">
+
+      <table class="table table-striped">
+        <p class="h6 text-center m-2" *ngIf="orders.length ==0">no orders to display</p>
         <thead>
-            <tr>
-              <th >IdOrder</th>
-              <th >Date</th>
-              <th >Total</th>                
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let order of orders">
-              <th>{{order.id}}</th>
-              <td>{{order.date}}</td>
-              <td>{{order.total}}</td>                     
-              <td>               
-                
-                <button class="btn btn-dark" >see details</button>
+          <tr>
+            <th>#</th>
+            <th>Date</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let order of orders">
+            <th>{{order.id}}</th>
+            <td>{{order.date}}</td>
+            <td>{{order.total}}</td>
+            <td>
 
-              </td>           
-            </tr>           
-          </tbody>
+              <button class="btn btn-dark">see details</button>
 
-    </table>
-       
+            </td>
+          </tr>
+        </tbody>
+
+      </table>
+
+    </div>
+
+    <div class="col-9 mt-3 mb-0" *ngIf="currentPage =='profile'">
+      <div class="row">
+
+        <div class="col-6">
+          <p class="h3">Profile</p>
+        </div>
+
+        <div class="col-6 d-flex justify-content-end mb-2">
+          <div>
+            <button [disabled]="saving" class="btn btn-danger mx-2" (click)="editForm();">{{action}}</button>
+            <button class="btn btn-dark" *ngIf="action=='Save'" (click)="cancel();">Cancel</button>
+          </div>
+        </div>
+
+      </div>
+
+      <hr class="mt-0">
+
+      <div class="w-75 mx-auto">
+
+        <p class="h6">Email:</p>
+        <input [disabled]="action!=='Save'" type="text" [(ngModel)]="buyer.user.email"
+          [ngClass]="buyer.user.email==null ? 'mb-3 rounded-pill border text-danger form-control':'mb-3 form-control border rounded-pill'">
+
+        <p class="h6">Ime:</p>
+        <!-- <p [ngClass]="buyer.user.firstName==null ? 'rounded-pill border p-2 text-danger':'border p-2 rounded-pill'">
+          {{buyer.user.firstName ? buyer.user.firstName : 'You have not completed this data' }}
+        </p> -->
+        <input [disabled]="action!=='Save'" type="text" [(ngModel)]="buyer.user.firstName"
+          [ngClass]="buyer.user.firstName==null ? 'mb-3 rounded-pill border text-danger form-control':'mb-3 form-control border rounded-pill'">
+
+        <p class="h6">Prezime:</p>
+        <input [disabled]="action!=='Save'" type="text" [(ngModel)]="buyer.user.lastName"
+          [ngClass]="buyer.user.lastName==null ? 'mb-3 rounded-pill border text-danger form-control':'mb-3 form-control border rounded-pill'">
+
+        <p class="h6">Broj mobitela:</p>
+        <input [disabled]="action!=='Save'" type="text" [(ngModel)]="buyer.user.phone"
+          [ngClass]="buyer.user.phone==null ? 'mb-3 rounded-pill border text-danger form-control':'mb-3 form-control border rounded-pill'">
+
+        <p class="h6">Federation:</p>
+        <!-- (change)="citiesCombo($event)" -->
+        <select [disabled]="action!=='Save'" (change)="citiesCombo($event)" name="federation" [(ngModel)]="buyer.user.federation"
+          class="form-select rounded-pill mb-3" id="select_federation">
+          <option value="">--Odaberite lokaciju--</option>
+          <option [disabled]="i == 0 || i == 11 || i == 16" *ngFor="let fed of federations, let i = index" [value]="i">
+            {{fed}}
+          </option>
+        </select>
+
+        <!-- <input [disabled]="action!=='Save'" type="text" [(ngModel)]="buyer.user.federation"
+          [ngClass]="buyer.user.federation==null ? 'mb-3 rounded-pill border text-danger form-control':'mb-3 form-control border rounded-pill'"> -->
+
+        <p class="h6">City:</p>
+
+        <select [disabled]="action!=='Save'" name="city" (change)="selectedCity($event)" [(ngModel)]="buyer.user.city" class="form-select rounded-pill mb-3"
+          id="select_federation">
+          <option value="">--Odaberite Grad--</option>
+          <option *ngFor="let fed of citiesToCombo, let i = index" [value]="i">{{fed}}</option>
+        </select>
+
+        <!-- <input [disabled]="action!=='Save'" type="text" [(ngModel)]="buyer.user.city"
+          [ngClass]="buyer.user.city==null ? 'mb-3 rounded-pill border text-danger form-control':'mb-3 form-control border rounded-pill'"> -->
+
+        <p class="h6">Postal code:</p>
+        <input [disabled]="action!=='Save'" type="text" [(ngModel)]="buyer.postalCode"
+          [ngClass]="buyer.postalCode==null ? 'mb-3 rounded-pill border text-danger form-control':' mb-3form-control border rounded-pill'">
+
+      </div>
+
+    </div>
+
+  </div>
 
 </div>

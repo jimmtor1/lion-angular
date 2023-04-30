@@ -12,7 +12,7 @@
 
             <div class="mb-3">
                 <label for="reg_email">Email adresa&nbsp;<span class="form-label">*</span></label>
-                <input type="email" class="form-control" name="email" id="reg_email" [(ngModel)]="userr.email"
+                <input type="email" class="form-control" name="email" id="reg_email" [(ngModel)]="user.email"
                     autocomplete="email" value="">
             </div>
 
@@ -20,13 +20,30 @@
             <div class="mb-3">
                 <label for="reg_password">Šifra&nbsp;<span class="form-label">*</span></label>
                 <input type="password" class="form-control" name="reg_password" id="reg_password"
-                    [(ngModel)]="userr.password">
+                    [(ngModel)]="user.password">
             </div>
+
+            
+
+            <div class="split-row form-row-wide">
+                <p class="form-row form-group">
+                    <label for="first-name">Ime<span class="required">*</span></label>
+                    <input type="text" class="input-text form-control" name="fname" id="first-name" value=""
+                        required="required" [(ngModel)]="seller.user.firstName">
+                </p>
+
+                <p class="form-row form-group">
+                    <label for="last-name">Prezime<span class="required">*</span></label>
+                    <input type="text" class="input-text form-control" name="lname" id="last-name" value=""
+                        required="required" [(ngModel)]="seller.user.lastName">
+                </p>
+            </div>
+
 
             <div class="row mb-3">
                 <div class="col">
                     <label for="">Kanton</label>
-                    <select name="federation" (change)="citiesCombo($event)" [(ngModel)]="product.federation"
+                    <select name="federation" (change)="citiesCombo($event)" [(ngModel)]="user.federation"
                         class="form-select" id="select_federation">
                         <option value="">--Odaberite lokaciju--</option>
                         <option [disabled]="i == 0 || i == 11 || i == 16" *ngFor="let fed of federations, let i = index"
@@ -36,7 +53,7 @@
                 </div>
                 <div class="col">
                     <label for="">Grad</label>
-                    <select name="city" (change)="selectedCity($event)" [(ngModel)]="product.city" class="form-select"
+                    <select name="city" (change)="selectedCity($event)" [(ngModel)]="user.city" class="form-select"
                         id="select_federation">
                         <option value="">--Odaberite Grad--</option>
                         <option *ngFor="let fed of citiesToCombo, let i = index" [value]="i">{{fed}}</option>
@@ -44,36 +61,20 @@
                 </div>
             </div>
 
+            <p class="form-row form-group form-row-wide"> <!--mobile number -->
+                <label for="mobile_phone">Broj mobitela<span class="required">*</span></label>
+                <input type="text" class="input-text form-control" name="mobile_phone" id="mobile_phone" value=""
+                    required="required" [(ngModel)]="seller.user.phone">
+            </p> 
 
-            <div *ngIf="isSeller" class="fadeIn">
 
-
-                <div class="split-row form-row-wide">
-                    <p class="form-row form-group">
-                        <label for="first-name">Ime<span class="required">*</span></label>
-                        <input type="text" class="input-text form-control" name="fname" id="first-name" value=""
-                            required="required" [(ngModel)]="seller.firstName">
-                    </p>
-
-                    <p class="form-row form-group">
-                        <label for="last-name">Prezime<span class="required">*</span></label>
-                        <input type="text" class="input-text form-control" name="lname" id="last-name" value=""
-                            required="required" [(ngModel)]="seller.lastName">
-                    </p>
-                </div>
+            <div *ngIf="isSeller" class="fadeIn">                
 
                 <p class="form-row form-group form-row-wide">
                     <label for="company-name">Ime Firme/Trgovine<span class="required">*</span></label>
                     <input type="text" class="input-text form-control" name="shopname" id="company-name" value=""
                         required="required" [(ngModel)]="seller.companyName">
-                </p>
-
-                <p class="form-row form-group form-row-wide"> <!--mobile number -->
-                    <label for="mobile_phone">Broj mobitela<span class="required">*</span></label>
-                    <input type="text" class="input-text form-control" name="mobile_phone" id="mobile_phone" value=""
-                        required="required" [(ngModel)]="seller.address">
-                </p>
-                   
+                </p>                                  
 
             </div>
 

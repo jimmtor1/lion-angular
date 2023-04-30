@@ -3,6 +3,7 @@ import { Userr } from "./userr";
 export class Buyer {
 
     id : number;
-    userr : Userr;
-
+    postalCode:string;
+    user : Userr;
+  
 }

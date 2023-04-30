@@ -8,8 +8,8 @@ import { Seller } from '../models/seller';
 })
 export class SellerService {
 
-  // private URL = "http://localhost:8080/provider";
-  private URL = "https://test1.dcl.ba/provider";
+  private URL = "http://localhost:8080/provider";
+  // private URL = "https://test1.dcl.ba/provider";
 
   constructor(private http:HttpClient) { }
 
@@ -23,6 +23,10 @@ export class SellerService {
 
   getAllProcess():Observable<Seller[]>{
     return this.http.get<Seller[]>(`${this.URL}/process`);
+  }
+
+  save(formData: FormData):Observable<Seller>{
+    return this.http.post<Seller>(this.URL, formData);
   }
 
 

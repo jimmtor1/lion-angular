@@ -5,17 +5,22 @@
         <thead>
             <tr>
               <th >Id</th>
+              <th >First name</th>
+              <th >Last name</th>
               <th >Email</th>
-              <th >Action</th>              
+              <th >Action</th>            
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let buyer of buyers">
               <th>{{buyer.id}}</th>
-              <td>{{buyer.userr.email}}</td>
+              <td>{{buyer.user.firstName}}</td>
+              <td>{{buyer.user.lastName}}</td>
+              <td>{{buyer.user.email}}</td>
               <td>
                 
-                <button class="btn btn-dark" >deactivate</button>
+                <button (click)="emitBuyerEdit(buyer.user.id)" class="btn btn-dark mx-1" >details</button>
+                <button class="btn btn-dark mx-1" >deactivate</button>
 
               </td>           
             </tr>           

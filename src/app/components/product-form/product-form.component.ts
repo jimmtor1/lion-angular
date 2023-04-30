@@ -240,8 +240,8 @@ class imgclasification {
 
   productImage: ProductImage;
   isNew: boolean;
-  link: String;
-  id: String;
+  link: string;
+  id: string;
   file:File;
 
 }

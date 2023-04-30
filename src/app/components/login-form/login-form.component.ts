@@ -22,7 +22,7 @@ export class LoginFormComponent implements OnInit {
     if (roleString) {
      
       if(JSON.parse(roleString)==1){
-        this.router.navigate(['']);        
+        this.router.navigate(['buyerPanel']);        
       } else if(JSON.parse(roleString)==2){
         this.router.navigate(['sellerpanel']);
       }else if(JSON.parse(roleString)==3){

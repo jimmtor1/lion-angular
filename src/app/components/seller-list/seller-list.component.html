@@ -8,6 +8,7 @@
               <th >Company</th>
               <th >Firs</th>
               <th >Last</th> 
+              <th >email</th> 
               <th >Action</th>     
             </tr>
           </thead>
@@ -15,11 +16,12 @@
             <tr *ngFor="let seller of sellers">
               <th>{{seller.idprovider}}</th>
               <td>{{seller.companyName}}</td>
-              <td>{{seller.firstName}}</td>
-              <td>{{seller.lastName}}</td>             
+              <td>{{seller.user.firstName}}</td>
+              <td>{{seller.user.lastName}}</td>  
+              <td>{{seller.user.email}}</td>             
               <td>               
                 
-                <button (click)="emitSellerEdit(seller.idprovider)" class="btn btn-dark" >see details</button>
+                <button (click)="emitSellerEdit(seller.user.id)" class="btn btn-dark" >see details</button>
 
               </td>           
             </tr>           

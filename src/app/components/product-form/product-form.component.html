@@ -18,22 +18,25 @@
 
             <div class="mb-3">
                 <label>Kategorija proizvoda&nbsp;<span class="form-label">*</span></label>
-                <select name="idsubcategory" (change)="selectedSub($event)" [(ngModel)]="product.idsubcategory" class="form-select">    
-                    <option value="">--Odaberite podkategoriju--</option>                
-                    <option *ngFor="let sub of subcategories" value={{sub.idsubcategory}}>{{sub.subcategoryName}}</option>                    
+                <select name="idsubcategory" (change)="selectedSub($event)" [(ngModel)]="product.idsubcategory"
+                    class="form-select">
+                    <option value="">--Odaberite podkategoriju--</option>
+                    <option *ngFor="let sub of subcategories" value={{sub.idsubcategory}}>{{sub.subcategoryName}}
+                    </option>
                 </select>
             </div>
-      
+
             <div class="mb-3">
                 <label for="product_name">Ime proizvoda&nbsp;<span class="form-label">*</span></label>
                 <input type="text" class="form-control" name="product_name" id="ime" autocomplete="Ime proizvoda"
                     value="" [(ngModel)]="product.productName">
             </div>
-           
+
             <div class="mb-3">
                 <!-- <span class="form-label">*</span> -->
                 <label for="description">Opis&nbsp;</label>
-                <textarea class="form-control" id="description" name="description" rows="3" [(ngModel)]="product.description"></textarea>
+                <textarea class="form-control" id="description" name="description" rows="3"
+                    [(ngModel)]="product.description"></textarea>
             </div>
 
             <div>
@@ -64,7 +67,7 @@
                 <ul #imagelist id="imagelist">
                     <li *ngFor="let image of images;" [id]="image.id">
                         <div class="d-flex flex-column">
-                            <img [src]="image.link"  width="100">
+                            <img [src]="image.link" width="100">
                             <button type="button" class="btn btn-danger" (click)="removeImage(image)">
                                 <i class="fa fa-trash"></i>
                             </button>

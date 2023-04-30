@@ -17,18 +17,11 @@ export class RegisterFormComponent implements OnInit {
 
   buyer : Buyer = new Buyer();
   seller : Seller = new Seller();
-  userr : Userr = new Userr();
-  selectedCategory: number;
-  product: Product = new Product();
-  subcategories: Subcategory[];
+  user : Userr = new Userr();
   citiesToCombo: string[] = [];
+  isSeller:boolean = false;
 
-  isSeller:boolean = true;
-
-
-  constructor(private buyerService : BuyerService, private router:Router, private categoryService: CategoryService){
-
-  }
+  constructor(private buyerService : BuyerService, private router:Router, private categoryService: CategoryService){}
 
   ngOnInit(): void {    
   }
@@ -36,66 +29,60 @@ export class RegisterFormComponent implements OnInit {
   sellerSelected(event:Event){
 
       if((<HTMLInputElement>event.target).value=="seller"){
-        this.isSeller=true;
-        this.userr.role.id = 2;
+        this.isSeller=true;        
       }else{
-        this.isSeller=false;
-        this.userr.role.id = 1;
+        this.isSeller=false;        
       }
 
   }
 
-  selectedSub(event: Event) {
-    this.product.idsubcategory = parseInt((event.target as HTMLSelectElement)?.value);
-  }
+  // selectedSub(event: Event) {
+  //   this.product.idsubcategory = parseInt((event.target as HTMLSelectElement)?.value);
+  // }
  
-  saveBuyer(){
-    console.log("metodo buyer");
-    console.log(this.buyer);
+  saveBuyer(){  
     this.buyerService.createBuyer(this.buyer).subscribe(dato => {      
       this.router.navigate(['login']);
     },error => console.log(error));
-
   }
 
-  saveSeller(){
-    console.log("metodo saveseller");
+  saveSeller(){   
     this.buyerService.createSeller(this.seller).subscribe(dato=>{      
       this.router.navigate(['login']);
     },error => console.log(error));
   }
 
-  onSubmit(){
-    console.log(this.isSeller)
+  onSubmit(){  
     if(this.isSeller){      
-      this.seller.user = this.userr;
-      console.log(this.seller)
+      this.user.role.id = 2;
+      this.seller.user = this.user;
       this.saveSeller();
     }else{
-      this.buyer.userr = this.userr;
+      this.user.role.id = 1;
+      this.buyer.user = this.user;
       this.saveBuyer();
     }
     
   }
 
-  subcategoriesCombo(event: Event) {    
-    this.selectedCategory = parseInt((event.target as HTMLSelectElement)?.value);    
-    this.product.idcategory = this.selectedCategory; 
+  // subcategoriesCombo(event: Event) {    
+  //   this.selectedCategory = parseInt((event.target as HTMLSelectElement)?.value);    
+  //   this.product.idcategory = this.selectedCategory; 
     
-    this.categoryService.getSubcategories(this.selectedCategory).subscribe(subcategories => {
-      this.subcategories = subcategories;
-    });
-  }
+  //   this.categoryService.getSubcategories(this.selectedCategory).subscribe(subcategories => {
+  //     this.subcategories = subcategories;
+  //   });
+  // }
 
   citiesCombo(event: Event) {
     const fed = parseInt((event.target as HTMLSelectElement)?.value);
-    this.product.federation = fed;
+    this.user.federation = fed;
     this.citiesToCombo = this.cities[fed];
   }
 
 
   selectedCity(event: Event) {
-    this.product.city = parseInt((event.target as HTMLSelectElement)?.value);
+    this.user.city = parseInt((event.target as HTMLSelectElement)?.value);
   }
 
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Buyer } from 'src/app/models/buyer';
 import { BuyerService } from 'src/app/services/buyer.service';
 
@@ -8,6 +8,8 @@ import { BuyerService } from 'src/app/services/buyer.service';
   styleUrls: ['./buyer-list.component.css']
 })
 export class BuyerListComponent implements OnInit {
+
+  @Output() BuyerEditEvent = new EventEmitter<number>();
 
   buyers:Buyer[];
 
@@ -22,5 +24,11 @@ export class BuyerListComponent implements OnInit {
       this.buyers = list;
     });
   }
+
+  emitBuyerEdit(idbuyer:number){
+    this.BuyerEditEvent.emit(idbuyer);
+  }
+
+ 
 
 }

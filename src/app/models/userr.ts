@@ -3,9 +3,14 @@ export class Userr {
     id : number;
     email : string;
     password : string;
-    role : Role;
+    role : Role = new Role();
     active : boolean;
-    creationDate : String;
+    creationDate : string;
+    federation:number;
+    city:number;
+    firstName:string;
+    lastName:string;
+    phone:string;
 
 }
 

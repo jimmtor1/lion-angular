@@ -17,7 +17,7 @@
                         Lokacija
                     </p>
                     
-                    <p *ngIf="seller.federation!=null" >Grad: {{cities[seller.federation][seller.city]}}</p> 
+                    <p *ngIf="seller.user.federation!=null" >Grad: {{cities[seller.user.federation][seller.user.city]}}</p> 
 
                     
                     <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
@@ -44,9 +44,9 @@
         </a>        
 
         <p>Ime firme: {{seller.companyName}}</p>
-        <p>Prodavač: {{seller.firstName}} {{seller.lastName}}</p> 
+        <p>Prodavač: {{seller.user.firstName}} {{seller.user.lastName}}</p> 
         <p>Adresa: {{seller.address}}</p>
-        <p>Broj telefona: {{seller.phone}}</p>
+        <p>Broj telefona: {{seller.user.phone}}</p>
 
         <!-- seller image product list -->
         <div class="border pt-2">

@@ -1,15 +1,4 @@
-
-input,
-button, select, span {
-  border-radius: 20px 20px 20px 20px;
+.form-check-input:checked {
+  background-color: #dc3545;
+  border-color: #dc3545;
 }
-
-.drop-zone {
-    border: 1px dashed gray;
-    width: 80%;
-    height: 200px;  
-    border-radius: 10px 10px 10px 10px;
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: center;
-  }

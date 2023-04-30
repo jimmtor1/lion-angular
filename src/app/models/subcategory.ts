@@ -1,7 +1,11 @@
 export class Subcategory {
 
-    idsubcategory:number = 0;
-    subcategoryName:String = "";
-    idcategory:number = 0;
+    idsubcategory: number = 0;
+    subcategoryName: string = "";
+    category: number = 0;
+
+    toString(): string {
+        return this.subcategoryName;
+    }
 
 }

@@ -28,22 +28,22 @@
                                   
                     <a *ngIf="role == 2" routerLink="product" style="text-decoration: none;" class="text-dark text-center">                       
                         <i class="fa fa-plus fs-5"></i>
-                        <p class="text-dark">Vaši oglasi</p>
+                        <p class="small text-dark">Vaši oglasi</p>
                     </a>
 
                     <a *ngIf="role < 2" (click)="direction()" class="text-center text-dark" style="text-decoration: none; cursor: pointer;">
                         <i class="fa fa-shopping-bag fs-5"></i>
-                        <p class="text-dark">Trgovina</p>
+                        <p class="small text-dark">Trgovina</p>
                     </a>
 
                     <a routerLink="login" style="text-decoration: none;" class="text-center text-dark mx-3">
                         <i class="fa fa-user-o fs-5"></i>
-                        <p >{{email}}</p>
+                        <p class="small" >{{email}}</p>
                     </a>
 
-                    <a *ngIf="email !== 'login'" (click)="logout()" style="text-decoration: none; cursor: pointer;" class="text-dark text-center">
+                    <a *ngIf="email !== 'Login'" (click)="logout()" style="text-decoration: none; cursor: pointer;" class="text-dark text-center">
                         <i class="fa fa-sign-out fs-5"></i>
-                        <p class="text-dark">Logout</p>
+                        <p class="small text-dark">Logout</p>
                     </a>
 
                 </div>
