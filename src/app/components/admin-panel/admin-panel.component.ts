@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { Buyer } from 'src/app/models/buyer';
 import { BuyerService } from 'src/app/services/buyer.service';
 
@@ -9,7 +10,7 @@ import { BuyerService } from 'src/app/services/buyer.service';
 })
 export class AdminPanelComponent {
 
-  constructor(private buyerService:BuyerService){}
+  constructor(private buyerService:BuyerService, private router: Router){}
 
   currentPage: string = 'home';
   title: string = ""; 
@@ -100,13 +101,19 @@ export class AdminPanelComponent {
    
   }
   
-
-  logout() {
-    localStorage.clear();
+  logout() { 
+    localStorage.clear();    
   }
 
   citiesCombo(event: Event) {
-    const fed = parseInt((event.target as HTMLSelectElement)?.value);
+    let fed = parseInt((event.target as HTMLSelectElement)?.value);    
+
+    if(fed<11){
+      fed = fed-1;
+    }else {
+      fed = fed-2;
+    }
+
     this.buyer.user.federation = fed;
     this.citiesToCombo = this.cities[fed];
   }

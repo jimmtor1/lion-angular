@@ -4,8 +4,7 @@ import { Subcategory } from "./subcategory";
 
 export class Seller {
 
-    idprovider: number;
-    address: string = "";
+    idprovider: number;   
     street: string = "";
     companyName: string = "";
     postalCode: string = "";

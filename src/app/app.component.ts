@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 import { Router } from '@angular/router';
+import { Observable, fromEvent, map, startWith } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -12,8 +13,14 @@ export class AppComponent {
 
   email: string = "Login";
   role:number=0;
+  public isMobile$: Observable<boolean>;
 
   constructor(private router:Router) {
+
+    this.isMobile$ = fromEvent(window, 'resize').pipe(
+      map(() => window.innerWidth <= 768),
+      startWith(window.innerWidth <= 768)
+    );
 
     const usuarioString = localStorage.getItem("email");    
     if (usuarioString) {

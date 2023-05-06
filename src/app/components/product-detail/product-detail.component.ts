@@ -58,7 +58,7 @@ export class ProductDetailComponent implements OnInit {
 
 
   federations = [
-    "FEDERACIJA BiH",
+    // "FEDERACIJA BiH",
     "UNSKO-SANSKI KANTON",
     "Posavski kanton",
     "Tuzlanski kanton",
@@ -69,12 +69,12 @@ export class ProductDetailComponent implements OnInit {
     "Zapadnohercegovački kanton",
     "Kanton Sarajevo",
     "Kanton 10",
-    "REPUBLIKA SRPSKA",
+    // "REPUBLIKA SRPSKA",
     "Banjalučka",
     "Dobojsko-Bijeljinska",
     "Sarajevsko-Zvornička",
     "Trebinjsko-Fočanska",
-    "BRČKO DISTRIKT"
+    // "BRČKO DISTRIKT"
   ];
 
   cities = [

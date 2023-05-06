@@ -78,8 +78,8 @@
                 <div class="w-75 mx-auto">
 
                     <!-- <div> -->
-                        <span *ngIf="buyer.user.active" class="badge rounded-pill bg-success p-2 mb-3">ACTIVE</span>
-                        <span *ngIf="!buyer.user.active" class="badge rounded-pill bg-danger p-2 mb-3">INACTIVE</span>
+                    <span *ngIf="buyer.user.active" class="badge rounded-pill bg-success p-2 mb-3">ACTIVE</span>
+                    <span *ngIf="!buyer.user.active" class="badge rounded-pill bg-danger p-2 mb-3">INACTIVE</span>
                     <!-- </div> -->
 
                     <p class="h6">Email:</p>
@@ -108,7 +108,7 @@
                         id="select_federation">
                         <option value="">--Odaberite lokaciju--</option>
                         <option [disabled]="i == 0 || i == 11 || i == 16" *ngFor="let fed of federations, let i = index"
-                            [value]="i">
+                            [value]="i-1">
                             {{fed}}
                         </option>
                     </select>
@@ -131,8 +131,8 @@
                     <input [disabled]="action!=='Save'" type="text" [(ngModel)]="buyer.postalCode"
                         [ngClass]="buyer.postalCode==null ? 'mb-3 rounded-pill border text-danger form-control':' mb-3form-control border rounded-pill'">
 
-                    
-                    
+                   
+
 
                 </div>
 

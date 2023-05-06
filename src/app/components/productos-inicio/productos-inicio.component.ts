@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Provider } from '@angular/core';
 import { Category } from 'src/app/models/category';
-import { Product } from 'src/app/models/product';
+import { Seller } from 'src/app/models/seller';
 import { CategoryService } from 'src/app/services/category.service';
 import { ProductService } from 'src/app/services/product.service';
+import { SellerService } from 'src/app/services/seller.service';
 
 @Component({
   selector: 'productos-inicio',
@@ -12,15 +13,23 @@ import { ProductService } from 'src/app/services/product.service';
 export class ProductosInicioComponent implements OnInit {
 
   categories:Category[] = [];
+  seller:Seller[]=[];
 
-  constructor(private categoryService:CategoryService){
+    constructor(private categoryService:CategoryService, private providerService:SellerService){
    
   }
 
   private getProductsFromCategory(){
+    
     this.categoryService.getAll().subscribe(data => {
-      this.categories = data;      
+      this.categories = data;  
     });
+
+    this.providerService.getAllByCategory().subscribe(data => {
+      this.seller = data;           
+    });
+
+
   }
 
   ngOnInit():void{

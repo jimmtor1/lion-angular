@@ -1,0 +1,48 @@
+<div>
+
+    <h1>{{cate.name[item]}}</h1>
+     
+    <ul >
+
+        <li *ngFor="let title of cate.title[item], let i = index">
+            {{title}}
+
+            <ul>
+
+                <div *ngIf="item==0">
+                    <li *ngFor="let sub of cate.subcategory1[i]">
+                        {{sub}}
+                    </li>
+                </div>
+
+                <div *ngIf="item==1">
+                    <li *ngFor="let sub of cate.subcategory2[i]">
+                        {{sub}}
+                    </li>
+                </div>
+
+                <div *ngIf="item==2">
+                    <li *ngFor="let sub of cate.subcategory3[i]">
+                        {{sub}}
+                    </li>
+                </div>
+
+                <div *ngIf="item==3">
+                    <li *ngFor="let sub of cate.subcategory4[i]">
+                        {{sub}}
+                    </li>
+                </div>
+
+                <div *ngIf="item==4">
+                    <li *ngFor="let sub of cate.subcategory5[i]">
+                        {{sub}}
+                    </li>
+                </div>
+
+            </ul>
+
+        </li>
+
+    </ul>
+
+</div>

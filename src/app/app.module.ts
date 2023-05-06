@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
@@ -23,20 +23,32 @@ import { SellerDetailComponent } from './components/seller-detail/seller-detail.
 import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
 import { BuyerListComponent } from './components/buyer-list/buyer-list.component';
 import { SellerListComponent } from './components/seller-list/seller-list.component';
+import { SellerSocialnetworkComponent } from './components/seller-socialnetwork/seller-socialnetwork.component';
+
+import { faBuilding, faHome, faLaptop, faMagnifyingGlass, faShirt, faShoppingCart, faSignOut, faStore, faUser } from '@fortawesome/free-solid-svg-icons';
+import { SubcategoryListComponent } from './components/subcategory-list/subcategory-list.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent, HomeComponent, ProductosInicioComponent, ProductFormComponent, RegisterFormComponent, LoginFormComponent, ProductCategoryListComponent, SellerPanelComponent, ProductDetailComponent, ProductBuyerListComponent, SellerCompanyFormComponent, PanelBuyerComponent, SellerDetailComponent, AdminPanelComponent, BuyerListComponent, SellerListComponent
+    AppComponent, HomeComponent, ProductosInicioComponent, ProductFormComponent, RegisterFormComponent, LoginFormComponent, ProductCategoryListComponent, SellerPanelComponent, ProductDetailComponent, ProductBuyerListComponent, SellerCompanyFormComponent, PanelBuyerComponent, SellerDetailComponent, AdminPanelComponent, BuyerListComponent, SellerListComponent, SellerSocialnetworkComponent, SubcategoryListComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FontAwesomeModule,
-    FormsModule   
+    FormsModule
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+
+  
+
+  constructor(library: FaIconLibrary) {
+    library.addIcons(faShirt, faBuilding, faHome, faLaptop, faShoppingCart, faMagnifyingGlass, faUser, faSignOut, faStore);
+  }
+
+}

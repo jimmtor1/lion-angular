@@ -29,5 +29,12 @@ export class SellerService {
     return this.http.post<Seller>(this.URL, formData);
   }
 
+  getAllByCategory(){
+    return this.http.get<Seller[]>(`${this.URL}/category`);
+  }
+
+  acceptById(id:number):Observable<Seller>{
+    return this.http.get<Seller>(`${this.URL}/active/${id}`);
+  }
 
 }

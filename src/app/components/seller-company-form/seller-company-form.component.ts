@@ -134,7 +134,7 @@ export class SellerCompanyFormComponent implements OnInit {
 
     formData.append('idprovider', this.seller.idprovider.toString());
     formData.append('companyName', this.seller.companyName);
-    formData.append('address', this.seller.address);
+    formData.append('address', this.seller.user.address);
     formData.append('street', this.seller.street);
     formData.append('postalCode', this.seller.postalCode);
     formData.append('annualLeave', this.seller.annualLeave);
@@ -213,7 +213,14 @@ export class SellerCompanyFormComponent implements OnInit {
   }
 
   citiesCombo(event: Event) {
-    const fed = parseInt((event.target as HTMLSelectElement)?.value);
+    let fed = parseInt((event.target as HTMLSelectElement)?.value);
+
+    if(fed<11){
+      fed = fed-1;
+    }else {
+      fed = fed-2;
+    }
+
     this.seller.user.federation = fed;
     this.citiesToCombo = this.cities[fed];
   }

@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { Buyer } from 'src/app/models/buyer';
 import { Order } from 'src/app/models/order';
 import { BuyerService } from 'src/app/services/buyer.service';
 import { OrderService } from 'src/app/services/order.service';
 
 @Component({
-  selector: 'app-panel-buyer',
+  selector: 'panel-buyer',
   templateUrl: './panel-buyer.component.html',
   styleUrls: ['./panel-buyer.component.css']
 })
@@ -23,7 +22,7 @@ export class PanelBuyerComponent implements OnInit {
   buyer: Buyer;
   iduser: number;
 
-  constructor(private orderService: OrderService, private router: Router, private buyerService: BuyerService) { }
+  constructor(private orderService: OrderService, private buyerService: BuyerService) { }
 
   ngOnInit(): void {
 
@@ -37,8 +36,7 @@ export class PanelBuyerComponent implements OnInit {
     if (usuarioString) {
       this.iduser = JSON.parse(usuarioString);
 
-      this.buyerService.getByIdUser(this.iduser).subscribe(buy => {
-        console.log(this.iduser);
+      this.buyerService.getByIdUser(this.iduser).subscribe(buy => {      
         this.buyer = buy;        
         this.citiesToCombo = this.cities[this.buyer.user.federation];
       });
@@ -61,9 +59,8 @@ export class PanelBuyerComponent implements OnInit {
 
   }
 
-  logout() {
-    localStorage.clear
-    this.router.navigate([''])
+  logout() {   
+    localStorage.clear(); 
   }
 
   editForm(){    
@@ -86,7 +83,12 @@ export class PanelBuyerComponent implements OnInit {
   }
 
   citiesCombo(event: Event) {
-    const fed = parseInt((event.target as HTMLSelectElement)?.value);
+    let fed = parseInt((event.target as HTMLSelectElement)?.value);
+    if(fed<11){
+      fed = fed-1;
+    }else {
+      fed = fed-2;
+    }
     this.buyer.user.federation = fed;
     this.citiesToCombo = this.cities[fed];
   }

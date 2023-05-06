@@ -21,7 +21,8 @@
               <td>{{seller.user.email}}</td>             
               <td>               
                 
-                <button (click)="emitSellerEdit(seller.user.id)" class="btn btn-dark" >see details</button>
+                <button (click)="emitSellerEdit(seller.user.id)" class="btn btn-dark mx-2" >see details</button>
+                <button (click)="confirm(seller.user.id)" class="btn btn-dark mx-2" >Confirm</button>
 
               </td>           
             </tr>           

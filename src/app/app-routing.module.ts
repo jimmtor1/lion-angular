@@ -12,6 +12,7 @@ import { ProductBuyerListComponent } from './components/product-buyer-list/produ
 import { SellerCompanyFormComponent } from './components/seller-company-form/seller-company-form.component';
 import { SellerDetailComponent } from './components/seller-detail/seller-detail.component';
 import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
+import { SubcategoryListComponent } from './components/subcategory-list/subcategory-list.component';
 
 const routes: Routes = [
   {path:'', component:HomeComponent},
@@ -22,12 +23,12 @@ const routes: Routes = [
   {path: 'productCategoryList/:id/:idc', component:ProductCategoryListComponent},
   {path: 'sellerpanel', component:SellerPanelComponent},
   {path: 'addetails/:id', component:ProductDetailComponent},
-  {path: 'buyerpanel', component:PanelBuyerComponent},
+  {path: 'buyerPanel', component:PanelBuyerComponent},
   {path: 'adBuyerList', component:ProductBuyerListComponent},
   {path: 'sellerCompanyForm', component:SellerCompanyFormComponent},
   {path: 'sellerDetail/:id', component:SellerDetailComponent},
-  {path: 'adminPanel', component:AdminPanelComponent},
-  {path: 'buyerPanel', component:PanelBuyerComponent}
+  {path: 'adminPanel', component:AdminPanelComponent},  
+  {path: 'subcategoryList/:id', component:SubcategoryListComponent}, 
 ];
 
 @NgModule({

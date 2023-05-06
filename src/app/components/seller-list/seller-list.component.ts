@@ -41,4 +41,10 @@ export class SellerListComponent {
     this.SellerEditEvent.emit(idseller);
   }
 
+  confirm(idseller:number){
+    this.sellerService.acceptById(idseller).subscribe(list =>{      
+      location.reload();
+    });
+  }
+
 }

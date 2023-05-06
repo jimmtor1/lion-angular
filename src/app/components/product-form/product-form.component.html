@@ -39,16 +39,28 @@
                     [(ngModel)]="product.description"></textarea>
             </div>
 
-            <div>
-                <label for="price">Cijena&nbsp;<span class="form-label">*</span></label>
-                <input type="number" class="form-control" name="price" id="price" rows="3" [(ngModel)]="product.price">
-            </div>
+            <div class="row">
 
-            <div>
-                <label for="price">Cijena na&nbsp;<span class="form-label">*</span></label>
-                <input type="number" class="form-control" name="price" id="price" rows="3" [(ngModel)]="product.price">
-            </div>
+                <div class="col-6">
+                    <label for="price">Cijena&nbsp;<span class="form-label">*</span></label>
+                    <input type="number" class="form-control" name="price" id="price" rows="3" [(ngModel)]="product.price" [disabled]="priceRequest">
+                </div>
 
+                <div class="col-6">
+
+                    <div class="row">
+                        <label for="price">Cijena na&nbsp;<span class="form-label">*</span></label>
+                    </div>
+
+                    <div class="row">
+                        <input type="checkbox" class="btn-check" id="btn-check-2-outlined" (click)="priceonrequest()" [checked]="product.price==0" autocomplete="off">
+                        <label class="btn btn-outline-secondary" for="btn-check-2-outlined">Cijena na</label><br>
+                    </div>
+                    
+
+                </div>
+
+            </div>
             <!-- <div class="my-3" style="height: 300px; border: dashed #dc3545;">
                 <h4 data-v-9aa5db88="" _msttexthash="307190" _msthash="1926">Sube fotos aquí...</h4>
             </div> -->

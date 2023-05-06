@@ -1,6 +1,5 @@
 import { Component, ComponentFactoryResolver, ElementRef, OnInit, Renderer2, ViewChild, ViewContainerRef } from '@angular/core';
 import { Router } from '@angular/router';
-import { Product } from 'src/app/models/product';
 
 @Component({
   selector: 'seller-panel',
@@ -22,6 +21,7 @@ export class SellerPanelComponent {
   mostrarProductList = false;
   mostrarSellerDetail = true;
   mostrarSellerEdit = false;
+  mostrarSocial = false;
 
   constructor(private router: Router, private renderer2: Renderer2) {}
 
@@ -40,7 +40,8 @@ export class SellerPanelComponent {
     this.mostrarProductList = false
     this.mostrarProductnew = false;
     this.mostrarProductEdit = false;
-    this.mostrarSellerEdit = false
+    this.mostrarSellerEdit = false;
+    this.mostrarSocial = false;
     this.mostrarSellerDetail = true
 
     this.title = "Company profile";
@@ -55,6 +56,7 @@ export class SellerPanelComponent {
 
   showSellerEdit() {
     this.mostrarSellerDetail = false
+    this.mostrarSocial = false;
     this.mostrarSellerEdit = true
 
     this.title = "Update Company data";
@@ -73,6 +75,7 @@ export class SellerPanelComponent {
     this.mostrarProductnew = false;
     this.mostrarProductEdit = false;
     this.mostrarSellerEdit = false
+    this.mostrarSocial = false;
     this.mostrarProductList = true;
 
     this.title = "Vaši oglasi";
@@ -89,8 +92,10 @@ export class SellerPanelComponent {
     this.mostrarProductEdit = false;
     this.mostrarProductList = false;
     this.mostrarSellerDetail = false;
-    this.mostrarSellerEdit = false
+    this.mostrarSellerEdit = false;
+    this.mostrarSocial = false;
     this.mostrarProductnew = true;
+    
 
     this.title = "Novi oglas"; //new ad
     this.action = "Cancel";
@@ -105,6 +110,7 @@ export class SellerPanelComponent {
 
   showProductEdit(idproduct: number) {
     this.mostrarProductList = false;
+    this.mostrarSocial = false;
     this.mostrarProductEdit = true;
 
     this.title = "ažurirati oglas"; //new ad
@@ -116,6 +122,21 @@ export class SellerPanelComponent {
       this.showProductList();
     })
     this.idproduct = idproduct;
+
+  }
+
+  showSocial() {
+    this.mostrarProductList = false;
+    this.mostrarProductEdit = false;
+    this.mostrarSellerDetail = false;
+    this.mostrarSellerEdit = false;
+    this.mostrarSocial = true;
+
+     this.title = "Social network"; //new ad
+    // this.action = "Cancel";
+     this.currentPage = "social";
+   
+  
 
   }
 

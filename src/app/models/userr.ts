@@ -11,6 +11,7 @@ export class Userr {
     firstName:string;
     lastName:string;
     phone:string;
+    address:string;
 
 }
 

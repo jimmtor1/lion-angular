@@ -10,9 +10,12 @@
                     <p class="card-text">
                         {{product.description}}
                     </p>
-                    <p class="h4">
+                    <p *ngIf="product.price!==0" class="h4">
                       Cijena:  {{product.price}} KM
                     </p>
+                    <p *ngIf="product.price==0" class="h4">
+                        Cijena:  Cijena na
+                      </p>
                     <p class="h4">
                         Lokacija
                     </p>
@@ -45,7 +48,7 @@
 
         <p>Ime firme: {{seller.companyName}}</p>
         <p>Prodavač: {{seller.user.firstName}} {{seller.user.lastName}}</p> 
-        <p>Adresa: {{seller.address}}</p>
+        <p>Adresa: {{seller.user.address}}</p>
         <p>Broj telefona: {{seller.user.phone}}</p>
 
         <!-- seller image product list -->

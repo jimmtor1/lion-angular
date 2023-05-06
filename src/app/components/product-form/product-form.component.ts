@@ -27,6 +27,8 @@ export class ProductFormComponent implements OnInit {
   productImage: ProductImage[] = [];
   filesTodelete: ProductImage[] = [];
   idimgnew: number = 0;
+  priceRequest:boolean=false;
+  iduser:number;
 
   constructor(private renderer2: Renderer2, private categoryService: CategoryService, private productService: ProductService, private router: Router, private auth: AuthService, private route: ActivatedRoute, private datePipe: DatePipe) { }
 
@@ -41,6 +43,11 @@ export class ProductFormComponent implements OnInit {
       }
     });
 
+    const u = localStorage.getItem("iduser");
+    if(u){
+      this.iduser = JSON.parse(u);      
+    }
+
     this.subcategoriesCombo2();
     // if(this.auth.idprovider==0){      
     //   this.router.navigate(['login']);
@@ -50,7 +57,11 @@ export class ProductFormComponent implements OnInit {
   getUserById(id: number) {
     this.productService.getById(id).subscribe(bdproduct => {
       this.product = bdproduct;
-
+      if(this.product.price==0){
+        this.priceRequest = true;
+      }else{
+        this.priceRequest = false;
+      }
       //this.citiesToCombo = this.cities[this.product.federation];
       this.onFileSelected2();
     })
@@ -94,12 +105,15 @@ export class ProductFormComponent implements OnInit {
     formData.append('description', this.product.description);
     formData.append('idcategory', "5");
     formData.append('idsubcategory', this.product.idsubcategory.toString());
-    formData.append('idprovider', this.product.idprovider.toString());
+
+       
+    formData.append('idprovider', this.iduser.toString());
     formData.append('active', this.product.active.toString());
     formData.append('price', this.product.price.toString());
 
     this.productService.saveAd(formData).subscribe(dato => {
-      this.router.navigate(['panelAnuncios']);
+      //this.router.navigate(['sellerpanel']);
+      location.reload();
     }, error => console.log(error));
   }
 
@@ -118,9 +132,10 @@ export class ProductFormComponent implements OnInit {
     formData.append('idproduct', this.product.idproduct.toString());
     formData.append('productName', this.product.productName);
     formData.append('description', this.product.description);
-    formData.append('idcategory', this.product.idcategory.toString());
+    formData.append('idcategory', "5");
     formData.append('idsubcategory', this.product.idsubcategory.toString());
-    formData.append('idprovider', this.product.idprovider.toString());
+ 
+    formData.append('idprovider', this.iduser.toString());
     formData.append('active', this.product.active.toString());
     formData.append('federation', this.product.federation.toString());
     formData.append('city', this.product.city.toString());
@@ -134,7 +149,8 @@ export class ProductFormComponent implements OnInit {
 
 
     this.productService.editAd(formData).subscribe(dato => { 
-      this.router.navigate(['panelAnuncios']);         
+      //this.router.navigate(['sellerpanel']);
+      location.reload();         
     }, error => console.log(error));
 
     // this.productService.editAd2(this.filesTodelete).subscribe(dato => {
@@ -162,6 +178,17 @@ export class ProductFormComponent implements OnInit {
       };
 
     }
+  }
+
+  priceonrequest(){
+    if(this.priceRequest){
+      this.priceRequest = false;      
+    }else{
+      this.priceRequest = true;
+      this.product.price = 0;
+    }    
+
+
   }
 
   onFileSelected2() {
