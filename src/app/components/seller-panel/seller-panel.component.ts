@@ -1,5 +1,6 @@
 import { Component, ComponentFactoryResolver, ElementRef, OnInit, Renderer2, ViewChild, ViewContainerRef } from '@angular/core';
 import { Router } from '@angular/router';
+import { SellerSocialnetworkComponent } from '../seller-socialnetwork/seller-socialnetwork.component';
 
 @Component({
   selector: 'seller-panel',
@@ -10,6 +11,7 @@ export class SellerPanelComponent {
 
   // @ViewChild('nietoContainer', { read: ViewContainerRef }) nietoContainer: ViewContainerRef;
   @ViewChild('butt') miEnlace!: ElementRef;
+  @ViewChild('datosDesdeElPadre', { static: false }) datosDesdeElPadre: SellerSocialnetworkComponent;
 
   idproduct: number;
   currentPage: string = 'company';
@@ -23,19 +25,22 @@ export class SellerPanelComponent {
   mostrarSellerEdit = false;
   mostrarSocial = false;
 
-  constructor(private router: Router, private renderer2: Renderer2) {}
+  private clickListener: () => void;
+
+  constructor(private router: Router, private renderer2: Renderer2) {
+    this.title = "Profil komanije";
+    this.action = "Ažuriraj podatke";
+   }
 
   ngAfterViewInit() {
-    this.title = "Company profile";
-    this.action = "Update data";
-
     const theLink = this.miEnlace.nativeElement;
-    this.renderer2.listen(theLink, 'click', () => {
+    this.clickListener = this.renderer2.listen(theLink, 'click', () => {
       this.showSellerEdit();
+      // console.log("inicio");
     })
   }
 
-  
+
   showSellerDetail() {
     this.mostrarProductList = false
     this.mostrarProductnew = false;
@@ -44,8 +49,8 @@ export class SellerPanelComponent {
     this.mostrarSocial = false;
     this.mostrarSellerDetail = true
 
-    this.title = "Company profile";
-    this.action = "Update data";
+    this.title = "Profil komanije";
+    this.action = "Ažuriraj podatke";
     this.currentPage = "company";
 
     const theLink = this.miEnlace.nativeElement;
@@ -57,10 +62,11 @@ export class SellerPanelComponent {
   showSellerEdit() {
     this.mostrarSellerDetail = false
     this.mostrarSocial = false;
-    this.mostrarSellerEdit = true
+    this.mostrarSellerEdit = true;
+    this.mostrarProductnew = false;
 
-    this.title = "Update Company data";
-    this.action = "Cancel";
+    this.title = "Ažuriraj podatke kompanije";
+    this.action = "Odustani";
 
     const theLink = this.miEnlace.nativeElement;
     this.renderer2.listen(theLink, 'click', () => {
@@ -95,10 +101,10 @@ export class SellerPanelComponent {
     this.mostrarSellerEdit = false;
     this.mostrarSocial = false;
     this.mostrarProductnew = true;
-    
+
 
     this.title = "Novi oglas"; //new ad
-    this.action = "Cancel";
+    this.action = "Odustani"; //cancel
     this.currentPage = "adlist";
 
     const theLink = this.miEnlace.nativeElement;
@@ -112,9 +118,10 @@ export class SellerPanelComponent {
     this.mostrarProductList = false;
     this.mostrarSocial = false;
     this.mostrarProductEdit = true;
+    this.mostrarProductnew = false;
 
     this.title = "ažurirati oglas"; //new ad
-    this.action = "Cancel";
+    this.action = "Odustani";
     this.currentPage = "adlist";
 
     const theLink = this.miEnlace.nativeElement;
@@ -126,17 +133,38 @@ export class SellerPanelComponent {
   }
 
   showSocial() {
+
+    
     this.mostrarProductList = false;
     this.mostrarProductEdit = false;
     this.mostrarSellerDetail = false;
     this.mostrarSellerEdit = false;
+    this.mostrarProductnew = false;
     this.mostrarSocial = true;
 
-     this.title = "Social network"; //new ad
-    // this.action = "Cancel";
-     this.currentPage = "social";
-   
+    
+
+    this.title = "Društvene mreže"; //new ad
+    this.action = "Edit";
+    this.currentPage = "social";
   
+    this.clickListener();
+
+    const theLink = this.miEnlace.nativeElement;
+
+     this.clickListener=this.renderer2.listen(theLink, 'click', () => {  
+      this.datosDesdeElPadre.estollegadelpadre = false;    
+      this.action = "Odustani";
+
+      this.clickListener();
+      this.clickListener=this.renderer2.listen(theLink, 'click', () => {  
+        this.datosDesdeElPadre.estollegadelpadre = true;    
+        this.action = "Edit";
+      });
+
+    })
+   
+
 
   }
 
@@ -146,5 +174,7 @@ export class SellerPanelComponent {
     localStorage.clear();
   }
 
+
+  
 
 }

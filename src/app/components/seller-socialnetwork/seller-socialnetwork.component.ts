@@ -10,6 +10,9 @@ import { SellerService } from 'src/app/services/seller.service';
 export class SellerSocialnetworkComponent implements OnInit {
   
   seller:Seller=new Seller();
+ // edit:boolean =false;
+  @Input() estollegadelpadre: any = true;
+  waiting:boolean = false;
 
   constructor(private sellerService:SellerService){}
   
@@ -19,11 +22,19 @@ export class SellerSocialnetworkComponent implements OnInit {
       this.sellerService.getById(JSON.parse(iduser)).subscribe(d=>{
         this.seller = d;
       });
-    }
-    
+    }       
   }
 
-  
+
+  save(){
+    this.waiting = true;
+    this.sellerService.saveWithoutForm(this.seller).subscribe(r=>{
+      this.estollegadelpadre=true;
+      this.waiting = false;
+    },error => {
+      this.waiting = false;
+    });
+  }
   
 
   

@@ -19,47 +19,48 @@ export class ProductFormComponent implements OnInit {
   @Input() id: number;
 
   images: imgclasification[] = [];
-  // files: File[] = [];
-  // selectedCategory: number;
   subcategories: Subcategory[];
   product: Product = new Product();
-  //citiesToCombo: string[] = [];
+
   productImage: ProductImage[] = [];
   filesTodelete: ProductImage[] = [];
   idimgnew: number = 0;
-  priceRequest:boolean=false;
-  iduser:number;
+  priceRequest: boolean = false;
+  iduser: number;
+  addTitle: boolean = false;
 
   constructor(private renderer2: Renderer2, private categoryService: CategoryService, private productService: ProductService, private router: Router, private auth: AuthService, private route: ActivatedRoute, private datePipe: DatePipe) { }
 
   ngOnInit(): void {
-    
+
+   
     this.route.params.subscribe(params => {
-      
-      if (params['id'] != null) {
-        this.getUserById(params['id']);
-      }else if(this.id>0){
-        this.getUserById(this.id);
-      }
-    });
+
+      if (params['id'] == 0) {
+        //this.getUserById(params['id']);
+        this.addTitle = true;
+      } 
+      //else if (this.id > 0) {
+        
+    //     this.getUserById(this.id);
+    //   }
+     });
 
     const u = localStorage.getItem("iduser");
-    if(u){
-      this.iduser = JSON.parse(u);      
+    if (u) {
+      this.iduser = JSON.parse(u);
     }
 
     this.subcategoriesCombo2();
-    // if(this.auth.idprovider==0){      
-    //   this.router.navigate(['login']);
-    // }
+
   }
 
   getUserById(id: number) {
     this.productService.getById(id).subscribe(bdproduct => {
       this.product = bdproduct;
-      if(this.product.price==0){
+      if (this.product.price == 0) {
         this.priceRequest = true;
-      }else{
+      } else {
         this.priceRequest = false;
       }
       //this.citiesToCombo = this.cities[this.product.federation];
@@ -67,13 +68,6 @@ export class ProductFormComponent implements OnInit {
     })
   }
 
-  // subcategoriesCombo(event: Event) {
-  //   this.selectedCategory = parseInt((event.target as HTMLSelectElement)?.value);
-  //   this.product.idcategory = this.selectedCategory;
-  //   this.categoryService.getSubcategories(this.selectedCategory).subscribe(subcategories => {
-  //     this.subcategories = subcategories;
-  //   });
-  // }
 
   subcategoriesCombo2() {
     this.categoryService.getSubcategories(5).subscribe(subcategories => {
@@ -88,9 +82,9 @@ export class ProductFormComponent implements OnInit {
 
   submit() {
 
-    if (this.product.idproduct > 0) {     
+    if (this.product.idproduct > 0) {
       this.edit();
-    } else {     
+    } else {
       this.save();
     }
 
@@ -106,7 +100,7 @@ export class ProductFormComponent implements OnInit {
     formData.append('idcategory', "5");
     formData.append('idsubcategory', this.product.idsubcategory.toString());
 
-       
+
     formData.append('idprovider', this.iduser.toString());
     formData.append('active', this.product.active.toString());
     formData.append('price', this.product.price.toString());
@@ -134,7 +128,7 @@ export class ProductFormComponent implements OnInit {
     formData.append('description', this.product.description);
     formData.append('idcategory', "5");
     formData.append('idsubcategory', this.product.idsubcategory.toString());
- 
+
     formData.append('idprovider', this.iduser.toString());
     formData.append('active', this.product.active.toString());
     formData.append('federation', this.product.federation.toString());
@@ -148,14 +142,10 @@ export class ProductFormComponent implements OnInit {
     }
 
 
-    this.productService.editAd(formData).subscribe(dato => { 
-      //this.router.navigate(['sellerpanel']);
-      location.reload();         
+    this.productService.editAd(formData).subscribe(dato => {
+         location.reload();
     }, error => console.log(error));
 
-    // this.productService.editAd2(this.filesTodelete).subscribe(dato => {
-    //   this.router.navigate(['panelAnuncios']);
-    // }, error => console.log(error));
 
   }
 
@@ -180,13 +170,13 @@ export class ProductFormComponent implements OnInit {
     }
   }
 
-  priceonrequest(){
-    if(this.priceRequest){
-      this.priceRequest = false;      
-    }else{
+  priceonrequest() {
+    if (this.priceRequest) {
+      this.priceRequest = false;
+    } else {
       this.priceRequest = true;
       this.product.price = 0;
-    }    
+    }
 
 
   }
@@ -200,8 +190,8 @@ export class ProductFormComponent implements OnInit {
         im = new imgclasification();
         im.isNew = false;
         im.link = "./assets/images/" + productImg[i].idimage + productImg[i].extension;
-        im.id = productImg[i].idimage.toString();       
-        im.productImage = productImg[i];      
+        im.id = productImg[i].idimage.toString();
+        im.productImage = productImg[i];
         this.images.push(im);
       }
 
@@ -211,16 +201,16 @@ export class ProductFormComponent implements OnInit {
   removeImage(im: imgclasification): void {
 
     const imageElement = document.getElementById(`${im.id}`);
-   
+
     if (im.isNew && imageElement !== null) {
-     
+
       imageElement.remove();
       let index = this.images.indexOf(im);
       this.images.splice(index, 1);
       alert("num images" + this.images.length);
 
     } else if (!im.isNew && imageElement !== null) {
-    
+
       this.filesTodelete.push(im.productImage);
       // console.log(this.filesTodelete[0]);
       imageElement.remove();
@@ -269,6 +259,6 @@ class imgclasification {
   isNew: boolean;
   link: string;
   id: string;
-  file:File;
+  file: File;
 
 }

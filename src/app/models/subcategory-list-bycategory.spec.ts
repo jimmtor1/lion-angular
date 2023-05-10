@@ -1,7 +1,8 @@
-import { SubcategoryListBycategory } from './subcategory-list-bycategory';
+import { Cate } from "./subcategory-list-bycategory";
+
 
 describe('SubcategoryListBycategory', () => {
   it('should create an instance', () => {
-    expect(new SubcategoryListBycategory()).toBeTruthy();
+    expect(new Cate()).toBeTruthy();
   });
 });

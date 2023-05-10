@@ -1,6 +1,6 @@
 <div class="container mt-3 pt-3">
 
-    <p class="h1 text-center"> Vendor Panel</p>
+    <p class="h1 text-center">  Prodavački panel kompanije</p>
 
     <div class="row border">
         <!-- vertical nav -->
@@ -13,26 +13,26 @@
                         <a class="nav-link" [ngClass]="{'active': currentPage === 'company'}"
                             (click)="showSellerDetail()">
                             <i class="fa fa-industry"></i>
-                            &nbsp;Company
+                            &nbsp;Kompanija
                         </a>
                     </li>
                     <li class="nav-item border">
                         <a class="nav-link" [ngClass]="{'active': currentPage === 'adlist'}" id="product-list"
                             (click)="showProductList()">
                             <i class="fa fa-buysellads"></i>
-                            &nbsp;Publications
+                            &nbsp;Objavljivanje
                         </a>
                     </li>
                     <li class="nav-item border">
                         <a class="nav-link" [ngClass]="{'active': currentPage === 'social'}"
                             (click)="showSocial()">
                             <i class="fa fa-comments"></i>
-                            &nbsp;social networks</a>
+                            &nbsp;Društvene mreže</a>
                     </li>
                     <li class="nav-item border">
                         <a class="nav-link" href="#" (click)="logout()">
                             <i class="fa fa-power-off"></i>
-                            &nbsp;Logout</a>
+                            &nbsp;Odjava</a>
                     </li>
 
                 </ul>
@@ -42,25 +42,13 @@
 
         <div class="col-9">
 
-            <!-- <div *ngIf="currentPage === 'company'" class="row mt-3">
-                <div class="col-6">
-                    <p class="h3">{{title}}</p>
-                </div>
-                <div class="col-6 d-flex justify-content-end mb-2">
-                    <div>
-                        <a id="actionButon" class="btn btn-danger" (click)="cargarEdit()">{{action}}</a>
-                    </div>
-                </div>
-                <hr>
-            </div> -->
-
             <!-- *ngIf="title != ''" -->
             <div class="row mt-3">
                 <div class="col-6">
                     <p class="h3">{{title}}</p>
                 </div>
                 <div class="col-6 d-flex justify-content-end mb-2">
-                    <div>
+                    <div>              
                         <a id="actionButon" #butt class="btn btn-danger">{{action}}</a>
                     </div>
                 </div>
@@ -88,7 +76,7 @@
             </div>
 
             <div *ngIf="mostrarSocial">
-                <seller-socialnetwork></seller-socialnetwork>
+                <seller-socialnetwork #datosDesdeElPadre></seller-socialnetwork>
             </div>
 
             <!-- <div #nietoContainer></div> -->

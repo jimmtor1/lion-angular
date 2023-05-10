@@ -1,33 +1,26 @@
 <div class="container my-5">
-        <h2>{{category}}</h2>
-        <hr class="mt-0" style="color: red;">
-        
-        <h3>{{subcategoryName}}</h3>
-    
+    <h2>{{category}}</h2>
+    <hr class="mt-0" style="color: red;">
+    <h3>{{subcategoryName}}</h3>
 </div>
 
 <div class="container">
 
-    <div>       
-        <div class="">
-            <ul  class="list-unstyled d-flex flex-wrap justify-content-start">
-                <li *ngFor="let product of products" class="mx-2 mb-3">
-                    <div class="card" style="width: 16rem;">
-                        
-                        <a routerLink="../../../addetails/{{product.idproduct}}">
-                            <!-- <img src="assets/images/img1.jpg" class="card-img-top" alt="..."> -->
-                            <img src="./assets/images/{{product.productImageList[0].idimage}}{{product.productImageList[0].extension}}" class="card-img-top" alt="image">
-                            <div class="card-body">
-                                <h5 class="card-title">{{product.productName}}</h5>
-                                <p>{{product.description}}</p>
-                                <p>{{product.price}} KM</p>                              
-                            </div>
-                        </a>
-                    </div>
-                </li>               
-            </ul>
-        </div>
+    <div class="row row-cols-2 row-cols-md-5 g-3">
+
+        <div *ngFor="let product of products" class="col">
+            <div class="card h-100">
+                <img src="assets/images/{{product.productImageList[0].idimage}}{{product.productImageList[0].extension}}" style="height: 200px;" class="card-img-top" alt="...">
+                <hr class="m-0">
+                <div class="card-body">
+                    <h6 class="card-title">{{product.productName}}</h6>
+                    <p class="card-text mb-0" *ngIf="product.price==0">Cineja na</p>
+                    <p class="card-text mb-0" *ngIf="product.price>0">{{product.price}} KM</p>
+                    <a routerLink="../../../addetails/{{product.idproduct}}" class="stretched-link m-0 p-0"></a>
+                </div>
+            </div>
+        </div>        
+
     </div>
 
 </div>
-   

@@ -1,0 +1,11 @@
+.card:hover {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+    /* box-shadow: 2px 9px 21px -5px rgba(242,12,31,0.56); */
+    background-color: #dc3545;
+    color: white;  
+  }
+  
+  .card a{
+    text-decoration: none;
+    color: inherit;
+  }

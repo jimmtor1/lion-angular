@@ -1,5 +1,30 @@
-<div class="container mt-3">
+
     
+
+    <div class="row row-cols-2 row-cols-md-4 g-2 mb-3">
+        
+        <div *ngFor="let product of products" class="col">
+            
+            <div class="card h-100">
+                <img src="assets/images/{{product.productImageList[0].idimage}}{{product.productImageList[0].extension}}" style="height: 200px;" class="card-img-top" alt="...">
+                <hr class="m-0">
+                <div class="card-body">
+                    <h6 class="card-title">{{product.productName}}</h6>
+                    <p class="card-text mb-0" *ngIf="product.price==0">Cineja na</p>
+                    <p class="card-text mb-0" *ngIf="product.price>0">{{product.price}} KM</p>
+                    <a (click)="showEditProductComponente(product.idproduct)" class="stretched-link m-0 p-0"></a>
+                </div>
+            </div>
+        </div>        
+
+
+
+
+
+
+
+
+
     <!-- <div class="row">
         <div class="col">
             <p class="h3">Vaši oglasi</p>
@@ -12,10 +37,15 @@
         </div>
     </div>
     <hr> -->
-
-    <div>
-        <div class="">
-            <ul class="list-unstyled d-flex flex-wrap justify-content-start">
+    
+    <!-- <div>
+        <div class=""> -->
+            
+            
+            
+            
+            
+            <!-- <ul class="list-unstyled d-flex flex-wrap justify-content-start">
                 <li *ngFor="let product of products" class="mx-2 mb-3">
 
                     <div class="card" style="width: 12rem;">
@@ -26,15 +56,16 @@
                             <h5 class="card-title m-0">{{product.productName}}</h5>
                             <p class="mb-1 small card-text">{{product.description}}</p>
                             <div class="d-flex justify-content-between">
-                                <p class="card-text">{{product.price}}</p>  
-                                <!-- [routerLink]="['/product', product.idproduct]"                               -->
-                                <a (click)="showEditProductComponente(product.idproduct)">  <!--"class="stretched-link"-->
+                                <p *ngIf="product.price==0" class="card-text">Cineja na</p>
+                                <p *ngIf="product.price>0" class="card-text">{{product.price}}</p>  
+                                                            
+                                <a (click)="showEditProductComponente(product.idproduct)">  
                                     <i class="fa fa-edit"></i>
                                 </a>
                             </div>
 
                         </div>
-                    </div>
+                    </div> -->
 
 
 
@@ -52,9 +83,9 @@
                             </div>
                         </a>
                     </div> -->
-                </li>
-            </ul>
-        </div>
-    </div>
+                <!-- </li>
+            </ul> -->
+        <!-- </div>
+    </div> -->
 
 </div>

@@ -1,6 +1,8 @@
+
+
 <div class="container mt-3 pt-3">
 
-  <p class="h1 text-center">Customer Panel</p>
+  <p class="h1 text-center">Korisnički panel kupca</p>
 
   <div class="row border">
 
@@ -12,19 +14,19 @@
         <li class="nav-item border">
           <a class="nav-link" [ngClass]="{'active': currentPage === 'profile'}" (click)="showBuyerDetail()">
             <i class="fa fa-industry"></i>
-            &nbsp;Profile
+            &nbsp;Profil
           </a>
         </li>
         <li class="nav-item border">
           <a class="nav-link" [ngClass]="{'active': currentPage === 'orders'}" (click)="showOrderList()">
             <i class="fa fa-buysellads"></i>
-            &nbsp;Orders
+            &nbsp;Narudžbe
           </a>
         </li>
         <li class="nav-item border">
           <a class="nav-link" href="#" (click)="logout()">
             <i class="fa fa-power-off"></i>
-            &nbsp;Logout</a>
+            &nbsp;Odjava</a>
         </li>
 
       </ul>
@@ -32,15 +34,18 @@
 
     </div>
 
-    <div class="col-9" *ngIf="currentPage =='orders'">
+    
+
+
+    <div  class="col-9" *ngIf="currentPage =='orders'">
 
       <table class="table table-striped">
         <p class="h6 text-center m-2" *ngIf="orders.length ==0">no orders to display</p>
         <thead>
           <tr>
             <th>#</th>
-            <th>Date</th>
-            <th>Total</th>
+            <th>Datum</th>
+            <th>Ukupno</th>
           </tr>
         </thead>
         <tbody>
@@ -50,7 +55,7 @@
             <td>{{order.total}}</td>
             <td>
 
-              <button class="btn btn-dark">see details</button>
+              <button class="btn btn-dark">Prikaži detalje</button>
 
             </td>
           </tr>
@@ -60,11 +65,19 @@
 
     </div>
 
+    <!-- preloader -->
+    <div class="col-9 text-center" *ngIf="currentPage =='loading'">
+      <br>
+      <div class="spinner-grow text-danger" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+
     <div class="col-9 mt-3 mb-0" *ngIf="currentPage =='profile'">
       <div class="row">
 
         <div class="col-6">
-          <p class="h3">Profile</p>
+          <p class="h3">Profil</p>
         </div>
 
         <div class="col-6 d-flex justify-content-end mb-2">
@@ -81,27 +94,27 @@
       <div class="w-75 mx-auto">
 
         <p class="h6">Email:</p>
-        <input [disabled]="action!=='Save'" type="text" [(ngModel)]="buyer.user.email"
+        <input [disabled]="action!=='Spremi'" type="text" [(ngModel)]="buyer.user.email"
           [ngClass]="buyer.user.email==null ? 'mb-3 rounded-pill border text-danger form-control':'mb-3 form-control border rounded-pill'">
 
         <p class="h6">Ime:</p>
         <!-- <p [ngClass]="buyer.user.firstName==null ? 'rounded-pill border p-2 text-danger':'border p-2 rounded-pill'">
           {{buyer.user.firstName ? buyer.user.firstName : 'You have not completed this data' }}
         </p> -->
-        <input [disabled]="action!=='Save'" type="text" [(ngModel)]="buyer.user.firstName"
+        <input [disabled]="action!=='Spremi'" type="text" [(ngModel)]="buyer.user.firstName"
           [ngClass]="buyer.user.firstName==null ? 'mb-3 rounded-pill border text-danger form-control':'mb-3 form-control border rounded-pill'">
 
         <p class="h6">Prezime:</p>
-        <input [disabled]="action!=='Save'" type="text" [(ngModel)]="buyer.user.lastName"
+        <input [disabled]="action!=='Spremi'" type="text" [(ngModel)]="buyer.user.lastName"
           [ngClass]="buyer.user.lastName==null ? 'mb-3 rounded-pill border text-danger form-control':'mb-3 form-control border rounded-pill'">
 
         <p class="h6">Broj mobitela:</p>
-        <input [disabled]="action!=='Save'" type="text" [(ngModel)]="buyer.user.phone"
+        <input [disabled]="action!=='Spremi'" type="text" [(ngModel)]="buyer.user.phone"
           [ngClass]="buyer.user.phone==null ? 'mb-3 rounded-pill border text-danger form-control':'mb-3 form-control border rounded-pill'">
 
-        <p class="h6">Federation:</p>
+        <p class="h6">Kanton:</p>
         <!-- (change)="citiesCombo($event)" -->
-        <select [disabled]="action!=='Save'" (change)="citiesCombo($event)" name="federation"
+        <select [disabled]="action!=='Spremi'" (change)="citiesCombo($event)" name="federation"
           [(ngModel)]="buyer.user.federation" class="form-select rounded-pill mb-3" id="select_federation">
           <option value="">--Odaberite lokaciju--</option>
           <option [disabled]="i == 0 || i == 11 || i == 16" *ngFor="let fed of federations, let i = index" [value]="i">
@@ -112,9 +125,9 @@
         <!-- <input [disabled]="action!=='Save'" type="text" [(ngModel)]="buyer.user.federation"
           [ngClass]="buyer.user.federation==null ? 'mb-3 rounded-pill border text-danger form-control':'mb-3 form-control border rounded-pill'"> -->
 
-        <p class="h6">City:</p>
+        <p class="h6">Grad:</p>
 
-        <select [disabled]="action!=='Save'" name="city" (change)="selectedCity($event)" [(ngModel)]="buyer.user.city"
+        <select [disabled]="action!=='Spremi'" name="city" (change)="selectedCity($event)" [(ngModel)]="buyer.user.city"
           class="form-select rounded-pill mb-3" id="select_federation">
           <option value="">--Odaberite Grad--</option>
           <option *ngFor="let fed of citiesToCombo, let i = index" [value]="i">{{fed}}</option>
@@ -123,15 +136,19 @@
         <!-- <input [disabled]="action!=='Save'" type="text" [(ngModel)]="buyer.user.city"
           [ngClass]="buyer.user.city==null ? 'mb-3 rounded-pill border text-danger form-control':'mb-3 form-control border rounded-pill'"> -->
 
-        <p class="h6">Postal code:</p>
-        <input [disabled]="action!=='Save'" type="text" [(ngModel)]="buyer.postalCode"
+        <p class="h6">Poštanski broj:</p>
+        <input [disabled]="action!=='Spremi'" type="text" [(ngModel)]="buyer.postalCode"
           [ngClass]="buyer.postalCode==null ? 'mb-3 rounded-pill border text-danger form-control':'mb-3 form-control border rounded-pill'">
 
-        <p class="h6">Address:</p>
-        <input [disabled]="action!=='Save'" type="text" [(ngModel)]="buyer.user.address"
+        <p class="h6">Adresa:</p>
+        <input [disabled]="action!=='Spremi'" type="text" [(ngModel)]="buyer.user.address"
           [ngClass]="buyer.user.address==null ? 'mb-3 rounded-pill border text-danger form-control':'mb-3 form-control border rounded-pill'">
 
 
+      </div>
+
+      <div class="d-flex justify-content-center mb-3">
+        <button [disabled]="saving" class="btn btn-danger mx-2" (click)="editForm();">{{action}}</button>
       </div>
 
     </div>

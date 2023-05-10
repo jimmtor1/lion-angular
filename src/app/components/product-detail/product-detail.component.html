@@ -42,12 +42,16 @@
 
     <!-- Seller information -->
     <div class="border border-danger rounded-2 p-2 w-75">
-        <a [routerLink]="['/sellerDetail', product.idprovider]">
+        <!-- <a [routerLink]="['/sellerDetail', product.idprovider]"> -->
             <p class="h4 text-danger">Informacije o firmi</p>
-        </a>        
+        <!-- </a>         -->
 
         <p>Ime firme: {{seller.companyName}}</p>
-        <p>Prodavač: {{seller.user.firstName}} {{seller.user.lastName}}</p> 
+        
+            <p>Prodavač: 
+                <a [routerLink]="['/sellerDetail', product.idprovider]"> {{seller.user.firstName}} {{seller.user.lastName}}</a>
+            </p>
+        
         <p>Adresa: {{seller.user.address}}</p>
         <p>Broj telefona: {{seller.user.phone}}</p>
 

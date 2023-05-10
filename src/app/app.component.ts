@@ -11,9 +11,10 @@ import { Observable, fromEvent, map, startWith } from 'rxjs';
 
 export class AppComponent {
 
-  email: string = "Login";
+  email: string = "Prijava";
   role:number=0;
   public isMobile$: Observable<boolean>;
+  
 
   constructor(private router:Router) {
 
@@ -49,8 +50,10 @@ export class AppComponent {
   logout(){    
     localStorage.clear();
     this.router.navigate([''])
-    this.email = "Login"; 
+    this.email = "Prijava"; 
     // location.reload();    
   }
+
+ 
 
 }

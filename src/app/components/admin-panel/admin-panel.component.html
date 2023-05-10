@@ -56,7 +56,7 @@
             <div *ngIf="activeSellerList">
                 <seller-list [accepted]="true" (SellerEditEvent)="showSellerDetail($event)"></seller-list>
             </div>
-
+            
             <div *ngIf="activeBuyerList">
                 <buyer-list (BuyerEditEvent)="showBuyerDetail($event)"></buyer-list>
             </div>

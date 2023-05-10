@@ -6,6 +6,8 @@ import { Subcategory } from 'src/app/models/subcategory';
 import { CategoryService } from 'src/app/services/category.service';
 import { SellerService } from 'src/app/services/seller.service';
 
+
+
 @Component({
   selector: 'seller-company-form',
   templateUrl: './seller-company-form.component.html',
@@ -214,15 +216,15 @@ export class SellerCompanyFormComponent implements OnInit {
 
   citiesCombo(event: Event) {
     let fed = parseInt((event.target as HTMLSelectElement)?.value);
-
+    let city;
     if(fed<11){
-      fed = fed-1;
+      city = fed-1;
     }else {
-      fed = fed-2;
+      city = fed-2;
     }
 
     this.seller.user.federation = fed;
-    this.citiesToCombo = this.cities[fed];
+    this.citiesToCombo = this.cities[city];
   }
 
   citiesCombo2() { 

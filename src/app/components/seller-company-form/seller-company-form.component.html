@@ -21,24 +21,6 @@
     </div>
 
 
-    <!-- <div class="mb-3"> -->
-    <!--category-->
-    <!-- <label for="category">Djelatnost&nbsp;<span class="form-label">*</span></label>  -->
-
-    <!-- <select name="category" name="category" (change)="subcategoriesCombo($event)"
-            [(ngModel)]="seller.companyCategory" class="form-select">
-            <option value="0">--odaberite kategoriju--</option>
-            <option value="1">Građevinarstvos</option>
-            <option value="2">Sve za kuću</option>
-            <option value="3">Informatika i telekomunikacije</option>
-            <option value="4">Od glave do pete</option> -->
-    <!-- <option value="5">Trgovina</option> -->
-    <!-- </select> -->
-
-    <!-- </div> -->
-
-
-
     <div class="mb-3">
         <label for="subcategory">Poddjelatnost&nbsp;<span class="form-label">*</span></label> <!--subcategory-->
 
@@ -204,18 +186,27 @@
     <!-- social networks: -->
     <label>Social networks:</label>
     <div class="input-group mb-2">
-        <span class="input-group-text" id="facebook"><i class="fa fa-facebook"></i></span>
+        <span class="input-group-text" id="facebook">
+            <fa-icon [icon]="['fab', 'facebook']" ></fa-icon>
+            <!-- <i class="fa fa-facebook"></i> -->
+        </span>
         <input type="text" class="form-control" id="facebook" [(ngModel)]="seller.facebook" aria-describedby="facebook">
     </div>
 
     <div class="input-group mb-2">
-        <span class="input-group-text" id="instagram"><i class="fa fa-instagram"></i></span>
+        <span class="input-group-text" id="instagram">
+            <!-- <i class="fa fa-instagram"></i> -->
+            <fa-icon [icon]="['fab', 'instagram']" ></fa-icon>
+        </span>
         <input type="text" class="form-control" id="instagram" [(ngModel)]="seller.instagram"
             aria-describedby="instagram">
     </div>
 
     <div class="input-group mb-3">
-        <span class="input-group-text" id="youtube"><i class="fa fa-youtube"></i></span>
+        <span class="input-group-text" id="youtube">
+            <fa-icon [icon]="['fab', 'youtube']" ></fa-icon>
+            <!-- <i class="fa fa-youtube"></i> -->
+        </span>
         <input type="text" class="form-control" id="youtube" [(ngModel)]="seller.youtube" aria-describedby="youtube">
     </div>
 

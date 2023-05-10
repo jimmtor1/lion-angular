@@ -24,9 +24,10 @@ import { AdminPanelComponent } from './components/admin-panel/admin-panel.compon
 import { BuyerListComponent } from './components/buyer-list/buyer-list.component';
 import { SellerListComponent } from './components/seller-list/seller-list.component';
 import { SellerSocialnetworkComponent } from './components/seller-socialnetwork/seller-socialnetwork.component';
-
-import { faBuilding, faHome, faLaptop, faMagnifyingGlass, faShirt, faShoppingCart, faSignOut, faStore, faUser } from '@fortawesome/free-solid-svg-icons';
 import { SubcategoryListComponent } from './components/subcategory-list/subcategory-list.component';
+
+import { faBuilding, faHandHoldingDroplet, faHandHoldingHand, faHandHoldingMedical, faHandHoldingUsd, faHandsHoldingCircle, faHandshake, faHeadset, faHome, faLaptop, faMagnifyingGlass, faShirt, faShoppingCart, faSignOut, faStore, faTag, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faFacebook, faInstagram, faYoutube } from '@fortawesome/free-brands-svg-icons';
 
 
 @NgModule({
@@ -48,7 +49,7 @@ export class AppModule {
   
 
   constructor(library: FaIconLibrary) {
-    library.addIcons(faShirt, faBuilding, faHome, faLaptop, faShoppingCart, faMagnifyingGlass, faUser, faSignOut, faStore);
+    library.addIcons(faShirt, faBuilding, faHome, faLaptop, faShoppingCart, faMagnifyingGlass, faUser, faSignOut, faStore, faFacebook, faInstagram, faYoutube, faHandshake, faHeadset, faHandHoldingMedical, faTag);
   }
 
 }

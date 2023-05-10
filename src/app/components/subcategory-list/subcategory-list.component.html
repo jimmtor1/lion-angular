@@ -1,41 +1,46 @@
-<div>
+<div class="container">
 
-    <h1>{{cate.name[item]}}</h1>
+    <br>
+    <div class="d-flex justify-content-center">
+        <!-- <fa-icon [icon]="['fas', 'building']" style="font-size: 1.5em;"></fa-icon>         -->
+        <h1 class="text-center mx-1" >{{cate.name[item]}}</h1>
+    </div>        
+    <hr>
      
-    <ul >
+    <ul class="nav flex-column" >
 
-        <li *ngFor="let title of cate.title[item], let i = index">
-            {{title}}
+        <li class="nav-item" *ngFor="let title of cate.title[item], let i = index">
+            <p class="h4 mt-1">{{title}}</p>           
 
-            <ul>
+            <ul class="nav flex-column">
 
                 <div *ngIf="item==0">
-                    <li *ngFor="let sub of cate.subcategory1[i]">
-                        {{sub}}
+                    <li class="nav-item" *ngFor="let sub of cate.subcategory1[i], let i = index">
+                        <a [routerLink]="['/productCategoryList/1/',i+1]" class="nav-link bg-dark text-white border-bottom" >{{sub}}</a>                       
                     </li>
                 </div>
 
                 <div *ngIf="item==1">
-                    <li *ngFor="let sub of cate.subcategory2[i]">
-                        {{sub}}
+                    <li class="nav-item" *ngFor="let sub of cate.subcategory2[i], let i = index">                        
+                        <a [routerLink]="['/productCategoryList/2/',i+21]" class="nav-link bg-dark text-white border-bottom" >{{sub}}</a>  
                     </li>
                 </div>
 
                 <div *ngIf="item==2">
-                    <li *ngFor="let sub of cate.subcategory3[i]">
-                        {{sub}}
+                    <li class="nav-item" *ngFor="let sub of cate.subcategory3[i], let i = index">
+                        <a [routerLink]="['/productCategoryList/3/',i+47]" class="nav-link bg-dark text-white border-bottom" >{{sub}}</a>  
                     </li>
                 </div>
 
                 <div *ngIf="item==3">
-                    <li *ngFor="let sub of cate.subcategory4[i]">
-                        {{sub}}
+                    <li class="nav-item" *ngFor="let sub of cate.subcategory4[i], let i = index">
+                        <a [routerLink]="['/productCategoryList/4/',i+57]" class="nav-link bg-dark text-white border-bottom" >{{sub}}</a>  
                     </li>
                 </div>
 
                 <div *ngIf="item==4">
-                    <li *ngFor="let sub of cate.subcategory5[i]">
-                        {{sub}}
+                    <li class="nav-item" *ngFor="let sub of cate.subcategory5[i], let i = index">
+                        <a [routerLink]="['/productCategoryList/5/',i+68]" class="nav-link bg-dark text-white border-bottom" >{{sub}}</a>  
                     </li>
                 </div>
 

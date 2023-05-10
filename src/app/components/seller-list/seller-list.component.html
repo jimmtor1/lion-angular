@@ -22,7 +22,8 @@
               <td>               
                 
                 <button (click)="emitSellerEdit(seller.user.id)" class="btn btn-dark mx-2" >see details</button>
-                <button (click)="confirm(seller.user.id)" class="btn btn-dark mx-2" >Confirm</button>
+                <button *ngIf="!accepted" (click)="confirm(seller.user.id)" class="btn btn-dark mx-2" >Confirm</button>
+                <button *ngIf="accepted" (click)="deactivate(seller.user.id)" class="btn btn-dark mx-2" >Deactivate</button>
 
               </td>           
             </tr>           

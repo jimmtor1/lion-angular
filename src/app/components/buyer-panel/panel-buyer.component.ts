@@ -11,12 +11,13 @@ import { OrderService } from 'src/app/services/order.service';
 })
 export class PanelBuyerComponent implements OnInit {
 
-  currentPage: string = 'profile'; //orders - profile
-  action:string = "Update data";  
+  currentPage: string = 'loading'; //orders - profile
+  action:string = "Spremi";  
   title: string = "";
   activeOrderList = false;
   saving:boolean=false;
   citiesToCombo: string[] = [];
+  loading:boolean = false;
 
   orders: Order[];
   buyer: Buyer;
@@ -31,7 +32,7 @@ export class PanelBuyerComponent implements OnInit {
   }
 
   showBuyerDetail() {
-
+    
     const usuarioString = localStorage.getItem("iduser");
     if (usuarioString) {
       this.iduser = JSON.parse(usuarioString);
@@ -39,10 +40,13 @@ export class PanelBuyerComponent implements OnInit {
       this.buyerService.getByIdUser(this.iduser).subscribe(buy => {      
         this.buyer = buy;        
         this.citiesToCombo = this.cities[this.buyer.user.federation];
+        this.currentPage = "profile";
+      }, error=>{
+        this.currentPage = "profile";
       });
     }
 
-    this.currentPage = "profile";
+
 
   }
 
@@ -65,7 +69,7 @@ export class PanelBuyerComponent implements OnInit {
 
   editForm(){    
     if(this.action=="Update data"){
-      this.action="Save";
+      this.action="Spremi";
     }else{
       this.saving = true;
       this.buyerService.createBuyer(this.buyer).subscribe(buy=>{

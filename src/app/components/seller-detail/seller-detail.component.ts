@@ -68,7 +68,6 @@ export class SellerDetailComponent implements OnInit {
       this.seller = sellerBd;
       this.loading = false;
       this.image = './assets/images/' + this.seller.image;
-      console.log(this.image)
 
       this.seller.providerSubcategoryList.forEach(p => {
 

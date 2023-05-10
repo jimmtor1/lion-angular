@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Cate } from 'src/app/models/subcategory-list-bycategory';
 
@@ -11,16 +11,17 @@ import { Cate } from 'src/app/models/subcategory-list-bycategory';
 export class SubcategoryListComponent implements OnInit {
 
   item: number;
-  cate:Cate = new Cate();
+  cate: Cate = new Cate();  
 
-  constructor(private route:ActivatedRoute) {}
-  
+  constructor(private route: ActivatedRoute) { }
+
   ngOnInit(): void {
-    
-    this.route.params.subscribe(param=>{
+
+    this.route.params.subscribe(param => {
       this.item = param['id'];
+     
     })
-    
+
   }
 
 

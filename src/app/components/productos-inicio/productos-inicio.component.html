@@ -1,236 +1,97 @@
 <div class="container mt-4">
 
-    <!-- categoria1 -->
-    <h4 class="text-center text-danger mb-0">Građevinarstvos</h4>
-    <hr class="mt-1">
-    <div *ngFor="let sell of seller">
+    <div *ngFor="let c of categoryWithSellers" class="mb-3">
 
-        <div class="d-flex justify-content-center">
-            <!-- <p *ngIf="category.products.length==0">No ads to show</p> -->
+        <h4 class="text-center text-danger mb-0">{{c.category}}</h4>
+        <hr class="mt-1">
+
+        <p *ngIf="c.sellers.length==0">No ads to show</p>
+
+        <div class="d-flex overflow-auto flex-nowrap">
+
+            <div *ngFor="let s of c.sellers" class="mx-1">
+                <div class="card h-100"  style="width: 13rem;">
+                    <img src="assets/images/{{s.image}}" style="height: 200px;" class="card-img-top" alt="...">
+                    <hr class="m-0">
+                    <div class="card-body">
+                        <h6 class="card-title">{{s.companyName}}</h6>                       
+                        <a routerLink="sellerDetail/{{s.idprovider}}" class="stretched-link m-0 p-0"></a>
+                    </div>
+                </div>
+            </div>        
+    
+        </div>
+
+        <!-- <div class="d-flex justify-content-center">
+            <p *ngIf="c.sellers.length==0">No ads to show</p>
 
             <ul class="list-unstyled d-flex overflow-auto flex-nowrap">
 
-                <li class="flex-row mx-2">
+                <li *ngFor="let s of c.sellers" class="flex-row mx-2">
                     <div class="card" style="width: 14rem;">
-                        <a routerLink="sellerDetail/{{sell.idprovider}}">
-                            <img src="./assets/images/{{sell.image}}" class="card-img-top" alt="...">
+                        <a routerLink="sellerDetail/{{s.idprovider}}">
+                            <img src="./assets/images/{{s.image}}" class="card-img-top" alt="...">
                             <div class="card-body">
-                                <h5 class="card-title">{{sell.companyName}}</h5>
-                            </div>
-                        </a>
-                    </div>
-                </li>
-
-            </ul>
-        </div>
-    </div>
-
-
-
-    <div *ngFor="let category of categories">
-
-        <div *ngIf="category.products.length>0">
-
-            <h4 class="text-center text-danger mb-0">{{category.categoryName}}</h4>
-            <hr class="mt-1">
-
-        </div>
-
-        <div class="d-flex justify-content-center">
-            <!-- <p *ngIf="category.products.length==0">No ads to show</p> -->
-
-            <ul *ngFor="let product of category.products.slice(0,4)"
-                class="list-unstyled d-flex overflow-auto flex-nowrap">
-
-                <li class="flex-row mx-2">
-                    <div class="card" style="width: 14rem;">
-                        <a routerLink="addetails/{{product.idproduct}}">
-                            <img src="./assets/images/{{product.productImageList[0].idimage}}{{product.productImageList[0].extension}}"
-                                class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">{{product.productName}}</h5>
+                                <h5 class="card-title">{{s.companyName}}</h5>
                             </div>
                         </a>
                     </div>
                 </li>
             </ul>
-        </div>
-
-
+        </div> -->
     </div>
 
-    <!-- categoria1 -->
-    <!-- <h4 class="text-center text-danger mb-0">Sve za kuću</h4>
+    <h4 class="text-center text-danger mb-0">{{categoryNames[4]}}</h4>
     <hr class="mt-1">
-    <div>
+    <!-- row row-cols-5 -->
+    <!-- overflow-auto d-flex flex-nowrap g-1 -->
+
+    <p *ngIf="products.length==0">No ads to show</p>
+
+    <div class="d-flex overflow-auto flex-nowrap">
+
+        <div *ngFor="let product of products.slice(0,5)" class="mx-1">
+            <div class="card h-100" style="width: 13rem;">
+                <img src="assets/images/{{product.productImageList[0].idimage}}{{product.productImageList[0].extension}}" style="height: 200px;" class="card-img-top" alt="...">
+                <hr class="m-0">
+                <div class="card-body">
+                    <h6 class="card-title">{{product.productName}}</h6>  
+                    <p class="card-text mb-0" *ngIf="product.price==0">Cineja na</p>
+                    <p class="card-text mb-0" *ngIf="product.price>0">{{product.price}} KM</p>                     
+                    <a routerLink="addetails/{{product.idproduct}}" class="stretched-link m-0 p-0"></a>
+                </div>
+            </div>
+        </div>        
+
+    </div>
+   
+   
+   
+   
+   
+   
+   
+   
+   
+    <!-- <div class="d-flex justify-content-center">
+
+        <p *ngIf="products.length==0">No ads to show</p>
+
         <ul class="list-unstyled d-flex overflow-auto flex-nowrap">
-            <li class="flex-row mx-2">
-                <div class="card" style="width: 16rem;">
-                    <img src="assets/images/img1.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Product name</h5>
-                    </div>
-                </div>
-            </li>
-            <li class="flex-row mx-2">
-                <div class="card" style="width: 16rem;">
-                    <img src="assets/images/img2.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Product name</h5>
 
-                    </div>
-                </div>
-            </li>
-            <li class="flex-row mx-2">
-                <div class="card" style="width: 16rem;">
-                    <img src="assets/images/img3.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Product name</h5>
+            <li *ngFor="let product of products.slice(0,5)" class="flex-row mx-2">
 
-                    </div>
-                </div>
-            </li>
-            <li class="flex-row mx-2">
-                <div class="card" style="width: 16rem;">
-                    <img src="assets/images/img4.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Product name</h5>
-                    </div>
+                <div class="card" style="width: 14rem;">
+                    <a routerLink="addetails/{{product.idproduct}}">
+                        <img src="./assets/images/{{product.productImageList[0].idimage}}{{product.productImageList[0].extension}}"
+                            class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">{{product.productName}}</h5>
+                        </div>
+                    </a>
                 </div>
             </li>
         </ul>
     </div> -->
-
-
-    <!-- categoria2 -->
-    <!-- <h4 class="text-center text-danger mb-0">Informatika i telekomunikacije</h4>
-    <hr class="mt-1">
-    <div>
-        <ul class="list-unstyled d-flex overflow-auto flex-nowrap">
-            <li class="flex-row mx-2">
-                <div class="card" style="width: 16rem;">
-                    <img src="assets/images/img1.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Product name</h5>
-
-                       
-                    </div>
-                </div>
-            </li>
-            <li class="flex-row mx-2">
-                <div class="card" style="width: 16rem;">
-                    <img src="assets/images/img2.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Product name</h5>
-
-                    </div>
-                </div>
-            </li>
-            <li class="flex-row mx-2">
-                <div class="card" style="width: 16rem;">
-                    <img src="assets/images/img3.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Product name</h5>
-
-                    </div>
-                </div>
-            </li>
-            <li class="flex-row mx-2">
-                <div class="card" style="width: 16rem;">
-                    <img src="assets/images/img4.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Product name</h5>
-                    </div>
-                </div>
-            </li>
-        </ul>
-    </div> -->
-
-    <!-- categoria3 -->
-    <!-- <h4 class="text-center text-danger mb-0">Od glave do pete</h4>
-    <hr class="mt-1">
-    <div>
-        <ul class="list-unstyled d-flex overflow-auto flex-nowrap">
-            <li class="flex-row mx-2">
-                <div class="card" style="width: 16rem;">
-                    <img src="assets/images/img1.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Product name</h5>
-
-                         <a href="#" class="btn btn-primary">Go somewhere</a> 
-                    </div>
-                </div>
-            </li>
-            <li class="flex-row mx-2">
-                <div class="card" style="width: 16rem;">
-                    <img src="assets/images/img2.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Product name</h5>
-
-                    </div>
-                </div>
-            </li>
-            <li class="flex-row mx-2">
-                <div class="card" style="width: 16rem;">
-                    <img src="assets/images/img3.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Product name</h5>
-
-                    </div>
-                </div>
-            </li>
-            <li class="flex-row mx-2">
-                <div class="card" style="width: 16rem;">
-                    <img src="assets/images/img4.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Product name</h5>
-                    </div>
-                </div>
-            </li>
-        </ul>
-    </div> -->
-
-    <!-- categoria4 -->
-    <!-- <h4 class="text-center text-danger mb-0">Trgovina</h4>
-    <hr class="mt-1">
-    <div>
-        <ul class="list-unstyled d-flex overflow-auto flex-nowrap">
-            <li class="flex-row mx-2">
-                <div class="card" style="width: 16rem;">
-                    <img src="assets/images/img1.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Product name</h5>
-                    </div>
-                </div>
-            </li>
-            <li class="flex-row mx-2">
-                <div class="card" style="width: 16rem;">
-                    <img src="assets/images/img2.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Product name</h5>
-
-                    </div>
-                </div>
-            </li>
-            <li class="flex-row mx-2">
-                <div class="card" style="width: 16rem;">
-                    <img src="assets/images/img3.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Product name</h5>
-
-                    </div>
-                </div>
-            </li>
-            <li class="flex-row mx-2">
-                <div class="card" style="width: 16rem;">
-                    <img src="assets/images/img4.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Product name</h5>
-                    </div>
-                </div>
-            </li>
-        </ul>
-    </div> -->
-
 
 </div>

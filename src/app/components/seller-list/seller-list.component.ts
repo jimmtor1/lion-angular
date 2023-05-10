@@ -27,7 +27,7 @@ export class SellerListComponent {
 
   getAccepted(){
     this.sellerService.getAllAccepted().subscribe(list =>{      
-      this.sellers = list;
+      this.sellers = list;      
     });
   }
 
@@ -43,6 +43,12 @@ export class SellerListComponent {
 
   confirm(idseller:number){
     this.sellerService.acceptById(idseller).subscribe(list =>{      
+      location.reload();
+    });
+  }
+
+  deactivate(idseller:number){
+    this.sellerService.deactivateById(idseller).subscribe(list =>{      
       location.reload();
     });
   }
