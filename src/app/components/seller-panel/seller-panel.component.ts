@@ -1,4 +1,4 @@
-import { Component, ComponentFactoryResolver, ElementRef, OnInit, Renderer2, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2, ViewChild, ViewContainerRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { SellerSocialnetworkComponent } from '../seller-socialnetwork/seller-socialnetwork.component';
 
@@ -24,19 +24,19 @@ export class SellerPanelComponent {
   mostrarSellerDetail = true;
   mostrarSellerEdit = false;
   mostrarSocial = false;
+  mostrarTender = false;
 
   private clickListener: () => void;
 
   constructor(private router: Router, private renderer2: Renderer2) {
     this.title = "Profil komanije";
     this.action = "Ažuriraj podatke";
-   }
+  }
 
   ngAfterViewInit() {
     const theLink = this.miEnlace.nativeElement;
     this.clickListener = this.renderer2.listen(theLink, 'click', () => {
       this.showSellerEdit();
-      // console.log("inicio");
     })
   }
 
@@ -48,6 +48,7 @@ export class SellerPanelComponent {
     this.mostrarSellerEdit = false;
     this.mostrarSocial = false;
     this.mostrarSellerDetail = true
+    this.mostrarTender = false;
 
     this.title = "Profil komanije";
     this.action = "Ažuriraj podatke";
@@ -64,6 +65,7 @@ export class SellerPanelComponent {
     this.mostrarSocial = false;
     this.mostrarSellerEdit = true;
     this.mostrarProductnew = false;
+    this.mostrarTender = false;
 
     this.title = "Ažuriraj podatke kompanije";
     this.action = "Odustani";
@@ -83,6 +85,7 @@ export class SellerPanelComponent {
     this.mostrarSellerEdit = false
     this.mostrarSocial = false;
     this.mostrarProductList = true;
+    this.mostrarTender = false;
 
     this.title = "Vaši oglasi";
     this.action = "novi oglas";
@@ -101,6 +104,7 @@ export class SellerPanelComponent {
     this.mostrarSellerEdit = false;
     this.mostrarSocial = false;
     this.mostrarProductnew = true;
+    this.mostrarTender = false;
 
 
     this.title = "Novi oglas"; //new ad
@@ -119,6 +123,7 @@ export class SellerPanelComponent {
     this.mostrarSocial = false;
     this.mostrarProductEdit = true;
     this.mostrarProductnew = false;
+    this.mostrarTender = false;
 
     this.title = "ažurirati oglas"; //new ad
     this.action = "Odustani";
@@ -134,38 +139,53 @@ export class SellerPanelComponent {
 
   showSocial() {
 
-    
+
     this.mostrarProductList = false;
     this.mostrarProductEdit = false;
     this.mostrarSellerDetail = false;
     this.mostrarSellerEdit = false;
     this.mostrarProductnew = false;
+    this.mostrarTender = false;
     this.mostrarSocial = true;
 
-    
+
 
     this.title = "Društvene mreže"; //new ad
     this.action = "Edit";
     this.currentPage = "social";
-  
+
     this.clickListener();
 
     const theLink = this.miEnlace.nativeElement;
 
-     this.clickListener=this.renderer2.listen(theLink, 'click', () => {  
-      this.datosDesdeElPadre.estollegadelpadre = false;    
+    this.clickListener = this.renderer2.listen(theLink, 'click', () => {
+      this.datosDesdeElPadre.estollegadelpadre = false;
       this.action = "Odustani";
 
       this.clickListener();
-      this.clickListener=this.renderer2.listen(theLink, 'click', () => {  
-        this.datosDesdeElPadre.estollegadelpadre = true;    
+      this.clickListener = this.renderer2.listen(theLink, 'click', () => {
+        this.datosDesdeElPadre.estollegadelpadre = true;
         this.action = "Edit";
       });
 
     })
-   
 
+  }
 
+  showTender() {
+
+    this.mostrarProductList = false;
+    this.mostrarProductEdit = false;
+    this.mostrarSellerDetail = false;
+    this.mostrarSellerEdit = false;
+    this.mostrarProductnew = false;
+    this.mostrarSocial = false;
+    this.mostrarTender = true;
+
+    this.title = "Tender list"; //new ad
+    this.action = "New tender";
+    this.currentPage = "tender";
+    
   }
 
   logout() {
@@ -175,6 +195,6 @@ export class SellerPanelComponent {
   }
 
 
-  
+
 
 }

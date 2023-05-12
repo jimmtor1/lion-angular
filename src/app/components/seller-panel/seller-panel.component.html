@@ -11,30 +11,34 @@
                 <ul class="nav flex-column bg-black c-white">
                     <li class="nav-item border">
                         <a class="nav-link" [ngClass]="{'active': currentPage === 'company'}"
-                            (click)="showSellerDetail()">
-                            <i class="fa fa-industry"></i>
+                            (click)="showSellerDetail()">                           
+                            <fa-icon [icon]="['fas', 'building']" style="font-size: 1.1em"></fa-icon>
                             &nbsp;Kompanija
                         </a>
                     </li>
                     <li class="nav-item border">
                         <a class="nav-link" [ngClass]="{'active': currentPage === 'adlist'}" id="product-list"
-                            (click)="showProductList()">
-                            <i class="fa fa-buysellads"></i>
+                            (click)="showProductList()">                          
+                            <fa-icon [icon]="['fas', 'rectangle-ad']" style="font-size: 1.1em"></fa-icon>
                             &nbsp;Objavljivanje
                         </a>
                     </li>
                     <li class="nav-item border">
                         <a class="nav-link" [ngClass]="{'active': currentPage === 'social'}"
-                            (click)="showSocial()">
-                            <i class="fa fa-comments"></i>
+                            (click)="showSocial()">                           
+                            <fa-icon [icon]="['fas', 'share-nodes']" style="font-size: 1.1em"></fa-icon>
                             &nbsp;Društvene mreže</a>
                     </li>
                     <li class="nav-item border">
-                        <a class="nav-link" href="#" (click)="logout()">
-                            <i class="fa fa-power-off"></i>
-                            &nbsp;Odjava</a>
+                        <a class="nav-link" (click)="showTender()">                          
+                            <fa-icon [icon]="['fas', 'list-check']" style="font-size: 1.1em"></fa-icon>                            
+                            &nbsp;Tender</a>
                     </li>
-
+                    <li class="nav-item border">
+                        <a class="nav-link" href="#" (click)="logout()">                            
+                            <fa-icon [icon]="['fas', 'right-from-bracket']" style="font-size: 1.1em"></fa-icon>                            
+                            &nbsp;Odjava</a>
+                    </li>                    
                 </ul>
             
 
@@ -77,6 +81,10 @@
 
             <div *ngIf="mostrarSocial">
                 <seller-socialnetwork #datosDesdeElPadre></seller-socialnetwork>
+            </div>
+
+            <div *ngIf="mostrarTender">
+                <tender></tender>
             </div>
 
             <!-- <div #nietoContainer></div> -->

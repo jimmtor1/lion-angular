@@ -87,14 +87,16 @@ export class PanelBuyerComponent implements OnInit {
   }
 
   citiesCombo(event: Event) {
-    let fed = parseInt((event.target as HTMLSelectElement)?.value);
+    let fed = parseInt((event.target as HTMLSelectElement)?.value);  
+    let city;
     if(fed<11){
-      fed = fed-1;
+      city = fed-1;
     }else {
-      fed = fed-2;
+      city = fed-2;
     }
+
     this.buyer.user.federation = fed;
-    this.citiesToCombo = this.cities[fed];
+    this.citiesToCombo = this.cities[city];
   }
 
   selectedCity(event: Event) {
@@ -124,6 +126,7 @@ export class PanelBuyerComponent implements OnInit {
 
   cities: string[][] = [ 
    
+    [""],
     ["Bihać", "Bosanska Krupa", "Bosanski Petrovac", "Bužim", "Cazin", "Ključ", "Sanski Most", "Velika Kladuša"],
     ["Šamac", "Odžak", "Orašje"],
     ["Banovići", "Čelić", "Doboj Istok", "Gračanica", "Gradačac", "Kalesija", "Kladanj", "Lukavac", "Sapna", "Srebrenik", "Teočak", "Tuzla", "Živinice"],

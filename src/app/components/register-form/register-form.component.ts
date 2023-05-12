@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable, fromEvent, map, startWith } from 'rxjs';
 import { Buyer } from 'src/app/models/buyer';
-import { Product } from 'src/app/models/product';
 import { Seller } from 'src/app/models/seller';
-import { Subcategory } from 'src/app/models/subcategory';
 import { Userr } from 'src/app/models/userr';
 import { BuyerService } from 'src/app/services/buyer.service';
 import { CategoryService } from 'src/app/services/category.service';
@@ -20,8 +19,14 @@ export class RegisterFormComponent implements OnInit {
   user : Userr = new Userr();
   citiesToCombo: string[] = [];
   isSeller:boolean = false;
+  public isMobile$: Observable<boolean>;
 
-  constructor(private buyerService : BuyerService, private router:Router, private categoryService: CategoryService){}
+  constructor(private buyerService : BuyerService, private router:Router, private categoryService: CategoryService){
+    this.isMobile$ = fromEvent(window, 'resize').pipe(
+      map(() => window.innerWidth <= 768),
+      startWith(window.innerWidth <= 768)
+    );
+  }
 
   ngOnInit(): void {    
   }
@@ -107,7 +112,7 @@ export class RegisterFormComponent implements OnInit {
    ];
  
    cities: string[][] = [ 
-    
+    [""],
      ["Bihać", "Bosanska Krupa", "Bosanski Petrovac", "Bužim", "Cazin", "Ključ", "Sanski Most", "Velika Kladuša"],
      ["Šamac", "Odžak", "Orašje"],
      ["Banovići", "Čelić", "Doboj Istok", "Gračanica", "Gradačac", "Kalesija", "Kladanj", "Lukavac", "Sapna", "Srebrenik", "Teočak", "Tuzla", "Živinice"],

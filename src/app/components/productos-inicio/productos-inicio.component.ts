@@ -73,7 +73,7 @@ export class ProductosInicioComponent implements OnInit {
   }
 
   categoryNames: string[] = [
-    "Građevinarstvos",
+    "Građevinarstvo",
     "Sve za kuću",
     "Informatika i telekomunikacije",
     "Od glave do pete",

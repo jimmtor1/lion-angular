@@ -6,11 +6,11 @@
 
 <div *ngIf="loading==false" class="w-75 m-auto">
 
-    <label class="form-label" for="">Profile picture</label>
+    <label class="form-label" for="">Slika profila</label>
     <div class="row">
         <label class="form-label" for="file-input">
             <div class="drop-zone d-flex justify-content-center">
-                <p class="text-center" *ngIf="image==''">Select an image</p>
+                <p class="text-center" *ngIf="image==''">Izaberite sliku</p>
                 <!-- *ngIf="image!==''" -->
                 <img [src]="image" width="100">
                 <!-- <img *ngIf="seller.image!==''" src="./assets/images/" {{seller.image}} width="100"> -->
@@ -62,12 +62,12 @@
     </div>
 
     <div class="mb-3">
-        <label for="street">Street&nbsp;<span class="form-label">*</span></label>
+        <label for="street">Ulica&nbsp;<span class="form-label">*</span></label>
         <input type="text" class="form-control" name="street" id="street" [(ngModel)]="seller.street">
     </div>
 
     <div class="mb-3">
-        <label for="postal_code">postal code&nbsp;<span class="form-label">*</span></label>
+        <label for="postal_code">Poštanski broj&nbsp;<span class="form-label">*</span></label>
         <input type="text" class="form-control" name="postal_code" id="postal_code" [(ngModel)]="seller.postalCode">
     </div>
 
@@ -97,53 +97,53 @@
     </div>
 
     <!-- short biography -->
-    <label for="short_biography">Short biography<span class="required">*</span></label>
+    <label for="short_biography">Kratka biografija<span class="required">*</span></label>
     <textarea rows="4" class="form-control" name="short_biography" id="short_biography"
         [(ngModel)]="seller.biography">
         </textarea>
 
 
-    <p class="mt-3">Schedule:</p>
-    <p>days of the week: </p>
+    <p class="mt-3">Radno vrijeme:</p>
+    <p>Dani u sedmici: </p>
 
     <div class="form-check form-switch">
         <input class="form-check-input" [(ngModel)]="seller.monday" type="checkbox" id="flexSwitchCheckDefault">
-        <label class="form-check-label" for="flexSwitchCheckDefault">Monday</label>
+        <label class="form-check-label" for="flexSwitchCheckDefault">Ponedjeljak</label>
     </div>
     <div class="form-check form-switch">
         <input class="form-check-input" [(ngModel)]="seller.tuesday" type="checkbox" id="flexSwitchCheckChecked">
-        <label class="form-check-label" for="flexSwitchCheckChecked">Tuesday</label>
+        <label class="form-check-label" for="flexSwitchCheckChecked">Utorak</label>
     </div>
     <div class="form-check form-switch">
         <input class="form-check-input" [(ngModel)]="seller.wednesday" type="checkbox" id="flexSwitchCheckDefault">
-        <label class="form-check-label" for="flexSwitchCheckDefault">Wednesday</label>
+        <label class="form-check-label" for="flexSwitchCheckDefault">Srijeda</label>
     </div>
     <div class="form-check form-switch">
         <input class="form-check-input" [(ngModel)]="seller.thursday" type="checkbox" id="flexSwitchCheckChecked">
-        <label class="form-check-label" for="flexSwitchCheckChecked">Thursday</label>
+        <label class="form-check-label" for="flexSwitchCheckChecked">Četvrtak</label>
     </div>
     <div class="form-check form-switch">
         <input class="form-check-input" [(ngModel)]="seller.friday" type="checkbox" id="flexSwitchCheckChecked">
-        <label class="form-check-label" for="flexSwitchCheckChecked">Friday</label>
+        <label class="form-check-label" for="flexSwitchCheckChecked">Petak</label>
     </div>
     <div class="form-check form-switch">
         <input class="form-check-input" [(ngModel)]="seller.saturday" type="checkbox" id="flexSwitchCheckChecked">
-        <label class="form-check-label" for="flexSwitchCheckChecked">Saturday</label>
+        <label class="form-check-label" for="flexSwitchCheckChecked">Subota</label>
     </div>
     <div class="form-check form-switch">
         <input class="form-check-input" [(ngModel)]="seller.sunday" type="checkbox" id="flexSwitchCheckChecked">
-        <label class="form-check-label" for="flexSwitchCheckChecked">Sunday</label>
+        <label class="form-check-label" for="flexSwitchCheckChecked">Nedjelja</label>
     </div>
 
 
-    <p class="h6 mt-3">Hours:</p>
+    <p class="h6 mt-3">Vrijeme:</p>
     <div class="row mb-3">
         <div class="col-1">
-            <span>From</span>
+            <span>Od</span>
         </div>
         <div class="col-5">
             <select class="form-select rounded-pill" [(ngModel)]="seller.startTime" name="hour-start">
-                <option value="">-Selection-</option>
+                <option value="">-Izaberite-</option>
                 <option value="5">05:00</option>
                 <option value="6">06:00</option>
                 <option value="7">07:00</option>
@@ -154,11 +154,11 @@
             </select>
         </div>
         <div class="col-1">
-            <span>To</span>
+            <span>Do</span>
         </div>
         <div class="col-5">
             <select class="form-select rounded-pill" [(ngModel)]="seller.endTime" name="hour-end">
-                <option value="">-Selection-</option>
+                <option value="">-Izaberite-</option>
                 <option value="15">15:00</option>
                 <option value="16">16:00</option>
                 <option value="17">17:00</option>
@@ -171,20 +171,20 @@
     </div>
 
     <div class="mb-3">
-        <label for="annual_leave">Annual leave<span class="required">*</span></label>
+        <label for="annual_leave">Godišnji odmor<span class="required">*</span></label>
         <input class="form-control" name="annual_leave" id="annual_leave" value="" required="required"
             [(ngModel)]="seller.annualLeave">
     </div>
 
     <div class="mb-3">
-        <label for="delivery_cost">Delivery cost<span class="required">*</span></label>
+        <label for="delivery_cost">Cijena dostave<span class="required">*</span></label>
         <input type="number" class="form-control" name="delivery_cost" id="delivery_cost" value="" required="required"
             [(ngModel)]="seller.deliveryCost">
     </div>
 
 
     <!-- social networks: -->
-    <label>Social networks:</label>
+    <label>Društvene mreže:</label>
     <div class="input-group mb-2">
         <span class="input-group-text" id="facebook">
             <fa-icon [icon]="['fab', 'facebook']" ></fa-icon>
@@ -214,7 +214,7 @@
         <label class="form-label">Email</label>
         <div class="form-check">
             <input type="checkbox" class="form-check-input" name="setting_show_email" value="yes" checked="checked">
-            <label> Prikaži email address in store</label>
+            <label> Prikaži email na profilu</label>
         </div>
     </div>
 

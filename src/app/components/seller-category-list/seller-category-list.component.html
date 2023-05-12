@@ -1,0 +1,28 @@
+<div class="container my-5">
+    <h2>{{category}}</h2>
+    <hr class="mt-0" style="color: red;">
+    <h3>{{subcategoryName}}</h3>
+</div>
+
+<div class="container">
+
+    <div class="row row-cols-2 row-cols-md-5 g-3">
+
+        <div *ngFor="let seller of sellers" class="col">
+            <div class="card h-100">
+                <img [src]="'assets/images/' + seller.image" style="height: 200px;" class="card-img-top" alt="...">
+                <hr class="m-0">
+                <div class="card-body">
+                    <h6 class="card-title">{{seller.companyName}}</h6>
+
+                    <!-- <p class="card-text mb-0">{{federations[seller.user.federation+1]}}</p> -->
+                    <!-- <p class="card-text mb-0" *ngIf="product.price>0"><b>{{product.price}} KM</b></p>  -->
+                    
+                    <a routerLink="/provider/{{seller.user.id}}" class="stretched-link m-0 p-0"></a>
+                </div>
+            </div>
+        </div>        
+
+    </div>
+
+</div>

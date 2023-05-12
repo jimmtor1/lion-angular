@@ -1,0 +1,39 @@
+<div class="table-responsive">
+
+    <table class="table table-striped">
+
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Project name</th>
+                <th>Date from</th>
+                <th>Date to</th>
+                <th>Description</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let tender of tenders">
+
+                <th>{{tender.idtender}}</th>
+                <td>{{tender.projectName}}</td>
+                <td>{{tender.dateFrom}}</td>
+                <td>{{tender.dateTo}}</td>
+                <td>{{tender.description}}</td>
+                
+                <td>
+
+                    <!-- 
+                    <button (click)="emitSellerEdit(seller.user.id)" class="btn btn-dark mx-2">see details</button>
+                    <button *ngIf="!accepted" (click)="confirm(seller.user.id)"
+                    class="btn btn-dark mx-2">Confirm</button>
+                    <button *ngIf="accepted" (click)="deactivate(seller.user.id)"
+                    class="btn btn-dark mx-2">Deactivate</button> 
+                    -->
+
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>

@@ -13,6 +13,8 @@ import { SellerCompanyFormComponent } from './components/seller-company-form/sel
 import { SellerDetailComponent } from './components/seller-detail/seller-detail.component';
 import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
 import { SubcategoryListComponent } from './components/subcategory-list/subcategory-list.component';
+import { ViewProviderToClienteComponent } from './components/view-provider-to-cliente/view-provider-to-cliente.component';
+import { SellerCategoryListComponent } from './components/seller-category-list/seller-category-list.component';
 
 const routes: Routes = [
   {path:'', component:HomeComponent},
@@ -21,6 +23,7 @@ const routes: Routes = [
   {path:'register', component:RegisterFormComponent},
   {path: 'login', component:LoginFormComponent},
   {path: 'productCategoryList/:id/:idc', component:ProductCategoryListComponent},
+  {path: 'providerSubcategoryList/:id/:idc', component:SellerCategoryListComponent},
   {path: 'sellerpanel', component:SellerPanelComponent},
   {path: 'addetails/:id', component:ProductDetailComponent},
   {path: 'buyerPanel', component:PanelBuyerComponent},
@@ -29,6 +32,7 @@ const routes: Routes = [
   {path: 'sellerDetail/:id', component:SellerDetailComponent},
   {path: 'adminPanel', component:AdminPanelComponent},  
   {path: 'subcategoryList/:id', component:SubcategoryListComponent}, 
+  {path: 'provider/:id', component:ViewProviderToClienteComponent}
 ];
 
 @NgModule({

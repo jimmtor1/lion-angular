@@ -1,4 +1,3 @@
-import { Provider } from "@angular/core";
 import { Userr } from "./userr";
 import { Subcategory } from "./subcategory";
 
@@ -8,12 +7,9 @@ export class Seller {
     street: string = "";
     companyName: string = "";
     postalCode: string = "";
-    biography: string = "";
-    // hours:string = "";
+    biography: string = ""; 
     annualLeave: string = "";
     deliveryCost: string = "";
-    // companyCategory:number;
-    // companySubcategory:number;
     providerSubcategoryList: Company_subcategory[];
     accepted: boolean;
     image: string = "";

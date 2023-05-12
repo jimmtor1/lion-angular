@@ -10,27 +10,27 @@
             <br>
             <ul class="nav flex-column bg-black c-white">
                 <li class="nav-item border">
-                    <a class="nav-link" [ngClass]="{'active': currentPage === 'companies'}" (click)="showSellerList()">
-                        <i class="fa fa-industry"></i>
-                        &nbsp;Companies
+                    <a class="nav-link" [ngClass]="{'active': currentPage === 'companies'}" (click)="showSellerList()">                       
+                        <fa-icon [icon]="['fas', 'building']" style="font-size: 1.1em"></fa-icon>
+                        &nbsp;Kompanijas
                     </a>
                 </li>
                 <li class="nav-item border">
                     <a class="nav-link" [ngClass]="{'active': currentPage === 'customers'}" id="product-list"
                         (click)="showBuyerList()">
-                        <i class="fa fa-buysellads"></i>
+                        <fa-icon [icon]="['fas', 'users']" style="font-size: 1.1em"></fa-icon>
                         &nbsp;Customers
                     </a>
                 </li>
                 <li class="nav-item border">
                     <a class="nav-link" [ngClass]="{'active': currentPage === 'customersConfirmation'}"
                         (click)="showSellerListToConfirm()">
-                        <i class="fa fa-check"></i>
-                        &nbsp;Companies to confirm</a>
+                        <fa-icon [icon]="['fas', 'building-circle-exclamation']" style="font-size: 1.1em"></fa-icon>
+                        &nbsp;Kompanijas to confirm</a>
                 </li>
                 <li class="nav-item border">
                     <a class="nav-link" href="#" (click)="logout()">
-                        <i class="fa fa-power-off"></i>
+                        <fa-icon [icon]="['fas', 'right-from-bracket']" style="font-size: 1.1em"></fa-icon>  
                         &nbsp;Logout</a>
                 </li>
 

@@ -50,6 +50,7 @@ export class SellerDetailComponent implements OnInit {
       this.route.params.subscribe(param => {
 
         if (param['id'] != null) {
+          console.log("recibiendo id");
           this.iduser = param['id'];
           this.getSeller();
         }

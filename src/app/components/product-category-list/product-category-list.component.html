@@ -14,8 +14,8 @@
                 <hr class="m-0">
                 <div class="card-body">
                     <h6 class="card-title">{{product.productName}}</h6>
-                    <p class="card-text mb-0" *ngIf="product.price==0">Cineja na</p>
-                    <p class="card-text mb-0" *ngIf="product.price>0">{{product.price}} KM</p>
+                    <p class="card-text mb-0" *ngIf="product.price==0"><b>Cijena po dogovoru</b></p>
+                    <p class="card-text mb-0" *ngIf="product.price>0"><b>{{product.price}} KM</b></p>
                     <a routerLink="../../../addetails/{{product.idproduct}}" class="stretched-link m-0 p-0"></a>
                 </div>
             </div>

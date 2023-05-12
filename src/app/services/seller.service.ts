@@ -35,6 +35,15 @@ export class SellerService {
     return this.http.get<SellerByCategory[]>(`${this.URL}/category`);
   }
 
+  getAllByCategoryId(idsub:number){
+    return this.http.get<Seller[]>(`${this.URL}/category/${idsub}`);
+  }
+
+  getAllBySubcategory(idsub:number){
+    return this.http.get<Seller[]>(`${this.URL}/subcategory/${idsub}`);
+  }
+
+
   acceptById(id:number):Observable<Seller>{
     return this.http.get<Seller>(`${this.URL}/active/${id}`);
   }

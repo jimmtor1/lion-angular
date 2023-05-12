@@ -13,19 +13,19 @@
       <ul class="nav flex-column bg-black c-white">
         <li class="nav-item border">
           <a class="nav-link" [ngClass]="{'active': currentPage === 'profile'}" (click)="showBuyerDetail()">
-            <i class="fa fa-industry"></i>
+            <fa-icon [icon]="['fas', 'address-card']" style="font-size: 1.1em"></fa-icon>  
             &nbsp;Profil
           </a>
         </li>
         <li class="nav-item border">
           <a class="nav-link" [ngClass]="{'active': currentPage === 'orders'}" (click)="showOrderList()">
-            <i class="fa fa-buysellads"></i>
+            <fa-icon [icon]="['fas', 'shopping-basket']" style="font-size: 1.1em"></fa-icon>  
             &nbsp;Narudžbe
           </a>
         </li>
         <li class="nav-item border">
           <a class="nav-link" href="#" (click)="logout()">
-            <i class="fa fa-power-off"></i>
+            <fa-icon [icon]="['fas', 'right-from-bracket']" style="font-size: 1.1em"></fa-icon>  
             &nbsp;Odjava</a>
         </li>
 
@@ -40,7 +40,7 @@
     <div  class="col-9" *ngIf="currentPage =='orders'">
 
       <table class="table table-striped">
-        <p class="h6 text-center m-2" *ngIf="orders.length ==0">no orders to display</p>
+        <p class="h6 text-center m-2" *ngIf="orders.length ==0">Nema narudžbi za prikaz</p>
         <thead>
           <tr>
             <th>#</th>

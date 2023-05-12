@@ -1,6 +1,6 @@
 <div class="container mt-3">
 
-    <div class="w-50 mx-auto">
+    <div [ngClass]="(isMobile$ | async) ?'w-75 mx-auto':'w-50 mx-auto'">
 
         <h2>Registracija</h2>
 
@@ -29,13 +29,13 @@
                 <p class="form-row form-group">
                     <label for="first-name">Ime<span class="required">*</span></label>
                     <input type="text" class="input-text form-control" name="fname" id="first-name" value=""
-                        required="required" [(ngModel)]="seller.user.firstName">
+                        required="required" [(ngModel)]="user.firstName">
                 </p>
 
                 <p class="form-row form-group">
                     <label for="last-name">Prezime<span class="required">*</span></label>
                     <input type="text" class="input-text form-control" name="lname" id="last-name" value=""
-                        required="required" [(ngModel)]="seller.user.lastName">
+                        required="required" [(ngModel)]="user.lastName">
                 </p>
             </div>
 
@@ -64,7 +64,7 @@
             <p class="form-row form-group form-row-wide"> <!--mobile number -->
                 <label for="mobile_phone">Broj mobitela<span class="required">*</span></label>
                 <input type="text" class="input-text form-control" name="mobile_phone" id="mobile_phone" value=""
-                    required="required" [(ngModel)]="seller.user.phone">
+                    required="required" [(ngModel)]="user.phone">
             </p> 
 
 

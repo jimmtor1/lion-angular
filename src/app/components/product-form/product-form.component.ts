@@ -37,13 +37,12 @@ export class ProductFormComponent implements OnInit {
     this.route.params.subscribe(params => {
 
       if (params['id'] == 0) {
-        //this.getUserById(params['id']);
+        this.getUserById(params['id']);
         this.addTitle = true;
       } 
-      //else if (this.id > 0) {
-        
-    //     this.getUserById(this.id);
-    //   }
+      else if (this.id > 0) {        
+        this.getUserById(this.id);
+      }
      });
 
     const u = localStorage.getItem("iduser");
@@ -207,8 +206,7 @@ export class ProductFormComponent implements OnInit {
       imageElement.remove();
       let index = this.images.indexOf(im);
       this.images.splice(index, 1);
-      alert("num images" + this.images.length);
-
+     
     } else if (!im.isNew && imageElement !== null) {
 
       this.filesTodelete.push(im.productImage);

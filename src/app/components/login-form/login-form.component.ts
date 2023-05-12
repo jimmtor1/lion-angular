@@ -1,5 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable, fromEvent, map, startWith } from 'rxjs';
 import { Userr } from 'src/app/models/userr';
 import { AuthService } from 'src/app/services/helper';
 import { UserService } from 'src/app/services/user.service';
@@ -14,8 +15,14 @@ export class LoginFormComponent implements OnInit {
   user:Userr = new Userr();
   
   access:number = 0; //0-no access, 1-acces, 2-wrong password
+  public isMobile$: Observable<boolean>;
 
-  constructor(private userService:UserService, private authService:AuthService, private router:Router){}
+  constructor(private userService:UserService, private authService:AuthService, private router:Router){
+    this.isMobile$ = fromEvent(window, 'resize').pipe(
+      map(() => window.innerWidth <= 768),
+      startWith(window.innerWidth <= 768)
+    );
+  }
   
   ngOnInit(): void {
     const roleString = localStorage.getItem("role");    

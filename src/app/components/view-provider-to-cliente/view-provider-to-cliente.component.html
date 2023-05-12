@@ -1,0 +1,124 @@
+
+<div *ngIf="loading" class="text-center mt-2">
+    <div class="spinner-grow text-danger" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
+
+<div *ngIf="!loading" class="container py-3">
+
+    <div class="border border-danger rounded-2 p-2">
+
+        <p class="h3 text-center my-3">Informacije o firmi</p>
+
+        <div class="row mb-3">
+
+            <div class="col-12 col-md-4">
+
+                <div class="border text-center p-1">
+                  
+                    <img [src]="'/assets/images/' + seller.image" alt="" style="height: 300px; max-width: 330px;">
+                   
+                </div>
+
+                <div>
+
+                    <p class="h6 mb-0 mt-2">
+                        <fa-icon [icon]="['fas','tag']"></fa-icon>
+                        Poddjelatnost: 
+                    </p>
+                    <div class="border rounded p-1 m-1 bg-light" style="min-height: 100px;">
+                        <span *ngFor="let sel of seller.providerSubcategoryList" class="badge rounded-pill bg-dark"                            
+                            style="margin-right: 5px;">{{sel.subcategory.subcategoryName}}</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-12 col-md-8">
+
+                <div class="border h-100 container">
+                    <p class="h3">{{seller.companyName}}</p>
+                    <p>
+                        <fa-icon [icon]="['fas','briefcase']"></fa-icon>
+                        <span class="h6">&nbsp;Prodavač:</span> {{seller.user.firstName}} {{seller.user.lastName}}
+                    </p>
+
+                    <div class="rounded border mb-3 bg-light">
+                        <fa-icon [icon]="['fas','location-dot']"></fa-icon>
+
+                        <p>
+                            <span class="h6">Kanton:</span>
+                            {{federations[seller.user.federation]}}
+                        </p>
+
+                        <p>
+
+                            <span class="h6">Grad:</span>
+                            {{cities[seller.user.federation][seller.user.city]}}
+                        </p>
+
+                        <p>
+                            <span class="h6">Adresa:</span>
+                            {{seller.user.address}}
+                        </p>
+
+
+                        <p>
+                            <span class="h6">Poštanski broj:</span>
+                            {{seller.postalCode}}
+                        </p>
+
+                    </div>
+
+
+                    <p>
+                        <fa-icon [icon]="['fas','mobile-phone']"></fa-icon>
+                        {{seller.user.phone}}
+                    </p>
+
+                    <p>
+                        <fa-icon [icon]="['fas','envelope']"></fa-icon>
+                        {{seller.user.email}}
+                    </p>
+
+                    <p class="rounded border bg-light">
+                        <fa-icon [icon]="['fas','address-book']"></fa-icon>
+                        {{seller.biography}}
+                    </p>
+
+
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+
+        <hr>
+
+        <!-- seller image product list -->
+        <div class="d-flex overflow-auto flex-nowrap">
+
+            <div *ngFor="let product of producByProvider.slice(0,5)" class="mx-1">
+                <div class="mini card h-100" style="width: 13rem;">
+                    <img src="assets/images/{{product.productImageList[0].idimage}}{{product.productImageList[0].extension}}"
+                        style="height: 200px;" class="card-img-top" alt="...">
+                    <hr class="m-0">
+                    <div class="card-body">
+                        <h6 class="card-title">{{product.productName}}</h6>
+                        <p class="card-text mb-0" *ngIf="product.price==0">Cineja na</p>
+                        <p class="card-text mb-0" *ngIf="product.price>0">{{product.price}} KM</p>
+                        <a routerLink="../../addetails/{{product.idproduct}}" class="stretched-link m-0 p-0"></a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

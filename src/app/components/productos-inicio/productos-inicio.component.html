@@ -5,7 +5,7 @@
         <h4 class="text-center text-danger mb-0">{{c.category}}</h4>
         <hr class="mt-1">
 
-        <p *ngIf="c.sellers.length==0">No ads to show</p>
+        <p *ngIf="c.sellers.length==0">Nema firmi za prikaz</p>
 
         <div class="d-flex overflow-auto flex-nowrap">
 
@@ -15,7 +15,7 @@
                     <hr class="m-0">
                     <div class="card-body">
                         <h6 class="card-title">{{s.companyName}}</h6>                       
-                        <a routerLink="sellerDetail/{{s.idprovider}}" class="stretched-link m-0 p-0"></a>
+                        <a routerLink="provider/{{s.user.id}}" class="stretched-link m-0 p-0"></a>
                     </div>
                 </div>
             </div>        

@@ -9,7 +9,7 @@ import { Order } from '../models/order';
 export class OrderService {
 
   private URL = "http://localhost:8080/order";
-  // private URL = "https://test1.dcl.ba/order";
+  //private URL = "https://test1.dcl.ba/order";
 
   constructor(private http:HttpClient) { }
 

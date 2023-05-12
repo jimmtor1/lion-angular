@@ -1,37 +1,75 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Product } from 'src/app/models/product';
-import { ProductService } from 'src/app/services/product.service';
+import { Seller } from 'src/app/models/seller';
+import { SellerService } from 'src/app/services/seller.service';
 
 @Component({
-  selector: 'app-product-list',
-  templateUrl: './product-category-list.component.html',
-  styleUrls: ['./product-category-list.component.css']
+  selector: 'seller-category-list',
+  templateUrl: './seller-category-list.component.html',
+  styleUrls: ['./seller-category-list.component.css']
 })
+export class SellerCategoryListComponent implements OnInit {
 
-
-export class ProductCategoryListComponent implements OnInit {
-
-  products: Product[] = [];
+  sellers: Seller[] = [];
   category: string = "";
-  categoryName: string[] = ["Građevinarstvo", "Sve za kuću", "Informatika i telekomunikacije", "Od glave do pete", "Trgovina"];
+  categoryName: string[] = ["Građevinarstvo", "Sve za kuću", "Informatika i telekomunikacije", "Od glave do pete"];
   subcategoryName: String = "All";
 
-  constructor(private productService: ProductService, private route: ActivatedRoute) { }
+  constructor(private providerService: SellerService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.getProductList();
+    this.getProvidersFromSubcategory();
   }
 
-  getProductList(): void {
+  private getProvidersFromSubcategory(): void {
     this.route.params.subscribe(params => {
+
       this.category = this.categoryName[params['id'] - 1];
-      this.subcategoryName = this.subcategory[params['idc']];
-      this.productService.getAllByCategory(params['id'], params['idc']).subscribe(data => {
-        this.products = data;
-      });
-    })
+
+      if (params['idc'] == 0) {
+
+        this.subcategoryName = "";
+        this.providerService.getAllByCategoryId(params['id']).subscribe(data => {
+          this.sellers = data;
+        });
+
+      } else {
+
+        this.subcategoryName = this.subcategory[params['idc']];
+        this.providerService.getAllBySubcategory(params['idc']).subscribe(data => {
+          this.sellers = data;
+        });
+
+      }
+
+
+
+      
+
+    });
+
   }
+
+
+  // federations: string[] = [    
+  //   "FEDERACIJA BiH",
+  //   "UNSKO-SANSKI KANTON",
+  //   "Posavski kanton",
+  //   "Tuzlanski kanton",
+  //   "Zeničko-dobojski kanton",
+  //   "Bosansko-podrinjski kanton",
+  //   "Srednjobosanski kanton",
+  //   "Hercegovačko-neretvanski kanton",
+  //   "Zapadnohercegovački kanton",
+  //   "Kanton Sarajevo",
+  //   "Kanton 10",
+  //   "REPUBLIKA SRPSKA",
+  //   "Banjalučka",
+  //   "Dobojsko-Bijeljinska",
+  //   "Sarajevsko-Zvornička",
+  //   "Trebinjsko-Fočanska",
+  //   "BRČKO DISTRIKT"
+  // ];
 
   subcategory: string[] = [
     "",
@@ -102,9 +140,6 @@ export class ProductCategoryListComponent implements OnInit {
     "Naočale",
     "Nakit",
 
-
   ];
-
-
 
 }
