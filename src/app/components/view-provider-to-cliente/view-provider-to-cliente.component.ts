@@ -46,7 +46,7 @@ export class ViewProviderToClienteComponent implements OnInit {
   }
 
   federations: string[] = [
-    "FEDERACIJA BiH",
+    "FEDERACIJA BiH",   
     "UNSKO-SANSKI KANTON",
     "Posavski kanton",
     "Tuzlanski kanton",

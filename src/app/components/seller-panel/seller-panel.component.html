@@ -1,63 +1,80 @@
 <div class="container mt-3 pt-3">
 
-    <p class="h1 text-center">  Prodavački panel kompanije</p>
+    <p class="h1 text-center"> Prodavački panel kompanije</p>
 
-    <div class="row border">
-        <!-- vertical nav -->
-        <div class="col-3 bg-black p-0">
-            <br>
-            <br>
-            <br>                
-                <ul class="nav flex-column bg-black c-white">
-                    <li class="nav-item border">
-                        <a class="nav-link" [ngClass]="{'active': currentPage === 'company'}"
-                            (click)="showSellerDetail()">                           
-                            <fa-icon [icon]="['fas', 'building']" style="font-size: 1.1em"></fa-icon>
-                            &nbsp;Kompanija
-                        </a>
-                    </li>
-                    <li class="nav-item border">
-                        <a class="nav-link" [ngClass]="{'active': currentPage === 'adlist'}" id="product-list"
-                            (click)="showProductList()">                          
-                            <fa-icon [icon]="['fas', 'rectangle-ad']" style="font-size: 1.1em"></fa-icon>
-                            &nbsp;Objavljivanje
-                        </a>
-                    </li>
-                    <li class="nav-item border">
-                        <a class="nav-link" [ngClass]="{'active': currentPage === 'social'}"
-                            (click)="showSocial()">                           
-                            <fa-icon [icon]="['fas', 'share-nodes']" style="font-size: 1.1em"></fa-icon>
-                            &nbsp;Društvene mreže</a>
-                    </li>
-                    <li class="nav-item border">
-                        <a class="nav-link" (click)="showTender()">                          
-                            <fa-icon [icon]="['fas', 'list-check']" style="font-size: 1.1em"></fa-icon>                            
-                            &nbsp;Tender</a>
-                    </li>
-                    <li class="nav-item border">
-                        <a class="nav-link" href="#" (click)="logout()">                            
-                            <fa-icon [icon]="['fas', 'right-from-bracket']" style="font-size: 1.1em"></fa-icon>                            
-                            &nbsp;Odjava</a>
-                    </li>                    
-                </ul>
-            
+    <div class="row">
 
+        <div class="col-2 bg-black d-flex" style="justify-content: center; align-items: center;">
+            <button class="boton-hamburguesa d-sm-none" (click)="toggleSidebar()">☰</button>
         </div>
 
-        <div class="col-9">
-
-            <!-- *ngIf="title != ''" -->
+        <div class="col-10">
             <div class="row mt-3">
+
                 <div class="col-6">
                     <p class="h3">{{title}}</p>
                 </div>
                 <div class="col-6 d-flex justify-content-end mb-2">
-                    <div>              
-                        <a id="actionButon" #butt class="btn btn-danger">{{action}}</a>
-                    </div>
+
+                    <a id="actionButon" #butt class="btn btn-danger">{{action}}</a>
+
                 </div>
-                <hr>
+
             </div>
+        </div>
+
+    </div>
+
+    <div class="border row">
+        <!-- vertical nav computer-->
+        <div class="col-2 bg-black p-0">
+
+
+            <ul class="nav flex-column c-white w-100">
+                <li class="nav-item border w-100 "> <!--text-center-->
+                    <a class="nav-link" [ngClass]="{'active': currentPage === 'company'}" (click)="showSellerDetail()">
+                        <fa-icon [icon]="['fas', 'building']" style="font-size: 1.1em"></fa-icon>
+                        <span class="d-none d-sm-inline">&nbsp;Kompanija</span>
+                    </a>
+                </li>
+                <li class="nav-item border w-100">
+                    <a class="nav-link" [ngClass]="{'active': currentPage === 'adlist'}" id="product-list"
+                        (click)="showProductList()">
+                        <fa-icon [icon]="['fas', 'rectangle-ad']" style="font-size: 1.1em"></fa-icon>
+                        <span class="d-none d-sm-inline">&nbsp;Objavljivanje</span>
+                    </a>
+                </li>
+                <li class="nav-item border w-100">
+                    <a class="nav-link" [ngClass]="{'active': currentPage === 'social'}" (click)="showSocial()">
+                        <fa-icon [icon]="['fas', 'share-nodes']" style="font-size: 1.1em"></fa-icon>
+                        <span class="d-none d-sm-inline">&nbsp;Društvene mreže</span>
+                    </a>
+                </li>
+                <li class="nav-item border w-100">
+                    <a class="nav-link" (click)="showTender()">
+                        <fa-icon [icon]="['fas', 'list-check']" style="font-size: 1.1em"></fa-icon>
+                        <span class="d-none d-sm-inline">&nbsp;Tender</span>
+                    </a>
+                </li>
+
+                <li class="nav-item border w-100">
+                    <a class="nav-link">
+                        <fa-icon [icon]="['fas', 'list-check']" style="font-size: 1.1em"></fa-icon>
+                        <span class="d-none d-sm-inline">&nbsp;Tender to apply</span>
+                    </a>
+                </li>
+
+                <li class="nav-item border w-100">
+                    <a class="nav-link" href="#" (click)="logout()">
+                        <fa-icon [icon]="['fas', 'right-from-bracket']" style="font-size: 1.1em"></fa-icon>
+                        <span class="d-none d-sm-inline">&nbsp;Odjava</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+
+        <div class="col-10">
 
             <div *ngIf="mostrarProductnew">
                 <product-form></product-form>
@@ -87,9 +104,67 @@
                 <tender></tender>
             </div>
 
-            <!-- <div #nietoContainer></div> -->
+            <div *ngIf="mostrarTenderEdit">
+                <tender-form></tender-form>
+            </div>
+
 
         </div>
     </div>
 
+</div>
+
+
+
+<!-- vertial nav responsive -->
+<div id="menu" class="menu d-flex" [ngClass]="{'mostrar': showSidebar}">
+
+   <div class="w-100">
+
+        <div class="text-end m-2">
+            <button class="btn btn-danger" (click)="toggleSidebar()">X</button>
+        </div>
+
+
+        <ul class="bg-primary">
+            <li class="bg-primary m-0" style="height: 40px;">
+                <a class="nav-link my-3 h4 px-2 h-100" [ngClass]="{'active': currentPage === 'company'}" (click)="showSellerDetail()">
+                    <fa-icon [icon]="['fas', 'building']" style="font-size: 1.1em"></fa-icon>
+                    &nbsp;Kompanija
+                </a>
+            </li>
+
+            <li>
+                <a  class="nav-link h4 m-0 px-2" style="height: 40px;" [ngClass]="{'active': currentPage === 'adlist'}" id="product-list" (click)="showProductList()">
+                    <fa-icon [icon]="['fas', 'rectangle-ad']" style="font-size: 1.1em"></fa-icon>
+                    &nbsp;Objavljivanje
+                </a>
+            </li>
+
+            <li>
+                <a class="nav-link h4 m-0 px-2" style="height: 40px;" [ngClass]="{'active': currentPage === 'social'}" (click)="showSocial()">
+                    <fa-icon [icon]="['fas', 'share-nodes']" style="font-size: 1.1em"></fa-icon>
+                    &nbsp;Društvene mreže
+                </a>
+            </li>
+
+            <li>
+                <a  class="nav-link m-0 h4 px-2" style="height: 40px;" (click)="showTender()">
+                    <fa-icon [icon]="['fas', 'list-check']" style="font-size: 1.1em"></fa-icon>
+                    &nbsp;Tender
+                </a>
+            </li>
+
+            <li>
+                <a  class="nav-link m-0 h4 px-2" style="height: 40px;" href="#" (click)="logout()">
+                    <fa-icon [icon]="['fas', 'right-from-bracket']" style="font-size: 1.1em"></fa-icon>
+                    &nbsp;Odjava
+                </a>
+            </li>
+
+        </ul>
+
+    </div>    
+
+    
 </div>

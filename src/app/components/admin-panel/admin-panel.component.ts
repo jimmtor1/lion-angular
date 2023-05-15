@@ -36,6 +36,7 @@ export class AdminPanelComponent {
 
     this.title = "Companies";   
     this.currentPage = "companies";
+    this.showSidebar = false;
 
   }
 
@@ -49,7 +50,7 @@ export class AdminPanelComponent {
 
     this.title = "Customers";   
     this.currentPage = "customers";
-
+    this.showSidebar = false;
   }
 
   showSellerListToConfirm() {
@@ -62,7 +63,7 @@ export class AdminPanelComponent {
 
     this.title = "Customers to Confirm";   
     this.currentPage = "customersConfirmation";
-
+    this.showSidebar = false;
   }
 
   showSellerDetail(idseller: number) {
@@ -120,6 +121,12 @@ export class AdminPanelComponent {
 
   selectedCity(event: Event) {
     this.buyer.user.city = parseInt((event.target as HTMLSelectElement)?.value);
+  }
+
+  showSidebar = false;
+
+  toggleSidebar() {
+    this.showSidebar = !this.showSidebar;
   }
 
   federations: string[] = [

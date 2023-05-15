@@ -41,12 +41,14 @@ export class PanelBuyerComponent implements OnInit {
         this.buyer = buy;        
         this.citiesToCombo = this.cities[this.buyer.user.federation];
         this.currentPage = "profile";
+        this.title = "Profil";
       }, error=>{
         this.currentPage = "profile";
+        this.title = "Profil";
       });
     }
 
-
+    this.showSidebar = false;
 
   }
 
@@ -60,6 +62,9 @@ export class PanelBuyerComponent implements OnInit {
       });
     }
     this.currentPage = "orders";
+    this.title = "Narudžbe";
+    
+    this.showSidebar = false;
 
   }
 
@@ -101,6 +106,12 @@ export class PanelBuyerComponent implements OnInit {
 
   selectedCity(event: Event) {
     this.buyer.user.city = parseInt((event.target as HTMLSelectElement)?.value);
+  }
+
+  showSidebar = false;
+
+  toggleSidebar() {
+    this.showSidebar = !this.showSidebar;
   }
 
   

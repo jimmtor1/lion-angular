@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { Seller } from 'src/app/models/seller';
 import { Tender } from 'src/app/models/tender';
+import { SellerService } from 'src/app/services/seller.service';
 import { TenderService } from 'src/app/services/tender.service';
 
 @Component({
@@ -10,9 +12,11 @@ import { TenderService } from 'src/app/services/tender.service';
 export class TenderFormComponent {
 
   iduser: number;
-  tender: Tender
+  tender: Tender = new Tender();
+  file: File;
+  seller:Seller;
 
-  constructor(private tenderService: TenderService) { }
+  constructor(private tenderService: TenderService, private sellerService: SellerService) { }
 
   ngOnInit(): void {
 
@@ -21,49 +25,47 @@ export class TenderFormComponent {
 
       if (JSON.parse(usuarioString) > 0) {
         this.iduser = JSON.parse(usuarioString);
+
+        this.sellerService.getById(this.iduser).subscribe(s => {
+          this.seller = s;
+        });
+
       }
 
     }
+
   }
 
   submit() {
-
     this.save();
-    // if (this.product.idproduct > 0) {
-    //   this.edit();
-    // } else {
-    //   this.save();
-    // }
-
   }
 
   save() {
+    console.log(this.tender);
+    const formData = new FormData();
 
-    this.tenderService.save(this.tender).subscribe(dato => {
+    formData.append('file', this.file);
+
+    formData.append('iduser', this.iduser.toString());
+    formData.append('projectName', this.tender.projectName);
+    formData.append('dateFrom', this.tender.dateFrom);
+    formData.append('dateTo', this.tender.dateTo);
+    formData.append('description', this.tender.description);
+
+    this.tenderService.save(formData).subscribe(dato => {
       //this.router.navigate(['sellerpanel']);
       location.reload();
     }, error => console.log(error));
+
   }
 
   onFileSelected(event: any) {
 
-  //   const files: FileList = event.target.files;
-  //   let im: imgclasification;
-  //   for (let i = 0; i < files.length; i++) {
-     
-  //     const reader = new FileReader();
-  //     reader.readAsDataURL(files[i]);
+    const files: FileList = event.target.files;
 
-  //     reader.onload = (e: any) => {
-  //       im = new imgclasification();
-  //       im.isNew = true;
-  //       im.link = e.target.result;
-  //       im.id = "newimg" + this.idimgnew++;
-  //       im.file = files[i];
-  //       this.images.push(im);
-  //     };
+    const reader = new FileReader();
+    this.file = files[0];
 
-  //   }
-  // }
+  }
 
 }

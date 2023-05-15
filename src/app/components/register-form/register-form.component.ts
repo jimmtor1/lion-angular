@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, fromEvent, map, startWith } from 'rxjs';
 import { Buyer } from 'src/app/models/buyer';
@@ -20,6 +20,14 @@ export class RegisterFormComponent implements OnInit {
   citiesToCombo: string[] = [];
   isSeller:boolean = false;
   public isMobile$: Observable<boolean>;
+  modalShow=false;
+
+  //modal values
+  name="";
+  result = "";
+
+  @ViewChild('miModal') miModal: any;
+
 
   constructor(private buyerService : BuyerService, private router:Router, private categoryService: CategoryService){
     this.isMobile$ = fromEvent(window, 'resize').pipe(
@@ -28,13 +36,15 @@ export class RegisterFormComponent implements OnInit {
     );
   }
 
-  ngOnInit(): void {    
+  ngOnInit(): void {
+      
   }
 
   sellerSelected(event:Event){
 
       if((<HTMLInputElement>event.target).value=="seller"){
-        this.isSeller=true;        
+        this.isSeller=true;  
+          
       }else{
         this.isSeller=false;        
       }
@@ -46,15 +56,43 @@ export class RegisterFormComponent implements OnInit {
   // }
  
   saveBuyer(){  
-    this.buyerService.createBuyer(this.buyer).subscribe(dato => {      
-      this.router.navigate(['login']);
-    },error => console.log(error));
+     
+    this.buyerService.createBuyer(this.buyer).subscribe(dato => {
+      if(dato){
+        this.modalShow = true;
+        this.name = dato.user.firstName;
+        this.result="registracija završena";  
+      } else{
+        this.result="registracija nije završena";
+      }
+      
+      //this.router.navigate(['login']);
+    },error => {
+      this.modalShow = true;
+      console.log(error);
+      this.result="registracija nije završena";
+    });
   }
 
   saveSeller(){   
-    this.buyerService.createSeller(this.seller).subscribe(dato=>{      
-      this.router.navigate(['login']);
-    },error => console.log(error));
+    this.buyerService.createSeller(this.seller).subscribe(dato=>{    
+      
+      if(dato){
+        this.modalShow = true;
+        this.name = dato.user.firstName;
+        this.result="registracija završena";
+      } else{
+        this.result="registracija nije završena";
+      }
+      //this.router.navigate(['login']);
+    },error =>{
+      this.modalShow = true;
+      this.result="registracija nije završena";
+      console.log(error);
+    }
+   
+     
+     );
   }
 
   onSubmit(){  
@@ -88,6 +126,11 @@ export class RegisterFormComponent implements OnInit {
 
   selectedCity(event: Event) {
     this.user.city = parseInt((event.target as HTMLSelectElement)?.value);
+  }
+
+  closeModal(){
+    this.modalShow = false;
+    this.router.navigate(['login']);
   }
 
 
@@ -130,6 +173,8 @@ export class RegisterFormComponent implements OnInit {
      ["Bileća", "Čajniče", "Foča", "Gacko", "Istočni Mostar", "Kalinovik", "Ljubinje", "Nevesinje", "Trebinje"],
      ["Brčko"]
    ]
+
+   
 
 
 }

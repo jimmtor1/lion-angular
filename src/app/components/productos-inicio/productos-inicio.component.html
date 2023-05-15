@@ -1,5 +1,5 @@
-<div class="container mt-4">
-
+<!-- <div class="container mt-4">
+    
     <div *ngFor="let c of categoryWithSellers" class="mb-3">
 
         <h4 class="text-center text-danger mb-0">{{c.category}}</h4>
@@ -22,29 +22,10 @@
     
         </div>
 
-        <!-- <div class="d-flex justify-content-center">
-            <p *ngIf="c.sellers.length==0">No ads to show</p>
-
-            <ul class="list-unstyled d-flex overflow-auto flex-nowrap">
-
-                <li *ngFor="let s of c.sellers" class="flex-row mx-2">
-                    <div class="card" style="width: 14rem;">
-                        <a routerLink="sellerDetail/{{s.idprovider}}">
-                            <img src="./assets/images/{{s.image}}" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">{{s.companyName}}</h5>
-                            </div>
-                        </a>
-                    </div>
-                </li>
-            </ul>
-        </div> -->
     </div>
 
     <h4 class="text-center text-danger mb-0">{{categoryNames[4]}}</h4>
     <hr class="mt-1">
-    <!-- row row-cols-5 -->
-    <!-- overflow-auto d-flex flex-nowrap g-1 -->
 
     <p *ngIf="products.length==0">No ads to show</p>
 
@@ -64,34 +45,75 @@
         </div>        
 
     </div>
-   
-   
-   
-   
-   
-   
-   
-   
-   
-    <!-- <div class="d-flex justify-content-center">
 
-        <p *ngIf="products.length==0">No ads to show</p>
+</div> -->
 
-        <ul class="list-unstyled d-flex overflow-auto flex-nowrap">
+<div class="bg-white" style="padding-bottom: 4px;">
 
-            <li *ngFor="let product of products.slice(0,5)" class="flex-row mx-2">
+    <!-- <div *ngFor="let c of categoryWithSellers" class="mb-3"> -->
 
-                <div class="card" style="width: 14rem;">
-                    <a routerLink="addetails/{{product.idproduct}}">
-                        <img src="./assets/images/{{product.productImageList[0].idimage}}{{product.productImageList[0].extension}}"
-                            class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">{{product.productName}}</h5>
-                        </div>
-                    </a>
+    <h4 class="text-center text-danger mb-0">SHOPS</h4>
+    <hr class="mt-1">
+
+    <p *ngIf="categoryWithSellers[0].sellers.length==0">Nema firmi za prikaz</p>
+
+    <div class="d-flex overflow-auto flex-nowrap">
+
+        <div *ngFor="let s of categoryWithSellers[0].sellers" class="mx-1">
+            <div class="card h-100" style="width: 16rem;">
+                <img src="assets/images/{{s.image}}" style="height: 150px;" class="card-img-top" alt="...">
+                <hr class="m-0">
+                <div class="card-body m-0">
+                    <h6 class="card-title">{{s.companyName}}</h6>
+                    <p class="m-0">{{federations[s.user.federation+1]}}</p>
+                    <p style="overflow: hidden; max-height: 2em; line-height: 1;" class="text-muted fs-6 m-0">{{s.biography}}</p>
+                    <a routerLink="provider/{{s.user.id}}" class="stretched-link m-0 p-0"></a>
                 </div>
-            </li>
-        </ul>
-    </div> -->
+            </div>
+        </div>
+
+        <div *ngFor="let s of categoryWithSellers[0].sellers" class="mx-1">
+            <div class="card h-100" style="width: 16rem;">
+                <img src="assets/images/{{s.image}}" style="height: 150px;" class="card-img-top" alt="...">
+                <hr class="m-0">
+                <div class="card-body m-0">
+                    <h6 class="card-title">{{s.companyName}}</h6>
+                    <p class="m-0">{{federations[s.user.federation+1]}}</p>
+                    <p style="overflow: hidden; max-height: 2em; line-height: 1;" class="text-muted fs-6 m-0">{{s.biography}}</p>
+                    <a routerLink="provider/{{s.user.id}}" class="stretched-link m-0 p-0"></a>
+                </div>
+            </div>
+        </div>
+
+
+       
+
+    </div>
+
+
+    <!-- </div> -->
+
+</div>
+
+<h4 class="text-center text-danger mb-0">{{categoryNames[4]}}</h4>
+<hr class="mt-1">
+
+<p *ngIf="products.length==0">No ads to show</p>
+
+<div class="d-flex flex-wrap justify-content-center">
+
+    <div *ngFor="let product of products" class="mx-1 mb-1">
+        <div class="card h-100" style="width: 13rem;">
+            <img src="assets/images/{{product.productImageList[0].idimage}}{{product.productImageList[0].extension}}"
+                style="height: 200px;" class="card-img-top" alt="...">
+            <hr class="m-0">
+            <div class="card-body">
+                <h6 class="card-title">{{product.productName}}</h6>
+                <p class="card-text mb-0" *ngIf="product.price==0">Cineja na</p>
+                <p class="card-text mb-0" *ngIf="product.price>0">{{product.price}} KM</p>
+                <a routerLink="addetails/{{product.idproduct}}" class="stretched-link m-0 p-0"></a>
+            </div>
+        </div>
+    </div>
 
 </div>

@@ -11,7 +11,8 @@ import { TenderService } from 'src/app/services/tender.service';
 export class TenderComponent implements OnInit {
 
   tenders: Tender[] = [];
-  iduser: number;
+  iduser: number;  
+  loading:boolean = true;
 
   constructor(private tenderService: TenderService) { }
 
@@ -31,7 +32,11 @@ export class TenderComponent implements OnInit {
   getList() {
     this.tenderService.getListByIduser(this.iduser).subscribe(list => {
       this.tenders = list;
+      this.loading=false;
+    },error=>{
+      this.loading=false;
     });
   }
 
+ 
 }

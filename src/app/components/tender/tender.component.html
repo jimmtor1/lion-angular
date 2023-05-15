@@ -1,4 +1,10 @@
-<div class="table-responsive">
+<div *ngIf="loading" class="text-center mt-3">
+    <div class="spinner-grow text-danger" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
+
+<div *ngIf="!loading" class="table-responsive">
 
     <table class="table table-striped">
 
@@ -22,18 +28,25 @@
                 <td>{{tender.description}}</td>
                 
                 <td>
-
-                    <!-- 
-                    <button (click)="emitSellerEdit(seller.user.id)" class="btn btn-dark mx-2">see details</button>
+                    
+                    <!-- <button (click)="emitSellerEdit(seller.user.id)" class="btn btn-dark mx-2">see details</button>
                     <button *ngIf="!accepted" (click)="confirm(seller.user.id)"
-                    class="btn btn-dark mx-2">Confirm</button>
-                    <button *ngIf="accepted" (click)="deactivate(seller.user.id)"
-                    class="btn btn-dark mx-2">Deactivate</button> 
-                    -->
+                    class="btn btn-dark mx-2">Confirm</button> -->
+                    <!-- <button *ngIf="tender.document" (click)="openDocument(tender.document)"
+                    class="btn btn-dark mx-2">Attached</button>  -->
+
+                    <fa-icon [icon]="['fas', 'file']"></fa-icon>
+                    <a href="assets/images/2.pdf" target="_blank">&nbsp;Attached                        
+                    </a>
+                   
 
                 </td>
             </tr>
         </tbody>
     </table>
 
+</div>
+
+<div *ngIf="tenders.length==0" class="text-center">
+    Nema podataka za prikaz
 </div>

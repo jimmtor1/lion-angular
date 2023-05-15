@@ -14,7 +14,7 @@ export class SellerDetailComponent implements OnInit {
 
   @Input() id: number;
 
-  seller: Seller = new Seller();
+  seller: Seller;
   selectedCategory: number;
   subcategories: Subcategory[] = [];
   iduser: number;
@@ -109,6 +109,7 @@ export class SellerDetailComponent implements OnInit {
 
   federations: string[] = [
     //"FEDERACIJA BiH",
+    "",
     "UNSKO-SANSKI KANTON",
     "Posavski kanton",
     "Tuzlanski kanton",
@@ -128,7 +129,7 @@ export class SellerDetailComponent implements OnInit {
   ];
 
   cities: string[][] = [
-
+    [""],
     ["Bihać", "Bosanska Krupa", "Bosanski Petrovac", "Bužim", "Cazin", "Ključ", "Sanski Most", "Velika Kladuša"],
     ["Šamac", "Odžak", "Orašje"],
     ["Banovići", "Čelić", "Doboj Istok", "Gračanica", "Gradačac", "Kalesija", "Kladanj", "Lukavac", "Sapna", "Srebrenik", "Teočak", "Tuzla", "Živinice"],

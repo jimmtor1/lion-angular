@@ -23,7 +23,7 @@
                     [(ngModel)]="user.password">
             </div>
 
-            
+
 
             <div class="split-row form-row-wide">
                 <p class="form-row form-group">
@@ -65,16 +65,16 @@
                 <label for="mobile_phone">Broj mobitela<span class="required">*</span></label>
                 <input type="text" class="input-text form-control" name="mobile_phone" id="mobile_phone" value=""
                     required="required" [(ngModel)]="user.phone">
-            </p> 
+            </p>
 
 
-            <div *ngIf="isSeller" class="fadeIn">                
+            <div *ngIf="isSeller" class="fadeIn">
 
                 <p class="form-row form-group form-row-wide">
                     <label for="company-name">Ime Firme/Trgovine<span class="required">*</span></label>
                     <input type="text" class="input-text form-control" name="shopname" id="company-name" value=""
                         required="required" [(ngModel)]="seller.companyName">
-                </p>                                  
+                </p>
 
             </div>
 
@@ -91,13 +91,15 @@
             </div>
 
             <div class="mt-3">
-                <p> Vaši lični podaci će se koristiti za podršku vašem iskustvu na ovoj web stranici, za upravljanje pristupom vašem računu i u druge svrhe opisane u našim
+                <p> Vaši lični podaci će se koristiti za podršku vašem iskustvu na ovoj web stranici, za upravljanje
+                    pristupom vašem računu i u druge svrhe opisane u našim
                     <a href="" class="woocommerce-privacy-policy-link" target="_blank">pravila o privatnosti</a>.
                 </p>
             </div>
 
 
-            <button type="submit" name="register" class="btn btn-danger">Registracija</button>
+            <button type="submit" name="register" data-bs-target="#exampleModal"
+                class="btn btn-danger">Registracija</button>
 
 
             <div class="mt-3">
@@ -113,4 +115,29 @@
     </div>
 
 
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal" [ngClass]="{ 'show': modalShow}">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">{{result}}</h5>
+                <button type="button" class="btn-close" (click)="closeModal()"></button>
+            </div>
+
+            <div class="modal-body">
+                {{name}}
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="closeModal()" data-bs-dismiss="modal">Ok</button>
+            </div>
+
+        
+        </div>
+    </div>
 </div>

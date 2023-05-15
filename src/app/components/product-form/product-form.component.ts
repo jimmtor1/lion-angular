@@ -3,10 +3,12 @@ import { Component, ElementRef, Input, OnInit, Renderer2, ViewChild } from '@ang
 import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from 'src/app/models/product';
 import { ProductImage } from 'src/app/models/product-image';
+import { Seller } from 'src/app/models/seller';
 import { Subcategory } from 'src/app/models/subcategory';
 import { CategoryService } from 'src/app/services/category.service';
 import { AuthService } from 'src/app/services/helper';
 import { ProductService } from 'src/app/services/product.service';
+import { SellerService } from 'src/app/services/seller.service';
 
 @Component({
   selector: 'product-form',
@@ -28,19 +30,22 @@ export class ProductFormComponent implements OnInit {
   priceRequest: boolean = false;
   iduser: number;
   addTitle: boolean = false;
+  seller: Seller;
 
-  constructor(private renderer2: Renderer2, private categoryService: CategoryService, private productService: ProductService, private router: Router, private auth: AuthService, private route: ActivatedRoute, private datePipe: DatePipe) { }
+
+  constructor(private sellerService: SellerService, private renderer2: Renderer2, private categoryService: CategoryService, private productService: ProductService, private router: Router, private auth: AuthService, private route: ActivatedRoute, private datePipe: DatePipe) { }
 
   ngOnInit(): void {
-
-   
+    
     this.route.params.subscribe(params => {
 
       if (params['id'] == 0) {
+
         this.getUserById(params['id']);
         this.addTitle = true;
-      } 
-      else if (this.id > 0) {        
+
+      } else if (this.id > 0) {  
+     
         this.getUserById(this.id);
       }
      });
@@ -48,9 +53,15 @@ export class ProductFormComponent implements OnInit {
     const u = localStorage.getItem("iduser");
     if (u) {
       this.iduser = JSON.parse(u);
-    }
-
-    this.subcategoriesCombo2();
+      this.sellerService.getById(this.iduser).subscribe(s => {
+        this.seller = s;
+     
+        if(this.seller.accepted){
+ 
+          this.subcategoriesCombo2();
+        }        
+      });
+    }    
 
   }
 
@@ -117,10 +128,13 @@ export class ProductFormComponent implements OnInit {
     this.images.forEach(file => {
       formData.append('filesTosave', file.file);
     })
-
+    
+    console.log("editando1");
     this.filesTodelete.forEach(imagename => {
       formData.append('filesTodelete', JSON.stringify(imagename));
     })
+
+    console.log("editando2");
 
     formData.append('idproduct', this.product.idproduct.toString());
     formData.append('productName', this.product.productName);
@@ -128,11 +142,16 @@ export class ProductFormComponent implements OnInit {
     formData.append('idcategory', "5");
     formData.append('idsubcategory', this.product.idsubcategory.toString());
 
+    console.log("editando3");
+
     formData.append('idprovider', this.iduser.toString());
-    formData.append('active', this.product.active.toString());
-    formData.append('federation', this.product.federation.toString());
-    formData.append('city', this.product.city.toString());
+    formData.append('active', this.product.active.toString()); 
+    
+    console.log("editando4");
+       
     formData.append('price', this.product.price.toString());
+
+    console.log("editando5");
 
     let myDate = this.datePipe.transform(this.product.creationDate, 'yyyy-MM-dd HH:mm:ss');
 

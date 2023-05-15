@@ -10,10 +10,10 @@ import { Seller } from '../models/seller';
 
 export class BuyerService {
 
-  // private baseUrl = 'https://test1.dcl.ba/buyer';
-  // private baseUrl2 = 'https://test1.dcl.ba/provider';
-  private baseUrl = 'http://localhost:8080/buyer';
-  private baseUrl2 = 'http://localhost:8080/provider';
+  private baseUrl = 'https://test1.dcl.ba/buyer';
+  private baseUrl2 = 'https://test1.dcl.ba/provider';
+  // private baseUrl = 'http://localhost:8080/buyer';
+  // private baseUrl2 = 'http://localhost:8080/provider';
 
   constructor(private http: HttpClient) { }
 
@@ -21,8 +21,9 @@ export class BuyerService {
     return this.http.post<Buyer>(`${this.baseUrl}`, buyer); 
   }
 
-  createSeller(seller:Seller):Observable<Seller>{   
-    return this.http.post<Seller>(this.baseUrl2, seller);
+  createSeller(seller:Seller):Observable<Seller>{  
+    console.log("guardando service"); 
+    return this.http.post<Seller>(`${this.baseUrl2}/register`, seller);
   }
 
   getAll():Observable<Buyer[]>{

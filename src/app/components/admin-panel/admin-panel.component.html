@@ -2,61 +2,83 @@
 
     <p class="h1 text-center"> Administrative panel</p>
 
+    <div class="row">
+
+        <div class="col-2 bg-black d-flex" style="justify-content: center; align-items: center;">
+            <button class="boton-hamburguesa d-sm-none" (click)="toggleSidebar()">☰</button>
+        </div>
+
+        <div class="col-10">
+            <div class="row mt-3">
+
+                <div class="col-6">
+                    <p class="h3">{{title}}</p>
+                </div>
+                <!-- <div class="col-6 d-flex justify-content-end mb-2">
+
+                    <a id="actionButon" #butt class="btn btn-danger">{{action}}</a>
+
+                </div> -->
+
+            </div>
+        </div>
+
+    </div>
+
     <div class="row border">
         <!-- vertical nav -->
-        <div class="col-3">
-            <br>
-            <br>
-            <br>
-            <ul class="nav flex-column bg-black c-white">
+        <div class="col-2 bg-black p-0">
+                <ul class="nav flex-column bg-black c-white">
                 <li class="nav-item border">
-                    <a class="nav-link" [ngClass]="{'active': currentPage === 'companies'}" (click)="showSellerList()">                       
+                    <a class="nav-link" [ngClass]="{'active': currentPage === 'companies'}" (click)="showSellerList()">
                         <fa-icon [icon]="['fas', 'building']" style="font-size: 1.1em"></fa-icon>
-                        &nbsp;Kompanijas
+                        <span class="d-none d-sm-inline">&nbsp;Kompanijas</span>
                     </a>
                 </li>
                 <li class="nav-item border">
                     <a class="nav-link" [ngClass]="{'active': currentPage === 'customers'}" id="product-list"
                         (click)="showBuyerList()">
                         <fa-icon [icon]="['fas', 'users']" style="font-size: 1.1em"></fa-icon>
-                        &nbsp;Customers
+                        <span class="d-none d-sm-inline">&nbsp;Customers</span>
                     </a>
                 </li>
-                <li class="nav-item border">
+                <li class="nav-item border w-100">
                     <a class="nav-link" [ngClass]="{'active': currentPage === 'customersConfirmation'}"
                         (click)="showSellerListToConfirm()">
                         <fa-icon [icon]="['fas', 'building-circle-exclamation']" style="font-size: 1.1em"></fa-icon>
-                        &nbsp;Kompanijas to confirm</a>
+                        <span class="d-none d-sm-inline">&nbsp;Kompanijas to confirm</span>
+                    </a>
                 </li>
-                <li class="nav-item border">
+                <li class="nav-item border w-100">
                     <a class="nav-link" href="#" (click)="logout()">
-                        <fa-icon [icon]="['fas', 'right-from-bracket']" style="font-size: 1.1em"></fa-icon>  
-                        &nbsp;Logout</a>
+                        <fa-icon [icon]="['fas', 'right-from-bracket']" style="font-size: 1.1em"></fa-icon>
+                        <span class="d-none d-sm-inline">&nbsp;Logout</span>
+                    </a>
                 </li>
 
             </ul>
 
         </div>
 
-        <div class="col-9">
+        <div class="col-10">
 
             <!-- *ngIf="title != ''" -->
-            <div class="row mt-3">
+            <!-- <div class="row mt-3">
                 <div class="col-6">
                     <p class="h3">{{title}}</p>
-                </div>
+                </div> -->
                 <!-- <div class="col-6 d-flex justify-content-end mb-2">
                     <div>
                         <a id="actionButon" #butt class="btn btn-danger">{{action}}</a>
                     </div>
                 </div> -->
-                <hr>
-            </div>
+                <!-- <hr>
+            </div> -->
 
             <div *ngIf="activeSellerList">
                 <seller-list [accepted]="true" (SellerEditEvent)="showSellerDetail($event)"></seller-list>
             </div>
-            
+
             <div *ngIf="activeBuyerList">
                 <buyer-list (BuyerEditEvent)="showBuyerDetail($event)"></buyer-list>
             </div>
@@ -64,10 +86,6 @@
             <div *ngIf="activeSellerListToConfirm">
                 <seller-list [accepted]="false" (SellerEditEvent)="showSellerDetail($event)"></seller-list>
             </div>
-
-            <!-- <div *ngIf="mostrarSellerDetail">
-                <product-form [id]="idproduct" ></product-form>
-            </div> -->
 
             <div *ngIf="activeSellerDetail">
                 <seller-detail [id]="idseller"></seller-detail>
@@ -131,7 +149,7 @@
                     <input [disabled]="action!=='Save'" type="text" [(ngModel)]="buyer.postalCode"
                         [ngClass]="buyer.postalCode==null ? 'mb-3 rounded-pill border text-danger form-control':' mb-3form-control border rounded-pill'">
 
-                   
+
 
 
                 </div>
@@ -140,5 +158,58 @@
 
         </div>
     </div>
+
+</div>
+
+
+
+
+
+<!-- vertial nav responsive -->
+<div id="menu" class="menu d-flex" [ngClass]="{'mostrar': showSidebar}">
+
+    <div class="w-100">
+
+        <div class="text-end m-2">
+            <button class="btn btn-danger" (click)="toggleSidebar()">X</button>
+        </div>
+
+
+        <ul class="bg-primary">
+            <li class="bg-primary m-0" style="height: 40px;">
+                <a class="nav-link my-3 h4 px-2 h-100" [ngClass]="{'active': currentPage === 'company'}"
+                    (click)="showSellerList()">
+                    <fa-icon [icon]="['fas', 'building']" style="font-size: 1.1em"></fa-icon>
+                    &nbsp;Kompanijas
+                </a>
+            </li>
+
+            <li>
+                <a class="nav-link h4 m-0 px-2" style="height: 40px;" [ngClass]="{'active': currentPage === 'adlist'}"
+                    id="product-list" (click)="showBuyerList()">
+                    <fa-icon [icon]="['fas', 'users']" style="font-size: 1.1em"></fa-icon>
+                    &nbsp;Objavljivanje
+                </a>
+            </li>
+
+            <li>
+                <a class="nav-link h4 m-0 px-2" style="height: 40px;" [ngClass]="{'active': currentPage === 'social'}"
+                    (click)="showSellerListToConfirm()">
+                    <fa-icon [icon]="['fas', 'building-circle-exclamation']" style="font-size: 1.1em"></fa-icon>
+                    &nbsp;Kompanijas to confirm
+                </a>
+            </li>
+
+            <li>
+                <a class="nav-link m-0 h4 px-2" style="height: 40px;" href="#" (click)="logout()">
+                    <fa-icon [icon]="['fas', 'right-from-bracket']" style="font-size: 1.1em"></fa-icon>
+                    &nbsp;Odjava
+                </a>
+            </li>
+
+        </ul>
+
+    </div>
+
 
 </div>

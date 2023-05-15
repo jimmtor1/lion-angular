@@ -1,6 +1,8 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild, ViewContainerRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { SellerSocialnetworkComponent } from '../seller-socialnetwork/seller-socialnetwork.component';
+import { Seller } from 'src/app/models/seller';
+import { SellerService } from 'src/app/services/seller.service';
 
 @Component({
   selector: 'seller-panel',
@@ -18,6 +20,7 @@ export class SellerPanelComponent {
   title: string = "";
   action: string = "";
 
+
   mostrarProductnew = false;
   mostrarProductEdit = false;
   mostrarProductList = false;
@@ -25,10 +28,11 @@ export class SellerPanelComponent {
   mostrarSellerEdit = false;
   mostrarSocial = false;
   mostrarTender = false;
+  mostrarTenderEdit = false;
 
   private clickListener: () => void;
 
-  constructor(private router: Router, private renderer2: Renderer2) {
+  constructor(private router: Router, private renderer2: Renderer2, private sellerService: SellerService) {
     this.title = "Profil komanije";
     this.action = "Ažuriraj podatke";
   }
@@ -50,6 +54,7 @@ export class SellerPanelComponent {
     this.mostrarSellerDetail = true
     this.mostrarTender = false;
 
+
     this.title = "Profil komanije";
     this.action = "Ažuriraj podatke";
     this.currentPage = "company";
@@ -58,6 +63,9 @@ export class SellerPanelComponent {
     this.renderer2.listen(theLink, 'click', () => {
       this.showSellerEdit();
     })
+
+    this.showSidebar = false;
+
   }
 
   showSellerEdit() {
@@ -95,16 +103,20 @@ export class SellerPanelComponent {
     this.renderer2.listen(theLink, 'click', () => {
       this.showProductNew();
     })
+
+    this.showSidebar = false;
   }
 
   showProductNew() {
+
     this.mostrarProductEdit = false;
     this.mostrarProductList = false;
     this.mostrarSellerDetail = false;
     this.mostrarSellerEdit = false;
     this.mostrarSocial = false;
     this.mostrarProductnew = true;
-    this.mostrarTender = false;
+    this.mostrarTender = false;    
+    this.mostrarTenderEdit = false;
 
 
     this.title = "Novi oglas"; //new ad
@@ -123,7 +135,8 @@ export class SellerPanelComponent {
     this.mostrarSocial = false;
     this.mostrarProductEdit = true;
     this.mostrarProductnew = false;
-    this.mostrarTender = false;
+    this.mostrarTender = false;  
+    this.mostrarTenderEdit = false;
 
     this.title = "ažurirati oglas"; //new ad
     this.action = "Odustani";
@@ -139,7 +152,6 @@ export class SellerPanelComponent {
 
   showSocial() {
 
-
     this.mostrarProductList = false;
     this.mostrarProductEdit = false;
     this.mostrarSellerDetail = false;
@@ -147,8 +159,6 @@ export class SellerPanelComponent {
     this.mostrarProductnew = false;
     this.mostrarTender = false;
     this.mostrarSocial = true;
-
-
 
     this.title = "Društvene mreže"; //new ad
     this.action = "Edit";
@@ -170,6 +180,8 @@ export class SellerPanelComponent {
 
     })
 
+    this.showSidebar = false;
+
   }
 
   showTender() {
@@ -180,12 +192,46 @@ export class SellerPanelComponent {
     this.mostrarSellerEdit = false;
     this.mostrarProductnew = false;
     this.mostrarSocial = false;
+    this.mostrarTenderEdit = false;
     this.mostrarTender = true;
 
     this.title = "Tender list"; //new ad
     this.action = "New tender";
     this.currentPage = "tender";
-    
+
+    const theLink = this.miEnlace.nativeElement;
+    this.renderer2.listen(theLink, 'click', () => {
+      this.showTenderEdit();
+    })
+    this.showSidebar = false;
+
+  }
+
+  showTenderEdit() {
+
+    this.mostrarProductList = false;
+    this.mostrarProductEdit = false;
+    this.mostrarSellerDetail = false;
+    this.mostrarSellerEdit = false;
+    this.mostrarProductnew = false;
+    this.mostrarSocial = false;
+    this.mostrarTender = false;
+    this.mostrarTenderEdit = true;
+
+    this.title = "New Tender";
+    this.action = "Odustani";
+
+    const theLink = this.miEnlace.nativeElement;
+    this.renderer2.listen(theLink, 'click', () => {
+      this.showTender();
+    })
+
+  }
+
+  showSidebar = false;
+
+  toggleSidebar() {
+    this.showSidebar = !this.showSidebar;
   }
 
   logout() {
@@ -193,8 +239,6 @@ export class SellerPanelComponent {
     // localStorage.setItem("email", "");
     localStorage.clear();
   }
-
-
 
 
 }

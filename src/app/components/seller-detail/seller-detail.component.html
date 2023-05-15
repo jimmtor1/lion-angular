@@ -4,7 +4,7 @@
     </div>
 </div>
 
-<div *ngIf="loading==false">
+<div *ngIf="loading==false && seller!==null">
     <div class="container">
         <div class="w-75 m-auto">
 
@@ -108,10 +108,10 @@
 
             <p class="h6 mt-3">Vrijeme:</p>
             <div class="row">
-                <div class="col-1">
+                <div class="col-2 col-sm-1">
                     <span>Od</span>
                 </div>
-                <div class="col-5">
+                <div class="col-10 col-sm-5">
                     <select class="form-select rounded-pill" [(ngModel)]="seller.startTime" name="hour-start" disabled>
                         <option value="6">06:00</option>
                         <option value="7">07:00</option>
@@ -121,10 +121,10 @@
                         <option value="11">11:00</option>
                     </select>
                 </div>
-                <div class="col-1">
+                <div class="col-2 col-sm-1">
                     <span>Do</span>
                 </div>
-                <div class="col-5">
+                <div class="col-10 col-sm-5">
                     <select class="form-select rounded-pill" [(ngModel)]="seller.endTime" name="hour-end" disabled>
                         <option value="16">16:00</option>
                         <option value="17">17:00</option>

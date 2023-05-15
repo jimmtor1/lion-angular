@@ -64,7 +64,7 @@ export class SellerCompanyFormComponent implements OnInit {
       this.subcategories.splice(21, 0, sub2);
       this.subcategories.splice(48, 0, sub3);
       this.subcategories.splice(59, 0, sub4);
-
+      this.loading = false;
     });
 
   }
@@ -86,8 +86,7 @@ export class SellerCompanyFormComponent implements OnInit {
       if (JSON.parse(usuarioString) > 0) {
         // this.iduser = JSON.parse(usuarioString); 
         this.sellerService.getById(JSON.parse(usuarioString)).subscribe(sellerBd => {
-          this.seller = sellerBd;
-          this.loading = false;
+          this.seller = sellerBd;          
           this.image = './assets/images/' + this.seller.image;
 
           this.seller.providerSubcategoryList.forEach(p => {
@@ -256,7 +255,7 @@ export class SellerCompanyFormComponent implements OnInit {
   ];
 
   cities: string[][] = [ 
-   
+    [""],
     ["Bihać", "Bosanska Krupa", "Bosanski Petrovac", "Bužim", "Cazin", "Ključ", "Sanski Most", "Velika Kladuša"],
     ["Šamac", "Odžak", "Orašje"],
     ["Banovići", "Čelić", "Doboj Istok", "Gračanica", "Gradačac", "Kalesija", "Kladanj", "Lukavac", "Sapna", "Srebrenik", "Teočak", "Tuzla", "Živinice"],

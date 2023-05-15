@@ -1,32 +1,73 @@
-
-
 <div class="container mt-3 pt-3">
 
   <p class="h1 text-center">Korisnički panel kupca</p>
 
+  <div class="row">
+
+    <div class="col-2 bg-black d-flex" style="justify-content: center; align-items: center;">
+      <button class="boton-hamburguesa d-sm-none" (click)="toggleSidebar()">☰</button>
+    </div>
+
+    <div class="col-10">
+      <div class="row mt-3">
+
+        <!-- <div class="col-6">
+          <p class="h3">{{title}}</p>
+        </div>
+        <div class="col-6 d-flex justify-content-end mb-2">
+
+          <a id="actionButon" #butt class="btn btn-danger">{{action}}</a>
+
+        </div> -->
+
+
+        <div class="col-6">
+          <p class="h3">{{title}}</p>
+        </div>
+
+        <div class="col-6 d-flex justify-content-end mb-2">
+          <div *ngIf="title=='Profil'" >
+            <button [disabled]="saving" class="btn btn-danger mx-2" (click)="editForm();">{{action}}</button>
+            <button class="btn btn-dark" *ngIf="action=='Save'" (click)="cancel();">Cancel</button>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+
+  </div>
+
   <div class="row border">
 
-    <div class="col-3 bg-black p-0">
-      <br>
-      <br>
-      <br>
+    <div class="col-2 bg-black p-0">
+      
       <ul class="nav flex-column bg-black c-white">
         <li class="nav-item border">
           <a class="nav-link" [ngClass]="{'active': currentPage === 'profile'}" (click)="showBuyerDetail()">
-            <fa-icon [icon]="['fas', 'address-card']" style="font-size: 1.1em"></fa-icon>  
-            &nbsp;Profil
+            <fa-icon [icon]="['fas', 'address-card']" style="font-size: 1.1em"></fa-icon>
+            <span class="d-none d-sm-inline">&nbsp;Profil</span>
           </a>
         </li>
         <li class="nav-item border">
           <a class="nav-link" [ngClass]="{'active': currentPage === 'orders'}" (click)="showOrderList()">
-            <fa-icon [icon]="['fas', 'shopping-basket']" style="font-size: 1.1em"></fa-icon>  
-            &nbsp;Narudžbe
+            <fa-icon [icon]="['fas', 'shopping-basket']" style="font-size: 1.1em"></fa-icon>
+            <span class="d-none d-sm-inline">&nbsp;Narudžbe</span>
           </a>
         </li>
+
+        <li class="nav-item border">
+          <a class="nav-link" [ngClass]="{'active': currentPage === 'orders'}">
+            <fa-icon [icon]="['fas', 'shopping-basket']" style="font-size: 1.1em"></fa-icon>
+            <span class="d-none d-sm-inline">&nbsp;Tender posted</span>
+          </a>
+        </li>
+
         <li class="nav-item border">
           <a class="nav-link" href="#" (click)="logout()">
-            <fa-icon [icon]="['fas', 'right-from-bracket']" style="font-size: 1.1em"></fa-icon>  
-            &nbsp;Odjava</a>
+            <fa-icon [icon]="['fas', 'right-from-bracket']" style="font-size: 1.1em"></fa-icon>
+            <span class="d-none d-sm-inline">&nbsp;Odjava</span>
+          </a>
         </li>
 
       </ul>
@@ -34,47 +75,51 @@
 
     </div>
 
-    
 
 
-    <div  class="col-9" *ngIf="currentPage =='orders'">
 
-      <table class="table table-striped">
-        <p class="h6 text-center m-2" *ngIf="orders.length ==0">Nema narudžbi za prikaz</p>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Datum</th>
-            <th>Ukupno</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let order of orders">
-            <th>{{order.id}}</th>
-            <td>{{order.date}}</td>
-            <td>{{order.total}}</td>
-            <td>
+    <div class="col-10" *ngIf="currentPage =='orders'">
 
-              <button class="btn btn-dark">Prikaži detalje</button>
+      <div class="table-responsive">
 
-            </td>
-          </tr>
-        </tbody>
+        <table class="table table-striped">
+          <p class="h6 text-center m-2" *ngIf="orders.length ==0">Nema narudžbi za prikaz</p>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Datum</th>
+              <th>Ukupno</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let order of orders">
+              <th>{{order.id}}</th>
+              <td>{{order.date}}</td>
+              <td>{{order.total}}</td>
+              <td>
 
-      </table>
+                <button class="btn btn-dark">Prikaži detalje</button>
+
+              </td>
+            </tr>
+          </tbody>
+
+        </table>
+
+      </div>
 
     </div>
 
     <!-- preloader -->
-    <div class="col-9 text-center" *ngIf="currentPage =='loading'">
+    <div class="col-10 text-center" *ngIf="currentPage =='loading'">
       <br>
       <div class="spinner-grow text-danger" role="status">
         <span class="visually-hidden">Loading...</span>
       </div>
     </div>
 
-    <div class="col-9 mt-3 mb-0" *ngIf="currentPage =='profile'">
-      <div class="row">
+    <div class="col-10 mt-3 mb-0" *ngIf="currentPage =='profile'">
+      <!-- <div class="row">
 
         <div class="col-6">
           <p class="h3">Profil</p>
@@ -87,9 +132,9 @@
           </div>
         </div>
 
-      </div>
+      </div> -->
 
-      <hr class="mt-0">
+      <!-- <hr class="mt-0"> -->
 
       <div class="w-75 mx-auto">
 
@@ -154,5 +199,50 @@
     </div>
 
   </div>
+
+</div>
+
+
+
+
+
+<!-- vertial nav responsive -->
+<div id="menu" class="menu d-flex" [ngClass]="{'mostrar': showSidebar}">
+
+  <div class="w-100">
+
+    <div class="text-end m-2">
+      <button class="btn btn-danger" (click)="toggleSidebar()">X</button>
+    </div>
+
+
+    <ul class="bg-primary">
+      <li class="bg-primary m-0" style="height: 40px;">
+        <a class="nav-link my-3 h4 px-2 h-100" [ngClass]="{'active': currentPage === 'company'}"
+          (click)="showBuyerDetail()">
+          <fa-icon [icon]="['fas', 'address-card']" style="font-size: 1.1em"></fa-icon>
+          &nbsp;Profil
+        </a>
+      </li>
+
+      <li>
+        <a class="nav-link h4 m-0 px-2" style="height: 40px;" [ngClass]="{'active': currentPage === 'adlist'}"
+          id="product-list" (click)="showOrderList()">
+          <fa-icon [icon]="['fas', 'shopping-basket']" style="font-size: 1.1em"></fa-icon>
+          &nbsp;Narudžbe
+        </a>
+      </li>
+
+      <li>
+        <a class="nav-link m-0 h4 px-2" style="height: 40px;" href="#" (click)="logout()">
+          <fa-icon [icon]="['fas', 'right-from-bracket']" style="font-size: 1.1em"></fa-icon>
+          &nbsp;Odjava
+        </a>
+      </li>
+
+    </ul>
+
+  </div>
+
 
 </div>

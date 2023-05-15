@@ -26,17 +26,18 @@ import { SellerListComponent } from './components/seller-list/seller-list.compon
 import { SellerSocialnetworkComponent } from './components/seller-socialnetwork/seller-socialnetwork.component';
 import { SubcategoryListComponent } from './components/subcategory-list/subcategory-list.component';
 
-import { faAddressBook, faAddressCard, faBasketShopping, faBriefcase, faBuilding, faBuildingCircleExclamation, faEnvelope, faHandHoldingDroplet, faHandHoldingHand, faHandHoldingMedical, faHandHoldingUsd, faHandsHoldingCircle, faHandshake, faHeadset, faHome, faLaptop, faListCheck, faLocationDot, faMagnifyingGlass, faMobilePhone, faRectangleAd, faRightFromBracket, faShareNodes, faShirt, faShoppingCart, faSignOut, faStore, faTag, faTrash, faUser, faUsers, faUsersBetweenLines } from '@fortawesome/free-solid-svg-icons';
+import { faAddressBook, faAddressCard, faBars, faBasketShopping, faBriefcase, faBuilding, faBuildingCircleExclamation, faCalendar, faEnvelope, faFile, faFileArrowDown, faHandHoldingMedical, faHandshake, faHeadset, faHome, faLaptop, faListCheck, faLocationDot, faMagnifyingGlass, faMobilePhone, faRectangleAd, faRightFromBracket, faShareNodes, faShirt, faShoppingCart, faSignOut, faStore, faTag, faTrash, faUser, faUsers } from '@fortawesome/free-solid-svg-icons';
 import { faFacebook, faInstagram, faYoutube } from '@fortawesome/free-brands-svg-icons';
 import { ViewProviderToClienteComponent } from './components/view-provider-to-cliente/view-provider-to-cliente.component';
 import { SellerCategoryListComponent } from './components/seller-category-list/seller-category-list.component';
 import { TenderComponent } from './components/tender/tender.component';
 import { TenderFormComponent } from './components/tender-form/tender-form.component';
+import { TenderDetailComponent } from './components/tender-detail/tender-detail.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent, HomeComponent, ProductosInicioComponent, ProductFormComponent, RegisterFormComponent, LoginFormComponent, ProductCategoryListComponent, SellerPanelComponent, ProductDetailComponent, ProductBuyerListComponent, SellerCompanyFormComponent, PanelBuyerComponent, SellerDetailComponent, AdminPanelComponent, BuyerListComponent, SellerListComponent, SellerSocialnetworkComponent, SubcategoryListComponent, ViewProviderToClienteComponent, SellerCategoryListComponent, TenderComponent, TenderFormComponent
+    AppComponent, HomeComponent, ProductosInicioComponent, ProductFormComponent, RegisterFormComponent, LoginFormComponent, ProductCategoryListComponent, SellerPanelComponent, ProductDetailComponent, ProductBuyerListComponent, SellerCompanyFormComponent, PanelBuyerComponent, SellerDetailComponent, AdminPanelComponent, BuyerListComponent, SellerListComponent, SellerSocialnetworkComponent, SubcategoryListComponent, ViewProviderToClienteComponent, SellerCategoryListComponent, TenderComponent, TenderFormComponent, TenderDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +54,7 @@ export class AppModule {
   
 
   constructor(library: FaIconLibrary) {
-    library.addIcons(faShirt, faBuilding, faHome, faLaptop, faShoppingCart, faMagnifyingGlass, faUser, faSignOut, faStore, faFacebook, faInstagram, faYoutube, faHandshake, faHeadset, faHandHoldingMedical, faTag, faRectangleAd, faShareNodes, faRightFromBracket, faUsers, faBuildingCircleExclamation, faAddressCard, faBasketShopping, faTrash, faLocationDot, faMobilePhone, faEnvelope, faBriefcase, faAddressBook, faListCheck);
+    library.addIcons(faShirt, faBuilding, faHome, faLaptop, faShoppingCart, faMagnifyingGlass, faUser, faSignOut, faStore, faFacebook, faInstagram, faYoutube, faHandshake, faHeadset, faHandHoldingMedical, faTag, faRectangleAd, faShareNodes, faRightFromBracket, faUsers, faBuildingCircleExclamation, faAddressCard, faBasketShopping, faTrash, faLocationDot, faMobilePhone, faEnvelope, faBriefcase, faAddressBook, faListCheck, faFile, faBars, faCalendar, faFileArrowDown);
   }
 
 }

@@ -15,6 +15,7 @@ import { AdminPanelComponent } from './components/admin-panel/admin-panel.compon
 import { SubcategoryListComponent } from './components/subcategory-list/subcategory-list.component';
 import { ViewProviderToClienteComponent } from './components/view-provider-to-cliente/view-provider-to-cliente.component';
 import { SellerCategoryListComponent } from './components/seller-category-list/seller-category-list.component';
+import { TenderDetailComponent } from './components/tender-detail/tender-detail.component';
 
 const routes: Routes = [
   {path:'', component:HomeComponent},
@@ -32,7 +33,8 @@ const routes: Routes = [
   {path: 'sellerDetail/:id', component:SellerDetailComponent},
   {path: 'adminPanel', component:AdminPanelComponent},  
   {path: 'subcategoryList/:id', component:SubcategoryListComponent}, 
-  {path: 'provider/:id', component:ViewProviderToClienteComponent}
+  {path: 'provider/:id', component:ViewProviderToClienteComponent},
+  {path: 'tenderDetail/:idtender', component:TenderDetailComponent}
 ];
 
 @NgModule({

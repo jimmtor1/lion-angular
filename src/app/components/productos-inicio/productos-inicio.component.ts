@@ -80,7 +80,25 @@ export class ProductosInicioComponent implements OnInit {
     "Trgovina",
   ]
 
-
+  federations: string[] = [
+    "FEDERACIJA BiH",
+    "UNSKO-SANSKI KANTON",
+    "Posavski kanton",
+    "Tuzlanski kanton",
+    "Zeničko-dobojski kanton",
+    "Bosansko-podrinjski kanton",
+    "Srednjobosanski kanton",
+    "Hercegovačko-neretvanski kanton",
+    "Zapadnohercegovački kanton",
+    "Kanton Sarajevo",
+    "Kanton 10",
+    "REPUBLIKA SRPSKA",
+    "Banjalučka",
+    "Dobojsko-Bijeljinska",
+    "Sarajevsko-Zvornička",
+    "Trebinjsko-Fočanska",
+    "BRČKO DISTRIKT"
+  ];
 
 
 }

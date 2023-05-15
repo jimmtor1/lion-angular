@@ -9,5 +9,6 @@ export class Tender {
     dateTo:string;
     description:string;
     document:string;
+    assignedTo:number;
 
 }

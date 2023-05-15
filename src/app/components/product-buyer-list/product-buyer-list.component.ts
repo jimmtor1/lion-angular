@@ -26,8 +26,7 @@ export class ProductBuyerListComponent implements OnInit {
 
   getProductList(): void {
     this.productService.getAllByProvider(this.iduser).subscribe(data => {
-      this.products = data;
-      console.log(this.products);
+      this.products = data;      
     });
     
   }
