@@ -7,7 +7,7 @@
 
 <div *ngIf="seller">
 
-    <div class="border border-2 border-danger rounded p-2 mt-3" *ngIf="!seller.accepted || seller.accepted!==null">
+    <div class="border border-2 border-danger rounded p-2 mt-3" *ngIf="!seller.accepted">
         <p>make sure to complete your profile</p>
         <p>Your profile is in the process of acceptance, then you can upload your products</p>
     </div>

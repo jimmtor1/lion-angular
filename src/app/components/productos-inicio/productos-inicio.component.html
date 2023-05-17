@@ -48,7 +48,7 @@
 
 </div> -->
 
-<div class="bg-white" style="padding-bottom: 4px;">
+<div class="bg-white mb-3">
 
     <!-- <div *ngFor="let c of categoryWithSellers" class="mb-3"> -->
 
@@ -62,11 +62,12 @@
         <div *ngFor="let s of categoryWithSellers[0].sellers" class="mx-1">
             <div class="card h-100" style="width: 16rem;">
                 <img src="assets/images/{{s.image}}" style="height: 150px;" class="card-img-top" alt="...">
-                <hr class="m-0">
-                <div class="card-body m-0">
-                    <h6 class="card-title">{{s.companyName}}</h6>
-                    <p class="m-0">{{federations[s.user.federation+1]}}</p>
-                    <p style="overflow: hidden; max-height: 2em; line-height: 1;" class="text-muted fs-6 m-0">{{s.biography}}</p>
+                <hr class="m-0 p-0">
+                <div class="card-body m-0 pb-0">
+                    <h6 class="card-title mt-0">{{s.companyName}}</h6>
+                    <p class="m-0">{{cities[s.user.federation+1][s.user.city+1]}}</p>
+                    <p style="overflow: hidden; max-height: 2em; line-height: 1;" class="text-muted fs-6">
+                        {{s.biography}}</p>
                     <a routerLink="provider/{{s.user.id}}" class="stretched-link m-0 p-0"></a>
                 </div>
             </div>
@@ -76,17 +77,15 @@
             <div class="card h-100" style="width: 16rem;">
                 <img src="assets/images/{{s.image}}" style="height: 150px;" class="card-img-top" alt="...">
                 <hr class="m-0">
-                <div class="card-body m-0">
+                <div class="card-body m-0 pb-0">
                     <h6 class="card-title">{{s.companyName}}</h6>
-                    <p class="m-0">{{federations[s.user.federation+1]}}</p>
-                    <p style="overflow: hidden; max-height: 2em; line-height: 1;" class="text-muted fs-6 m-0">{{s.biography}}</p>
+                    <p class="m-0">{{cities[s.user.federation+1][s.user.city+1]}}</p>
+                    <p style="overflow: hidden; max-height: 2em; line-height: 1;" class="text-muted fs-6">
+                        {{s.biography}}</p>
                     <a routerLink="provider/{{s.user.id}}" class="stretched-link m-0 p-0"></a>
                 </div>
             </div>
         </div>
-
-
-       
 
     </div>
 
@@ -100,20 +99,22 @@
 
 <p *ngIf="products.length==0">No ads to show</p>
 
-<div class="d-flex flex-wrap justify-content-center">
-
-    <div *ngFor="let product of products" class="mx-1 mb-1">
-        <div class="card h-100" style="width: 13rem;">
+<!-- <div class="d-flex flex-wrap justify-content-center"> -->
+<div class="row g-2">
+    <!-- class="mx-1 mb-1" -->
+    <div class="col-6 col-sm-4 col-md-2" *ngFor="let product of products" > 
+        <!-- style="width: 13rem;" -->
+        <div class="card h-100 mx-0"> 
             <img src="assets/images/{{product.productImageList[0].idimage}}{{product.productImageList[0].extension}}"
                 style="height: 200px;" class="card-img-top" alt="...">
             <hr class="m-0">
             <div class="card-body">
                 <h6 class="card-title">{{product.productName}}</h6>
-                <p class="card-text mb-0" *ngIf="product.price==0">Cineja na</p>
-                <p class="card-text mb-0" *ngIf="product.price>0">{{product.price}} KM</p>
+                <p class="card-text mb-0" *ngIf="product.price==0"><b>Cijena po dogovoru</b></p>
+                <p class="card-text mb-0" *ngIf="product.price>0"><b>{{product.price}} KM</b></p>
                 <a routerLink="addetails/{{product.idproduct}}" class="stretched-link m-0 p-0"></a>
             </div>
         </div>
     </div>
-
 </div>
+<!-- </div> -->

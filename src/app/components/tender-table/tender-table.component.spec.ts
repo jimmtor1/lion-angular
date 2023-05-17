@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TenderComponent } from './tender.component';
+import { TenderTableComponent } from './tender-table.component';
 
-describe('TenderComponent', () => {
-  let component: TenderComponent;
-  let fixture: ComponentFixture<TenderComponent>;
+describe('TenderTableComponent', () => {
+  let component: TenderTableComponent;
+  let fixture: ComponentFixture<TenderTableComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TenderComponent ]
+      declarations: [ TenderTableComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(TenderComponent);
+    fixture = TestBed.createComponent(TenderTableComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

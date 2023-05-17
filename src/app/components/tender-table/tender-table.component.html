@@ -4,7 +4,7 @@
     </div>
 </div>
 
-<div *ngIf="!loading" class="table-responsive">
+<div *ngIf="!loading && detail==0" class="table-responsive">
 
     <table class="table table-striped">
 
@@ -25,21 +25,21 @@
                 <td>{{tender.projectName}}</td>
                 <td>{{tender.dateFrom}}</td>
                 <td>{{tender.dateTo}}</td>
-                <td>{{tender.description}}</td>
+                <td>
+                    <p style="overflow: hidden; max-height: 1.2em; line-height: 1; max-width: 360px;" class="p-0 m-0">{{tender.description}}</p>
+                    ...
+                </td>
                 
                 <td>
-                    
-                    <!-- <button (click)="emitSellerEdit(seller.user.id)" class="btn btn-dark mx-2">see details</button>
-                    <button *ngIf="!accepted" (click)="confirm(seller.user.id)"
-                    class="btn btn-dark mx-2">Confirm</button> -->
-                    <!-- <button *ngIf="tender.document" (click)="openDocument(tender.document)"
-                    class="btn btn-dark mx-2">Attached</button>  -->
+                                      
+                    <a (click)="showTenderDetail(tender.idtender)" style="cursor: pointer;">
+                        <fa-icon [icon]="['fas', 'circle-info']" class="fs-5"></fa-icon>                        
+                    </a>
 
-                    <fa-icon [icon]="['fas', 'file']"></fa-icon>
-                    <a href="assets/images/2.pdf" target="_blank">&nbsp;Attached                        
+                    <a *ngIf="role==3" (click)="confirmTender(tender.idtender)" style="margin-left: 1em; cursor: pointer;">
+                        <fa-icon [icon]="['fas', 'check-square']" class="fs-5"></fa-icon>                        
                     </a>
                    
-
                 </td>
             </tr>
         </tbody>
@@ -49,4 +49,8 @@
 
 <div *ngIf="tenders.length==0" class="text-center">
     Nema podataka za prikaz
+</div>
+
+<div *ngIf="detail>0">    
+    <tender-detail [idtender]="detail" ></tender-detail>
 </div>

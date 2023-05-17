@@ -5,6 +5,10 @@
     color: white;  
 }
 
+.card-text:hover{
+    color: white;
+}
+
 .card a{
     text-decoration: none;
     color: inherit;

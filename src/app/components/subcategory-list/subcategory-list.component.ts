@@ -18,13 +18,11 @@ export class SubcategoryListComponent implements OnInit {
   ngOnInit(): void {
 
     this.route.params.subscribe(param => {
-      this.item = param['id'];
+      this.item = parseInt(param['id']);
      
     })
 
   }
-
-
 
 
 

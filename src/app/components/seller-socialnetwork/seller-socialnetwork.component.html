@@ -4,7 +4,7 @@
     <span class="input-group-text" id="facebook">
         <fa-icon [icon]="['fab', 'facebook']"></fa-icon>
     </span>
-    <input [disabled]="estollegadelpadre" type="text" class="form-control" id="facebook" [(ngModel)]="seller.facebook"
+    <input type="text" class="form-control" id="facebook" [(ngModel)]="seller.facebook"
         aria-describedby="facebook">
 </div>
 
@@ -12,7 +12,7 @@
     <span class="input-group-text" id="instagram">
         <fa-icon [icon]="['fab', 'instagram']"></fa-icon>
     </span>
-    <input [disabled]="estollegadelpadre" type="text" class="form-control" [(ngModel)]="seller.instagram" id="instagram"
+    <input type="text" class="form-control" [(ngModel)]="seller.instagram" id="instagram"
         aria-describedby="instagram">
 </div>
 
@@ -20,11 +20,11 @@
     <span class="input-group-text" id="youtube">
         <fa-icon [icon]="['fab', 'youtube']"></fa-icon>
     </span>
-    <input [disabled]="estollegadelpadre" type="text" class="form-control" [(ngModel)]="seller.youtube" id="youtube"
+    <input type="text" class="form-control" [(ngModel)]="seller.youtube" id="youtube"
         aria-describedby="youtube">
 </div>
-
-<div *ngIf="!estollegadelpadre" class="text-center">
+<!-- *ngIf="!estollegadelpadre" -->
+<div  class="text-center">
     <button (click)="save()" [disabled]="waiting" class="btn btn-danger">
         <span *ngIf="!waiting">Sava</span>        
         <div *ngIf="waiting" class="spinner-grow text-light" role="status">

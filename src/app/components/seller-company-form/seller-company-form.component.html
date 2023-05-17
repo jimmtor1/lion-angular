@@ -98,8 +98,7 @@
 
     <!-- short biography -->
     <label for="short_biography">Kratka biografija<span class="required">*</span></label>
-    <textarea rows="4" class="form-control" name="short_biography" id="short_biography"
-        [(ngModel)]="seller.biography">
+    <textarea rows="4" class="form-control" name="short_biography" id="short_biography" [(ngModel)]="seller.biography">
         </textarea>
 
 
@@ -187,7 +186,7 @@
     <label>Društvene mreže:</label>
     <div class="input-group mb-2">
         <span class="input-group-text" id="facebook">
-            <fa-icon [icon]="['fab', 'facebook']" ></fa-icon>
+            <fa-icon [icon]="['fab', 'facebook']"></fa-icon>
             <!-- <i class="fa fa-facebook"></i> -->
         </span>
         <input type="text" class="form-control" id="facebook" [(ngModel)]="seller.facebook" aria-describedby="facebook">
@@ -196,7 +195,7 @@
     <div class="input-group mb-2">
         <span class="input-group-text" id="instagram">
             <!-- <i class="fa fa-instagram"></i> -->
-            <fa-icon [icon]="['fab', 'instagram']" ></fa-icon>
+            <fa-icon [icon]="['fab', 'instagram']"></fa-icon>
         </span>
         <input type="text" class="form-control" id="instagram" [(ngModel)]="seller.instagram"
             aria-describedby="instagram">
@@ -204,7 +203,7 @@
 
     <div class="input-group mb-3">
         <span class="input-group-text" id="youtube">
-            <fa-icon [icon]="['fab', 'youtube']" ></fa-icon>
+            <fa-icon [icon]="['fab', 'youtube']"></fa-icon>
             <!-- <i class="fa fa-youtube"></i> -->
         </span>
         <input type="text" class="form-control" id="youtube" [(ngModel)]="seller.youtube" aria-describedby="youtube">

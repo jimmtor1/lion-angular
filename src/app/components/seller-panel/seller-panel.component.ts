@@ -1,7 +1,6 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild, ViewContainerRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { SellerSocialnetworkComponent } from '../seller-socialnetwork/seller-socialnetwork.component';
-import { Seller } from 'src/app/models/seller';
 import { SellerService } from 'src/app/services/seller.service';
 
 @Component({
@@ -29,6 +28,7 @@ export class SellerPanelComponent {
   mostrarSocial = false;
   mostrarTender = false;
   mostrarTenderEdit = false;
+  mostrarTenderApply = false;
 
   private clickListener: () => void;
 
@@ -46,13 +46,15 @@ export class SellerPanelComponent {
 
 
   showSellerDetail() {
-    this.mostrarProductList = false
     this.mostrarProductnew = false;
     this.mostrarProductEdit = false;
+    this.mostrarProductList = false;
+    this.mostrarSellerDetail = true;
     this.mostrarSellerEdit = false;
     this.mostrarSocial = false;
-    this.mostrarSellerDetail = true
     this.mostrarTender = false;
+    this.mostrarTenderEdit = false;
+    this.mostrarTenderApply = false;
 
 
     this.title = "Profil komanije";
@@ -69,11 +71,15 @@ export class SellerPanelComponent {
   }
 
   showSellerEdit() {
-    this.mostrarSellerDetail = false
-    this.mostrarSocial = false;
-    this.mostrarSellerEdit = true;
     this.mostrarProductnew = false;
+    this.mostrarProductEdit = false;
+    this.mostrarProductList = false;
+    this.mostrarSellerDetail = false;
+    this.mostrarSellerEdit = true;
+    this.mostrarSocial = false;
     this.mostrarTender = false;
+    this.mostrarTenderEdit = false;
+    this.mostrarTenderApply = false;
 
     this.title = "Ažuriraj podatke kompanije";
     this.action = "Odustani";
@@ -86,21 +92,25 @@ export class SellerPanelComponent {
   }
 
   showProductList() {
-
-    this.mostrarSellerDetail = false;
+    
+    
     this.mostrarProductnew = false;
-    this.mostrarProductEdit = false;
-    this.mostrarSellerEdit = false
+    this.mostrarProductEdit = false;    
+    this.mostrarSellerDetail = false;
+    this.mostrarSellerEdit = false;
     this.mostrarSocial = false;
-    this.mostrarProductList = true;
     this.mostrarTender = false;
+    this.mostrarTenderEdit = false;
+    this.mostrarTenderApply = false;
+    this.mostrarProductList = true;
+ 
 
     this.title = "Vaši oglasi";
     this.action = "novi oglas";
     this.currentPage = "adlist";
 
     const theLink = this.miEnlace.nativeElement;
-    this.renderer2.listen(theLink, 'click', () => {
+    this.clickListener = this.renderer2.listen(theLink, 'click', () => {
       this.showProductNew();
     })
 
@@ -109,14 +119,15 @@ export class SellerPanelComponent {
 
   showProductNew() {
 
+    this.mostrarProductnew = true;
     this.mostrarProductEdit = false;
     this.mostrarProductList = false;
     this.mostrarSellerDetail = false;
     this.mostrarSellerEdit = false;
     this.mostrarSocial = false;
-    this.mostrarProductnew = true;
-    this.mostrarTender = false;    
+    this.mostrarTender = false;
     this.mostrarTenderEdit = false;
+    this.mostrarTenderApply = false;
 
 
     this.title = "Novi oglas"; //new ad
@@ -131,12 +142,15 @@ export class SellerPanelComponent {
   }
 
   showProductEdit(idproduct: number) {
-    this.mostrarProductList = false;
-    this.mostrarSocial = false;
-    this.mostrarProductEdit = true;
     this.mostrarProductnew = false;
-    this.mostrarTender = false;  
+    this.mostrarProductEdit = true;
+    this.mostrarProductList = false;
+    this.mostrarSellerDetail = false;
+    this.mostrarSellerEdit = false;
+    this.mostrarSocial = false;
+    this.mostrarTender = false;
     this.mostrarTenderEdit = false;
+    this.mostrarTenderApply = false;
 
     this.title = "ažurirati oglas"; //new ad
     this.action = "Odustani";
@@ -152,55 +166,70 @@ export class SellerPanelComponent {
 
   showSocial() {
 
-    this.mostrarProductList = false;
+    this.mostrarProductnew = false;
     this.mostrarProductEdit = false;
+    this.mostrarProductList = false;
     this.mostrarSellerDetail = false;
     this.mostrarSellerEdit = false;
-    this.mostrarProductnew = false;
-    this.mostrarTender = false;
     this.mostrarSocial = true;
+    this.mostrarTender = false;
+    this.mostrarTenderEdit = false;
+    this.mostrarTenderApply = false;
 
     this.title = "Društvene mreže"; //new ad
-    this.action = "Edit";
+    this.action = "";
     this.currentPage = "social";
 
-    this.clickListener();
-
     const theLink = this.miEnlace.nativeElement;
-
-    this.clickListener = this.renderer2.listen(theLink, 'click', () => {
-      this.datosDesdeElPadre.estollegadelpadre = false;
-      this.action = "Odustani";
-
-      this.clickListener();
-      this.clickListener = this.renderer2.listen(theLink, 'click', () => {
-        this.datosDesdeElPadre.estollegadelpadre = true;
-        this.action = "Edit";
-      });
-
+    this.renderer2.listen(theLink, 'click', () => {
+      this.showProductList();
     })
+
+
+    // const theLink = this.miEnlace.nativeElement;
+
+    // this.clickListener(); 
+    // this.clickListener = this.renderer2.listen(theLink, 'click', () => {
+    //   this.datosDesdeElPadre.estollegadelpadre = !this.datosDesdeElPadre.estollegadelpadre;
+    //   if(this.datosDesdeElPadre.estollegadelpadre){
+    //     this.action = "Odustani";
+    //   }else{
+    //     this.action = "Edit";
+    //   }
+
+
+    // this.clickListener();
+    // this.clickListener = this.renderer2.listen(theLink, 'click', () => {
+    //   this.datosDesdeElPadre.estollegadelpadre = true;
+    //   this.action = "Edit";
+    // });
+
+    // })
 
     this.showSidebar = false;
 
   }
 
-  showTender() {
+  showTenderTable() {
 
-    this.mostrarProductList = false;
+    this.mostrarProductnew = false;
     this.mostrarProductEdit = false;
+    this.mostrarProductList = false;
     this.mostrarSellerDetail = false;
     this.mostrarSellerEdit = false;
-    this.mostrarProductnew = false;
     this.mostrarSocial = false;
-    this.mostrarTenderEdit = false;
     this.mostrarTender = true;
+    this.mostrarTenderEdit = false;
+    this.mostrarTenderApply = false;
 
     this.title = "Tender list"; //new ad
     this.action = "New tender";
     this.currentPage = "tender";
 
     const theLink = this.miEnlace.nativeElement;
-    this.renderer2.listen(theLink, 'click', () => {
+    this.clickListener();
+    
+    this.clickListener=this.renderer2.listen(theLink, 'click', () => {      
       this.showTenderEdit();
     })
     this.showSidebar = false;
@@ -209,22 +238,42 @@ export class SellerPanelComponent {
 
   showTenderEdit() {
 
-    this.mostrarProductList = false;
+    this.mostrarProductnew = false;
     this.mostrarProductEdit = false;
+    this.mostrarProductList = false;
     this.mostrarSellerDetail = false;
     this.mostrarSellerEdit = false;
-    this.mostrarProductnew = false;
     this.mostrarSocial = false;
     this.mostrarTender = false;
     this.mostrarTenderEdit = true;
+    this.mostrarTenderApply = false;
 
     this.title = "New Tender";
     this.action = "Odustani";
 
     const theLink = this.miEnlace.nativeElement;
-    this.renderer2.listen(theLink, 'click', () => {
-      this.showTender();
+    this.clickListener();
+    this.clickListener=this.renderer2.listen(theLink, 'click', () => {
+      this.showTenderTable();
     })
+
+  }
+
+  showTenderApply() {
+
+    this.mostrarProductnew = false;
+    this.mostrarProductEdit = false;
+    this.mostrarProductList = false;
+    this.mostrarSellerDetail = false;
+    this.mostrarSellerEdit = false;
+    this.mostrarSocial = false;
+    this.mostrarTender = false;
+    this.mostrarTenderEdit = false;
+    this.mostrarTenderApply = true;
+
+    this.title = "Posted Tender";
+    this.action = "";
+    this.currentPage = "tenderapply";
 
   }
 
@@ -239,6 +288,7 @@ export class SellerPanelComponent {
     // localStorage.setItem("email", "");
     localStorage.clear();
   }
+
 
 
 }

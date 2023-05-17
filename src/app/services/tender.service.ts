@@ -9,17 +9,29 @@ import { TenderProposal } from '../models/tender-proposal';
 })
 export class TenderService {
 
-  private URL = "http://test1.dcl.ba/tender";
-  private URL2 = "http://test1.dcl.ba/proposal";
+  // private URL = "https://test1.dcl.ba/tender";
+  // private URL2 = "https://test1.dcl.ba/proposal";
 
-  // private URL = "http://localhost:8080/tender";
-  // private URL2 = "http://localhost:8080/proposal";
+  private URL = "http://localhost:8080/tender";
+  private URL2 = "http://localhost:8080/proposal";
 
   constructor(private http:HttpClient) { }
 
 
   getListByIduser(iduser:number):Observable<Tender[]>{
     return this.http.get<Tender[]>(`${this.URL}/list/${iduser}`);
+  }
+
+  getListActiceTender():Observable<Tender[]>{
+    return this.http.get<Tender[]>(`${this.URL}/activelist`);
+  }
+
+  getAuthorizedListTender():Observable<Tender[]>{
+    return this.http.get<Tender[]>(`${this.URL}/authorized`);
+  }
+
+  setTenderAuthorize(idtender:number):Observable<Tender>{
+    return this.http.get<Tender>(`${this.URL}/authorize/${idtender}`)
   }
 
   save(formData:FormData):Observable<Tender>{

@@ -16,7 +16,7 @@
                 </div>
                 <div class="col-6 d-flex justify-content-end mb-2">
 
-                    <a id="actionButon" #butt class="btn btn-danger">{{action}}</a>
+                    <a [hidden]="action==''" id="actionButon" #butt class="btn btn-danger">{{action}}</a>
 
                 </div>
 
@@ -51,14 +51,14 @@
                     </a>
                 </li>
                 <li class="nav-item border w-100">
-                    <a class="nav-link" (click)="showTender()">
+                    <a class="nav-link" [ngClass]="{'active': currentPage === 'tender'}" (click)="showTenderTable()">
                         <fa-icon [icon]="['fas', 'list-check']" style="font-size: 1.1em"></fa-icon>
                         <span class="d-none d-sm-inline">&nbsp;Tender</span>
                     </a>
                 </li>
 
                 <li class="nav-item border w-100">
-                    <a class="nav-link">
+                    <a class="nav-link" [ngClass]="{'active': currentPage === 'tenderapply'}" (click)="showTenderApply()">
                         <fa-icon [icon]="['fas', 'list-check']" style="font-size: 1.1em"></fa-icon>
                         <span class="d-none d-sm-inline">&nbsp;Tender to apply</span>
                     </a>
@@ -97,15 +97,20 @@
             </div>
 
             <div *ngIf="mostrarSocial">
-                <seller-socialnetwork #datosDesdeElPadre></seller-socialnetwork>
+                <!-- #datosDesdeElPadre -->
+                <seller-socialnetwork ></seller-socialnetwork>
             </div>
 
             <div *ngIf="mostrarTender">
-                <tender></tender>
+                <tender-table></tender-table>
             </div>
 
             <div *ngIf="mostrarTenderEdit">
                 <tender-form></tender-form>
+            </div>
+
+            <div *ngIf="mostrarTenderApply">
+                <tender-list></tender-list>
             </div>
 
 
@@ -149,9 +154,16 @@
             </li>
 
             <li>
-                <a  class="nav-link m-0 h4 px-2" style="height: 40px;" (click)="showTender()">
+                <a  class="nav-link m-0 h4 px-2" style="height: 40px;" (click)="showTenderTable()">
                     <fa-icon [icon]="['fas', 'list-check']" style="font-size: 1.1em"></fa-icon>
                     &nbsp;Tender
+                </a>
+            </li>
+
+            <li class="nav-item border w-100">
+                <a class="nav-link">
+                    <fa-icon [icon]="['fas', 'newspaper']" (click)="showTenderApply()" style="font-size: 1.1em"></fa-icon>
+                    <span class="d-none d-sm-inline">&nbsp;Tender to apply</span>
                 </a>
             </li>
 

@@ -68,17 +68,47 @@ export class PanelBuyerComponent implements OnInit {
 
   }
 
+  showTenderTable() {
+
+    this.title = "Tender list"; //new ad
+    // this.action = "New tender";
+    this.currentPage = "tenderTable";
+
+    // const theLink = this.miEnlace.nativeElement;
+    // this.clickListener();
+    
+    // this.clickListener=this.renderer2.listen(theLink, 'click', () => {      
+    //   this.showTenderEdit();
+    // })
+    this.showSidebar = false;
+
+  }
+
+  showTenderApply() {    
+
+    this.title = "Posted Tender";
+    // this.action = "";
+    this.currentPage = "tenderapply";
+
+  }
+
+  showNewTender(){
+    this.title = "New tender";
+    // this.action = "";
+    this.currentPage = "tenderForm";
+  }
+
   logout() {   
     localStorage.clear(); 
   }
 
   editForm(){    
-    if(this.action=="Update data"){
+    if(this.action=="Ažuriraj podatke"){ //update
       this.action="Spremi";
     }else{
       this.saving = true;
       this.buyerService.createBuyer(this.buyer).subscribe(buy=>{
-        this.action="Update data"
+        this.action="Ažuriraj podatke"
         this.saving = false;
       },error => {
         console.log(error);
@@ -88,7 +118,7 @@ export class PanelBuyerComponent implements OnInit {
   }
 
   cancel(){
-    this.action = "Update data"
+    this.action = "Ažuriraj podatke" //update
   }
 
   citiesCombo(event: Event) {

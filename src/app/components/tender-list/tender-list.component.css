@@ -1,0 +1,7 @@
+.card-body:hover{   
+    background-color: rgba(207, 21, 21, 0.2); /* Negro con 80% de opacidad */
+}
+
+.card-body{
+    background-color: rgb(248, 249, 250);
+}

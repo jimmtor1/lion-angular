@@ -23,7 +23,7 @@ li .active {
     height: 100vh;
     background-color: #f1f1f1;
     transition: left 0.3s ease-in-out;
-    background-color: rgba(0, 0, 0, 0.95); /* Negro con 80% de opacidad */   
+    background-color: rgba(0, 0, 0, 0.80); /* Negro con 80% de opacidad */   
     align-items: center;
   }
   

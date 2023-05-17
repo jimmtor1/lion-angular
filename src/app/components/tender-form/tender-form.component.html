@@ -1,15 +1,85 @@
-<div *ngIf="seller==null" class="text-center mt-3">
+<div *ngIf="loading" class="text-center mt-3">
     <div class="spinner-grow text-danger" role="status">
         <span class="visually-hidden">Loading...</span>
     </div>
 </div>
 
-<div class="border border-2 border-danger rounded p-2 mt-3" *ngIf="!seller.accepted || seller.accepted!==null">
-    <p>make sure to complete your profile</p>
-    <p>Your profile is in the process of acceptance, then you can upload your products</p>
+<div *ngIf="seller">
+
+    <div class="border border-2 border-danger rounded p-2 mt-3" *ngIf="!seller.accepted">
+        <p>make sure to complete your profile</p>
+        <p>Your profile is in the process of acceptance, then you can upload your products</p>
+    </div>
+
+    <div *ngIf="seller.accepted" class="mt-3">
+
+        <div class="w-75 mx-auto">
+
+            <form (ngSubmit)="submit()">
+
+                <div class="mb-3">
+                    <label for="project_name">Project name&nbsp;<span class="form-label">*</span></label>
+                    <input type="text" class="form-control" name="project_name" id="project_name" value=""
+                        [(ngModel)]="tender.projectName">
+                </div>
+
+                <div class="mb-3">
+                    <label for="dateFrom">Date from&nbsp;</label>
+                    <input type="date" class="form-control" id="dateFrom" name="dateFrom" [(ngModel)]="tender.dateFrom">
+                </div>
+
+                <div class="mb-3">
+                    <label for="dateTo">Date to&nbsp;</label>
+                    <input type="date" class="form-control" id="dateTo" name="dateTo" [(ngModel)]="tender.dateTo">
+                </div>
+
+                <div class="mb-3">
+                    <label for="description">Description&nbsp;</label>
+                    <textarea class="form-control" id="description" name="description" rows="3"
+                        [(ngModel)]="tender.description"></textarea>
+                </div>
+
+
+                <label class="mt-3" for="file">File</label>
+                <div class="input-group mt-3 mb-2">
+                    <input type="file" (change)="onFileSelected($event)" class="form-control" multiple id="file">
+                    <!-- <label class="input-group-text" for="imagesInput">Dodaj</label> -->
+                </div>
+
+                <!-- <div class="drop-zone">
+                <ul #imagelist id="imagelist">
+                    <li *ngFor="let image of images;" [id]="image.id">
+                        <div class="position-relative">
+                            <img [src]="image.link" width="100">
+                            <div class="rounded-circle w-25 text-center bg-warning">
+                                <button class="btn btn-danger position-absolute bottom-0 end-0" >
+                                    <fa-icon [icon]="['fas','trash']" style="font-size: 0.8em"></fa-icon>
+                                </button>                               
+                            </div>                           
+                        </div>
+                    </li>
+                </ul>
+            </div> -->
+
+                <div class="text-center">
+                    <input type="submit" value="Dodaj" class="btn btn-danger">
+                </div>
+
+
+            </form>
+            <br>
+        </div>
+
+
+    </div>
+
 </div>
 
-<div class="mt-3">
+
+
+
+
+<div *ngIf="role==1" class="mt-3">
 
     <div class="w-75 mx-auto">
 
@@ -17,28 +87,26 @@
 
             <div class="mb-3">
                 <label for="project_name">Project name&nbsp;<span class="form-label">*</span></label>
-                <input type="text" class="form-control" name="project_name" id="project_name"
-                    value="" [(ngModel)]="tender.projectName">
+                <input type="text" class="form-control" name="project_name" id="project_name" value=""
+                    [(ngModel)]="tender.projectName">
             </div>
 
-            <div class="mb-3">                
+            <div class="mb-3">
                 <label for="dateFrom">Date from&nbsp;</label>
-                <input type="date" class="form-control" id="dateFrom" name="dateFrom"
-                    [(ngModel)]="tender.dateFrom">
+                <input type="date" class="form-control" id="dateFrom" name="dateFrom" [(ngModel)]="tender.dateFrom">
             </div>
 
-            <div class="mb-3">                
+            <div class="mb-3">
                 <label for="dateTo">Date to&nbsp;</label>
-                <input type="date" class="form-control" id="dateTo" name="dateTo"
-                    [(ngModel)]="tender.dateTo">
+                <input type="date" class="form-control" id="dateTo" name="dateTo" [(ngModel)]="tender.dateTo">
             </div>
 
-            <div class="mb-3">                
+            <div class="mb-3">
                 <label for="description">Description&nbsp;</label>
                 <textarea class="form-control" id="description" name="description" rows="3"
                     [(ngModel)]="tender.description"></textarea>
             </div>
-            
+
 
             <label class="mt-3" for="file">File</label>
             <div class="input-group mt-3 mb-2">
@@ -64,7 +132,7 @@
             <div class="text-center">
                 <input type="submit" value="Dodaj" class="btn btn-danger">
             </div>
-            
+
 
         </form>
         <br>
@@ -72,4 +140,3 @@
 
 
 </div>
-

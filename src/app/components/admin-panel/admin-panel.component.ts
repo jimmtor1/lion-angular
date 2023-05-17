@@ -25,14 +25,18 @@ export class AdminPanelComponent {
   activeSellerListToConfirm = false;
   activeSellerDetail = false;
   activeBuyerDetail = false;
+  activeTenderListToConfirm = false;
+  activeTenderList = false;
 
   showSellerList() {
-   
+
+    this.activeSellerList = true;
     this.activeBuyerList = false;
     this.activeSellerListToConfirm = false;
     this.activeSellerDetail = false;
-    this.activeSellerList = true;
     this.activeBuyerDetail = false;
+    this.activeTenderListToConfirm = false;
+    this.activeTenderList = false;
 
     this.title = "Companies";   
     this.currentPage = "companies";
@@ -41,12 +45,14 @@ export class AdminPanelComponent {
   }
 
   showBuyerList() {
-
+   
     this.activeSellerList = false;
+    this.activeBuyerList = true;
     this.activeSellerListToConfirm = false;
     this.activeSellerDetail = false;
-    this.activeBuyerList = true;
-    this.activeBuyerDetail = false;   
+    this.activeBuyerDetail = false;
+    this.activeTenderListToConfirm = false;
+    this.activeTenderList = false;
 
     this.title = "Customers";   
     this.currentPage = "customers";
@@ -54,27 +60,31 @@ export class AdminPanelComponent {
   }
 
   showSellerListToConfirm() {
-
+    
     this.activeSellerList = false;
-    this.activeBuyerList = false;  
+    this.activeBuyerList = false;
+    this.activeSellerListToConfirm = true;
     this.activeSellerDetail = false;
-    this.activeSellerListToConfirm = true; 
     this.activeBuyerDetail = false;
+    this.activeTenderListToConfirm = false;
+    this.activeTenderList = false;
 
-    this.title = "Customers to Confirm";   
-    this.currentPage = "customersConfirmation";
+    this.title = "Kompanijas to Confirm";   
+    this.currentPage = "companyConfirmation";
     this.showSidebar = false;
   }
 
   showSellerDetail(idseller: number) {
    
     this.idseller = idseller;
-
+    
+    this.activeSellerList = false;
     this.activeBuyerList = false;
     this.activeSellerListToConfirm = false;
-    this.activeSellerList = false;
     this.activeSellerDetail = true;
     this.activeBuyerDetail = false;
+    this.activeTenderListToConfirm = false;
+    this.activeTenderList = false;
 
     this.title = "Companies details";   
     this.currentPage = "companies";
@@ -85,12 +95,14 @@ export class AdminPanelComponent {
   showBuyerDetail(idbuyer: number) {
    
     this.idseller = idbuyer;
-
+    
+    this.activeSellerList = false;
     this.activeBuyerList = false;
     this.activeSellerListToConfirm = false;
-    this.activeSellerList = false;
     this.activeSellerDetail = false;
     this.activeBuyerDetail = true;
+    this.activeTenderListToConfirm = false;
+    this.activeTenderList = false;
 
     this.title = "Customer details";   
     this.currentPage = "customers";
@@ -100,6 +112,39 @@ export class AdminPanelComponent {
       this.citiesToCombo = this.cities[this.buyer.user.federation];
     })
    
+  }
+
+  showTenderListToConfirm(){
+
+    
+    this.activeSellerList = false;
+    this.activeBuyerList = false;
+    this.activeSellerListToConfirm = false;
+    this.activeSellerDetail = false;
+    this.activeBuyerDetail = false;
+    this.activeTenderListToConfirm = true;
+    this.activeTenderList = false;
+
+    this.title = "Tender to Confirm";   
+    this.currentPage = "tenderConfirmation";
+    this.showSidebar = false;
+
+  }
+
+  showTenderList(){
+    
+    this.activeSellerList = false;
+    this.activeBuyerList = false;
+    this.activeSellerListToConfirm = false;
+    this.activeSellerDetail = false;
+    this.activeBuyerDetail = false;
+    this.activeTenderListToConfirm = false;
+    this.activeTenderList = true;
+
+    this.title = "Posted tender";
+    this.currentPage = "tenderposted"
+    this.showSidebar = false;
+
   }
   
   logout() { 

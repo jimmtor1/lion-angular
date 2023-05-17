@@ -10,10 +10,10 @@ import { Seller } from '../models/seller';
 
 export class BuyerService {
 
-  private baseUrl = 'https://test1.dcl.ba/buyer';
-  private baseUrl2 = 'https://test1.dcl.ba/provider';
-  // private baseUrl = 'http://localhost:8080/buyer';
-  // private baseUrl2 = 'http://localhost:8080/provider';
+  // private baseUrl = 'https://test1.dcl.ba/buyer';
+  // private baseUrl2 = 'https://test1.dcl.ba/provider';
+  private baseUrl = 'http://localhost:8080/buyer';
+  private baseUrl2 = 'http://localhost:8080/provider';
 
   constructor(private http: HttpClient) { }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Tender } from 'src/app/models/tender';
 import { TenderProposal } from 'src/app/models/tender-proposal';
@@ -16,6 +16,7 @@ export class TenderDetailComponent implements OnInit {
 tender:Tender;
 user:Userr;
 tenderProposal:TenderProposal[];
+@Input() idtender: number;
 
 constructor(private tenderService:TenderService, private route: ActivatedRoute, private userService:UserService){}
 
@@ -31,7 +32,18 @@ constructor(private tenderService:TenderService, private route: ActivatedRoute, 
         });
 
       }); 
-    }    
+    }else{
+
+      this.tenderService.getById(this.idtender).subscribe(t=>{
+        this.tender = t;
+
+        this.userService.getById(this.tender.iduser).subscribe(u=>{
+          this.user = u;
+        });
+
+      });
+
+    }   
   })
  
 }

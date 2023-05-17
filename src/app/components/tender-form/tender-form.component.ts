@@ -15,6 +15,8 @@ export class TenderFormComponent {
   tender: Tender = new Tender();
   file: File;
   seller:Seller;
+  loading:boolean = true;
+  role:number=0;
 
   constructor(private tenderService: TenderService, private sellerService: SellerService) { }
 
@@ -22,13 +24,25 @@ export class TenderFormComponent {
 
     const usuarioString = localStorage.getItem("iduser");
     if (usuarioString) {
-
+      console.log("if 1");
       if (JSON.parse(usuarioString) > 0) {
+        console.log("if 2");
         this.iduser = JSON.parse(usuarioString);
-
-        this.sellerService.getById(this.iduser).subscribe(s => {
-          this.seller = s;
-        });
+        const rol = localStorage.getItem("role");
+        if(rol){
+          this.role=JSON.parse(rol);
+          console.log("if 3");
+          if (this.role == 2) {
+            this.sellerService.getById(this.iduser).subscribe(s => {
+              this.seller = s;
+              this.loading=false;
+            });
+          }else{
+            this.loading=false;
+          }
+        }else{
+          this.loading=false;
+        }      
 
       }
 

@@ -8,8 +8,8 @@ import { Observable } from 'rxjs';
 })
 export class UserService {
 
-  // private baseURL = 'http://localhost:8080/login';
-  private baseURL = 'https://test1.dcl.ba/login';
+  private baseURL = 'http://localhost:8080/login';
+  // private baseURL = 'https://test1.dcl.ba/login';
 
   private user = new Userr
 

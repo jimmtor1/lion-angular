@@ -155,8 +155,15 @@ export class SellerCompanyFormComponent implements OnInit {
     formData.append('saturday', this.seller.saturday.toString());
     formData.append('sunday', this.seller.sunday.toString());
 
-    formData.append('startTime', this.seller.startTime.toString());
-    formData.append('endTime', this.seller.endTime.toString());
+    if(this.seller.startTime){
+      formData.append('startTime', this.seller.startTime.toString());
+    }
+
+    if(this.seller.endTime){
+      formData.append('endTime', this.seller.endTime.toString());
+    }
+   
+    
 
     formData.append('facebook', this.seller.facebook);
     formData.append('instagram', this.seller.instagram);

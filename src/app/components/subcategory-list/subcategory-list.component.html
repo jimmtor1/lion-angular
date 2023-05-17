@@ -6,15 +6,17 @@
         <h1 class="text-center mx-1" >{{cate.name[item]}}</h1>
     </div>        
     <hr>
-     
+
+    <a *ngIf="item<4" [routerLink]="['/providerSubcategoryList', item+1, '0']">vidjeti sve</a>
+    <a *ngIf="item==4" [routerLink]="['/productCategoryList', item+1, '0']">vidjeti sve</a> 
+
     <ul class="nav flex-column" >
 
         <li class="nav-item" *ngFor="let title of cate.title[item], let i = index">
-            <p class="h4 mt-1">{{title}}</p>           
+            <p class="h4 mt-1">{{title}}</p>            
 
             <ul class="nav flex-column">
-
-                <div *ngIf="item==0">
+                <div *ngIf="item==0">                    
                     <li class="nav-item" *ngFor="let sub of cate.subcategory1[i], let i = index">
                         <a [routerLink]="['/providerSubcategoryList/1/',i+1]" class="nav-link bg-dark text-white border-bottom" >{{sub}}</a>                       
                     </li>

@@ -29,7 +29,7 @@
         <!-- vertical nav -->
         <div class="col-2 bg-black p-0">
                 <ul class="nav flex-column bg-black c-white">
-                <li class="nav-item border">
+                <li class="nav-item border">                    
                     <a class="nav-link" [ngClass]="{'active': currentPage === 'companies'}" (click)="showSellerList()">
                         <fa-icon [icon]="['fas', 'building']" style="font-size: 1.1em"></fa-icon>
                         <span class="d-none d-sm-inline">&nbsp;Kompanijas</span>
@@ -43,12 +43,29 @@
                     </a>
                 </li>
                 <li class="nav-item border w-100">
-                    <a class="nav-link" [ngClass]="{'active': currentPage === 'customersConfirmation'}"
+                    <a class="nav-link" [ngClass]="{'active': currentPage === 'companyConfirmation'}"
                         (click)="showSellerListToConfirm()">
                         <fa-icon [icon]="['fas', 'building-circle-exclamation']" style="font-size: 1.1em"></fa-icon>
                         <span class="d-none d-sm-inline">&nbsp;Kompanijas to confirm</span>
                     </a>
                 </li>
+
+                <li class="nav-item border w-100">
+                    <a class="nav-link" [ngClass]="{'active': currentPage === 'tenderConfirmation'}"
+                        (click)="showTenderListToConfirm()">
+                        <fa-icon [icon]="['fas', 'list-check']" style="font-size: 1.1em"></fa-icon>
+                        <span class="d-none d-sm-inline">&nbsp;Tender to confirm</span>
+                    </a>
+                </li>
+
+                <li class="nav-item border w-100">
+                    <a class="nav-link" [ngClass]="{'active': currentPage === 'tenderposted'}"
+                        (click)="showTenderList()">
+                        <fa-icon [icon]="['fas', 'newspaper']" style="font-size: 1.1em"></fa-icon>
+                        <span class="d-none d-sm-inline">&nbsp;Posted Tender</span>
+                    </a>
+                </li>
+
                 <li class="nav-item border w-100">
                     <a class="nav-link" href="#" (click)="logout()">
                         <fa-icon [icon]="['fas', 'right-from-bracket']" style="font-size: 1.1em"></fa-icon>
@@ -90,6 +107,14 @@
             <div *ngIf="activeSellerDetail">
                 <seller-detail [id]="idseller"></seller-detail>
             </div>
+
+            <div *ngIf="activeTenderListToConfirm">
+                <tender-table></tender-table>
+            </div> 
+            
+            <div *ngIf="activeTenderList">
+                <tender-list></tender-list>
+            </div> 
 
             <div *ngIf="activeBuyerDetail">
 
@@ -197,6 +222,14 @@
                     (click)="showSellerListToConfirm()">
                     <fa-icon [icon]="['fas', 'building-circle-exclamation']" style="font-size: 1.1em"></fa-icon>
                     &nbsp;Kompanijas to confirm
+                </a>
+            </li>
+
+            <li class="nav-item border w-100">
+                <a class="nav-link" [ngClass]="{'active': currentPage === 'tenderConfirmation'}"
+                    (click)="showTenderListToConfirm()">
+                    <fa-icon [icon]="['fas', 'building-circle-exclamation']" style="font-size: 1.1em"></fa-icon>
+                    <span class="d-none d-sm-inline">&nbsp;Tender to confirm</span>
                 </a>
             </li>
 
