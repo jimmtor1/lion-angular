@@ -29,18 +29,25 @@
                     <!-- <div *ngIf="tender.document!=''" class="mb-3 w-50 border border-danger rounded text-center"> -->
                        
                         &nbsp;
-                        <a class="btn btn-danger my-3" href="assets/images/{{tender.idtender}}{{tender.document}}" target="_blank">
+                        <a *ngIf="tender.document" class="btn btn-danger my-3" href="assets/images/{{tender.idtender}}{{tender.document}}" target="_blank">
                             <fa-icon [icon]="['fas', 'file-arrow-down']"></fa-icon>
                             Attached
                         </a>
                     <!-- </div> -->
-
-                    <div class="mb-3">
-                        <label for="exampleFormControlTextarea1" class="form-label">Description of your proposal</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+                    <div *ngIf="!already_offered" >
+                        <div class="mb-3">
+                            <label for="exampleFormControlTextarea1" class="form-label">Description of your proposal</label>
+                            <textarea [(ngModel)]="comment" class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+                        </div>
+    
+                        <a (click)="saveProposal()" class="btn btn-danger">Apply</a>
                     </div>
 
-                    <a href="#" class="btn btn-danger">Apply</a>
+                    <div *ngIf="already_offered">
+                        <span class="badge rounded-pill bg-primary">You have already bid</span>
+                    </div>
+                    
+
                 </div>
             </div>
         </div>
@@ -64,29 +71,7 @@
                     </div>
 
                 </div>
-
-                <!-- <ul class="list-group list-group-flush">
-                    <li class="list-group-item bg-light">
-                        <div class="d-flex">
-                            <fa-icon [icon]="['fas','user']"></fa-icon>
-                            &nbsp;
-                            <p class="h6">{{user.firstName}} {{user.lastName}}</p>
-                        </div>
-                    </li>
-                    <li class="list-group-item bg-light">
-                        <div class="d-flex">
-                            <fa-icon [icon]="['fas','location-dot']"></fa-icon>
-                            &nbsp;
-                            <p class="h6">{{federations[user.federation]}} ,{{cities[user.federation][user.city]}}</p>                 
-                        </div>
-                    </li>
-                    <li class="list-group-item">A third item</li>
-                </ul>
-                <div class="card-body">
-                    <a href="#" class="card-link">Card link</a>
-                    <a href="#" class="card-link">Another link</a>
-                </div> -->
-
+                
             </div>
         </div>
 

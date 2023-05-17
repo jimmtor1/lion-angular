@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Product } from 'src/app/models/product';
 import { ProductImage } from '../models/product-image';
+import { API_URL } from './helper';
 
 
 @Injectable({
@@ -11,10 +12,10 @@ import { ProductImage } from '../models/product-image';
 
 export class ProductService {
 
-  private URL = "http://localhost:8080/product";
-  private URLimages = "http://localhost:8080/productImage/product"
-  // private URL = "https://test1.dcl.ba/product";
-  // private URLimages = "https://test1.dcl.ba/productImage/product"
+  // private URL = "http://localhost:8080/product";
+  // private URLimages = "http://localhost:8080/productImage/product"
+  private URL = `${API_URL}product`
+  private URLimages = `${API_URL}productImage/product`
 
   constructor(private httpClient: HttpClient) { }
 

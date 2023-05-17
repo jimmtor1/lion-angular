@@ -3,14 +3,15 @@ import { Injectable, Provider } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Seller } from '../models/seller';
 import { SellerByCategory } from '../models/seller-by-category';
+import { API_URL } from './helper';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SellerService {
 
-  private URL = "http://localhost:8080/provider";
-  // private URL = "https://test1.dcl.ba/provider";
+  // private URL = "http://localhost:8080/provider";
+  private URL = `${API_URL}provider`
 
 
   constructor(private http:HttpClient) { }

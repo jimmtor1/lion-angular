@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Tender } from 'src/app/models/tender';
 import { TenderProposal } from 'src/app/models/tender-proposal';
 import { Userr } from 'src/app/models/userr';
@@ -13,86 +13,132 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class TenderDetailComponent implements OnInit {
 
-tender:Tender;
-user:Userr;
-tenderProposal:TenderProposal[];
-@Input() idtender: number;
+  tender: Tender;
+  user: Userr;
+  id_current_user: number;
+  tenderProposal: TenderProposal[];
+  comment: string;
+  @Input() idtender: number;
+  already_offered: boolean = false;
 
-constructor(private tenderService:TenderService, private route: ActivatedRoute, private userService:UserService){}
+  constructor(private tenderService: TenderService, private route: ActivatedRoute, private userService: UserService, private router: Router) { }
 
- ngOnInit(): void {
+  ngOnInit(): void {
 
-  this.route.params.subscribe(param=>{
-    if(param['idtender']){
-      this.tenderService.getById(param['idtender']).subscribe(t=>{
-        this.tender = t;
+    const user = localStorage.getItem('iduser');
+    if (user) {
+      this.id_current_user = JSON.parse(user);
+    }
 
-        this.userService.getById(this.tender.iduser).subscribe(u=>{
-          this.user = u;
+    this.route.params.subscribe(param => {
+      if (param['idtender']) {
+        this.tenderService.getById(param['idtender']).subscribe(t => {
+          this.tender = t;
+
+          this.userService.getById(this.tender.iduser).subscribe(u => {
+            this.user = u;
+          });
+
+        });
+      } else {
+
+        this.tenderService.getById(this.idtender).subscribe(t => {
+          this.tender = t;
+
+          this.userService.getById(this.tender.iduser).subscribe(u => {
+            this.user = u;
+          });
+
+
+          const role = localStorage.getItem('role');
+          if (role) {
+            if (JSON.parse(role) !== 3) {
+              this.get_already_offer();
+            }
+          }
+
         });
 
-      }); 
-    }else{
+      }
+    })
 
-      this.tenderService.getById(this.idtender).subscribe(t=>{
-        this.tender = t;
+  }
 
-        this.userService.getById(this.tender.iduser).subscribe(u=>{
-          this.user = u;
-        });
+  get_already_offer() {
 
-      });
+    this.tenderService.confirmAlreadyPosted(this.tender.idtender, this.id_current_user).subscribe(t => {
+      if (t) {
+        this.already_offered = true;
+      } else {
+        this.already_offered = false;
+      }
 
-    }   
-  })
- 
-}
+    });
+   
+  }
 
-getProposals(){
-  this.tenderService.getProposalList(this.tender.idtender).subscribe(t=>{
-    this.tenderProposal = t;
-  });
-}
+  getProposals() {
+    this.tenderService.getProposalList(this.tender.idtender).subscribe(t => {
+      this.tenderProposal = t;
+    });
+  }
+
+  saveProposal() {
+
+    const formData = new FormData();
+
+    formData.append('idTender', this.tender.idtender.toString());
+    formData.append('user', this.id_current_user.toString());
+    formData.append('comment', this.comment);
+
+    this.tenderService.saveProposal(formData).subscribe(x => {
+      if (x.idProposal > 0) {        
+        this.already_offered = true;
+      } else {
+        alert("no se guardó")
+      }
+    })
+  }
 
 
-federations: string[] = [
-  // "FEDERACIJA BiH",
-  "UNSKO-SANSKI KANTON",
-  "Posavski kanton",
-  "Tuzlanski kanton",
-  "Zeničko-dobojski kanton",
-  "Bosansko-podrinjski kanton",
-  "Srednjobosanski kanton",
-  "Hercegovačko-neretvanski kanton",
-  "Zapadnohercegovački kanton",
-  "Kanton Sarajevo",
-  "Kanton 10",
-  // "REPUBLIKA SRPSKA",
-  "Banjalučka",
-  "Dobojsko-Bijeljinska",
-  "Sarajevsko-Zvornička",
-  "Trebinjsko-Fočanska",
-  // "BRČKO DISTRIKT"
-];
+  federations: string[] = [
+    // "FEDERACIJA BiH",
+    "UNSKO-SANSKI KANTON",
+    "Posavski kanton",
+    "Tuzlanski kanton",
+    "Zeničko-dobojski kanton",
+    "Bosansko-podrinjski kanton",
+    "Srednjobosanski kanton",
+    "Hercegovačko-neretvanski kanton",
+    "Zapadnohercegovački kanton",
+    "Kanton Sarajevo",
+    "Kanton 10",
+    // "REPUBLIKA SRPSKA",
+    "Banjalučka",
+    "Dobojsko-Bijeljinska",
+    "Sarajevsko-Zvornička",
+    "Trebinjsko-Fočanska",
+    // "BRČKO DISTRIKT"
+  ];
 
-cities: string[][] = [  
-  ["Bihać", "Bosanska Krupa", "Bosanski Petrovac", "Bužim", "Cazin", "Ključ", "Sanski Most", "Velika Kladuša"],
-  ["Šamac", "Odžak", "Orašje"],
-  ["Banovići", "Čelić", "Doboj Istok", "Gračanica", "Gradačac", "Kalesija", "Kladanj", "Lukavac", "Sapna", "Srebrenik", "Teočak", "Tuzla", "Živinice"],
-  ["Breza", "Doboj Jug", "Kakanj", "Maglaj", "Olovo", "Tešanj", "Usora", "Vareš", "Visoko", "Zavidovići", "Zenica", "Žepče"],
-  ["Goražde", "Ustikolina"],
-  ["Bugojno", "Busovača", "Dobretići", "Donji Vakuf", "Fojnica", "Gornji Vakuf-Uskoplje", "Jajce", "Kiseljak", "Kreševo", "Novi Travnik", "Travnik", "Vitez"],
-  ["Čapljina", "Čitluk", "Jablanica", "Konjic", "Mostar", "Neum", "Prozor", "Ravno", "Stolac"],
-  ["Grude", "Ljubuški", "Posušje", "Široki Brijeg"],
-  ["Hadžići", "Ilidža", "Ilijaš", "Sarajevo - Centar", "Sarajevo - Novi Grad", "Sarajevo - Novo Sarajevo", "Sarajevo - Stari Grad", "Trnovo", "Vogošća"],
-  ["Bosansko Grahovo", "Drvar", "Glamoč", "Kupres", "Livno", "Tomislavgrad"],
-//   ["Banjalučka", "Dobojsko-Bijeljinska", "Sarajevsko-Zvornička", "Trebinjsko-Fočanska"],
-  ["Kozarska Dubica", "Krupa na Uni", "Laktaši", "Mrkonjić Grad", "Novi Grad", "Oštra Luka", "Prijedor", "Prnjavor", "Ribnik", "Šipovo", "Srbac"],
-  ["Lopare", "Modriča", "Pelagićevo", "Petrovo", "Šamac", "Stanari", "Teslić", "Ugljevik", "Vukosavlje"],
-  ["Novo Goražde", "Osmaci", "Pale", "Rogatica", "Rudo", "Šekovići", "Sokolac", "Srebrenica", "Višegrad", "Vlasenica", "Zvornik"],
-  ["Bileća", "Čajniče", "Foča", "Gacko", "Istočni Mostar", "Kalinovik", "Ljubinje", "Nevesinje", "Trebinje"],
-  ["Brčko"]
-]
+  cities: string[][] = [
+    ["Bihać", "Bosanska Krupa", "Bosanski Petrovac", "Bužim", "Cazin", "Ključ", "Sanski Most", "Velika Kladuša"],
+    ["Šamac", "Odžak", "Orašje"],
+    ["Banovići", "Čelić", "Doboj Istok", "Gračanica", "Gradačac", "Kalesija", "Kladanj", "Lukavac", "Sapna", "Srebrenik", "Teočak", "Tuzla", "Živinice"],
+    ["Breza", "Doboj Jug", "Kakanj", "Maglaj", "Olovo", "Tešanj", "Usora", "Vareš", "Visoko", "Zavidovići", "Zenica", "Žepče"],
+    ["Goražde", "Ustikolina"],
+    ["Bugojno", "Busovača", "Dobretići", "Donji Vakuf", "Fojnica", "Gornji Vakuf-Uskoplje", "Jajce", "Kiseljak", "Kreševo", "Novi Travnik", "Travnik", "Vitez"],
+    ["Čapljina", "Čitluk", "Jablanica", "Konjic", "Mostar", "Neum", "Prozor", "Ravno", "Stolac"],
+    ["Grude", "Ljubuški", "Posušje", "Široki Brijeg"],
+    ["Hadžići", "Ilidža", "Ilijaš", "Sarajevo - Centar", "Sarajevo - Novi Grad", "Sarajevo - Novo Sarajevo", "Sarajevo - Stari Grad", "Trnovo", "Vogošća"],
+    ["Bosansko Grahovo", "Drvar", "Glamoč", "Kupres", "Livno", "Tomislavgrad"],
+    //   ["Banjalučka", "Dobojsko-Bijeljinska", "Sarajevsko-Zvornička", "Trebinjsko-Fočanska"],
+    ["Kozarska Dubica", "Krupa na Uni", "Laktaši", "Mrkonjić Grad", "Novi Grad", "Oštra Luka", "Prijedor", "Prnjavor", "Ribnik", "Šipovo", "Srbac"],
+    ["Lopare", "Modriča", "Pelagićevo", "Petrovo", "Šamac", "Stanari", "Teslić", "Ugljevik", "Vukosavlje"],
+    ["Novo Goražde", "Osmaci", "Pale", "Rogatica", "Rudo", "Šekovići", "Sokolac", "Srebrenica", "Višegrad", "Vlasenica", "Zvornik"],
+    ["Bileća", "Čajniče", "Foča", "Gacko", "Istočni Mostar", "Kalinovik", "Ljubinje", "Nevesinje", "Trebinje"],
+    ["Brčko"]
+  ]
 
 
 }

@@ -3,17 +3,18 @@ import { Injectable } from '@angular/core';
 import { Tender } from '../models/tender';
 import { Observable } from 'rxjs/internal/Observable';
 import { TenderProposal } from '../models/tender-proposal';
+import { API_URL } from './helper';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TenderService {
 
-  // private URL = "https://test1.dcl.ba/tender";
-  // private URL2 = "https://test1.dcl.ba/proposal";
+  private URL = `${API_URL}tender`;
+  private URL2 = `${API_URL}proposal`;
 
-  private URL = "http://localhost:8080/tender";
-  private URL2 = "http://localhost:8080/proposal";
+  // private URL = "http://localhost:8080/tender";
+  // private URL2 = "http://localhost:8080/proposal";
 
   constructor(private http:HttpClient) { }
 
@@ -36,6 +37,14 @@ export class TenderService {
 
   save(formData:FormData):Observable<Tender>{
     return this.http.post<Tender>(this.URL, formData);
+  }
+
+  saveProposal(formData:FormData):Observable<TenderProposal>{
+    return this.http.post<TenderProposal>(this.URL2, formData);
+  }
+
+  confirmAlreadyPosted(idtender:number, iduser:number):Observable<TenderProposal>{
+    return this.http.get<TenderProposal>(`${this.URL2}/already/${idtender}/${iduser}`)
   }
 
   getById(idtender:number):Observable<Tender>{

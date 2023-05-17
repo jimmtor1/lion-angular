@@ -6,7 +6,7 @@ import { ProductImage } from 'src/app/models/product-image';
 import { Seller } from 'src/app/models/seller';
 import { Subcategory } from 'src/app/models/subcategory';
 import { CategoryService } from 'src/app/services/category.service';
-import { AuthService } from 'src/app/services/helper';
+// import { AuthService } from 'src/app/services/helper';
 import { ProductService } from 'src/app/services/product.service';
 import { SellerService } from 'src/app/services/seller.service';
 
@@ -33,7 +33,7 @@ export class ProductFormComponent implements OnInit {
   seller: Seller;
 
 
-  constructor(private sellerService: SellerService, private renderer2: Renderer2, private categoryService: CategoryService, private productService: ProductService, private router: Router, private auth: AuthService, private route: ActivatedRoute, private datePipe: DatePipe) { }
+  constructor(private sellerService: SellerService, private renderer2: Renderer2, private categoryService: CategoryService, private productService: ProductService, private router: Router, private route: ActivatedRoute, private datePipe: DatePipe) { }
 
   ngOnInit(): void {
     
