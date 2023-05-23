@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Company_subcategory, Seller } from 'src/app/models/seller';
 import { Subcategory } from 'src/app/models/subcategory';
 import { CategoryService } from 'src/app/services/category.service';
+import { FEDERATIONS, IMG_PROFILE_URL, federation, selectListByFed, select_city, select_fed } from 'src/app/services/helper';
 import { SellerService } from 'src/app/services/seller.service';
 
 
@@ -24,7 +25,13 @@ export class SellerCompanyFormComponent implements OnInit {
   imageFile: File;
   imageSelected = false;
   company_category: Company_subcategory[] = [];
-  citiesToCombo: string[] = [];
+  citiesToCombo: any[] = [];
+
+  federations: federation[] = FEDERATIONS;
+  fed: number;
+  city: number;
+
+  urlprof_img = `${IMG_PROFILE_URL}`;
 
   // selectedSucategories: Subcategory[] = [];
 
@@ -32,18 +39,12 @@ export class SellerCompanyFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.getSeller();
-    this.subcategoriesCombo();    
+    this.subcategoriesCombo();
+
   }
 
 
-  subcategoriesCombo(/*event: Event*/) {
-    //this.selectedCategory = parseInt((event.target as HTMLSelectElement)?.value);
-    //this.product.idcategory = this.selectedCategory; 
-
-    // this.categoryService.getSubcategories(this.selectedCategory).subscribe(subcategories => {
-    //   this.subcategories = subcategories;
-    // });
-
+  subcategoriesCombo() {
     this.categoryService.getAllsub().subscribe(subcategories => {
       this.subcategories = subcategories;
 
@@ -64,20 +65,10 @@ export class SellerCompanyFormComponent implements OnInit {
       this.subcategories.splice(21, 0, sub2);
       this.subcategories.splice(48, 0, sub3);
       this.subcategories.splice(59, 0, sub4);
-      this.loading = false;
+      this.loading = false;      
     });
 
   }
-
-  // selectedSub(sel: any) {
-
-  // if (sel !== null) {
-  //   this.selectedSucategories.push(sel);
-  // } 
-
-  //alert(this.selectedSucategories[0].subcategoryName);
-  // this.product.idsubcategory = parseInt((event.target as HTMLSelectElement)?.value);
-  // }
 
   getSeller() {
 
@@ -86,8 +77,13 @@ export class SellerCompanyFormComponent implements OnInit {
       if (JSON.parse(usuarioString) > 0) {
         // this.iduser = JSON.parse(usuarioString); 
         this.sellerService.getById(JSON.parse(usuarioString)).subscribe(sellerBd => {
-          this.seller = sellerBd;          
-          this.image = './assets/images/' + this.seller.image;
+          this.seller = sellerBd;
+
+          this.fed = select_fed(this.seller.user.federation).id;
+          this.city = select_city(this.seller.user.city).id;
+
+
+          this.image = this.urlprof_img+this.seller.image;
 
           this.seller.providerSubcategoryList.forEach(p => {
             this.company_category.push(p);
@@ -124,7 +120,7 @@ export class SellerCompanyFormComponent implements OnInit {
 
   save() {
     const formData = new FormData();
-
+    // console.log(this.seller);
     this.company_category.forEach(sub => {
       formData.append('idsubcategories', sub.subcategory.idsubcategory.toString())
     })
@@ -155,16 +151,14 @@ export class SellerCompanyFormComponent implements OnInit {
     formData.append('saturday', this.seller.saturday.toString());
     formData.append('sunday', this.seller.sunday.toString());
 
-    if(this.seller.startTime){
+    if (this.seller.startTime) {
       formData.append('startTime', this.seller.startTime.toString());
     }
 
-    if(this.seller.endTime){
+    if (this.seller.endTime) {
       formData.append('endTime', this.seller.endTime.toString());
     }
-   
     
-
     formData.append('facebook', this.seller.facebook);
     formData.append('instagram', this.seller.instagram);
     formData.append('youtube', this.seller.youtube);
@@ -173,8 +167,19 @@ export class SellerCompanyFormComponent implements OnInit {
     formData.append('email', this.seller.user.email);
     formData.append('firstName', this.seller.user.firstName);
     formData.append('lastName', this.seller.user.lastName);
-    formData.append('federation', this.seller.user.federation.toString());
-    formData.append('city', this.seller.user.city.toString());
+
+    if(this.fed){
+      formData.append('federation', this.fed.toString());
+    }else if(this.seller.user.federation){
+      formData.append('federation', this.seller.user.federation.toString());      
+    }
+
+    if(this.city){
+      formData.append('city', this.city.toString());
+    }else if(this.seller.user.city){
+      formData.append('federation', this.seller.user.city.toString());      
+    }
+       
     formData.append('phone', this.seller.user.phone);
     formData.append('password', this.seller.user.password);
 
@@ -183,7 +188,7 @@ export class SellerCompanyFormComponent implements OnInit {
     if (myDate !== null) {
       formData.append('creationDate2', myDate);
     }
-    
+
     formData.append('idrole', this.seller.user.role.id.toString());
 
     this.sellerService.save(formData).subscribe(dato => {
@@ -199,20 +204,35 @@ export class SellerCompanyFormComponent implements OnInit {
 
   subCategoryAdded(event: Event): void {
 
-    const d = (event.target as HTMLSelectElement)?.value
+    let d = parseInt((event.target as HTMLSelectElement)?.value)
+    
+    let sub=this.getSubcategoryById(d);
+
     let exist = false;
- 
     this.company_category.forEach(c => {
-      if (c.subcategory.idsubcategory == +d) {
+      if (c.subcategory == sub) {
         exist = true;
         return;
       }
-    })
+    });
 
     if (!exist) {
-      this.company_category.push(new Company_subcategory(this.subcategories[+d]));
+      this.company_category.push(new Company_subcategory(sub));
     }
 
+
+  }
+
+  getSubcategoryById(idsubcategory:number):Subcategory{
+
+    let sub:Subcategory=new Subcategory();
+    this.subcategories.forEach(s=>{
+      if(s.idsubcategory==idsubcategory){
+        sub = s;
+        return;
+      }
+    })
+    return sub;
 
   }
 
@@ -222,63 +242,18 @@ export class SellerCompanyFormComponent implements OnInit {
 
   citiesCombo(event: Event) {
     let fed = parseInt((event.target as HTMLSelectElement)?.value);
-    let city;
-    if(fed<11){
-      city = fed-1;
-    }else {
-      city = fed-2;
-    }
-
     this.seller.user.federation = fed;
-    this.citiesToCombo = this.cities[city];
+    this.citiesToCombo = selectListByFed(fed);
   }
 
-  citiesCombo2() { 
-    this.citiesToCombo = this.cities[this.seller.user.federation];
+  citiesCombo2() {
+    this.citiesToCombo = selectListByFed(this.seller.user.federation);
   }
 
   selectedCity(event: Event) {
-    this.seller.user.city = parseInt((event.target as HTMLSelectElement)?.value);
+    this.city = parseInt((event.target as HTMLSelectElement)?.value);
+    //this.seller.user.city = parseInt((event.target as HTMLSelectElement)?.value);
   }
 
-  federations: string[] = [
-    "FEDERACIJA BiH",
-    "UNSKO-SANSKI KANTON",
-    "Posavski kanton",
-    "Tuzlanski kanton",
-    "Zeničko-dobojski kanton",
-    "Bosansko-podrinjski kanton",
-    "Srednjobosanski kanton",
-    "Hercegovačko-neretvanski kanton",
-    "Zapadnohercegovački kanton",
-    "Kanton Sarajevo",
-    "Kanton 10",
-    "REPUBLIKA SRPSKA",
-    "Banjalučka",
-    "Dobojsko-Bijeljinska",
-    "Sarajevsko-Zvornička",
-    "Trebinjsko-Fočanska",
-    "BRČKO DISTRIKT"
-  ];
-
-  cities: string[][] = [ 
-    [""],
-    ["Bihać", "Bosanska Krupa", "Bosanski Petrovac", "Bužim", "Cazin", "Ključ", "Sanski Most", "Velika Kladuša"],
-    ["Šamac", "Odžak", "Orašje"],
-    ["Banovići", "Čelić", "Doboj Istok", "Gračanica", "Gradačac", "Kalesija", "Kladanj", "Lukavac", "Sapna", "Srebrenik", "Teočak", "Tuzla", "Živinice"],
-    ["Breza", "Doboj Jug", "Kakanj", "Maglaj", "Olovo", "Tešanj", "Usora", "Vareš", "Visoko", "Zavidovići", "Zenica", "Žepče"],
-    ["Goražde", "Ustikolina"],
-    ["Bugojno", "Busovača", "Dobretići", "Donji Vakuf", "Fojnica", "Gornji Vakuf-Uskoplje", "Jajce", "Kiseljak", "Kreševo", "Novi Travnik", "Travnik", "Vitez"],
-    ["Čapljina", "Čitluk", "Jablanica", "Konjic", "Mostar", "Neum", "Prozor", "Ravno", "Stolac"],
-    ["Grude", "Ljubuški", "Posušje", "Široki Brijeg"],
-    ["Hadžići", "Ilidža", "Ilijaš", "Sarajevo - Centar", "Sarajevo - Novi Grad", "Sarajevo - Novo Sarajevo", "Sarajevo - Stari Grad", "Trnovo", "Vogošća"],
-    ["Bosansko Grahovo", "Drvar", "Glamoč", "Kupres", "Livno", "Tomislavgrad"],
- //   ["Banjalučka", "Dobojsko-Bijeljinska", "Sarajevsko-Zvornička", "Trebinjsko-Fočanska"],
-    ["Kozarska Dubica", "Krupa na Uni", "Laktaši", "Mrkonjić Grad", "Novi Grad", "Oštra Luka", "Prijedor", "Prnjavor", "Ribnik", "Šipovo", "Srbac"],
-    ["Lopare", "Modriča", "Pelagićevo", "Petrovo", "Šamac", "Stanari", "Teslić", "Ugljevik", "Vukosavlje"],
-    ["Novo Goražde", "Osmaci", "Pale", "Rogatica", "Rudo", "Šekovići", "Sokolac", "Srebrenica", "Višegrad", "Vlasenica", "Zvornik"],
-    ["Bileća", "Čajniče", "Foča", "Gacko", "Istočni Mostar", "Kalinovik", "Ljubinje", "Nevesinje", "Trebinje"],
-    ["Brčko"]
-  ]
 
 }

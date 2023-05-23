@@ -10,7 +10,7 @@
 
         <div *ngFor="let product of products" class="col">
             <div class="card h-100">
-                <img src="assets/images/{{product.productImageList[0].idimage}}{{product.productImageList[0].extension}}" style="height: 200px;" class="card-img-top" alt="...">
+                <img src="{{urlprod_img}}{{product.productImageList[0].idimage}}{{product.productImageList[0].extension}}" style="height: 200px;" class="card-img-top" alt="...">
                 <hr class="m-0">
                 <div class="card-body">
                     <h6 class="card-title">{{product.productName}}</h6>

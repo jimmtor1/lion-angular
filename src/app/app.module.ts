@@ -5,7 +5,7 @@ import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontaweso
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
-import { DatePipe } from '@angular/common';
+import { DatePipe} from '@angular/common';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -34,11 +34,38 @@ import { TenderFormComponent } from './components/tender-form/tender-form.compon
 import { TenderDetailComponent } from './components/tender-detail/tender-detail.component';
 import { TenderListComponent } from './components/tender-list/tender-list.component';
 import { TenderTableComponent } from './components/tender-table/tender-table.component';
+import { HeaderComponent } from './components/header/header.component';
+import { NavbarMenuCategoryComponent } from './components/navbar-menu-category/navbar-menu-category.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent, HomeComponent, ProductosInicioComponent, ProductFormComponent, RegisterFormComponent, LoginFormComponent, ProductCategoryListComponent, SellerPanelComponent, ProductDetailComponent, ProductBuyerListComponent, SellerCompanyFormComponent, PanelBuyerComponent, SellerDetailComponent, AdminPanelComponent, BuyerListComponent, SellerListComponent, SellerSocialnetworkComponent, SubcategoryListComponent, ViewProviderToClienteComponent, SellerCategoryListComponent, TenderFormComponent, TenderDetailComponent, TenderListComponent, TenderTableComponent
+    AppComponent,
+    HomeComponent,
+    ProductosInicioComponent,
+    ProductFormComponent,
+    RegisterFormComponent,
+    LoginFormComponent,
+    ProductCategoryListComponent,
+    SellerPanelComponent,
+    ProductDetailComponent,
+    ProductBuyerListComponent,
+    SellerCompanyFormComponent,
+    PanelBuyerComponent,
+    SellerDetailComponent,
+    AdminPanelComponent,
+    BuyerListComponent,
+    SellerListComponent,
+    SellerSocialnetworkComponent,
+    SubcategoryListComponent,
+    ViewProviderToClienteComponent,
+    SellerCategoryListComponent,
+    TenderFormComponent,
+    TenderDetailComponent,
+    TenderListComponent,
+    TenderTableComponent, 
+    HeaderComponent,
+    NavbarMenuCategoryComponent
   ],
   imports: [
     BrowserModule,

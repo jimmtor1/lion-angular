@@ -4,12 +4,12 @@
         
         <thead>
             <tr>
-              <th >Id</th>
-              <th >Company</th>
-              <th >Firs</th>
-              <th >Last</th> 
+              <th >ID</th>
+              <th >Firma</th>
+              <th >Ime</th>
+              <th >Prezime</th> 
               <th >email</th> 
-              <th >Action</th>     
+              <th >Radnja</th>     
             </tr>
           </thead>
           <tbody>
@@ -21,9 +21,9 @@
               <td>{{seller.user.email}}</td>             
               <td>               
                 
-                <button (click)="emitSellerEdit(seller.user.id)" class="btn btn-dark mx-2" >see details</button>
-                <button *ngIf="!accepted" (click)="confirm(seller.user.id)" class="btn btn-dark mx-2" >Confirm</button>
-                <button *ngIf="accepted" (click)="deactivate(seller.user.id)" class="btn btn-dark mx-2" >Deactivate</button>
+                <button (click)="emitSellerEdit(seller.user.id)" class="btn btn-dark mx-2" >detalji</button>
+                <button *ngIf="!accepted" (click)="confirm(seller.user.id)" class="btn btn-dark mx-2" >Aktiviraj</button>
+                <button *ngIf="accepted" (click)="deactivate(seller.user.id)" class="btn btn-dark mx-2" >Deaktiviraj</button>
 
               </td>           
             </tr>           

@@ -1,0 +1,35 @@
+<div class="container mt-2">
+
+    <div class="table-responsive border">
+
+        <table class="table table-striped">
+
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Ime</th>
+                    <th>Prezime</th>
+                    <th>Email</th>
+                    <th>Akcija</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let buyer of buyers">
+                    <th>{{buyer.id}}</th>
+                    <td>{{buyer.user.firstName}}</td>
+                    <td>{{buyer.user.lastName}}</td>
+                    <td>{{buyer.user.email}}</td>
+                    <td>
+
+                        <button class="btn btn-dark mx-1">Detalji</button>
+                        <button class="btn btn-dark mx-1">Deaktiviraj</button>
+
+                    </td>
+                </tr>
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>

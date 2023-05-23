@@ -5,48 +5,50 @@
         <!-- tender info -->
         <div class="col-12 col-sm-8 mb-2">
             <div class="card">
-                <h5 class="card-header">Details</h5>
+                <h5 class="card-header">Detalji</h5>
                 <div class="card-body bg-light">
                     <!-- <h5 class="card-title">Special title treatment</h5> -->
                     <p class="card-text">{{tender.description}}</p>
 
                     <div class="d-flex">
                         <fa-icon [icon]="['fas','calendar']"></fa-icon>
-                        <p class="h6 mx-2">Period available to apply</p>
+                        <p class="h6 mx-2">Period trajanja tendera</p>
                     </div>
 
 
                     <div class="row mb-2">
                         <!-- col-sm-1 -->
                         <div class="col-12">
-                            From: <span>{{tender.dateFrom}}</span>
+                            Od: <span>{{tender.dateFrom}}</span>
                         </div>
                         <div class="col-12">
-                            To: <span>{{tender.dateTo}}</span>
+                            Do: <span>{{tender.dateTo}}</span>
                         </div>
                     </div>
 
                     <!-- <div *ngIf="tender.document!=''" class="mb-3 w-50 border border-danger rounded text-center"> -->
-                       
-                        &nbsp;
-                        <a *ngIf="tender.document" class="btn btn-danger my-3" href="assets/images/{{tender.idtender}}{{tender.document}}" target="_blank">
-                            <fa-icon [icon]="['fas', 'file-arrow-down']"></fa-icon>
-                            Attached
-                        </a>
+
+                    &nbsp;
+                    <a *ngIf="tender.document" class="btn btn-danger my-3"
+                        href="{{url_doc}}{{tender.idtender}}{{tender.document}}" target="_blank">
+                        <fa-icon [icon]="['fas', 'file-arrow-down']"></fa-icon>
+                        Otvorite prilog
+                    </a>
                     <!-- </div> -->
-                    <div *ngIf="!already_offered" >
+                    <div *ngIf="!already_offered && id_current_role==2">
                         <div class="mb-3">
-                            <label for="exampleFormControlTextarea1" class="form-label">Description of your proposal</label>
-                            <textarea [(ngModel)]="comment" class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+                            <label for="exampleFormControlTextarea1" class="form-label">Unesite vašu ponudu</label>
+                            <textarea [(ngModel)]="comment" class="form-control" id="exampleFormControlTextarea1"
+                                rows="5"></textarea>
                         </div>
-    
-                        <a (click)="saveProposal()" class="btn btn-danger">Apply</a>
+
+                        <a (click)="saveProposal()" class="btn btn-danger">Apliciraj</a>
                     </div>
 
                     <div *ngIf="already_offered">
-                        <span class="badge rounded-pill bg-primary">You have already bid</span>
+                        <span class="badge rounded-pill bg-primary">Već ste aplicirali</span>
                     </div>
-                    
+
 
                 </div>
             </div>
@@ -57,7 +59,7 @@
         <div class="col-12 col-sm-4">
             <!-- style="width: 18rem;" -->
             <div class="card">
-                <h5 class="card-header">Customer details</h5>
+                <h5 class="card-header">Tender objavio</h5>
                 <div class="card-body bg-light">
                     <div class="d-flex mb-1">
                         <fa-icon [icon]="['fas','user']"></fa-icon>
@@ -67,11 +69,11 @@
                     <div class="d-flex">
                         <fa-icon [icon]="['fas','location-dot']"></fa-icon>
                         &nbsp;
-                        <p class="h6">{{federations[user.federation]}} ,{{cities[user.federation][user.city]}}</p>
+                        <p class="h6">{{fed}} ,{{city}}</p>
                     </div>
 
                 </div>
-                
+
             </div>
         </div>
 
@@ -81,12 +83,12 @@
     <!-- proposals -->
     <div class="row mt-2">
 
-        <p *ngIf="tenderProposal" class="h4 my-3">Proposals</p>
+        <p *ngIf="tenderProposal" class="h4 my-3">Ponude</p>
 
         <div class="col-12">
 
             <a style="text-decoration: underline; color: var(--bs-link-color); cursor: pointer;" class="m-2"
-                *ngIf="!tenderProposal" (click)="getProposals()">see proposals...</a>
+                *ngIf="!tenderProposal" (click)="getProposals()">Pogledajte ponude...</a>
 
             <div *ngIf="tenderProposal">
                 <div *ngFor="let t of tenderProposal" class="card mb-2">
@@ -98,17 +100,17 @@
                             &nbsp;
                             <div class="d-flex justify-content-between w-100">
                                 <p class="h6">{{t.user.firstName}} {{t.user.firstName}}</p>
-                                <p class="text-muted">Posted: {{t.date}}</p>
-                            </div>                            
+                                <p class="text-muted">Objavljeno: {{t.date}}</p>
+                            </div>
                         </div>
                         <hr class="m-0 p-0">
 
                         <div class="d-flex">
                             <fa-icon [icon]="['fas','location-dot']"></fa-icon>
                             &nbsp;
-                            <p>{{federations[t.user.federation]}} ,{{cities[t.user.federation][t.user.city]}}</p>
-                        </div>                        
-                       
+                            <p>{{fed}} ,{{city}}</p>
+                        </div>
+
                         <p class="pb-0 mb-0">{{t.comment}}</p>
 
                     </div>

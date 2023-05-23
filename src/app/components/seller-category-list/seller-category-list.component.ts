@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Seller } from 'src/app/models/seller';
+import { IMG_PROFILE_URL } from 'src/app/services/helper';
 import { SellerService } from 'src/app/services/seller.service';
 
 @Component({
@@ -14,6 +15,8 @@ export class SellerCategoryListComponent implements OnInit {
   category: string = "";
   categoryName: string[] = ["Građevinarstvo", "Sve za kuću", "Informatika i telekomunikacije", "Od glave do pete"];
   subcategoryName: String = "All";
+
+  urlprof_img = `${IMG_PROFILE_URL}`;
 
   constructor(private providerService: SellerService, private route: ActivatedRoute) { }
 

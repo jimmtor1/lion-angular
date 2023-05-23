@@ -91,8 +91,7 @@ export class SellerPanelComponent {
 
   }
 
-  showProductList() {
-    
+  showProductList() {    
     
     this.mostrarProductnew = false;
     this.mostrarProductEdit = false;    
@@ -110,6 +109,8 @@ export class SellerPanelComponent {
     this.currentPage = "adlist";
 
     const theLink = this.miEnlace.nativeElement;
+
+    this.clickListener();    
     this.clickListener = this.renderer2.listen(theLink, 'click', () => {
       this.showProductNew();
     })
@@ -135,6 +136,7 @@ export class SellerPanelComponent {
     this.currentPage = "adlist";
 
     const theLink = this.miEnlace.nativeElement;
+    this.clickListener(); 
     this.renderer2.listen(theLink, 'click', () => {
       this.showProductList();
     })
@@ -157,6 +159,7 @@ export class SellerPanelComponent {
     this.currentPage = "adlist";
 
     const theLink = this.miEnlace.nativeElement;
+    this.clickListener(); 
     this.renderer2.listen(theLink, 'click', () => {
       this.showProductList();
     })
@@ -222,8 +225,8 @@ export class SellerPanelComponent {
     this.mostrarTenderEdit = false;
     this.mostrarTenderApply = false;
 
-    this.title = "Tender list"; //new ad
-    this.action = "New tender";
+    this.title = "Lista vaših dodanih tendera"; //new ad
+    this.action = "Dodaj tender";
     this.currentPage = "tender";
 
     const theLink = this.miEnlace.nativeElement;
@@ -248,7 +251,7 @@ export class SellerPanelComponent {
     this.mostrarTenderEdit = true;
     this.mostrarTenderApply = false;
 
-    this.title = "New Tender";
+    this.title = "Novi tender";
     this.action = "Odustani";
 
     const theLink = this.miEnlace.nativeElement;
@@ -271,7 +274,7 @@ export class SellerPanelComponent {
     this.mostrarTenderEdit = false;
     this.mostrarTenderApply = true;
 
-    this.title = "Posted Tender";
+    this.title = "Odobreni tenderi za apliciranje";
     this.action = "";
     this.currentPage = "tenderapply";
 

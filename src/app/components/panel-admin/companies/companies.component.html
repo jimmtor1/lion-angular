@@ -1,0 +1,56 @@
+<div class="container mt-2">
+
+    <div class="card text-center">
+        <div class="card-header">
+            <ul class="nav nav-tabs card-header-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" [ngClass]="{'active':active}" (click)="getAccepted()">Odobrene</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" [ngClass]="{'active':!active}" (click)="getProgress()"  >Za odobravanje</a>
+                </li>
+            </ul>
+        </div>
+        <div class="card-body">
+
+            <div class="table-responsive">
+
+                <table class="table table-striped">
+                    
+                    <thead>
+                        <tr>
+                          <th >ID</th>
+                          <th >Firma</th>
+                          <th >Ime</th>
+                          <th >Prezime</th> 
+                          <th >email</th> 
+                          <th >Radnja</th>     
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let seller of sellers">
+                          <th>{{seller.idprovider}}</th>
+                          <td>{{seller.companyName}}</td>
+                          <td>{{seller.user.firstName}}</td>
+                          <td>{{seller.user.lastName}}</td>  
+                          <td>{{seller.user.email}}</td>             
+                          <td>               
+                            
+                            <!-- <button (click)="emitSellerEdit(seller.user.id)" class="btn btn-dark mx-2" >detalji</button> -->
+                            <button *ngIf="active" (click)="deactivate(seller.user.id)" class="btn btn-dark mx-2" >Deaktiviraj</button>
+                            <button *ngIf="!active" (click)="confirm(seller.user.id)" class="btn btn-dark mx-2" >Aktiviraj</button>
+                            
+            
+                          </td>           
+                        </tr>           
+                      </tbody>
+            
+                </table>
+            
+            </div>
+            
+
+        </div>
+    </div>
+
+</div>

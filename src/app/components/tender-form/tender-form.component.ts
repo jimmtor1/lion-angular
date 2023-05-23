@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Seller } from 'src/app/models/seller';
+// import { Seller } from 'src/app/models/seller';
 import { Tender } from 'src/app/models/tender';
 import { SellerService } from 'src/app/services/seller.service';
 import { TenderService } from 'src/app/services/tender.service';
@@ -14,9 +14,10 @@ export class TenderFormComponent {
   iduser: number;
   tender: Tender = new Tender();
   file: File;
-  seller:Seller;
+  // seller:Seller;
   loading:boolean = true;
-  role:number=0;
+  // role:number=0;
+  authorized:boolean;
 
   constructor(private tenderService: TenderService, private sellerService: SellerService) { }
 
@@ -24,20 +25,26 @@ export class TenderFormComponent {
 
     const usuarioString = localStorage.getItem("iduser");
     if (usuarioString) {
-      console.log("if 1");
+
       if (JSON.parse(usuarioString) > 0) {
-        console.log("if 2");
+      
         this.iduser = JSON.parse(usuarioString);
         const rol = localStorage.getItem("role");
         if(rol){
-          this.role=JSON.parse(rol);
-          console.log("if 3");
-          if (this.role == 2) {
-            this.sellerService.getById(this.iduser).subscribe(s => {
-              this.seller = s;
+          // this.role=JSON.parse(rol);
+     
+          if (JSON.parse(rol) == 2) {
+            // this.sellerService.getById(this.iduser).subscribe(s => {
+            //   this.seller = s;
+            //   this.loading=false;
+            // });
+
+            this.sellerService.isActive(this.iduser).subscribe(s => {
+              this.authorized = s;
               this.loading=false;
             });
           }else{
+            this.authorized = true;
             this.loading=false;
           }
         }else{

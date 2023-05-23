@@ -1,0 +1,70 @@
+<div class="container mt-2">
+
+    <div class="card text-center">
+        <div class="card-header">
+            <ul class="nav nav-tabs card-header-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" [ngClass]="{'active':active}" (click)="getAuthorizedList()">Odobrene</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" [ngClass]="{'active':!active}" l (click)="getNoAutorizedList()">Za
+                        odobravanje</a>
+                </li>
+            </ul>
+        </div>
+        <div class="card-body">
+
+            <div class="table-responsive">
+
+                <table class="table table-striped">
+
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Naziv projekta</th>
+                            <th>Od</th>
+                            <th>Do</th>
+                            <th>Opis projekta</th>
+                            <th>Radnja</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let tender of tenders">
+
+                            <th>{{tender.idtender}}</th>
+                            <td>{{tender.projectName}}</td>
+                            <td>{{tender.dateFrom}}</td>
+                            <td>{{tender.dateTo}}</td>
+                            <td>
+                                <p style="overflow: hidden; max-height: 1.2em; line-height: 1; max-width: 360px;"
+                                    class="p-0 m-0">
+                                    {{tender.description}}</p>
+                                ...
+                            </td>
+
+                            <td>
+                                <!-- style="cursor: pointer;" -->
+                                <a class="btn btn-dark " style="margin-right: 5px;">
+                                    detils
+                                    <!-- <fa-icon [icon]="['fas', 'circle-info']" class="fs-5">
+                                    </fa-icon> -->
+                                </a>
+
+                                <!-- style="margin-left: 1em; cursor: pointer;" -->
+                                <a (click)="confirmTender(tender.idtender)" class="btn btn-dark"> 
+                                    confirm
+                                    <!-- <fa-icon [icon]="['fas', 'check-square']" class="fs-5"></fa-icon> -->
+                                </a>
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+
+
+        </div>
+    </div>
+
+</div>

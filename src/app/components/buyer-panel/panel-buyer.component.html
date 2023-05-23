@@ -19,7 +19,7 @@
         <div class="col-6 d-flex justify-content-end mb-2">
           <div *ngIf="title=='Profil'">
             <button [disabled]="saving" class="btn btn-danger mx-2" (click)="editForm();">{{action}}</button>
-            <button class="btn btn-dark" *ngIf="action=='Save'" (click)="cancel();">Cancel</button>
+            <button class="btn btn-dark" *ngIf="action=='Save'" (click)="cancel();">Odustani</button>
           </div>
         </div>
 
@@ -55,12 +55,12 @@
         </li>
 
 
-        <li class="nav-item border">
+        <!-- <li class="nav-item border">
           <a class="nav-link" [ngClass]="{'active': currentPage === 'tenderapply'}" (click)="showTenderApply()">
             <fa-icon [icon]="['fas', 'newspaper']" style="font-size: 1.1em"></fa-icon>
             <span class="d-none d-sm-inline">&nbsp;Tender</span>
           </a>
-        </li>
+        </li> -->
 
 
         <li class="nav-item border">
@@ -143,28 +143,27 @@
 
         <p class="h6">Kanton:</p>
         <!-- (change)="citiesCombo($event)" -->
-        <select [disabled]="action!=='Spremi'" (change)="citiesCombo($event)" name="federation"
-          [(ngModel)]="buyer.user.federation" class="form-select rounded-pill mb-3" id="select_federation">
+        <select [disabled]="action!=='Spremi'" (change)="citiesCombo($event)" name="federation" [(ngModel)]="fed"
+          class="form-select rounded-pill mb-3" id="select_federation">
           <option value="">--Odaberite lokaciju--</option>
-          <option [disabled]="i == 0 || i == 11 || i == 16" *ngFor="let fed of federations, let i = index" [value]="i">
+          <option [value]="fed.id" [disabled]="fed.id==0" *ngFor="let fed of federations">{{fed.name}}</option>
+
+
+          <!-- <option [disabled]="i == 0 || i == 11 || i == 16" *ngFor="let fed of federations, let i = index" [value]="i">
             {{fed}}
-          </option>
+          </option> -->
         </select>
 
-        <!-- <input [disabled]="action!=='Save'" type="text" [(ngModel)]="buyer.user.federation"
-          [ngClass]="buyer.user.federation==null ? 'mb-3 rounded-pill border text-danger form-control':'mb-3 form-control border rounded-pill'"> -->
-
+    
         <p class="h6">Grad:</p>
 
-        <select [disabled]="action!=='Spremi'" name="city" (change)="selectedCity($event)" [(ngModel)]="buyer.user.city"
-          class="form-select rounded-pill mb-3" id="select_federation">
-          <option value="">--Odaberite Grad--</option>
-          <option *ngFor="let fed of citiesToCombo, let i = index" [value]="i">{{fed}}</option>
+        <select [disabled]="action!=='Spremi'" name="city" (change)="selectedCity($event)" [(ngModel)]="city"
+          class="form-select rounded-pill mb-3" id="select_city">
+          <option value="">--Odaberite Grad--</option>          
+          <option *ngFor="let c of citiesToCombo" [value]="c.id">{{c.name}}</option>
         </select>
-
-        <!-- <input [disabled]="action!=='Save'" type="text" [(ngModel)]="buyer.user.city"
-          [ngClass]="buyer.user.city==null ? 'mb-3 rounded-pill border text-danger form-control':'mb-3 form-control border rounded-pill'"> -->
-
+  
+   
         <p class="h6">Poštanski broj:</p>
         <input [disabled]="action!=='Spremi'" type="text" [(ngModel)]="buyer.postalCode"
           [ngClass]="buyer.postalCode==null ? 'mb-3 rounded-pill border text-danger form-control':'mb-3 form-control border rounded-pill'">
@@ -183,7 +182,7 @@
     </div>
 
     <div class="col-10 mt-3 mb-0" *ngIf="currentPage =='tenderTable'">
-      <button class="btn btn-danger"  (click)="showNewTender()" >New tender</button>
+      <button class="btn btn-danger" (click)="showNewTender()">Dodaj tender</button>
       <tender-table></tender-table>
     </div>
 
@@ -191,9 +190,9 @@
       <tender-form></tender-form>
     </div>
 
-    <div class="col-10 mt-3 mb-0" *ngIf="currentPage =='tenderapply'">
+    <!-- <div class="col-10 mt-3 mb-0" *ngIf="currentPage =='tenderapply'">
       <tender-list></tender-list>
-    </div>
+    </div> -->
 
   </div>
 

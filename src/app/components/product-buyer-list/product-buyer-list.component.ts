@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Product } from 'src/app/models/product';
+import { IMG_PRODUCT_URL } from 'src/app/services/helper';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
@@ -13,6 +14,7 @@ export class ProductBuyerListComponent implements OnInit {
  
   products: Product[] = [];
   iduser:number;
+  urlprod_img = `${IMG_PRODUCT_URL}`;
 
   constructor(private productService: ProductService) { }
 

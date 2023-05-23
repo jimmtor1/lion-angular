@@ -20,7 +20,7 @@
                         Lokacija
                     </p>
                     
-                    <p *ngIf="seller.user.federation!=null" >Grad: {{cities[seller.user.federation][seller.user.city]}}</p> 
+                    <p *ngIf="seller.user.federation!=null" >Grad: {{city}}</p> 
 
                     
                     <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
@@ -34,7 +34,7 @@
         <li *ngFor="let img of product.productImageList, let i = index" class="flex-row" style="margin-right: 12px;">
             <div class="card" style="width: 5rem;">
                 <a (click)="chagePrincipalImage(i);">
-                    <img src="./assets/images/{{img.idimage}}{{img.extension}}" class="card-img-top" alt="...">
+                    <img src="{{urlprod_img}}{{img.idimage}}{{img.extension}}" class="card-img-top" alt="...">
                 </a>
             </div>
         </li>        
@@ -55,40 +55,25 @@
         <p>Adresa: {{seller.user.address}}</p>
         <p>Broj telefona: {{seller.user.phone}}</p>
 
+        
         <!-- seller image product list -->
 
         <div class="d-flex overflow-auto flex-nowrap">
 
             <div *ngFor="let product of producByProvider.slice(0,5)" class="mx-1">
                 <div class="mini card h-100" style="width: 13rem;">
-                    <img src="assets/images/{{product.productImageList[0].idimage}}{{product.productImageList[0].extension}}" style="height: 200px;" class="card-img-top" alt="...">
+                    <img src="{{urlprod_img}}{{product.productImageList[0].idimage}}{{product.productImageList[0].extension}}" style="height: 200px;" class="card-img-top" alt="...">
                     <hr class="m-0">
                     <div class="card-body">
                         <h6 class="card-title">{{product.productName}}</h6>  
-                        <p class="card-text mb-0" *ngIf="product.price==0">Cineja na</p>
-                        <p class="card-text mb-0" *ngIf="product.price>0">{{product.price}} KM</p>                     
+                        <p class="card-text mb-0" *ngIf="product.price==0"><b>Cijena po dogovoru</b></p>
+                        <p class="card-text mb-0" *ngIf="product.price>0"><b>{{product.price}} KM</b></p>                     
                         <a routerLink="../../addetails/{{product.idproduct}}" class="stretched-link m-0 p-0"></a>
                     </div>
                 </div>
             </div>        
     
         </div>
-
-        <!-- <div class="border pt-2">
-            <h3>Ostalo od ove firme</h3>
-            <ul class="list-unstyled d-flex overflow-auto flex-nowrap">
-                <li *ngFor="let prodprov of producByProvider" class="flex-row mx-2">
-                    <div class="card" style="width: 12rem;">
-                        <a routerLink="../../addetails/{{prodprov.idproduct}}">
-                            <img src="./assets/images/{{prodprov.productImageList[0].idimage}}{{prodprov.productImageList[0].extension}}" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">{{prodprov.productName}}</h5>
-                            </div>
-                        </a>
-                    </div>
-                </li>                
-            </ul>
-        </div> -->
 
     </div>
 

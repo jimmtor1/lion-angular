@@ -17,6 +17,7 @@ import { ViewProviderToClienteComponent } from './components/view-provider-to-cl
 import { SellerCategoryListComponent } from './components/seller-category-list/seller-category-list.component';
 import { TenderDetailComponent } from './components/tender-detail/tender-detail.component';
 import { TenderListComponent } from './components/tender-list/tender-list.component';
+import { PanelAdminComponent } from './components/panel-admin/panel-admin.component';
 
 const routes: Routes = [
   {path:'', component:HomeComponent},
@@ -36,7 +37,8 @@ const routes: Routes = [
   {path: 'subcategoryList/:id', component:SubcategoryListComponent}, 
   {path: 'provider/:id', component:ViewProviderToClienteComponent},
   {path: 'tenderDetail/:idtender', component:TenderDetailComponent},
-  {path: 'tenderList', component:TenderListComponent}
+  {path: 'tenderList', component:TenderListComponent},
+  {path: 'paneladmin', loadChildren:() => import('./components/panel-admin/panel-admin.module').then(x=> x.PanelAdminModule)}
 ];
 
 @NgModule({

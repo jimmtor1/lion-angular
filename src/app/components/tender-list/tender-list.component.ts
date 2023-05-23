@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Tender } from 'src/app/models/tender';
+import { SellerService } from 'src/app/services/seller.service';
 import { TenderService } from 'src/app/services/tender.service';
 
 @Component({
@@ -14,17 +15,40 @@ export class TenderListComponent {
   iduser: number;
   loading: boolean = true;
   detail: number = 0;
+  authorized:boolean;
 
-  constructor(private tenderService: TenderService) { }
+  constructor(private tenderService: TenderService, private sellerService: SellerService) { }
 
   ngOnInit(): void {
-    this.getList()    
+    
+    const rol = localStorage.getItem("role");
+    if (rol) {
+      if (JSON.parse(rol) == 2) {
+        const usuarioString = localStorage.getItem("iduser");        
+        if (usuarioString) {
+          
+          this.sellerService.isActive(JSON.parse(usuarioString)).subscribe(b => {
+            this.authorized = b;            
+            if (b) {              
+              this.getList();
+            }else{
+              this.loading = false;
+            }
+          });
+        }
+
+      } else {
+        this.authorized = true;
+        this.getList();
+      }
+    }
   }
+
+
 
   getList() {
     this.tenderService.getAuthorizedListTender().subscribe(list => {
       this.tenders = list;
-      // console.log(this.tenders);
       this.loading = false;
     }, error => {
       this.loading = false;
@@ -46,7 +70,7 @@ export class TenderListComponent {
 
   }
 
-  
+
 
   showTenderDetail(idtender: number) {
     this.detail = idtender;

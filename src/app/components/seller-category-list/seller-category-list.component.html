@@ -10,7 +10,7 @@
 
         <div *ngFor="let seller of sellers" class="col">
             <div class="card h-100">
-                <img [src]="'assets/images/' + seller.image" style="height: 200px;" class="card-img-top" alt="...">
+                <img [src]="urlprof_img + seller.image" style="height: 200px;" class="card-img-top" alt="...">
                 <hr class="m-0">
                 <div class="card-body">
                     <h6 class="card-title">{{seller.companyName}}</h6>

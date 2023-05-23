@@ -10,10 +10,9 @@
     <div class="row">
         <label class="form-label" for="file-input">
             <div class="drop-zone d-flex justify-content-center">
-                <p class="text-center" *ngIf="image==''">Izaberite sliku</p>
-                <!-- *ngIf="image!==''" -->
-                <img [src]="image" width="100">
-                <!-- <img *ngIf="seller.image!==''" src="./assets/images/" {{seller.image}} width="100"> -->
+                <p class="text-center" *ngIf="image==''">Izaberite sliku</p>             
+                <img *ngIf="seller.image" [src]="image" width="500">
+                <img *ngIf="!seller.image" src="./assets/images/no-image-icon.svg" width="100">
             </div>
         </label>
         <!-- (change)="onFileSelected($event)" -->
@@ -27,9 +26,9 @@
         <select multiple name="subcategory" id="subcategory" (change)="subCategoryAdded($event)" class="form-select"
             style="height: 200px;">
             <!-- <option value="">--Odaberite podkategoriju--</option> -->
-            <option value="{{sub.idsubcategory}}" [disabled]="i == 0 || i == 21 || i == 48 || i == 59"
-                [ngClass]="i == 0 || i == 21 || i == 48 || i == 59 ?'title':''"
-                *ngFor="let sub of subcategories, let i = index">{{sub.subcategoryName}}</option>
+            <option *ngFor="let sub of subcategories" [value]="sub.idsubcategory" [disabled]="sub.idsubcategory==0" [ngClass]="sub.idsubcategory==0 ?'title':''">
+                {{sub.subcategoryName}}
+            </option>
         </select>
 
         <div class="border rounded p-1" style="min-height: 100px;">
@@ -61,10 +60,10 @@
         <input type="text" class="form-control" name="reg_address" id="reg_address" [(ngModel)]="seller.user.address">
     </div>
 
-    <div class="mb-3">
+    <!-- <div class="mb-3">
         <label for="street">Ulica&nbsp;<span class="form-label">*</span></label>
         <input type="text" class="form-control" name="street" id="street" [(ngModel)]="seller.street">
-    </div>
+    </div> -->
 
     <div class="mb-3">
         <label for="postal_code">Poštanski broj&nbsp;<span class="form-label">*</span></label>
@@ -74,13 +73,16 @@
     <div class="mb-3">
         <label for="federation">Kanton:&nbsp;<span class="form-label">*</span></label>
 
-        <select name="federation" (change)="citiesCombo($event)" [(ngModel)]="seller.user.federation"
+        <select name="federation" (change)="citiesCombo($event)" [(ngModel)]="fed"
             class="form-select" id="select_federation">
             <option value="">--Odaberite lokaciju--</option>
-            <option [disabled]="i == 0 || i == 11 || i == 16" *ngFor="let fed of federations, let i = index"
+            <option [value]="fed.id" [disabled]="fed.id==0" *ngFor="let fed of federations">{{fed.name}}</option>
+            <!-- <option [disabled]="i == 0 || i == 11 || i == 16" *ngFor="let fed of federations, let i = index"
                 [value]="i">{{fed}}
-            </option>
+            </option> -->
         </select>
+
+       
 
 
     </div>
@@ -88,10 +90,10 @@
     <div class="mb-3">
         <label for="city">Grad:&nbsp;<span class="form-label">*</span></label>
 
-        <select name="city" (change)="selectedCity($event)" [(ngModel)]="seller.user.city" class="form-select"
-            id="select_federation">
+        <select name="city" (change)="selectedCity($event)" [(ngModel)]="city" class="form-select"
+            id="select_city">
             <option value="">--Odaberite Grad--</option>
-            <option *ngFor="let fed of citiesToCombo, let i = index" [value]="i">{{fed}}</option>
+            <option *ngFor="let c of citiesToCombo" [value]="c.id">{{c.name}}</option>            
         </select>
 
     </div>
@@ -219,7 +221,7 @@
 
     <div class="w-50 m-auto text-center mb-4">
 
-        <a class="btn btn-danger mx-3" (click)="save();">&nbsp;&nbsp;Save&nbsp;&nbsp;</a>
+        <a class="btn btn-danger mx-3" (click)="save();">&nbsp;&nbsp;Spremi&nbsp;&nbsp;</a>
 
     </div>
 

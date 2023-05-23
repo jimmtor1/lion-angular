@@ -32,8 +32,12 @@ export class SellerService {
     return this.http.post<Seller>(this.URL, formData);
   }
 
-  getAllByCategory(){
-    return this.http.get<SellerByCategory[]>(`${this.URL}/category`);
+  // getAllByCategory(){
+  //   return this.http.get<SellerByCategory[]>(`${this.URL}/category`);
+  // }
+
+  getAllRandomWhitLimit(limit:number):Observable<Seller[]>{
+    return this.http.get<Seller[]>(`${this.URL}/randomlist/${limit}`);
   }
 
   getAllByCategoryId(idsub:number){
@@ -44,7 +48,6 @@ export class SellerService {
     return this.http.get<Seller[]>(`${this.URL}/subcategory/${idsub}`);
   }
 
-
   acceptById(id:number):Observable<Seller>{
     return this.http.get<Seller>(`${this.URL}/active/${id}`);
   }
@@ -54,8 +57,12 @@ export class SellerService {
   }
 
   saveWithoutForm(seller:Seller):Observable<Seller>{
-    console.log("savewidthot");
+   
     return this.http.post<Seller>(`${this.URL}/socialSave`, seller);
+  }
+
+  isActive(id:number):Observable<boolean>{
+    return this.http.get<boolean>(`${this.URL}/state/${id}`)
   }
 
 }

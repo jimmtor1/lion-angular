@@ -12,9 +12,9 @@
 
             <div class="mt-4 mb-4">
                 <div class="row">
-                    <div class="drop-zone m-auto d-flex justify-content-center">
-                        <!-- <img src="./assets/images/company-vision.png" width="100"> -->
-                        <img [src]="image" width="100">
+                    <div class="drop-zone d-flex justify-content-center">
+                        <img *ngIf="!seller.image" src="./assets/images/no-image-icon.svg" class="w-100" style="max-height: 412px;">
+                        <img *ngIf="seller.image" [src]="image" class="w-100" style="max-height: 412px;">
                     </div>
                 </div>
             </div>
@@ -48,9 +48,9 @@
             <p [ngClass]="seller.user.address ? 'border p-2 rounded-pill' : 'border p-2 rounded-pill text-danger'">{{
                 seller.user.address ? seller.user.address : ' Niste popunili ove podatke' }}</p>
 
-            <p class="h6">Ulica:</p>
+            <!-- <p class="h6">Ulica:</p>
             <p [ngClass]="seller.street ? 'border p-2 rounded-pill' : 'border p-2 rounded-pill text-danger'">{{
-                seller.street ? seller.street : 'Niste popunili ove podatke' }}</p>
+                seller.street ? seller.street : 'Niste popunili ove podatke' }}</p> -->
 
             <p class="h6">Poštanski broj:</p>
             <p [ngClass]="seller.postalCode ? 'border p-2 rounded-pill' : 'border p-2 rounded-pill text-danger'">
@@ -58,10 +58,10 @@
             </p>
 
             <p class="h6">Kanton:</p>
-            <p class="border p-2 rounded-pill">{{federations[seller.user.federation]}}</p>
+            <p class="border p-2 rounded-pill">{{fed}}</p>
 
             <p class="h6">Grad:</p>
-            <p class="border p-2 rounded-pill">{{cities[seller.user.federation][seller.user.city]}}</p>
+            <p class="border p-2 rounded-pill">{{city}}</p>
 
             <p class="mb-0" disabled="true">Kratka biografija:</p> <!-- short biography -->
             <textarea readonly [ngClass]="seller.biography ? 'form-control rounded' : 'form-control rounded text-danger'"

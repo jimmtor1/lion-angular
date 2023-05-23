@@ -4,11 +4,19 @@
     </div>
 </div>
 
+<div *ngIf="!authorized && !loading">
+    <div class="border border-2 border-danger rounded p-2 mt-3">
+        <p>Jeste li sigurni da je Vaš profil odobren za dodavanje tendera?</p>
+        <p>Molimo Vas da se obratite vlasniku stranice.</p>
+    </div>
+</div>
+
+<div *ngIf="authorized">
 <div *ngIf="!loading && detail==0" class="container">
 
     <div class="row">
 
-        <p *ngIf="tenders" class="h4 my-3">Tenders</p>
+        <p *ngIf="tenders" class="h4 my-3">Tenderi</p>
 
         <div class="col-12">
 
@@ -38,6 +46,7 @@
 
     </div>
 
+</div>
 </div>
 
 <div *ngIf="detail>0">    

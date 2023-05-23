@@ -32,7 +32,7 @@ export class LoginFormComponent implements OnInit {
       } else if(JSON.parse(roleString)==2){
         this.router.navigate(['sellerpanel']);
       }else if(JSON.parse(roleString)==3){
-        this.router.navigate(['adminPanel']);
+        this.router.navigate(['paneladmin']);
       } 
     } else {
            

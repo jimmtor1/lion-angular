@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from 'src/app/models/product';
+import { IMG_PRODUCT_URL } from 'src/app/services/helper';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
@@ -14,8 +15,10 @@ export class ProductCategoryListComponent implements OnInit {
 
   products: Product[] = [];
   category: string = "";
-  categoryName: string[] = ["Građevinarstvo", "Sve za kuću", "Informatika i telekomunikacije", "Od glave do pete", "Trgovina"];
+  categoryName: string[] = ["Građevinarstvo", "Sve za kuću", "Informatika i telekomunikacije", "Od glave do pete", "Svi proizvodi / Usluge"];
   subcategoryName: String = "All";
+
+  urlprod_img = `${IMG_PRODUCT_URL}`;
 
   constructor(private productService: ProductService, private route: ActivatedRoute) { }
 

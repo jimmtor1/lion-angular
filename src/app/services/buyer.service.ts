@@ -11,8 +11,8 @@ import { API_URL } from './helper';
 
 export class BuyerService {
 
-  private baseUrl = `${API_URL}buyer/`;
-  private baseUrl2 = `${API_URL}provider/`;
+  private baseUrl = `${API_URL}buyer`;
+  private baseUrl2 = `${API_URL}provider`;
   // private baseUrl = 'http://localhost:8080/buyer';
   // private baseUrl2 = 'http://localhost:8080/provider';
 

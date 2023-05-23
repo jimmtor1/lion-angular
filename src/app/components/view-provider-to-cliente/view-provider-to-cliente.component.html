@@ -16,7 +16,9 @@
 
                 <div class="border text-center p-1">
 
-                    <img [src]="'/assets/images/' + seller.image" alt="" style="height: 300px; max-width: 330px;">
+                    <img *ngIf="seller.image" [src]="url_prof_img + seller.image" alt="" style="height: 300px; max-width: 330px;">
+
+                    <img *ngIf="!seller.image" src="/assets/images/no-image-icon.svg" alt="" style="height: 300px; max-width: 330px;">
 
                 </div>
 
@@ -49,13 +51,13 @@
 
                         <p>
                             <span class="h6">Kanton:</span>
-                            {{federations[seller.user.federation+1]}}
+                            {{fed}}
                         </p>
 
                         <p>
 
                             <span class="h6">Grad:</span>
-                            {{cities[seller.user.federation][seller.user.city]}}
+                            {{city}}
                         </p>
 
                         <p>
@@ -102,7 +104,7 @@
 
             <div *ngFor="let product of producByProvider.slice(0,5)" class="mx-1">
                 <div class="mini card h-100" style="width: 13rem;">
-                    <img src="assets/images/{{product.productImageList[0].idimage}}{{product.productImageList[0].extension}}"
+                    <img src="{{url_prod_img}}{{product.productImageList[0].idimage}}{{product.productImageList[0].extension}}"
                         style="height: 200px;" class="card-img-top" alt="...">
                     <hr class="m-0">
                     <div class="card-body">

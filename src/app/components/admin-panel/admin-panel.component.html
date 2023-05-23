@@ -1,6 +1,6 @@
 <div class="container mt-3 pt-3">
 
-    <p class="h1 text-center"> Administrative panel</p>
+    <p class="h1 text-center"> Administrator panel</p>
 
     <div class="row">
 
@@ -32,21 +32,21 @@
                 <li class="nav-item border">                    
                     <a class="nav-link" [ngClass]="{'active': currentPage === 'companies'}" (click)="showSellerList()">
                         <fa-icon [icon]="['fas', 'building']" style="font-size: 1.1em"></fa-icon>
-                        <span class="d-none d-sm-inline">&nbsp;Kompanijas</span>
+                        <span class="d-none d-sm-inline">&nbsp;Odobrene firme</span>
                     </a>
                 </li>
                 <li class="nav-item border">
                     <a class="nav-link" [ngClass]="{'active': currentPage === 'customers'}" id="product-list"
                         (click)="showBuyerList()">
                         <fa-icon [icon]="['fas', 'users']" style="font-size: 1.1em"></fa-icon>
-                        <span class="d-none d-sm-inline">&nbsp;Customers</span>
+                        <span class="d-none d-sm-inline">&nbsp;Kupci</span>
                     </a>
                 </li>
                 <li class="nav-item border w-100">
                     <a class="nav-link" [ngClass]="{'active': currentPage === 'companyConfirmation'}"
                         (click)="showSellerListToConfirm()">
                         <fa-icon [icon]="['fas', 'building-circle-exclamation']" style="font-size: 1.1em"></fa-icon>
-                        <span class="d-none d-sm-inline">&nbsp;Kompanijas to confirm</span>
+                        <span class="d-none d-sm-inline">&nbsp;Firme za odobravanje</span>
                     </a>
                 </li>
 
@@ -54,7 +54,7 @@
                     <a class="nav-link" [ngClass]="{'active': currentPage === 'tenderConfirmation'}"
                         (click)="showTenderListToConfirm()">
                         <fa-icon [icon]="['fas', 'list-check']" style="font-size: 1.1em"></fa-icon>
-                        <span class="d-none d-sm-inline">&nbsp;Tender to confirm</span>
+                        <span class="d-none d-sm-inline">&nbsp;Tenderi za odobravanje</span>
                     </a>
                 </li>
 
@@ -62,14 +62,14 @@
                     <a class="nav-link" [ngClass]="{'active': currentPage === 'tenderposted'}"
                         (click)="showTenderList()">
                         <fa-icon [icon]="['fas', 'newspaper']" style="font-size: 1.1em"></fa-icon>
-                        <span class="d-none d-sm-inline">&nbsp;Posted Tender</span>
+                        <span class="d-none d-sm-inline">&nbsp;Objavljeni tenderi</span>
                     </a>
                 </li>
 
                 <li class="nav-item border w-100">
                     <a class="nav-link" href="#" (click)="logout()">
                         <fa-icon [icon]="['fas', 'right-from-bracket']" style="font-size: 1.1em"></fa-icon>
-                        <span class="d-none d-sm-inline">&nbsp;Logout</span>
+                        <span class="d-none d-sm-inline">&nbsp;Odjava</span>
                     </a>
                 </li>
 
@@ -78,19 +78,6 @@
         </div>
 
         <div class="col-10">
-
-            <!-- *ngIf="title != ''" -->
-            <!-- <div class="row mt-3">
-                <div class="col-6">
-                    <p class="h3">{{title}}</p>
-                </div> -->
-                <!-- <div class="col-6 d-flex justify-content-end mb-2">
-                    <div>
-                        <a id="actionButon" #butt class="btn btn-danger">{{action}}</a>
-                    </div>
-                </div> -->
-                <!-- <hr>
-            </div> -->
 
             <div *ngIf="activeSellerList">
                 <seller-list [accepted]="true" (SellerEditEvent)="showSellerDetail($event)"></seller-list>
@@ -118,11 +105,11 @@
 
             <div *ngIf="activeBuyerDetail">
 
-                <div class="w-75 mx-auto">
+                <div class="w-75 mx-auto my-3">
 
                     <!-- <div> -->
-                    <span *ngIf="buyer.user.active" class="badge rounded-pill bg-success p-2 mb-3">ACTIVE</span>
-                    <span *ngIf="!buyer.user.active" class="badge rounded-pill bg-danger p-2 mb-3">INACTIVE</span>
+                    <span *ngIf="buyer.user.active" class="badge rounded-pill bg-success p-2 mb-3">AKTIVAN</span>
+                    <span *ngIf="!buyer.user.active" class="badge rounded-pill bg-danger p-2 mb-3">NEAKTIVAN</span>
                     <!-- </div> -->
 
                     <p class="h6">Email:</p>
@@ -144,27 +131,28 @@
                     <input [disabled]="action!=='Save'" type="text" [(ngModel)]="buyer.user.phone"
                         [ngClass]="buyer.user.phone==null ? 'mb-3 rounded-pill border text-danger form-control':'mb-3 form-control border rounded-pill'">
 
-                    <p class="h6">Federation:</p>
+                    <p class="h6">Kanton:</p>
                     <!-- (change)="citiesCombo($event)" -->
-                    <select [disabled]="action!=='Save'" (change)="citiesCombo($event)" name="federation"
-                        [(ngModel)]="buyer.user.federation" class="form-select rounded-pill mb-3"
-                        id="select_federation">
-                        <option value="">--Odaberite lokaciju--</option>
-                        <option [disabled]="i == 0 || i == 11 || i == 16" *ngFor="let fed of federations, let i = index"
+                    <select [disabled]="action!=='Save'" (change)="citiesCombo($event)" name="federation" [(ngModel)]="fed" class="form-select rounded-pill mb-3" id="select_federation">
+                        <option value="">--Odaberite lokaciju--</option>                        
+                        <option [value]="fed.id" [disabled]="fed.id==0" *ngFor="let fed of federations">{{fed.name}}</option>
+                        
+                        <!-- <option [disabled]="i == 0 || i == 11 || i == 16" *ngFor="let fed of federations, let i = index"
                             [value]="i-1">
                             {{fed}}
-                        </option>
+                        </option> -->
+
                     </select>
 
                     <!-- <input [disabled]="action!=='Save'" type="text" [(ngModel)]="buyer.user.federation"
                       [ngClass]="buyer.user.federation==null ? 'mb-3 rounded-pill border text-danger form-control':'mb-3 form-control border rounded-pill'"> -->
 
-                    <p class="h6">City:</p>
+                    <p class="h6">Grad:</p>
 
                     <select [disabled]="action!=='Save'" name="city" (change)="selectedCity($event)"
-                        [(ngModel)]="buyer.user.city" class="form-select rounded-pill mb-3" id="select_federation">
+                        [(ngModel)]="city" class="form-select rounded-pill mb-3" id="select_city">
                         <option value="">--Odaberite Grad--</option>
-                        <option *ngFor="let fed of citiesToCombo, let i = index" [value]="i">{{fed}}</option>
+                        <option *ngFor="let c of citiesToCombo" [value]="c.id">{{c.name}}</option>
                     </select>
 
                     <!-- <input [disabled]="action!=='Save'" type="text" [(ngModel)]="buyer.user.city"
@@ -190,7 +178,6 @@
 
 
 
-<!-- vertial nav responsive -->
 <div id="menu" class="menu d-flex" [ngClass]="{'mostrar': showSidebar}">
 
     <div class="w-100">
@@ -202,15 +189,15 @@
 
         <ul class="bg-primary">
             <li class="bg-primary m-0" style="height: 40px;">
-                <a class="nav-link my-3 h4 px-2 h-100" [ngClass]="{'active': currentPage === 'company'}"
+                <a class="nav-link my-3 h4 px-2 h-100" [ngClass]="{'active': currentPage === 'companies'}"
                     (click)="showSellerList()">
                     <fa-icon [icon]="['fas', 'building']" style="font-size: 1.1em"></fa-icon>
-                    &nbsp;Kompanijas
+                    &nbsp;Odobrene firme
                 </a>
             </li>
 
             <li>
-                <a class="nav-link h4 m-0 px-2" style="height: 40px;" [ngClass]="{'active': currentPage === 'adlist'}"
+                <a class="nav-link h4 m-0 px-2" style="height: 40px;" [ngClass]="{'active': currentPage === 'customers'}"
                     id="product-list" (click)="showBuyerList()">
                     <fa-icon [icon]="['fas', 'users']" style="font-size: 1.1em"></fa-icon>
                     &nbsp;Objavljivanje
@@ -218,10 +205,10 @@
             </li>
 
             <li>
-                <a class="nav-link h4 m-0 px-2" style="height: 40px;" [ngClass]="{'active': currentPage === 'social'}"
+                <a class="nav-link h4 m-0 px-2" style="height: 40px;" [ngClass]="{'active': currentPage === 'companyConfirmation'}"
                     (click)="showSellerListToConfirm()">
                     <fa-icon [icon]="['fas', 'building-circle-exclamation']" style="font-size: 1.1em"></fa-icon>
-                    &nbsp;Kompanijas to confirm
+                    &nbsp;Firme za odobravanje
                 </a>
             </li>
 
@@ -229,7 +216,15 @@
                 <a class="nav-link" [ngClass]="{'active': currentPage === 'tenderConfirmation'}"
                     (click)="showTenderListToConfirm()">
                     <fa-icon [icon]="['fas', 'building-circle-exclamation']" style="font-size: 1.1em"></fa-icon>
-                    <span class="d-none d-sm-inline">&nbsp;Tender to confirm</span>
+                    <span class="d-none d-sm-inline">&nbsp;Tenderi za odobravanje</span>
+                </a>
+            </li>
+
+            <li class="nav-item border w-100">
+                <a class="nav-link" [ngClass]="{'active': currentPage === 'tenderposted'}"
+                    (click)="showTenderList()">
+                    <fa-icon [icon]="['fas', 'newspaper']" style="font-size: 1.1em"></fa-icon>
+                    <span class="d-none d-sm-inline">&nbsp;Objavljeni tenderi</span>
                 </a>
             </li>
 
@@ -246,3 +241,71 @@
 
 
 </div>
+
+
+
+
+<!-- vertial nav responsive -->
+<!-- <div id="menu" class="menu d-flex" [ngClass]="{'mostrar': showSidebar}">
+
+    <div class="w-100">
+
+        <div class="text-end m-2">
+            <button class="btn btn-danger" (click)="toggleSidebar()">X</button>
+        </div>
+
+
+        <ul class="bg-primary">
+            <li class="bg-primary m-0" style="height: 40px;">
+                <a class="nav-link my-3 h4 px-2 h-100" [ngClass]="{'active': currentPage === 'companies'}"
+                    (click)="showSellerList()">
+                    <fa-icon [icon]="['fas', 'building']" style="font-size: 1.1em"></fa-icon>
+                    &nbsp;Odobrene firme
+                </a>
+            </li>
+
+            <li>
+                <a class="nav-link h4 m-0 px-2" style="height: 40px;" [ngClass]="{'active': currentPage === 'customers'}"
+                    id="product-list" (click)="showBuyerList()">
+                    <fa-icon [icon]="['fas', 'users']" style="font-size: 1.1em"></fa-icon>
+                    &nbsp;Objavljivanje
+                </a>
+            </li>
+
+            <li>
+                <a class="nav-link h4 m-0 px-2" style="height: 40px;" [ngClass]="{'active': currentPage === 'companyConfirmation'}"
+                    (click)="showSellerListToConfirm()">
+                    <fa-icon [icon]="['fas', 'building-circle-exclamation']" style="font-size: 1.1em"></fa-icon>
+                    &nbsp;Firme za odobravanje
+                </a>
+            </li>
+
+            <li class="nav-item border w-100">
+                <a class="nav-link" [ngClass]="{'active': currentPage === 'tenderConfirmation'}"
+                    (click)="showTenderListToConfirm()">
+                    <fa-icon [icon]="['fas', 'building-circle-exclamation']" style="font-size: 1.1em"></fa-icon>
+                    <span class="d-none d-sm-inline">&nbsp;Tenderi za odobravanje</span>
+                </a>
+            </li>
+
+            <li class="nav-item border w-100">
+                <a class="nav-link" [ngClass]="{'active': currentPage === 'tenderposted'}"
+                    (click)="showTenderList()">
+                    <fa-icon [icon]="['fas', 'newspaper']" style="font-size: 1.1em"></fa-icon>
+                    <span class="d-none d-sm-inline">&nbsp;Objavljeni tenderi</span>
+                </a>
+            </li>
+
+            <li>
+                <a class="nav-link m-0 h4 px-2" style="height: 40px;" href="#" (click)="logout()">
+                    <fa-icon [icon]="['fas', 'right-from-bracket']" style="font-size: 1.1em"></fa-icon>
+                    &nbsp;Odjava
+                </a>
+            </li>
+
+        </ul>
+
+    </div>
+
+
+</div> -->

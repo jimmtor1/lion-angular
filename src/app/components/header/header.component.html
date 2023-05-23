@@ -1,0 +1,117 @@
+<!-- <header> -->
+<!-- computer -->
+<div *ngIf="(isMobile$ | async) === false" class="container">
+    <div class="row align-items-center">
+        
+        <div class="col-3">
+            <a routerLink="/">
+                <img src="assets/images/lion_logo.png" alt="DCL.ba" class="w-100">
+            </a>
+        </div>
+
+        <div class="col-6">
+
+            <form class="d-flex">
+                <input class="form-control border border-2 border-danger search-input" type="search"
+                    placeholder="Pretraži proizvode" aria-label="Search">
+                <button class="btn btn-danger search-button" style="width: 60px;" type="submit">
+                    <i class="fa fa-search"></i>
+                    <fa-icon [icon]="['fas', 'magnifying-glass']"></fa-icon>
+                </button>
+            </form>
+
+        </div>
+
+        <div class="col-3">            
+            <div class="row">
+
+                <div class="col text-center">
+
+                    <a routerLink="login" style="text-decoration: none;" class="text-danger">
+                        <!-- <i class="fa fa-user-o fs-5"></i> -->
+                        <fa-icon [icon]="['fas', 'user']" style="font-size: 1.1em"></fa-icon>
+                        <p class="small text-dark flex-nowrap">{{email}}</p>
+                    </a>
+
+                </div>
+
+                <div class="col text-center">
+
+                    <a *ngIf="role == 2" routerLink="product/0" style="text-decoration: none;"
+                        class="text-danger text-center">
+                        <fa-icon [icon]="['fas', 'store']" style="font-size: 1.1em"></fa-icon>
+                        <p class="small text-dark">Vaši oglasi</p>
+                    </a>
+
+                    <a *ngIf="role < 2" (click)="direction()" class="text-danger"
+                        style="text-decoration: none; cursor: pointer;">
+                        <!-- <i class="fa fa-shopping-bag fs-5"></i> -->
+                        <fa-icon [icon]="['fas', 'shopping-cart']" style="font-size: 1.1em"></fa-icon>
+                        <p class="small text-dark">Košarica</p>
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<!-- mobile -->
+<div *ngIf="(isMobile$ | async) === true" class="container">
+
+    <div class="row align-items-center">
+
+        <!-- logo -->
+        <div class="col-2 text-center px-1">
+            <a routerLink="/">
+                <img class="bg-warning" src="assets/images/lion_logo_small.png" alt="DCL.ba" class="w-100">
+            </a>
+        </div>
+
+        <!-- searcher -->
+        <div class="col-7 px-1">
+            <form class="d-flex">
+                <input class="form-control border border-2 border-danger search-input" type="search"
+                    placeholder="Pretraži proizvode" aria-label="Search">
+                <button class="btn btn-danger search-button" style="width: 50px;" type="submit">
+                    <!-- <i class="fa fa-search"></i> -->
+                    <fa-icon [icon]="['fas', 'magnifying-glass']"></fa-icon>
+                </button>
+            </form>
+        </div>
+
+        <!-- user-icon -->
+        <div class="col-3">
+            <div class="row text-center">
+
+                <div class="col" style="border-right: 1px solid black;">
+                    <a routerLink="login" style="text-decoration: none;" class="text-center text-danger">
+                        <fa-icon [icon]="['fas', 'user']" style="font-size: 1.1em"></fa-icon>
+                    </a>
+                </div>
+
+                <div class="col">
+                    <a *ngIf="role < 2" (click)="direction()" style="text-decoration: none; cursor: pointer;"
+                        class="text-center text-danger">
+                        <fa-icon [icon]="['fas', 'shopping-cart']" style="font-size: 1.1em"></fa-icon>
+                    </a>
+
+                    <a *ngIf="role == 2" routerLink="product" style="text-decoration: none;"
+                        class="text-danger text-center">
+                        <fa-icon [icon]="['fas', 'store']" style="font-size: 1.1em"></fa-icon>
+                    </a>
+
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- </header> -->
