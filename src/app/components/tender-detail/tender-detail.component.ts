@@ -44,7 +44,10 @@ export class TenderDetailComponent implements OnInit {
 
           this.userService.getById(this.tender.iduser).subscribe(u => {
             this.user = u;
-            this.fed = select_fed(this.user.federation).name;
+            let x = select_fed(this.user.federation);
+            if(x){
+              this.fed = x.name;
+            }            
             this.city = select_city(this.user.city).name;
           });
 
@@ -56,10 +59,12 @@ export class TenderDetailComponent implements OnInit {
 
           this.userService.getById(this.tender.iduser).subscribe(u => {
             this.user = u;
-            this.fed = select_fed(this.user.federation).name;
+            let x = select_fed(this.user.federation);
+            if(x){
+              this.fed = x.name;
+            }            
             this.city = select_city(this.user.city).name;
           });
-
 
           const role = localStorage.getItem('role');
           if (role) {

@@ -44,8 +44,11 @@ export class PanelBuyerComponent implements OnInit {
 
       this.buyerService.getByIdUser(this.iduser).subscribe(buy => {
         this.buyer = buy;
-
-        this.fed = select_fed(this.buyer.user.federation).id;
+        let x = select_fed(this.buyer.user.federation);
+        if(x){
+          this.fed = x.id;
+        }
+        
         this.city = select_city(this.buyer.user.city).id;
         this.citiesToCombo = selectListByFed(this.buyer.user.federation);
 

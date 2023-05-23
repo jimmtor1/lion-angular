@@ -36,7 +36,11 @@ export class ViewProviderToClienteComponent implements OnInit {
           this.seller = pro; 
 
           if(this.seller.user.federation){
-            this.fed = select_fed(this.seller.user.federation).name;
+              let x = select_fed(this.seller.user.federation);
+            if(x){
+              this.fed = x.name;
+            }
+            
           }
           
           if(this.seller.user.city){

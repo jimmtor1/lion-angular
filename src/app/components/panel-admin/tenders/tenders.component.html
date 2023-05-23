@@ -4,10 +4,10 @@
         <div class="card-header">
             <ul class="nav nav-tabs card-header-tabs">
                 <li class="nav-item">
-                    <a class="nav-link active" [ngClass]="{'active':active}" (click)="getAuthorizedList()">Odobrene</a>
+                    <a class="nav-link active"  style="cursor: pointer;" [ngClass]="{'active':active}" (click)="getAuthorizedList()">Odobrene</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" [ngClass]="{'active':!active}" l (click)="getNoAutorizedList()">Za
+                    <a class="nav-link"  style="cursor: pointer;" [ngClass]="{'active':!active}" l (click)="getNoAutorizedList()">Za
                         odobravanje</a>
                 </li>
             </ul>
@@ -44,7 +44,7 @@
 
                             <td>
                                 <!-- style="cursor: pointer;" -->
-                                <a class="btn btn-dark " style="margin-right: 5px;">
+                                <a routerLink="/paneladmin/tenderDetail/{{tender.idtender}}" class="btn btn-dark " style="margin-right: 5px;">
                                     detils
                                     <!-- <fa-icon [icon]="['fas', 'circle-info']" class="fs-5">
                                     </fa-icon> -->

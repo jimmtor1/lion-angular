@@ -24,6 +24,7 @@ export class TenderListComponent {
     const rol = localStorage.getItem("role");
     if (rol) {
       if (JSON.parse(rol) == 2) {
+        
         const usuarioString = localStorage.getItem("iduser");        
         if (usuarioString) {
           

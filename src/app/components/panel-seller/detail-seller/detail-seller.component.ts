@@ -1,48 +1,107 @@
-import { DatePipe } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 import { Company_subcategory, Seller } from 'src/app/models/seller';
 import { Subcategory } from 'src/app/models/subcategory';
-import { CategoryService } from 'src/app/services/category.service';
 import { FEDERATIONS, IMG_PROFILE_URL, federation, selectListByFed, select_city, select_fed } from 'src/app/services/helper';
 import { SellerService } from 'src/app/services/seller.service';
-
-
+import { DatePipe } from '@angular/common';
+import { CategoryService } from 'src/app/services/category.service';
 
 @Component({
-  selector: 'seller-company-form',
-  templateUrl: './seller-company-form.component.html',
-  styleUrls: ['./seller-company-form.component.css']
+  selector: 'app-detail-seller',
+  templateUrl: './detail-seller.component.html',
+  styleUrls: ['./detail-seller.component.css']
 })
-export class SellerCompanyFormComponent implements OnInit {
+export class DetailSellerComponent implements OnInit {
 
-  seller: Seller = new Seller();
-  selectedCategory: number;
-  subcategories: Subcategory[];
+  seller: Seller;
   iduser: number;
-  loading: boolean = true;
+  urlprof_img = `${IMG_PROFILE_URL}`;
   image: string;
+  subcategories: Subcategory[] = [];
+
+  citiesToCombo: any[] = [];
+  company_category: Company_subcategory[] = [];
   imageFile: File;
   imageSelected = false;
-  company_category: Company_subcategory[] = [];
-  citiesToCombo: any[] = [];
 
   federations: federation[] = FEDERATIONS;
-  
-  fed: federation | null;
+  fed: federation;
   city: number;
 
-  urlprof_img = `${IMG_PROFILE_URL}`;
+  //idcity: number;
 
-  // selectedSucategories: Subcategory[] = [];
+  editmode: boolean = false;
 
-  constructor(private categoryService: CategoryService, private sellerService: SellerService, private router: Router, private datePipe: DatePipe) { }
+  constructor(private sellerService: SellerService, private datePipe: DatePipe, private categoryService: CategoryService) { }
 
   ngOnInit(): void {
-    this.getSeller();
-    this.subcategoriesCombo();
+
+    const usuarioString = localStorage.getItem("iduser");
+    if (usuarioString) {
+
+      if (JSON.parse(usuarioString) > 0) {
+        this.iduser = JSON.parse(usuarioString);
+        this.getSeller();
+      }
+    }
+
   }
 
+  getSeller() {
+
+    this.sellerService.getById(this.iduser).subscribe(sellerBd => {
+      this.seller = sellerBd;
+
+      this.image = this.urlprof_img + this.seller.image;
+
+      if (this.seller.user.federation) {
+        let x = select_fed(this.seller.user.federation);
+        if(x){
+          this.fed = x;
+        }
+         
+        if(this.fed){
+          this.citiesToCombo = selectListByFed(this.fed.id);  
+        }  
+            
+      }
+
+      if (this.seller.user.city) {
+        this.city = select_city(this.seller.user.city).id;
+      }
+
+      this.seller.providerSubcategoryList.forEach(p => {
+        this.subcategories.push(p.subcategory);
+      })
+
+    });
+  }
+
+
+  citiesCombo(event: Event) {
+    let fed = parseInt((event.target as HTMLSelectElement)?.value);
+    this.seller.user.federation = fed;
+    this.citiesToCombo = selectListByFed(fed);
+  }
+
+  selectedCity(event: Event) {
+    this.city = parseInt((event.target as HTMLSelectElement)?.value);
+  }
+
+  activeEdit() {
+    this.editmode = !this.editmode;
+
+    if (this.editmode) {
+      this.subcategoriesCombo();
+    }else{
+      this.subcategories = [];
+      this.seller.providerSubcategoryList.forEach(p => {
+        this.subcategories.push(p.subcategory);
+      })
+    }
+
+
+  }
 
   subcategoriesCombo() {
     this.categoryService.getAllsub().subscribe(subcategories => {
@@ -65,36 +124,41 @@ export class SellerCompanyFormComponent implements OnInit {
       this.subcategories.splice(21, 0, sub2);
       this.subcategories.splice(48, 0, sub3);
       this.subcategories.splice(59, 0, sub4);
-      this.loading = false;      
+
     });
+  }
+
+  subCategoryAdded(event: Event): void {
+
+    let d = parseInt((event.target as HTMLSelectElement)?.value)
+
+    let sub = this.getSubcategoryById(d);
+
+    let exist = false;
+    this.company_category.forEach(c => {
+      if (c.subcategory == sub) {
+        exist = true;
+        return;
+      }
+    });
+
+    if (!exist) {
+      this.company_category.push(new Company_subcategory(sub));
+    }
+
 
   }
 
-  getSeller() {
+  getSubcategoryById(idsubcategory: number): Subcategory {
 
-    const usuarioString = localStorage.getItem("iduser");
-    if (usuarioString) {
-      if (JSON.parse(usuarioString) > 0) {
-        // this.iduser = JSON.parse(usuarioString); 
-        this.sellerService.getById(JSON.parse(usuarioString)).subscribe(sellerBd => {
-          this.seller = sellerBd;
-          
-          this.fed = select_fed(this.seller.user.federation);
-          this.city = select_city(this.seller.user.city).id;
-
-          this.image = this.urlprof_img+this.seller.image;
-
-          this.seller.providerSubcategoryList.forEach(p => {
-            this.company_category.push(p);
-          })
-
-          this.citiesCombo2();
-
-        });
-
+    let sub: Subcategory = new Subcategory();
+    this.subcategories.forEach(s => {
+      if (s.idsubcategory == idsubcategory) {
+        sub = s;
+        return;
       }
-    }
-
+    })
+    return sub;
 
   }
 
@@ -116,10 +180,12 @@ export class SellerCompanyFormComponent implements OnInit {
 
   }
 
+  deleteSubcategory(sub: number) {
+    this.company_category.splice(sub, 1);
+  }
 
   save() {
-    const formData = new FormData();
-    // console.log(this.seller);
+    const formData = new FormData();   
     this.company_category.forEach(sub => {
       formData.append('idsubcategories', sub.subcategory.idsubcategory.toString())
     })
@@ -157,7 +223,7 @@ export class SellerCompanyFormComponent implements OnInit {
     if (this.seller.endTime) {
       formData.append('endTime', this.seller.endTime.toString());
     }
-    
+
     formData.append('facebook', this.seller.facebook);
     formData.append('instagram', this.seller.instagram);
     formData.append('youtube', this.seller.youtube);
@@ -167,18 +233,18 @@ export class SellerCompanyFormComponent implements OnInit {
     formData.append('firstName', this.seller.user.firstName);
     formData.append('lastName', this.seller.user.lastName);
 
-    if(this.fed){
-      formData.append('federation', this.fed.toString());
-    }else if(this.seller.user.federation){
-      formData.append('federation', this.seller.user.federation.toString());      
+    if (this.fed) {      
+      formData.append('federation', this.fed.id.toString());
+    } else if (this.seller.user.federation) {      
+      formData.append('federation', this.seller.user.federation.toString());
     }
 
-    if(this.city){
+    if (this.city) {
       formData.append('city', this.city.toString());
-    }else if(this.seller.user.city){
-      formData.append('federation', this.seller.user.city.toString());      
+    } else if (this.seller.user.city) {
+      formData.append('federation', this.seller.user.city.toString());
     }
-       
+
     formData.append('phone', this.seller.user.phone);
     formData.append('password', this.seller.user.password);
 
@@ -201,58 +267,6 @@ export class SellerCompanyFormComponent implements OnInit {
     }, error => console.log(error));
   }
 
-  subCategoryAdded(event: Event): void {
-
-    let d = parseInt((event.target as HTMLSelectElement)?.value)
-    
-    let sub=this.getSubcategoryById(d);
-
-    let exist = false;
-    this.company_category.forEach(c => {
-      if (c.subcategory == sub) {
-        exist = true;
-        return;
-      }
-    });
-
-    if (!exist) {
-      this.company_category.push(new Company_subcategory(sub));
-    }
-
-
-  }
-
-  getSubcategoryById(idsubcategory:number):Subcategory{
-
-    let sub:Subcategory=new Subcategory();
-    this.subcategories.forEach(s=>{
-      if(s.idsubcategory==idsubcategory){
-        sub = s;
-        return;
-      }
-    })
-    return sub;
-
-  }
-
-  deleteSubcategory(sub: number) {
-    this.company_category.splice(sub, 1);
-  }
-
-  citiesCombo(event: Event) {
-    let fed = parseInt((event.target as HTMLSelectElement)?.value);
-    this.seller.user.federation = fed;
-    this.citiesToCombo = selectListByFed(fed);
-  }
-
-  citiesCombo2() {
-    this.citiesToCombo = selectListByFed(this.seller.user.federation);
-  }
-
-  selectedCity(event: Event) {
-    this.city = parseInt((event.target as HTMLSelectElement)?.value);
-    //this.seller.user.city = parseInt((event.target as HTMLSelectElement)?.value);
-  }
-
 
 }
+

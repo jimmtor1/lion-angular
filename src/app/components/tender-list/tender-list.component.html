@@ -12,43 +12,46 @@
 </div>
 
 <div *ngIf="authorized">
-<div *ngIf="!loading && detail==0" class="container">
 
-    <div class="row">
+    <div *ngIf="!loading && detail==0" class="container">
 
-        <p *ngIf="tenders" class="h4 my-3">Tenderi</p>
+        <div class="row">
 
-        <div class="col-12">
+            <p *ngIf="tenders" class="h4 my-3">Tenderi</p>
 
-            <div *ngIf="tenders">
+            <div class="col-12">
 
-                <div *ngFor="let t of tenders" class="card mb-2">
+                <div *ngIf="tenders">
 
-                    <div class="card-body">
+                    <div *ngFor="let t of tenders" class="card mb-2">
 
-                        <p class="h5">{{t.projectName}}</p>
-                        <p class="pb-0" style="overflow: hidden; max-height: 3em;">{{t.description}}</p>
+                        <div class="card-body">
 
-                        <span class="text-muted">Posted: {{t.createDate}}</span>
+                            <p class="h5">{{t.projectName}}</p>
+                            <p class="pb-0" style="overflow: hidden; max-height: 3em;">{{t.description}}</p>
 
-                        <!-- <a [routerLink]="['/tenderDetail',t.idtender]" class="stretched-link"></a> -->
+                            <span class="text-muted">Posted: {{t.createDate}}</span>
 
-                        <a (click)="showTenderDetail(t.idtender)" class="stretched-link"></a>
+                            <!-- <a [routerLink]="['/tenderDetail',t.idtender]" class="stretched-link"></a> -->
 
-                                              
+                            <a (click)="showTenderDetail(t.idtender)" class="stretched-link"></a>
+
+
+
+                        </div>
 
                     </div>
 
                 </div>
-
             </div>
+
         </div>
 
     </div>
 
-</div>
+    
 </div>
 
-<div *ngIf="detail>0">    
-    <tender-detail [idtender]="detail" ></tender-detail>
+<div *ngIf="detail>0">
+    <tender-detail [idtender]="detail"></tender-detail>
 </div>

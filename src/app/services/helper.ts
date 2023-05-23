@@ -43,13 +43,17 @@ export const FEDERATIONS = [
 ];
 
 
-export function select_fed(id: number) {
-    if (id > 11) {
-        id += 1;
-    }else if(id > 14){
-        id += 2;
+export function select_fed(id: number):federation | null {
+    
+    let federation = null;
+    for (let index = 0; index < FEDERATIONS.length; index++) {
+        if(FEDERATIONS[index].id==id){  
+            federation = FEDERATIONS[index];
+            break;
+        }        
     }
-    return FEDERATIONS[id];
+    return federation;
+   
 }
 
 class city {

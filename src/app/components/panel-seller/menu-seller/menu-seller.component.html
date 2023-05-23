@@ -1,0 +1,35 @@
+<div class="container mt-2">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <div class="navbar-collapse" id="navbarText">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" routerLinkActive="active" routerLink="/panelseller/details">
+                            <fa-icon [icon]="['fas','building']"></fa-icon>
+                            Kompanija
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLinkActive="active" routerLink="/panelseller/products">
+                            <fa-icon [icon]="['fas','box']"></fa-icon>
+                            Objavljivanje
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLinkActive="active" routerLink="/panelseller/tenders">
+                            <fa-icon [icon]="['fas','list-check']"></fa-icon>
+                            Tenderi
+                        </a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <a href="#" (click)="logout()" style="color: antiquewhite;">
+                        <fa-icon [icon]="['fas','sign-out']"></fa-icon>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+</div>

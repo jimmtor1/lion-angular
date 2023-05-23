@@ -114,7 +114,10 @@ export class AdminPanelComponent {
 
     this.buyerService.getByIdUser(idbuyer).subscribe(x=>{
       this.buyer = x;
-      this.fed = select_fed(this.buyer.user.federation).id;
+      let y = select_fed(this.buyer.user.federation);
+      if(y){
+        this.fed = y.id;
+      }      
       this.city = select_city(this.buyer.user.city).id;
       this.citiesToCombo = selectListByFed(this.buyer.user.federation);
     })

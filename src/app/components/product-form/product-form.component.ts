@@ -42,35 +42,48 @@ export class ProductFormComponent implements OnInit {
     
     this.route.params.subscribe(params => {
 
-      if (params['id'] == 0) {
+      if (params['id']){
+        this.getProductById(params['id']);
+      }else{
+        this.subcategoriesCombo2();
+      }   
 
-        this.getUserById(params['id']);
-        this.addTitle = true;
+    })
 
-      } else if (this.id > 0) {  
+
+    // this.route.params.subscribe(params => {
+
+    //   if (params['id'] == 0) {
+
+    //     this.getUserById(params['id']);
+    //     this.addTitle = true;
+
+    //   } else if (this.id > 0) {  
      
-        this.getUserById(this.id);
-      }
-     });
+    //     this.getUserById(this.id);
+    //   }
+    //  });
 
-    const u = localStorage.getItem("iduser");
-    if (u) {
-      this.iduser = JSON.parse(u);
-      this.sellerService.getById(this.iduser).subscribe(s => {
-        this.seller = s;
+    // const u = localStorage.getItem("iduser");
+    // if (u) {
+    //   this.iduser = JSON.parse(u);
+    //   this.sellerService.getById(this.iduser).subscribe(s => {
+    //     this.seller = s;
      
-        if(this.seller.accepted){
+    //     if(this.seller.accepted){
  
-          this.subcategoriesCombo2();
-        }        
-      });
-    }    
+    //       this.subcategoriesCombo2();
+    //     }        
+    //   });
+    // }    
 
   }
 
-  getUserById(id: number) {
+  getProductById(id: number) {
     this.productService.getById(id).subscribe(bdproduct => {
       this.product = bdproduct;
+      this.subcategoriesCombo2();
+      
       if (this.product.price == 0) {
         this.priceRequest = true;
       } else {
