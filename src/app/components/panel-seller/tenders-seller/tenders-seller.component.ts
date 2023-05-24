@@ -28,7 +28,7 @@ export class TendersSellerComponent implements OnInit {
       this.tenderService.getAuthorizedListTender().subscribe(list => {
         this.tenders = list;
         this.page="tendertoapply";
-        //this.active = true;
+        this.active = true;
       }, error => {
         console.log(error);
       });
@@ -51,6 +51,7 @@ export class TendersSellerComponent implements OnInit {
 
       this.tenderService.getListByIduser(JSON.parse(userid)).subscribe(list => {
         this.tenders = list;
+        this.active=false
         this.page="owntender";
       }, error => {
         console.log(error);

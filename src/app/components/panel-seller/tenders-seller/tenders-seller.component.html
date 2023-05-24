@@ -5,16 +5,15 @@
             <ul class="nav nav-tabs card-header-tabs">
                 <li class="nav-item">
                     <a class="nav-link active" style="cursor: pointer;" [ngClass]="{'active':active}"
-                        (click)="getAuthorizedList()">prijaviti se</a>
+                        (click)="getAuthorizedList()">Prijava na tender</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" style="cursor: pointer;" [ngClass]="{'active':!active}" l
-                        (click)="getListByUser()">vaše objave</a>
+                    <a class="nav-link" style="cursor: pointer;" [ngClass]="{'active':!active}" (click)="getListByUser()">Vaši tenderi</a>
                 </li>
             </ul>
         </div>
         <div class="card-body text-start">
-    
+
             <div *ngIf="page=='tendertoapply'" class="row">
 
                 <!-- <p *ngIf="tenders" class="h4 my-3">Tenderi</p> -->
@@ -32,11 +31,7 @@
 
                                 <span class="text-muted">Posted: {{t.createDate}}</span>
 
-                                <!-- <a [routerLink]="['/tenderDetail',t.idtender]" class="stretched-link"></a> -->
-
-                                <!-- <a (click)="showTenderDetail(t.idtender)" class="stretched-link"></a> -->
-
-
+                                <a [routerLink]="['/panelseller/tenderDetail',t.idtender]" class="stretched-link"></a>
 
                             </div>
 
@@ -47,47 +42,53 @@
 
             </div>
 
+            <div *ngIf="page=='owntender'">
 
-            <div *ngIf="page=='owntender'" class="table-responsive">
+                <div class="d-flex justify-content-end mb-1">
+                    <button routerLink="/panelseller/newtender" class="btn btn-secondary btn-sm">Novi tender</button>                    
+                </div>
 
-                <table class="table table-striped">
+                <div class="table-responsive">
 
-                    <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Naziv projekta</th>
-                            <th>Od</th>
-                            <th>Do</th>
-                            <th>Opis projekta</th>
-                            <th>Radnja</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let tender of tenders">
+                    <table class="table table-striped">
 
-                            <th>{{tender.idtender}}</th>
-                            <td>{{tender.projectName}}</td>
-                            <td>{{tender.dateFrom}}</td>
-                            <td>{{tender.dateTo}}</td>
-                            <td>
-                                <p style="overflow: hidden; max-height: 1.2em; line-height: 1; max-width: 360px;"
-                                    class="p-0 m-0">
-                                    {{tender.description}}</p>
-                                ...
-                            </td>
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Naziv projekta</th>
+                                <th>Od</th>
+                                <th>Do</th>
+                                <th>Opis projekta</th>
+                                <th>Radnja</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let tender of tenders">
 
-                            <td>                          
-                                <a routerLink="/panelseller/tenderDetail/{{tender.idtender}}" class="btn btn-dark "
-                                    style="margin-right: 5px;">
-                                    detils
-                                    <fa-icon [icon]="['fas', 'circle-info']" class="fs-5"></fa-icon>
-                                </a>
+                                <th>{{tender.idtender}}</th>
+                                <td>{{tender.projectName}}</td>
+                                <td>{{tender.dateFrom}}</td>
+                                <td>{{tender.dateTo}}</td>
+                                <td>
+                                    <p style="overflow: hidden; max-height: 1.2em; line-height: 1; max-width: 360px;"
+                                        class="p-0 m-0">
+                                        {{tender.description}}</p>
+                                    ...
+                                </td>
 
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                                <td>
+                                    <a routerLink="/panelseller/tenderDetail/{{tender.idtender}}" class="btn btn-dark "
+                                        style="margin-right: 5px;">
+                                        detils
+                                        <fa-icon [icon]="['fas', 'circle-info']" class="fs-5"></fa-icon>
+                                    </a>
 
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
             </div>
 
         </div>

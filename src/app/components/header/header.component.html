@@ -37,10 +37,10 @@
 
                 <div class="col text-center">
 
-                    <a *ngIf="role == 2" routerLink="product/0" style="text-decoration: none;"
+                    <a *ngIf="role == 2" routerLink="/panelseller/product" style="text-decoration: none;"
                         class="text-danger text-center">
                         <fa-icon [icon]="['fas', 'store']" style="font-size: 1.1em"></fa-icon>
-                        <p class="small text-dark">Vaši oglasi</p>
+                        <p class="small text-dark">Objavi</p>
                     </a>
 
                     <a *ngIf="role < 2" (click)="direction()" class="text-danger"

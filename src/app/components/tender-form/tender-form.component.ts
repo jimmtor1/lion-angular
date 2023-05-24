@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 // import { Seller } from 'src/app/models/seller';
 import { Tender } from 'src/app/models/tender';
+import { ModalService } from 'src/app/services/modal.service';
 import { SellerService } from 'src/app/services/seller.service';
 import { TenderService } from 'src/app/services/tender.service';
 
@@ -15,11 +17,11 @@ export class TenderFormComponent {
   tender: Tender = new Tender();
   file: File;
   // seller:Seller;
-  loading:boolean = true;
+  loading: boolean = true;
   // role:number=0;
-  authorized:boolean;
+  authorized: boolean;
 
-  constructor(private tenderService: TenderService, private sellerService: SellerService) { }
+  constructor(private tenderService: TenderService, private sellerService: SellerService, private router: Router, private modalService: ModalService) { }
 
   ngOnInit(): void {
 
@@ -27,12 +29,12 @@ export class TenderFormComponent {
     if (usuarioString) {
 
       if (JSON.parse(usuarioString) > 0) {
-      
+
         this.iduser = JSON.parse(usuarioString);
         const rol = localStorage.getItem("role");
-        if(rol){
+        if (rol) {
           // this.role=JSON.parse(rol);
-     
+
           if (JSON.parse(rol) == 2) {
             // this.sellerService.getById(this.iduser).subscribe(s => {
             //   this.seller = s;
@@ -41,15 +43,15 @@ export class TenderFormComponent {
 
             this.sellerService.isActive(this.iduser).subscribe(s => {
               this.authorized = s;
-              this.loading=false;
+              this.loading = false;
             });
-          }else{
+          } else {
             this.authorized = true;
-            this.loading=false;
+            this.loading = false;
           }
-        }else{
-          this.loading=false;
-        }      
+        } else {
+          this.loading = false;
+        }
 
       }
 
@@ -62,7 +64,7 @@ export class TenderFormComponent {
   }
 
   save() {
-    console.log(this.tender);
+
     const formData = new FormData();
 
     formData.append('file', this.file);
@@ -74,8 +76,8 @@ export class TenderFormComponent {
     formData.append('description', this.tender.description);
 
     this.tenderService.save(formData).subscribe(dato => {
-      //this.router.navigate(['sellerpanel']);
-      location.reload();
+      this.modalService.openModal("Uspješno ste dodali tender. U najkraćem roku očekujte ponude i izaberite najbolju za vas.");
+      this.router.navigate(['panelseller/tenders']);
     }, error => console.log(error));
 
   }

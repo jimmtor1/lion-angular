@@ -1,5 +1,7 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Tender } from 'src/app/models/tender';
+import { DOC_URL } from 'src/app/services/helper';
 import { TenderService } from 'src/app/services/tender.service';
 
 @Component({
@@ -11,8 +13,11 @@ export class TendersComponent implements OnInit {
 
   tenders: Tender[] = [];
   active = true;
+  conf_att_button=false;  
+  urlpdf = DOC_URL;
 
-  constructor(private tenderService: TenderService) { }
+
+  constructor(private tenderService: TenderService, private datePipe: DatePipe) { }
 
   ngOnInit(): void {
     this.getAuthorizedList();
@@ -22,8 +27,9 @@ export class TendersComponent implements OnInit {
     this.tenderService.getAuthorizedListTender().subscribe(list => {
       this.tenders = list;
       this.active = true;
+      this.conf_att_button=false;
     }, error => {
-      console.log();
+      console.log(error);
     });
   }
 
@@ -31,8 +37,9 @@ export class TendersComponent implements OnInit {
     this.tenderService.getListActiceTender().subscribe(list => {
       this.tenders = list;
       this.active = false;
+      this.conf_att_button=true;
     }, error => {
-      console.log();
+      console.log(error);
     });
   }
 

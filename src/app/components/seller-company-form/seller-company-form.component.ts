@@ -50,7 +50,7 @@ export class SellerCompanyFormComponent implements OnInit {
 
       let sub: Subcategory = new Subcategory();
       sub.category = 1;
-      sub.subcategoryName = "Građevinarstvos";
+      sub.subcategoryName = "Građevinarstvo";
       let sub2: Subcategory = new Subcategory();
       sub2.category = 2;
       sub2.subcategoryName = "Sve za kuću";

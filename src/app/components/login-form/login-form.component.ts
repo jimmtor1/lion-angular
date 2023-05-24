@@ -28,7 +28,7 @@ export class LoginFormComponent implements OnInit {
     if (roleString) {
      
       if(JSON.parse(roleString)==1){
-        this.router.navigate(['buyerPanel']);        
+        this.router.navigate(['paneluser']);        
       } else if(JSON.parse(roleString)==2){
         this.router.navigate(['panelseller']);
       }else if(JSON.parse(roleString)==3){

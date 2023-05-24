@@ -36,6 +36,7 @@ import { TenderListComponent } from './components/tender-list/tender-list.compon
 import { TenderTableComponent } from './components/tender-table/tender-table.component';
 import { HeaderComponent } from './components/header/header.component';
 import { NavbarMenuCategoryComponent } from './components/navbar-menu-category/navbar-menu-category.component';
+import { ModalMsComponent } from './components/modal-ms/modal-ms.component';
 
 
 @NgModule({
@@ -65,7 +66,8 @@ import { NavbarMenuCategoryComponent } from './components/navbar-menu-category/n
     TenderListComponent,
     TenderTableComponent, 
     HeaderComponent,
-    NavbarMenuCategoryComponent
+    NavbarMenuCategoryComponent,
+    ModalMsComponent  
   ],
   imports: [
     BrowserModule,

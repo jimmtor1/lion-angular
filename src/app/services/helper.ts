@@ -4,12 +4,10 @@
 // export const IMG_PRODUCT_URL = 'https://test2.dcl.ba/images/product-images/';
 // export const DOC_URL = 'https://test2.dcl.ba/images/documents/';
 
-
 export const API_URL = 'https://test1.dcl.ba/';
 export const IMG_PROFILE_URL = '/images/profile-images/';
 export const IMG_PRODUCT_URL = '/images/product-images/';
 export const DOC_URL = '/images/documents/';
-
 
 export class federation {
     id: number;

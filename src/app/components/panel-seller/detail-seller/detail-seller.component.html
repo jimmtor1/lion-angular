@@ -4,7 +4,7 @@
         <button *ngIf="!editmode" (click)="activeEdit()" class="btn btn-secondary btn-sm">Ažuriraj podatke</button>
         <div *ngIf="editmode">
             <button (click)="activeEdit()" class="btn btn-secondary btn-sm mx-2">Otkaži</button>
-            <button (click)="save()" class="btn btn-danger btn-sm">Odustani</button>
+            <button (click)="save()" class="btn btn-danger btn-sm">Spremi</button>
         </div>
     </div>
 
@@ -46,29 +46,33 @@
                     </div>
 
 
-                    <label for="subcategory">Poddjelatnost&nbsp;<span class="form-label">*</span></label>
-                    <div *ngIf="editmode" class="mb-3">
+                    <label for="subcategory">Sve djelatnosti kojima se bavi firma&nbsp;<span
+                            class="form-label">*</span></label>
+
+                    <!-- <div *ngIf="editmode" class="mb-3"> -->
                         <!--subcategory-->
-                        <select multiple name="subcategory" id="subcategory" (change)="subCategoryAdded($event)"
-                            class="form-select" style="height: 200px;">
-                            <!-- <option value="">--Odaberite podkategoriju--</option> -->
-                            <option *ngFor="let sub of subcategories" [value]="sub.idsubcategory"
+                        <select *ngIf="editmode" multiple name="subcategory" id="subcategory" [(ngModel)]="subcategoriesSelected" (change)="subCategoryAdded($event)"
+                            class="form-select" style="height: 200px;">                           
+                            <option *ngFor="let sub of subcategories" [ngValue]="sub"
                                 [disabled]="sub.idsubcategory==0" [ngClass]="sub.idsubcategory==0 ?'title':''">
                                 {{sub.subcategoryName}}
                             </option>
                         </select>
 
                         <div class="border rounded p-1" style="min-height: 100px;">
-                            <span *ngFor="let sel of company_category, let i = index" class="badge rounded-pill bg-dark"
-                                style="margin-right: 5px;">{{sel.subcategory.subcategoryName}} <button
-                                    (click)="deleteSubcategory(i)">X</button> </span>
+                            <span *ngFor="let sel of subcategoriesSelected, let i = index" class="badge rounded-pill bg-dark"
+                                style="margin-right: 5px;">{{sel.subcategoryName}} 
+                                <!-- <button
+                                    (click)="deleteSubcategory(sel)">X</button> -->
+                                </span> 
                         </div>
-                    </div>
+                    <!-- </div> -->
 
-                    <div *ngIf="!editmode" class="border rounded p-1 mb-2" style="min-height: 100px;">
-                        <span *ngFor="let sel of subcategories" class="badge rounded-pill bg-dark"
+                    <!-- <div *ngIf="!editmode" class="border rounded p-1 mb-2"
+                        style="min-height: 100px; background-color: #e9ecef;">
+                        <span *ngFor="let sel of subcategoriesSelected" class="badge rounded-pill bg-dark"
                             style="margin-right: 5px;">{{sel.subcategoryName}}</span>
-                    </div>
+                    </div> -->
 
 
                     <div class="row">
@@ -270,7 +274,8 @@
                             podatke</button>
                         <div *ngIf="editmode">
                             <button (click)="activeEdit()" class="btn btn-secondary btn-sm mx-2">Otkaži</button>
-                            <button (click)="save()" class="btn btn-danger btn-sm">Odustani</button>
+                            <!-- <button (click)="save()" class="btn btn-danger btn-sm">Spremi</button> -->
+                            <button (click)="save()" class="btn btn-danger btn-sm">Spremi</button>
                         </div>
                     </div>
 
@@ -285,3 +290,4 @@
 
     </div>
 </div>
+

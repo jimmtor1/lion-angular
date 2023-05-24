@@ -6,6 +6,7 @@ import { ProductsSellerComponent } from './products-seller/products-seller.compo
 import { TendersSellerComponent } from './tenders-seller/tenders-seller.component';
 import { TenderDetailComponent } from '../tender-detail/tender-detail.component';
 import { ProductFormComponent } from '../product-form/product-form.component';
+import { TenderFormComponent } from '../tender-form/tender-form.component';
 
 const routes: Routes = [
   {path:'',component:PanelSellerComponent, children: [
@@ -16,7 +17,7 @@ const routes: Routes = [
     {path:'tenderDetail/:idtender', component:TenderDetailComponent},
     {path:'product/:id', component:ProductFormComponent},
     {path:'product', component:ProductFormComponent},
-    // {path: 'addetails/:id', component:ProductDetailComponent},
+    {path:'newtender', component:TenderFormComponent},
   ]}
 ];
 

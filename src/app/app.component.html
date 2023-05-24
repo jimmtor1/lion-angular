@@ -1,13 +1,18 @@
 <header>
-    <app-header></app-header>    
+    <app-header></app-header>
     <navbar-menu-category></navbar-menu-category>
 </header>
 
-<router-outlet></router-outlet>
+<div *ngIf="modalOpen">
+    <modal-ms [message]="ms"></modal-ms>
+</div>
 
+
+<div style="min-height: 68vh;">
+    <router-outlet></router-outlet>
+</div>
 
 <footer>
-    <hr>
     <div class="bg-danger py-3">
         <div class="container m-0 text-center">
             © <a class="h6" routerLink="/">DCL.ba</a> <span class="h6"> - Sva prava zadržana</span>

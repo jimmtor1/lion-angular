@@ -66,16 +66,16 @@ export class RegisterFormComponent implements OnInit {
       if(dato){
         this.modalShow = true;
         this.name = dato.user.firstName;
-        this.result="registracija završena";  
+        this.result="Registracija je uspješno završena";  
       } else{
-        this.result="registracija nije završena";
+        this.result="Registracija nije završena";
       }
       
       //this.router.navigate(['login']);
     },error => {
       this.modalShow = true;
       console.log(error);
-      this.result="registracija nije završena";
+      this.result="Registracija nije završena";
     });
   }
 
@@ -85,14 +85,14 @@ export class RegisterFormComponent implements OnInit {
       if(dato){
         this.modalShow = true;
         this.name = dato.user.firstName;
-        this.result="registracija završena";
+        this.result="Registracija je uspješno završena";
       } else{
-        this.result="registracija nije završena";
+        this.result="Registracija nije završena";
       }
       //this.router.navigate(['login']);
     },error =>{
       this.modalShow = true;
-      this.result="registracija nije završena";
+      this.result="Registracija nije završena";
       console.log(error);
     }
    

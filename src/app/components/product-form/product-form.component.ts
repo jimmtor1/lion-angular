@@ -7,6 +7,7 @@ import { Seller } from 'src/app/models/seller';
 import { Subcategory } from 'src/app/models/subcategory';
 import { CategoryService } from 'src/app/services/category.service';
 import { IMG_PRODUCT_URL } from 'src/app/services/helper';
+import { ModalService } from 'src/app/services/modal.service';
 // import { AuthService } from 'src/app/services/helper';
 import { ProductService } from 'src/app/services/product.service';
 import { SellerService } from 'src/app/services/seller.service';
@@ -32,23 +33,39 @@ export class ProductFormComponent implements OnInit {
   iduser: number;
   addTitle: boolean = false;
   seller: Seller;
+  authorizedSeller = false;
+  loading = true;
 
   urlprod_img = `${IMG_PRODUCT_URL}`;
 
 
-  constructor(private sellerService: SellerService, private renderer2: Renderer2, private categoryService: CategoryService, private productService: ProductService, private router: Router, private route: ActivatedRoute, private datePipe: DatePipe) { }
+  constructor(private sellerService: SellerService, private renderer2: Renderer2, private categoryService: CategoryService, private productService: ProductService, private router: Router, private route: ActivatedRoute, private datePipe: DatePipe, private modaService: ModalService) { }
 
   ngOnInit(): void {
-    
-    this.route.params.subscribe(params => {
 
-      if (params['id']){
-        this.getProductById(params['id']);
-      }else{
-        this.subcategoriesCombo2();
-      }   
+    const u = localStorage.getItem("iduser");
+    if (u) {
+      this.sellerService.isActive(JSON.parse(u)).subscribe(s => {
+        this.authorizedSeller = s
+        if (s) {
+          this.route.params.subscribe(params => {
 
-    })
+            if (params['id']) {
+              this.getProductById(params['id']);
+            } else {
+              this.subcategoriesCombo2();
+            }
+            this.loading=false;
+          })
+        }else{
+          this.loading=false;
+        }
+      });
+    }
+
+
+
+
 
 
     // this.route.params.subscribe(params => {
@@ -59,7 +76,7 @@ export class ProductFormComponent implements OnInit {
     //     this.addTitle = true;
 
     //   } else if (this.id > 0) {  
-     
+
     //     this.getUserById(this.id);
     //   }
     //  });
@@ -69,9 +86,9 @@ export class ProductFormComponent implements OnInit {
     //   this.iduser = JSON.parse(u);
     //   this.sellerService.getById(this.iduser).subscribe(s => {
     //     this.seller = s;
-     
+
     //     if(this.seller.accepted){
- 
+
     //       this.subcategoriesCombo2();
     //     }        
     //   });
@@ -83,7 +100,7 @@ export class ProductFormComponent implements OnInit {
     this.productService.getById(id).subscribe(bdproduct => {
       this.product = bdproduct;
       this.subcategoriesCombo2();
-      
+
       if (this.product.price == 0) {
         this.priceRequest = true;
       } else {
@@ -117,6 +134,7 @@ export class ProductFormComponent implements OnInit {
   }
 
   save() {
+
     const formData = new FormData();
     this.images.forEach(file => {
       formData.append('files', file.file);
@@ -132,9 +150,10 @@ export class ProductFormComponent implements OnInit {
     formData.append('price', this.product.price.toString());
 
     this.productService.saveAd(formData).subscribe(dato => {
-      //this.router.navigate(['sellerpanel']);
-      location.reload();
+      this.modaService.openModal("Uspješno ste dodali vaš oglas.");
+      this.router.navigate(['panelseller/products']);
     }, error => console.log(error));
+
   }
 
   edit() {
@@ -144,7 +163,7 @@ export class ProductFormComponent implements OnInit {
     this.images.forEach(file => {
       formData.append('filesTosave', file.file);
     })
-    
+
     console.log("editando1");
     this.filesTodelete.forEach(imagename => {
       formData.append('filesTodelete', JSON.stringify(imagename));
@@ -161,10 +180,10 @@ export class ProductFormComponent implements OnInit {
     console.log("editando3");
 
     formData.append('idprovider', this.iduser.toString());
-    formData.append('active', this.product.active.toString()); 
-    
+    formData.append('active', this.product.active.toString());
+
     console.log("editando4");
-       
+
     formData.append('price', this.product.price.toString());
 
     console.log("editando5");
@@ -177,7 +196,8 @@ export class ProductFormComponent implements OnInit {
 
 
     this.productService.editAd(formData).subscribe(dato => {
-         location.reload();
+      this.modaService.openModal("Uspješno ste dodali vaš oglas.");
+      this.router.navigate(['panelseller/products']);
     }, error => console.log(error));
 
 
@@ -223,7 +243,7 @@ export class ProductFormComponent implements OnInit {
       for (let i = 0; i < productImg.length; i++) {
         im = new imgclasification();
         im.isNew = false;
-        im.link =  this.urlprod_img + productImg[i].idimage + productImg[i].extension;
+        im.link = this.urlprod_img + productImg[i].idimage + productImg[i].extension;
         im.id = productImg[i].idimage.toString();
         im.productImage = productImg[i];
         this.images.push(im);
@@ -241,7 +261,7 @@ export class ProductFormComponent implements OnInit {
       imageElement.remove();
       let index = this.images.indexOf(im);
       this.images.splice(index, 1);
-     
+
     } else if (!im.isNew && imageElement !== null) {
 
       this.filesTodelete.push(im.productImage);

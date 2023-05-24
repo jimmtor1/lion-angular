@@ -51,6 +51,14 @@ export class TenderDetailComponent implements OnInit {
             this.city = select_city(this.user.city).name;
           });
 
+          const role = localStorage.getItem('role');
+          if (role) {
+            this.id_current_role = JSON.parse(role);
+            if (this.id_current_role !== 3) {
+              this.get_already_offer();
+            }
+          }
+
         });
       } else {
 

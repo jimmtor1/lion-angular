@@ -39,7 +39,8 @@ const routes: Routes = [
   {path: 'tenderList', component:TenderListComponent},
   {path: 'sellerPanel', component:SellerPanelComponent},
   {path: 'paneladmin', loadChildren:() => import('./components/panel-admin/panel-admin.module').then(x=> x.PanelAdminModule)},
-  {path: 'panelseller', loadChildren:() => import('./components/panel-seller/panel-seller.module').then(x=> x.PanelSellerModule)}
+  {path: 'panelseller', loadChildren:() => import('./components/panel-seller/panel-seller.module').then(x=> x.PanelSellerModule)},
+  {path:'paneluser',loadChildren:() => import('./components/panel-buyer/panel-buyer.module').then(x=> x.PanelBuyerModule)}
 ];
 
 @NgModule({

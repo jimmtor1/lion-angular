@@ -17,8 +17,7 @@
                     <h6 class="card-title">{{product.productName}}</h6>
                     <p class="card-text mb-0" *ngIf="product.price==0"><b>Cijena po dogovoru</b></p>
                     <p class="card-text mb-0" *ngIf="product.price>0"><b>{{product.price}}</b> <b> KM</b></p>
-                    <a routerLink="/panelseller/product/{{product.idproduct}}" class="stretched-link m-0 p-0"></a>
-                    <!-- (click)="showEditProductComponente(product.idproduct)" -->
+                    <a routerLink="/panelseller/product/{{product.idproduct}}" class="stretched-link m-0 p-0"></a>                    
                 </div>
             </div>
         </div>
