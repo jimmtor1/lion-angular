@@ -1,8 +1,8 @@
-<div class="container mt-3">
+<div class="container mt-5">
 
     <div [ngClass]="(isMobile$ | async) ?'w-75 mx-auto':'w-50 mx-auto'">
 
-        <h2>Registracija</h2>
+        <h2 class="text-center mb-4">Registracija</h2>
 
         <form (ngSubmit)="onSubmit()">
 
@@ -12,21 +12,37 @@
 
             <div class="mb-3">
                 <label for="reg_email">Email adresa&nbsp;<span class="form-label">*</span></label>
-                <input type="email" class="form-control" name="email" id="reg_email" [(ngModel)]="user.email"
+                <input required type="email" class="form-control" name="email" id="reg_email" [(ngModel)]="user.email"
                     autocomplete="email" value="">
             </div>
 
 
-            <div class="mb-3">
+
+            <!-- <div class="mb-3">
                 <label for="reg_password">Šifra&nbsp;<span class="form-label">*</span></label>
                 <input type="password" class="form-control" name="reg_password" id="reg_password"
                     [(ngModel)]="user.password">
+            </div> -->
+
+
+            <div class="row mb-3 g-3">
+
+                <div class="col-12 col-sm-6">
+                    <label for="first-name">Ime<span class="required">*</span></label>
+                    <input required type="text" class="input-text form-control" name="fname" id="first-name" value=""
+                         [(ngModel)]="user.firstName">
+                </div>
+
+                <div class="col-12 col-sm-6">
+                    <label for="last-name">Prezime<span class="required">*</span></label>
+                    <input required type="text" class="input-text form-control" name="lname" id="last-name" value=""
+                         [(ngModel)]="user.lastName">
+                </div>
+
             </div>
 
-
-
-            <div class="split-row form-row-wide">
-                <p class="form-row form-group">
+            <!-- <div class="split-row form-row-wide"> -->
+            <!-- <p class="form-row form-group">
                     <label for="first-name">Ime<span class="required">*</span></label>
                     <input type="text" class="input-text form-control" name="fname" id="first-name" value=""
                         required="required" [(ngModel)]="user.firstName">
@@ -36,12 +52,12 @@
                     <label for="last-name">Prezime<span class="required">*</span></label>
                     <input type="text" class="input-text form-control" name="lname" id="last-name" value=""
                         required="required" [(ngModel)]="user.lastName">
-                </p>
-            </div>
+                </p> -->
+            <!-- </div> -->
 
 
-            <div class="row mb-3">
-                <div class="col">
+            <div class="row mb-3 g-3">
+                <div class="col-12 col-sm-6">
                     <label for="">Kanton</label>
                     <select name="federation" (change)="citiesCombo($event)" [(ngModel)]="fed" class="form-select"
                         id="select_federation">
@@ -57,7 +73,7 @@
 
 
                 </div>
-                <div class="col">
+                <div class="col-12 col-sm-6">
                     <label for="">Grad</label>
                     <select name="city" (change)="selectedCity($event)" [(ngModel)]="city" class="form-select"
                         id="select_city">
@@ -73,6 +89,23 @@
                     required="required" [(ngModel)]="user.phone">
             </p>
 
+            <div class="row mb-3">
+                <div class="col-12 col-sm-6">
+                    <label for="reg_password">Šifra&nbsp;<span class="form-label">*</span></label>
+                    <input type="password" class="form-control" name="reg_password" id="reg_password"
+                        [(ngModel)]="user.password">
+                </div>
+                <div class="col-12 col-sm-6">
+                    <label for="conf_password">Potvrda Šifra&nbsp;<span class="form-label">*</span></label>
+                    <input type="password" class="form-control" name="conf_password" id="conf_password"
+                        [(ngModel)]="pw_confirm">
+                </div>
+                <!-- *ngIf="pw_different" -->
+                <div *ngIf="pw_different" class="col-12">
+                    <p class="bg-warning p-0 m-0">Šifra su različite</p>
+                </div>
+            </div>
+
 
             <div *ngIf="isSeller" class="fadeIn">
 
@@ -83,6 +116,8 @@
                 </p>
 
             </div>
+
+
 
             <div class="form-check">
                 <input class="form-check-input" type="radio" name="role" value="buyer" checked
@@ -104,8 +139,7 @@
             </div>
 
 
-            <button type="submit" name="register" data-bs-target="#exampleModal"
-                class="btn btn-danger">Registracija</button>
+            <input type="submit" name="register" value="Registracija" data-bs-target="#exampleModal" class="btn btn-danger">
 
 
             <div class="mt-3">

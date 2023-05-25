@@ -1,7 +1,7 @@
-.form-check-input:checked {
+/* .form-check-input:checked {
   background-color: #dc3545;
   border-color: #dc3545;
-}
+} */
 
 .fadeIn {
   animation: fadeIn 1s ease-out;
@@ -36,10 +36,10 @@
 }
 
 
-input,
+/* input,
 button, select, span {
   border-radius: 20px 20px 20px 20px;
-}
+} */
 
 .modal {  
   animation: modalshow 0.2s ease-out;

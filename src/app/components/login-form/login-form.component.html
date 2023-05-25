@@ -6,12 +6,12 @@
         <form (ngSubmit)="login()">
             <div class="mb-3">
                 <label class="form-label" for="reg_email" style="font-weight: bold;">Korisničko ime ili email adresa&nbsp;<span class="form-label">*</span></label>                
-                <input type="email" class="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp" [(ngModel)]="user.email">
+                <input required="" type="email" class="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp" [(ngModel)]="user.email">
                 <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
             </div>
             <div class="mb-3">
                 <label style="font-weight: bold;" for="pw" class="form-label">Šifra</label>
-                <input type="password" name="pw" class="form-control" id="pw" [(ngModel)]="user.password">
+                <input required type="password" name="pw" class="form-control" id="pw" [(ngModel)]="user.password">
             </div>
             <div class="mb-3 form-check">
                 <div class="row">

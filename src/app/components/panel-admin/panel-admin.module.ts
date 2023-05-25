@@ -9,6 +9,8 @@ import { CustomersComponent } from './customers/customers.component';
 import { TendersComponent } from './tenders/tenders.component';
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faBuilding, faListCheck, faSignOut, faUsers } from '@fortawesome/free-solid-svg-icons';
+import { CustomerComponent } from './customer/customer.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -17,12 +19,14 @@ import { faBuilding, faListCheck, faSignOut, faUsers } from '@fortawesome/free-s
     MenuAdminComponent,
     CompaniesComponent,
     CustomersComponent,
-    TendersComponent
+    TendersComponent,
+    CustomerComponent
   ],
   imports: [
     CommonModule,
     PanelAdminRoutingModule,
-    FontAwesomeModule   
+    FontAwesomeModule,
+    FormsModule
   ]
 })
 export class PanelAdminModule {

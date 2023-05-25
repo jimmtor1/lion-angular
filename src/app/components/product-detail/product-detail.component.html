@@ -1,9 +1,27 @@
 <div class="container pt-5">
-    <div class="card mb-1" style="max-width: 840px;">
+
+    <!-- style="max-width: 840px;" -->
+    <div class="card mb-1" >
         <div class="row g-0">
-            <div class="col-md-7">
-                <img [src]="principalImage" class="img-fluid rounded-start w-100" alt="...">
+            <div class="col-md-7" style="height: 590px" >
+                <div class="d-flex justify-content-center">
+                    <img [src]="principalImage" class="img-fluid justify-content-center" style="height: 500px; max-width: 100%;" alt="product-img">
+                </div>
+                
+
+                <!-- thumbnail image list -->
+                <ul class="list-unstyled d-flex overflow-auto flex-nowrap my-1">
+                    <li *ngFor="let img of product.productImageList, let i = index" class="flex-row" style="margin-right: 6px;">
+                        <div class="card" style="width: 5rem;">
+                            <a (click)="chagePrincipalImage(i);" style="cursor: pointer;">
+                                <img src="{{urlprod_img}}{{img.idimage}}{{img.extension}}" class="card-img-top" alt="thumbnail" style="height: 80px;">
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+
             </div>
+
             <div class="col-md-5">
                 <div class="card-body">
                     <h5 class="card-title">{{product.productName}}</h5>
@@ -11,18 +29,18 @@
                         {{product.description}}
                     </p>
                     <p *ngIf="product.price!==0" class="h4">
-                      Cijena:  {{product.price}} KM
+                        Cijena: {{product.price}} KM
                     </p>
                     <p *ngIf="product.price==0" class="h4">
-                        Cijena:  Po dogovoru
-                      </p>
+                        Cijena: Po dogovoru
+                    </p>
                     <p class="h4">
                         Lokacija
                     </p>
-                    
-                    <p *ngIf="seller.user.federation!=null" >Grad: {{city}}</p> 
 
-                    
+                    <p *ngIf="seller.user.federation!=null">Grad: {{city}}</p>
+
+
                     <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
                 </div>
             </div>
@@ -30,49 +48,50 @@
     </div>
 
     <!-- thumbnail image list -->
-    <ul class="list-unstyled d-flex overflow-auto flex-nowrap">
+    <!-- <ul class="list-unstyled d-flex overflow-auto flex-nowrap">
         <li *ngFor="let img of product.productImageList, let i = index" class="flex-row" style="margin-right: 12px;">
             <div class="card" style="width: 5rem;">
                 <a (click)="chagePrincipalImage(i);">
                     <img src="{{urlprod_img}}{{img.idimage}}{{img.extension}}" class="card-img-top" alt="...">
                 </a>
             </div>
-        </li>        
-    </ul>
+        </li>
+    </ul> -->
 
     <!-- Seller information -->
-    <div class="border border-danger rounded-2 p-2">
+    <div class="border border-danger rounded-2 p-2 mb-2">
         <!-- <a [routerLink]="['/sellerDetail', product.idprovider]"> -->
-            <p class="h4 text-danger">Informacije o firmi</p>
+        <p class="h4 text-danger">Informacije o firmi</p>
         <!-- </a>         -->
 
         <p>Ime firme: {{seller.companyName}}</p>
-        
-            <p>Prodavač: 
-                <a [routerLink]="['/provider', product.idprovider]"> {{seller.user.firstName}} {{seller.user.lastName}}</a>
-            </p>
-        
+
+        <p>Prodavač:
+            <a [routerLink]="['/provider', product.idprovider]"> {{seller.user.firstName}} {{seller.user.lastName}}</a>
+        </p>
+
         <p>Adresa: {{seller.user.address}}</p>
         <p>Broj telefona: {{seller.user.phone}}</p>
 
-        
+
         <!-- seller image product list -->
 
         <div class="d-flex overflow-auto flex-nowrap">
 
             <div *ngFor="let product of producByProvider.slice(0,5)" class="mx-1">
                 <div class="mini card h-100" style="width: 13rem;">
-                    <img src="{{urlprod_img}}{{product.productImageList[0].idimage}}{{product.productImageList[0].extension}}" style="height: 200px;" class="card-img-top" alt="...">
+                    <img src="{{urlprod_img}}{{product.productImageList[0].idimage}}{{product.productImageList[0].extension}}"
+                        style="height: 200px;" class="card-img-top" alt="...">
                     <hr class="m-0">
                     <div class="card-body">
-                        <h6 class="card-title">{{product.productName}}</h6>  
+                        <h6 class="card-title">{{product.productName}}</h6>
                         <p class="card-text mb-0" *ngIf="product.price==0"><b>Cijena po dogovoru</b></p>
-                        <p class="card-text mb-0" *ngIf="product.price>0"><b>{{product.price}} KM</b></p>                     
+                        <p class="card-text mb-0" *ngIf="product.price>0"><b>{{product.price}} KM</b></p>
                         <a routerLink="../../addetails/{{product.idproduct}}" class="stretched-link m-0 p-0"></a>
                     </div>
                 </div>
-            </div>        
-    
+            </div>
+
         </div>
 
     </div>

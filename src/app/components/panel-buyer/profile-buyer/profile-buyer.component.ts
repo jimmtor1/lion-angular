@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Buyer } from 'src/app/models/buyer';
 import { BuyerService } from 'src/app/services/buyer.service';
 import { FEDERATIONS, federation, selectListByFed, select_city, select_fed } from 'src/app/services/helper';
+import { ModalService } from 'src/app/services/modal.service';
 
 @Component({
   selector: 'app-profile-buyer',
@@ -21,7 +22,7 @@ export class ProfileBuyerComponent implements OnInit {
   saving: boolean = false;
   loading:boolean = true;
 
-  constructor(private buyerService: BuyerService, private router:Router) { }
+  constructor(private buyerService: BuyerService, private router:Router, private modalService:ModalService) { }
 
   ngOnInit(): void {
     this.showBuyerDetail();
@@ -72,8 +73,11 @@ export class ProfileBuyerComponent implements OnInit {
     this.saving = true;
     this.buyerService.createBuyer(this.buyer).subscribe(buy => {
       this.saving = false;
+      this.editmode = false;
+      this.modalService.openModal("Uspješno ažurirani i sačuvani podaci.");
     }, error => {
       console.log(error);
+      this.editmode = false;
       this.saving = false;
     });
   }

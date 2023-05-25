@@ -44,19 +44,19 @@
 
                             <td>                             
                                 <a routerLink="/paneladmin/tenderDetail/{{tender.idtender}}" class="btn btn-dark btn-sm" style="margin-right: 5px;">
-                                    detils
+                                    Detalji
                                     <!-- <fa-icon [icon]="['fas', 'circle-info']" class="fs-5">
                                     </fa-icon> -->
                                 </a>
 
                          
                                 <a *ngIf="conf_att_button" (click)="confirmTender(tender.idtender)" class="btn btn-dark btn-sm"> 
-                                    confirm
+                                    Potvrdi
                                     <!-- <fa-icon [icon]="['fas', 'check-square']" class="fs-5"></fa-icon> -->
                                 </a>
 
                                 <a *ngIf="!conf_att_button" routerLink="{{urlpdf}}/{{tender.idtender}}{{tender.document}}" target="_blank" class="btn btn-dark btn-sm"> 
-                                    attached
+                                    Prilog
                                     <!-- <fa-icon [icon]="['fas', 'check-square']" class="fs-5"></fa-icon> -->
                                 </a>
 

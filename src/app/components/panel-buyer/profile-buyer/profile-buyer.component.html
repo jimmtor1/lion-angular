@@ -6,7 +6,7 @@
         </button>
         <div *ngIf="editmode">
             <button [disabled]="saving" (click)="activeEdit()" class="btn btn-secondary btn-sm mx-2">Otkaži</button>
-            <button [disabled]="saving" (click)="save()" class="btn btn-danger btn-sm">Odustani</button>
+            <button [disabled]="saving" (click)="save()" class="btn btn-danger btn-sm">Spremi</button>
         </div>
     </div>
 
@@ -26,7 +26,7 @@
 
                 <div class="text-center">
                     <br>
-                    <p class="h1">User Profile</p>
+                    <p class="h1"> Korisnički panel kupca</p>
                     <br>
                 </div>
 
@@ -81,7 +81,7 @@
                     <div *ngIf="editmode">
                         <button [disabled]="saving" (click)="activeEdit()"
                             class="btn btn-secondary btn-sm mx-2">Otkaži</button>
-                        <button [disabled]="saving" (click)="save()" class="btn btn-danger btn-sm">Odustani</button>
+                        <button [disabled]="saving" (click)="save()" class="btn btn-danger btn-sm">Spremi</button>
                     </div>
                 </div>
 

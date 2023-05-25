@@ -1,0 +1,46 @@
+<div class="container mt-2">
+
+    <div class="w-75 mx-auto">
+
+        <br>
+        <p class="h2 text-center">Kupci</p>
+        <br>
+
+        <p class="h6">Email:</p>
+        <input disabled type="text" [(ngModel)]="buyer.user.email"
+            [ngClass]="buyer.user.email==null ? 'mb-3 rounded-pill border text-danger form-control':'mb-3 form-control border rounded-pill'">
+
+        <p class="h6">Ime:</p>
+ 
+        <input disabled type="text" [(ngModel)]="buyer.user.firstName"
+            [ngClass]="buyer.user.firstName==null ? 'mb-3 rounded-pill border text-danger form-control':'mb-3 form-control border rounded-pill'">
+
+        <p class="h6">Prezime:</p>
+        <input disabled type="text" [(ngModel)]="buyer.user.lastName"
+            [ngClass]="buyer.user.lastName==null ? 'mb-3 rounded-pill border text-danger form-control':'mb-3 form-control border rounded-pill'">
+
+        <p class="h6">Broj mobitela:</p>
+        <input disabled type="text" [(ngModel)]="buyer.user.phone"
+            [ngClass]="buyer.user.phone==null ? 'mb-3 rounded-pill border text-danger form-control':'mb-3 form-control border rounded-pill'">
+       
+
+        <p class="h6">Kanton:</p>
+        <p class="border p-2 rounded-pill" style="background-color: #e9ecef;">{{fed}}</p>
+
+        <p class="h6">Grad:</p>
+        <p class="border p-2 rounded-pill" style="background-color: #e9ecef;">{{city}}</p>
+
+
+        <p class="h6">Poštanski broj:</p>
+        <input disabled type="text" [(ngModel)]="buyer.postalCode"
+            [ngClass]="buyer.postalCode==null ? 'mb-3 rounded-pill border text-danger form-control':'mb-3 form-control border rounded-pill'">
+
+        <p class="h6">Adresa:</p>
+        <input disabled type="text" [(ngModel)]="buyer.user.address"
+            [ngClass]="buyer.user.address==null ? 'mb-3 rounded-pill border text-danger form-control':'mb-3 form-control border rounded-pill'">
+
+
+    </div>
+
+
+</div>
