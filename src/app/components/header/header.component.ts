@@ -11,6 +11,8 @@ export class HeaderComponent {
 
   email: string = "Prijava";
   role:number=0;
+  word="";
+
   public isMobile$: Observable<boolean>;
 
   constructor(private router:Router) {
@@ -42,6 +44,13 @@ export class HeaderComponent {
       this.router.navigate(['login']);
     }
     
+  }
+
+  search(){
+    console.log("word: " + this.word)
+    if(this.word!==''){
+      this.router.navigate(['search', this.word]);
+    }
   }
 
 }

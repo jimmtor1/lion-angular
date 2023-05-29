@@ -6,9 +6,26 @@
         <h1 class="text-center mx-1" >{{cate.name[item]}}</h1>
     </div>        
     <hr>
+    <div class="row">
+        <div class="col">
+            <a *ngIf="item<4" [routerLink]="['/providerSubcategoryList', item+1, '0']">pogledaj sve</a>
+            <a *ngIf="item==4" [routerLink]="['/productCategoryList', item+1, '0']">pogledaj sve</a> 
+        </div>
+        <div class="col">
+            <a *ngIf="item==4" class="btn btn-danger" [routerLink]="['/providerSubcategoryList', 0, '0']">
+                <fa-icon [icon]="['fas', 'store']" ></fa-icon>
+                trgovine
+            </a>
 
-    <a *ngIf="item<4" [routerLink]="['/providerSubcategoryList', item+1, '0']">pogledaj sve</a>
-    <a *ngIf="item==4" [routerLink]="['/productCategoryList', item+1, '0']">pogledaj sve</a> 
+            <a *ngIf="item<4" class="btn btn-danger" [routerLink]="['/productCategoryList', 0, '0']">
+                <fa-icon [icon]="['fas', 'box']" ></fa-icon>
+                proizvodi
+            </a>
+
+        </div>
+    </div>
+    
+    
 
     <ul class="nav flex-column" >
 

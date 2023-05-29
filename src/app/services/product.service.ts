@@ -12,8 +12,6 @@ import { API_URL } from './helper';
 
 export class ProductService {
 
-  // private URL = "http://localhost:8080/product";
-  // private URLimages = "http://localhost:8080/productImage/product"
   private URL = `${API_URL}product`
   private URLimages = `${API_URL}productImage/product`
 
@@ -35,6 +33,28 @@ export class ProductService {
     return this.httpClient.get<Product>(`${this.URL}/${id}`);
   }
 
+  getFilterFederationCity(idcategory:number,idsubcategory:number, idfed:number, idcity:number):Observable<Product[]>{
+    return this.httpClient.get<Product[]>(`${this.URL}/filter-f-c/${idcategory}/${idsubcategory}/${idfed}/${idcity}`);
+  }
+
+  getFilterPrice(idcategory:number,idsubcategory:number, fed:number, city:number,price1:number, price2:number):Observable<Product[]>{
+    return this.httpClient.get<Product[]>(`${this.URL}/filterprice/${idcategory}/${idsubcategory}/${fed}/${city}/${price1}/${price2}`);
+  }
+
+  getAllFilters(category:number, subcategory:number, federation: number, city:number, minPrice:number | undefined, maxPrice:number | undefined, pageNum:number):Observable<any>{
+    return this.httpClient.get<any>(`${this.URL}/filter/${category}/${subcategory}/${federation}/${city}/${minPrice==undefined?-1:minPrice}/${maxPrice==undefined?-1:maxPrice}/${pageNum}/28`)
+  }
+
+  getAllFilterSearch(federation: number, city:number, minPrice:number | undefined, maxPrice:number | undefined, keyword:string,pageNum:number):Observable<any>{
+    return this.httpClient.get<any>(`${this.URL}/filter/${federation}/${city}/${minPrice==undefined?-1:minPrice}/${maxPrice==undefined?-1:maxPrice}/${keyword}/${pageNum}/28`)
+  }
+
+  getSearchProduct(word:string):Observable<Product[]>{
+   // return this.httpClient.get<Product[]>(this.URL);
+    
+    return this.httpClient.get<Product[]>(`${this.URL}/search/${word}`);
+  }
+
   saveAd(formData: FormData): Observable<any> {
     return this.httpClient.post<any>(this.URL, formData);
   }
@@ -44,17 +64,14 @@ export class ProductService {
   }
 
   editAd(formData: FormData): Observable<string> {
-
     return this.httpClient.put<string>(`${this.URL}`, formData);
-
   }
 
   editAd2(producImage: ProductImage[]): Observable<any> {
-
     return this.httpClient.put<any>(`${this.URL}/w`, producImage);
-
-
   }
+
+
 
 
 }

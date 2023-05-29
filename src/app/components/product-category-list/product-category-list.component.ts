@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from 'src/app/models/product';
-import { IMG_PRODUCT_URL } from 'src/app/services/helper';
+import { FEDERATIONS, IMG_PRODUCT_URL, federation, selectListByFed } from 'src/app/services/helper';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
@@ -17,10 +17,23 @@ export class ProductCategoryListComponent implements OnInit {
   category: string = "";
   categoryName: string[] = ["Građevinarstvo", "Sve za kuću", "Informatika i telekomunikacije", "Od glave do pete", "Svi proizvodi / Usluge"];
   subcategoryName: String = "All";
+  federations: federation[] = FEDERATIONS;
+  citiesToCombo: any[] = [];
+  //fed: federation | null;
+  fed: number = 0;
+  city: number = 0;
+  idsubcategory: number;
+  idcategory: number;
+  loading = true;
+  price1: number | undefined;
+  price2: number | undefined;
+  page = 0;
+
+  btnActive = false;
 
   urlprod_img = `${IMG_PRODUCT_URL}`;
 
-  constructor(private productService: ProductService, private route: ActivatedRoute) { }
+  constructor(private productService: ProductService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
     this.getProductList();
@@ -28,36 +41,88 @@ export class ProductCategoryListComponent implements OnInit {
 
   getProductList(): void {
     this.route.params.subscribe(params => {
+
+      this.idcategory = params['id'];
+      this.idsubcategory = params['idc'];
+
       this.category = this.categoryName[params['id'] - 1];
-      this.subcategoryName = this.subcategory[params['idc']];
+      this.subcategoryName = this.subcategory[params['idc'] - 70];
+
       this.productService.getAllByCategory(params['id'], params['idc']).subscribe(data => {
         this.products = data;
+        this.loading = false;
       });
+
+
+      // if(this.idcategory==0){
+
+      //   this.productService.
+
+      // }else{
+
+      // }
+
+
     })
   }
 
+  citiesCombo(event: Event) {
+    this.loading = true
+    this.price1 = undefined;
+    this.price2 = undefined;
+    this.city = 0;
+    this.fed = parseInt((event.target as HTMLSelectElement)?.value); 
+    this.citiesToCombo = selectListByFed(this.fed);
+    this.allfilters();
+  }
+
+  selectedCity(event: Event) {
+    this.loading = true;
+    this.price1 = undefined;
+    this.price2 = undefined;
+    this.city = parseInt((event.target as HTMLSelectElement)?.value);
+    this.allfilters();
+  }
+
+  getProductListByPrice() {
+    this.loading = true;
+    this.allfilters();
+  }
+
+  doChage() {
+    if (this.price2 !== undefined && this.price2 > 0) {
+      this.btnActive = true;
+    } else {
+      this.btnActive = false;
+    }
+  }
+
   subcategory: string[] = [
-    "",
-    "Zemljani radovi",
-    "Betonski radovi",
-    "Armirano-betonski radovi",
-    "Zidarski radovi",
-    "Tesarski radovi",
-    "Izolacijski radovi",
-    "Krovopokrivački radovi",
-    "Limarski radovi",
-    "Bravarski radovi",
-    "Stolarski radovi",
-    "Keramički radovi",
-    "Fasadski radovi",
-    "Grijanje i hlađenje",
-    "Hidroinstalacije",
-    "Elektroinstalacije",
-    "Strojarske instalacije",
-    "Prozori",
-    "Sobna vrata",
-    "Ulazna vrata",
-    "Roletne",
+    "All",
+    "Mobiteli",
+    "Automobili",
+    "Sportska oprema",
+    "Informatička oprema",
+    "Audio, video i foto",
+    "Dječiji svijet",
+    "Odjeća",
+    "Obuća",
+    "Građevinski materijal",
+    "Računari i laptopi",
+    "Konzole",
+    "Tableti",
+    "Mašine i alati",
+    "Klima uređaji",
+    "Radijatori",
+    "Ventilatori",
+    "Kamini",
+    "Peći",
+    "Grijalice",
+    "Jastuci",
+    "Posteljina",
+    "Prekrivači i deke",
+    "Zavjese",
+    "Tepisi",
     "Kuhinje",
     "Stolovi i stolice",
     "Dnevni boravak namještaj",
@@ -77,36 +142,77 @@ export class ProductCategoryListComponent implements OnInit {
     "Zidni sat",
     "Tapete",
     "Ostale dekoracije",
-    "Klima uređaji",
-    "Radijatori",
-    "Kamini",
-    "Peći",
-    "Grijalice",
     "Jastuci",
     "Posteljina",
     "Prekrivači i deke",
     "Zavjese",
-    "Tepisi",
-    "Servis TV, audio i video uređaja",
-    "Servis mobitela",
-    "Servis kućanskih aparata",
-    "Servis klima uređaja",
-    "Servis računara",
-    "Servis igraćih konzola",
-    "Web hosting",
-    "Web i software izrada",
-    "Mreže serveri i telekomunikacije",
-    "Mreže sigurnost",
-    "Odjeća",
-    "Obuća",
-    "Radna odjeća i zaštitna oprema",
-    "Dječija odjeća i obuća",
-    "Dorbe i novčanici",
-    "Naočale",
-    "Nakit",
-
-
+    "Tepisi"
   ];
+
+  allfilters(){
+    this.productService.getAllFilters(this.idcategory, this.idsubcategory, this.fed, this.city, this.price1, this.price2, this.page).subscribe(p => {      
+      this.products = p.content;
+      this.loading = false;
+    }, error => { this.loading = false });
+  }
+
+  filter() {
+
+    // if (this.idsubcategory > 0) {
+
+    if (this.fed > 0 && this.city == 0 && this.price2 == null) {
+
+      this.productService.getFilterFederationCity(this.idcategory, this.idsubcategory, this.fed, this.city).subscribe(p => {
+        this.products = p;
+        this.loading = false;
+      }, error => { this.loading = false });
+
+    } else if (this.city > 0 && this.price2 == null) {
+
+      this.productService.getFilterFederationCity(this.idcategory, this.idsubcategory, 0, this.city).subscribe(p => {
+        this.products = p;
+        this.loading = false;
+      }, error => { this.loading = false });
+
+    } else if (this.fed == 0 && this.city == 0 && (this.price2 !== undefined && this.price2 > 0)) {
+
+      this.productService.getFilterPrice(this.idcategory, this.idsubcategory, this.fed, this.city, this.price1 == undefined ? 0 : this.price1, this.price2).subscribe(p => {
+        this.products = p;
+        this.loading = false;
+      }, error => { this.loading = false });
+
+    } else if (this.fed > 0 && this.city > 0 && (this.price2 !== undefined && this.price2 > 0)) {
+
+      this.productService.getFilterPrice(this.idcategory, this.idsubcategory, 0, this.city, this.price1 == undefined ? 0 : this.price1, this.price2).subscribe(p => {
+        this.products = p;
+        this.loading = false;
+      }, error => { this.loading = false });
+
+    } else if (this.fed > 0 && this.city == 0 && (this.price2 !== undefined && this.price2 > 0)) {
+
+      this.productService.getFilterPrice(this.idcategory, this.idsubcategory, this.fed, this.city, this.price1 == undefined ? 0 : this.price1, this.price2).subscribe(p => {
+        this.products = p;
+        this.loading = false;
+      }, error => { this.loading = false });
+
+    } else {
+      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+        this.router.navigateByUrl('productCategoryList/5/' + this.idsubcategory);
+      }, error => { this.loading = false });
+    }
+
+    // }else{
+
+    // }
+
+
+
+
+
+
+
+
+  }
 
 
 

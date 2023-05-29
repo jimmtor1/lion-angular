@@ -26,7 +26,7 @@ export class Cate {
         ["Kuhinje", "Stolovi i stolice", "Dnevni boravak namještaj", "Stilski namještaj", "Dječije sobe", "Kupaonski namještaj", "Predsoblja namještaj"],
         ["Led rasvjeta", "Lusteri", "Stropna rasvjeta i plafonjere", "Zidna rasvjeta", "Podne lampe", "Stolne lampe", "Ugradbena rasvjeta", "Vanjska rasvjeta"],
         ["Vaze", "Zidni sat", "Tapete", "Ostale dekoracije"],
-        ["Klima uređaji", "Radijatori", "Kamini", "Peći", "Grijalice"],
+        ["Klima uređaji", "Radijatori", "Ventilatori", "Kamini", "Peći", "Grijalice"],
         ["Jastuci", "Posteljina", "Prekrivači i deke", "Zavjese", "Tepisi"],
 
     ]
@@ -41,7 +41,7 @@ export class Cate {
     subcategory4: string[][] = [
 
         ["Odjeća", "Obuća", "Radna odjeća i zaštitna oprema", "Dječija odjeća i obuća", "Dorbe i novčanici", "Naočale", "Nakit", "Satovi"],
-        ["Krojači", "Web i software izrada", "Sahadžije"],
+        ["Krojači", "Sahadžije"],
 
     ]
 

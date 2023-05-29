@@ -13,8 +13,8 @@
 
             <form class="d-flex">
                 <input class="form-control border border-2 border-danger search-input" type="search"
-                    placeholder="Pretraži proizvode" aria-label="Search">
-                <button class="btn btn-danger search-button" style="width: 60px;" type="submit">
+                    placeholder="Pretraži proizvode" aria-label="Search" name="keyword" [(ngModel)]="word">
+                <button class="btn btn-danger search-button" (click)="search()" style="width: 60px;" type="submit">
                     <i class="fa fa-search"></i>
                     <fa-icon [icon]="['fas', 'magnifying-glass']"></fa-icon>
                 </button>
@@ -75,8 +75,8 @@
         <div class="col-7 px-1">
             <form class="d-flex">
                 <input class="form-control border border-2 border-danger search-input" type="search"
-                    placeholder="Pretraži proizvode" aria-label="Search">
-                <button class="btn btn-danger search-button" style="width: 50px;" type="submit">
+                    placeholder="Pretraži proizvode" aria-label="Search" name="keyword" [(ngModel)]="word">
+                <button class="btn btn-danger search-button" (click)="search()" style="width: 50px;" type="submit">
                     <!-- <i class="fa fa-search"></i> -->
                     <fa-icon [icon]="['fas', 'magnifying-glass']"></fa-icon>
                 </button>

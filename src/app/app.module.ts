@@ -26,7 +26,7 @@ import { SellerListComponent } from './components/seller-list/seller-list.compon
 import { SellerSocialnetworkComponent } from './components/seller-socialnetwork/seller-socialnetwork.component';
 import { SubcategoryListComponent } from './components/subcategory-list/subcategory-list.component';
 
-import { faAddressBook, faAddressCard, faBars, faBasketShopping, faBriefcase, faBuilding, faBuildingCircleExclamation, faCalendar, faCheckSquare, faCircleInfo, faEnvelope, faFile, faFileArrowDown, faHandHoldingMedical, faHandshake, faHeadset, faHome, faIdBadge, faLaptop, faListCheck, faLocationDot, faMagnifyingGlass, faMobilePhone, faNewspaper, faRectangleAd, faRightFromBracket, faShareNodes, faShirt, faShoppingCart, faSignOut, faStore, faTag, faTrash, faUser, faUsers } from '@fortawesome/free-solid-svg-icons';
+import { faAddressBook, faAddressCard, faArrowsRotate, faBars, faBasketShopping, faBox, faBoxOpen, faBriefcase, faBuilding, faBuildingCircleExclamation, faCalendar, faCheckSquare, faCircleInfo, faEnvelope, faFile, faFileArrowDown, faHandHoldingMedical, faHandshake, faHeadset, faHome, faIdBadge, faLaptop, faListCheck, faLocationDot, faMagnifyingGlass, faMobilePhone, faNewspaper, faRectangleAd, faRightFromBracket, faShareNodes, faShirt, faShoppingCart, faSignOut, faStore, faTag, faTrash, faUser, faUsers } from '@fortawesome/free-solid-svg-icons';
 import { faFacebook, faInstagram, faYoutube } from '@fortawesome/free-brands-svg-icons';
 import { ViewProviderToClienteComponent } from './components/view-provider-to-cliente/view-provider-to-cliente.component';
 import { SellerCategoryListComponent } from './components/seller-category-list/seller-category-list.component';
@@ -37,6 +37,7 @@ import { TenderTableComponent } from './components/tender-table/tender-table.com
 import { HeaderComponent } from './components/header/header.component';
 import { NavbarMenuCategoryComponent } from './components/navbar-menu-category/navbar-menu-category.component';
 import { ModalMsComponent } from './components/modal-ms/modal-ms.component';
+import { ProducSearchListComponent } from './components/produc-search-list/produc-search-list.component';
 
 
 @NgModule({
@@ -67,7 +68,8 @@ import { ModalMsComponent } from './components/modal-ms/modal-ms.component';
     TenderTableComponent, 
     HeaderComponent,
     NavbarMenuCategoryComponent,
-    ModalMsComponent  
+    ModalMsComponent,
+    ProducSearchListComponent  
   ],
   imports: [
     BrowserModule,
@@ -84,7 +86,7 @@ export class AppModule {
   
 
   constructor(library: FaIconLibrary) {
-    library.addIcons(faShirt, faBuilding, faHome, faLaptop, faShoppingCart, faMagnifyingGlass, faUser, faSignOut, faStore, faFacebook, faInstagram, faYoutube, faHandshake, faHeadset, faHandHoldingMedical, faTag, faRectangleAd, faShareNodes, faRightFromBracket, faUsers, faBuildingCircleExclamation, faAddressCard, faBasketShopping, faTrash, faLocationDot, faMobilePhone, faEnvelope, faBriefcase, faAddressBook, faListCheck, faFile, faBars, faCalendar, faFileArrowDown, faCircleInfo, faCheckSquare, faNewspaper);
+    library.addIcons(faShirt, faBuilding, faHome, faLaptop, faShoppingCart, faMagnifyingGlass, faUser, faSignOut, faStore, faFacebook, faInstagram, faYoutube, faHandshake, faHeadset, faHandHoldingMedical, faTag, faRectangleAd, faShareNodes, faRightFromBracket, faUsers, faBuildingCircleExclamation, faAddressCard, faBasketShopping, faTrash, faLocationDot, faMobilePhone, faEnvelope, faBriefcase, faAddressBook, faListCheck, faFile, faBars, faCalendar, faFileArrowDown, faCircleInfo, faCheckSquare, faNewspaper, faBoxOpen, faArrowsRotate,faBox);
   }
 
 }

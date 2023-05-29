@@ -11,7 +11,6 @@ import { FormsModule } from '@angular/forms';
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faFacebook, faInstagram, faYoutube } from '@fortawesome/free-brands-svg-icons';
 import { faSignOut, faListCheck, faBuilding, faUsers, faBox, faCircleInfo } from '@fortawesome/free-solid-svg-icons';
-import { ModalMsComponent } from '../modal-ms/modal-ms.component';
 
 
 @NgModule({

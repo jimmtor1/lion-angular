@@ -6,23 +6,107 @@
 
 <div class="container">
 
-    <div class="row row-cols-2 row-cols-md-5 g-3">
+    <div class="row">
 
-        <div *ngFor="let seller of sellers" class="col">
-            <div class="card h-100">
-                <img [src]="urlprof_img + seller.image" style="height: 200px;" class="card-img-top" alt="...">
-                <hr class="m-0">
-                <div class="card-body">
-                    <h6 class="card-title">{{seller.companyName}}</h6>
+        <div class="col-12 col-sm-4 col-md-3 mb-3">
 
-                    <!-- <p class="card-text mb-0">{{federations[seller.user.federation+1]}}</p> -->
-                    <!-- <p class="card-text mb-0" *ngIf="product.price>0"><b>{{product.price}} KM</b></p>  -->
-                    
-                    <a routerLink="/provider/{{seller.user.id}}" class="stretched-link m-0 p-0"></a>
-                </div>
+            <div class="mb-3">
+
+                <label for="federation">Kanton:</label>
+
+
+                <select name="federation" (change)="citiesCombo($event)" [(ngModel)]="fed" class="form-select"
+                    id="select_federation">
+                    <option value="0">--Odaberite kanton--</option>
+                    <option [value]="fed.id" [disabled]="fed.id==0" *ngFor="let fed of federations">{{fed.name}}
+                    </option>
+                </select>
+
             </div>
-        </div>        
+
+
+            <div class="mb-3">
+
+                <label for="city">Grad</label>
+
+                <select name="city" (change)="selectedCity($event)" class="form-select" id="select_city">
+                    <option value="0">--Odaberite Grad--</option>
+                    <option *ngFor="let c of citiesToCombo" [value]="c.id">{{c.name}}</option>
+                </select>
+
+            </div>
+            
+        </div>
+
+        <div class="col-12 col-sm-8 col-md-9">
+
+            <div class="bg-light">
+                
+
+                <div *ngIf="!loading">
+
+                    <div *ngIf="sellers.length==0" class="d-flex justify-content-center align-center py-2">
+                        <span>
+                            <fa-icon [icon]="['fas', 'box-open']"></fa-icon>
+                            Nije pronađen nijedan proizvod
+                        </span>
+                    </div>
+
+
+                    <div *ngIf="sellers.length>0" class="row g-2 mb-3 pb-3 px-1">
+                        <div class="col-6 col-lg-3" *ngFor="let seller of sellers">
+                            <div class="card h-100">
+
+
+                                <img [src]="urlprof_img + seller.image" style="height: 200px; object-fit: contain;" class="card-img-top"
+                                    alt="...">
+                                <hr class="m-0">
+                                <div class="card-body py-1">
+                                    <h6 class="card-title">{{seller.companyName}}</h6>
+
+                                    <!-- <p class="card-text mb-0">{{federations[seller.user.federation+1]}}</p> -->
+                                    <!-- <p class="card-text mb-0" *ngIf="product.price>0"><b>{{product.price}} KM</b></p>  -->
+
+                                    <a routerLink="/provider/{{seller.user.id}}" class="stretched-link m-0 p-0"></a>
+                                </div>
+                              
+                              
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div *ngIf="loading" class="text-center">
+                    <div class="spinner-grow text-danger" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- <div *ngIf="!loading" class="d-flex justify-content-center">
+
+                <div *ngIf="loadingnewpage" class="text-center">
+                    <div class="spinner-grow text-danger" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+
+                <button *ngIf="!loadingnewpage" class="btn btn-dark btn-sm" (click)="newpage()">
+                    <fa-icon [icon]="['fas', 'arrows-rotate']" ></fa-icon>
+                 </button>
+            </div> -->
+
+        </div>
+
+        
 
     </div>
 
+    
+
+
 </div>
+
+

@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, Provider } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Seller } from '../models/seller';
-import { SellerByCategory } from '../models/seller-by-category';
 import { API_URL } from './helper';
 
 @Injectable({
@@ -16,6 +15,14 @@ export class SellerService {
 
   constructor(private http:HttpClient) { }
 
+  getAllPageable(pageNum:number):Observable<any>{
+    return this.http.get<any>(`${this.URL}/${pageNum}/50`)
+  }
+
+  getAllFilters(category:number, subcategory:number, federation: number, city:number,pageNum:number):Observable<any>{
+    return this.http.get<any>(`${this.URL}/filter/${category}/${subcategory}/${federation}/${city}/${pageNum}/28`)
+  }
+
   getById(id:number):Observable<Seller>{
     return this.http.get<Seller>(`${this.URL}/${id}`);
   }
@@ -26,6 +33,14 @@ export class SellerService {
 
   getAllProcess():Observable<Seller[]>{
     return this.http.get<Seller[]>(`${this.URL}/process`);
+  }
+
+  getFilterSub(idsub:number, idfed:number, idcity:number):Observable<Seller[]>{
+    return this.http.get<Seller[]>(`${this.URL}/filter-s/${idsub}/${idfed}/${idcity}`);
+  }
+
+  getFilterCat(idcat:number, idfed:number, idcity:number):Observable<Seller[]>{
+    return this.http.get<Seller[]>(`${this.URL}/filter-c/${idcat}/${idfed}/${idcity}`);
   }
 
   save(formData: FormData):Observable<Seller>{

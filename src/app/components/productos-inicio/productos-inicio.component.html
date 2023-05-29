@@ -1,4 +1,4 @@
-<div class="bg-white mb-3">
+<div class="bg-white mb-3 mt-3">
 
     <h4 class="text-center text-danger mb-0">Firme / Trgovine</h4>
     <hr class="mt-1">
@@ -26,7 +26,7 @@
         <div *ngFor="let s of sellers" class="mx-1">
             <div class="card h-100" style="width: 16rem;">
                 
-                <img *ngIf="s.image" src="{{urlprof_img}}{{s.image}}" style="height: 150px;" class="card-img-top" alt="...">
+                <img *ngIf="s.image" src="{{urlprof_img}}{{s.image}}" style="height: 150px; object-fit: contain;" class="card-img-top" alt="...">
 
                 <img *ngIf="!s.image" src="assets/images/no-image-icon.svg" style="height: 150px;" class="card-img-top" alt="...">
 
@@ -60,13 +60,17 @@
         <!-- style="width: 13rem;" -->
         <div class="card h-100 mx-0">
             <img src="{{urlprod_img}}{{product.productImageList[0].idimage}}{{product.productImageList[0].extension}}"
-                style="height: 200px;" class="card-img-top" alt="...">
+                style="height: 200px; object-fit: contain;" class="card-img-top" alt="...">
             <hr class="m-0">
-            <div class="card-body">
+            <div class="card-body py-1">
                 <h6 class="card-title">{{product.productName}}</h6>
-                <p class="card-text mb-0" *ngIf="product.price==0"><b>Cijena po dogovoru</b></p>
-                <p class="card-text mb-0" *ngIf="product.price>0"><b>{{product.price}} KM</b></p>
+                <!-- <p class="card-text mb-0" *ngIf="product.price==0"><b>Cijena po dogovoru</b></p>
+                <p class="card-text mb-0" *ngIf="product.price>0"><b>{{product.price}} KM</b></p> -->
                 <a routerLink="addetails/{{product.idproduct}}" class="stretched-link m-0 p-0"></a>
+            </div>
+            <div class="d-flex card-footer bg-white justify-content-end" style="border-top: none;">
+                <span class="badge rounded-pill bg-danger" *ngIf="product.price==0">Cijena po dogovoru</span>
+                <span class="badge rounded-pill bg-danger" *ngIf="product.price>0">{{product.price}} KM</span>
             </div>
         </div>
     </div>

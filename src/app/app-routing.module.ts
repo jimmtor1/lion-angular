@@ -17,6 +17,7 @@ import { ViewProviderToClienteComponent } from './components/view-provider-to-cl
 import { SellerCategoryListComponent } from './components/seller-category-list/seller-category-list.component';
 import { TenderDetailComponent } from './components/tender-detail/tender-detail.component';
 import { TenderListComponent } from './components/tender-list/tender-list.component';
+import { ProducSearchListComponent } from './components/produc-search-list/produc-search-list.component';
 
 const routes: Routes = [
   {path:'', component:HomeComponent},
@@ -38,6 +39,7 @@ const routes: Routes = [
   {path: 'tenderDetail/:idtender', component:TenderDetailComponent},
   {path: 'tenderList', component:TenderListComponent},
   {path: 'sellerPanel', component:SellerPanelComponent},
+  {path: 'search/:word', component:ProducSearchListComponent},
   {path: 'paneladmin', loadChildren:() => import('./components/panel-admin/panel-admin.module').then(x=> x.PanelAdminModule)},
   {path: 'panelseller', loadChildren:() => import('./components/panel-seller/panel-seller.module').then(x=> x.PanelSellerModule)},
   {path:'paneluser',loadChildren:() => import('./components/panel-buyer/panel-buyer.module').then(x=> x.PanelBuyerModule)}

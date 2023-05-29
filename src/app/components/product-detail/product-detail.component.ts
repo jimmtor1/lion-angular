@@ -18,13 +18,14 @@ export class ProductDetailComponent implements OnInit {
   producByProvider: Product[] = [];
   seller: Seller;
   city:string;
+  loading = true;
 
   urlprod_img = `${IMG_PRODUCT_URL}`;
 
   constructor(private productService: ProductService, private route: ActivatedRoute, private sellerService: SellerService) {
-    this.product = new Product();
-    this.seller = new Seller();
-    this.producByProvider = [];
+    // this.product = new Product();
+    // this.seller = new Seller();
+    // this.producByProvider = [];
   }
 
   ngOnInit(): void {
@@ -40,11 +41,13 @@ export class ProductDetailComponent implements OnInit {
           this.sellerService.getById(this.product.idprovider).subscribe(pro => {
             this.seller = pro;
             this.city = select_city(this.seller.user.city).name; 
+            this.loading=false;
           });
 
           this.productService.getAllByProvider(this.product.idprovider).subscribe(result => {
             result.forEach(r => {
               this.producByProvider.push(r);
+              
             })
           });
 
