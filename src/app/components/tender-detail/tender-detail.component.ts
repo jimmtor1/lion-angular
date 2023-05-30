@@ -18,10 +18,12 @@ export class TenderDetailComponent implements OnInit {
   user: Userr;
   id_current_user: number;
   id_current_role: number;
-  tenderProposal: TenderProposal[];
+  tenderProposal: TenderProposal[] = [];
   comment: string;
   @Input() idtender: number;
   already_offered: boolean = false;
+  canOffer: boolean = false;
+  loading=true;
 
   url_doc = `${DOC_URL}`;
 
@@ -42,23 +44,28 @@ export class TenderDetailComponent implements OnInit {
         this.tenderService.getById(param['idtender']).subscribe(t => {
           this.tender = t;
 
+          const role = localStorage.getItem('role');
+          if (role) {
+            this.id_current_role = JSON.parse(role);           
+            if (this.id_current_role == 2 && this.id_current_user != this.tender.iduser) {
+              this.get_already_offer();
+              this.canOffer = true;
+            } else if ((this.id_current_role !== 3 && this.id_current_user == this.tender.iduser) || this.id_current_role == 3) {
+              this.getProposals();
+              this.canOffer = false;
+            }
+            
+          }
+
           this.userService.getById(this.tender.iduser).subscribe(u => {
             this.user = u;
             let x = select_fed(this.user.federation);
-            if(x){
+            if (x) {
               this.fed = x.name;
-            }            
-            this.city = select_city(this.user.city).name;
-          });
-
-          const role = localStorage.getItem('role');
-          if (role) {
-            this.id_current_role = JSON.parse(role);
-            if (this.id_current_role !== 3) {
-              this.get_already_offer();
             }
-          }
-
+            this.city = select_city(this.user.city).name;
+            this.loading=false;
+          });
         });
       } else {
 
@@ -68,10 +75,11 @@ export class TenderDetailComponent implements OnInit {
           this.userService.getById(this.tender.iduser).subscribe(u => {
             this.user = u;
             let x = select_fed(this.user.federation);
-            if(x){
+            if (x) {
               this.fed = x.name;
-            }            
+            }
             this.city = select_city(this.user.city).name;
+            this.loading=false;
           });
 
           const role = localStorage.getItem('role');
@@ -87,6 +95,8 @@ export class TenderDetailComponent implements OnInit {
       }
     })
 
+
+
   }
 
   get_already_offer() {
@@ -94,6 +104,8 @@ export class TenderDetailComponent implements OnInit {
     this.tenderService.confirmAlreadyPosted(this.tender.idtender, this.id_current_user).subscribe(t => {
       if (t) {
         this.already_offered = true;
+        this.canOffer=false;
+        this.tenderProposal.push(t);
       } else {
         this.already_offered = false;
       }
@@ -103,9 +115,12 @@ export class TenderDetailComponent implements OnInit {
   }
 
   getProposals() {
+   
     this.tenderService.getProposalList(this.tender.idtender).subscribe(t => {
+
       this.tenderProposal = t;
     });
+
   }
 
   saveProposal() {
@@ -119,11 +134,15 @@ export class TenderDetailComponent implements OnInit {
     this.tenderService.saveProposal(formData).subscribe(x => {
       if (x.idProposal > 0) {
         this.already_offered = true;
+        this.canOffer=false;
+        this.tenderProposal.push(x);
       } else {
         alert("no se guardó")
       }
     })
   }
+
+
 
 
   // federations: string[] = [

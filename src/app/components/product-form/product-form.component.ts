@@ -45,6 +45,7 @@ export class ProductFormComponent implements OnInit {
 
     const u = localStorage.getItem("iduser");
     if (u) {
+      this.iduser = JSON.parse(u);
       this.sellerService.isActive(JSON.parse(u)).subscribe(s => {
         this.authorizedSeller = s
         if (s) {

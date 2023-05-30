@@ -2,11 +2,15 @@
 <!-- computer -->
 <nav *ngIf="(isMobile$ | async) === false" class="navbar bg-danger justify-content-center">
     <ul class="menu">
-        <li *ngFor="let c of cate.name, let i = index" class="submenu shadow">
+        <li *ngFor="let c of cate.name, let i = index" class="submenu shadow" >
 
-            <button class="btn btn-danger dropdown-toggle rounded-0 m-0 fw-bold pb-2" href="#">{{c}}</button>
 
-            <ul class="row sublista bg-light shadow">
+            <button (mouseenter)="showElement(i)" (mouseleave)="hideElement()" class="btn btn-danger dropdown-toggle rounded-0 m-0 fw-bold pb-2" href="#">{{c}}
+                 <div class="progreso" [style.width]="anchoProgreso == 'element'+i?'100%':'0%'"></div>            
+            </button>
+           
+
+            <ul class="row sublista bg-light shadow" (mouseenter)="showElement2(i)" (mouseleave)="hideElement2()" [hidden]="show !== 'element'+i">
 
                 <a *ngIf="i<4" class="py-0" [routerLink]="['/providerSubcategoryList', i+1, '0']">pogledaj sve</a>
                 <a *ngIf="i==4" class="py-0"  [routerLink]="['/productCategoryList', i+1, '0']">pogledaj sve</a>

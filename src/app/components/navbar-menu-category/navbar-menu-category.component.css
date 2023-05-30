@@ -6,6 +6,10 @@
     display: block;
 }
 
+.dropdown-toggle {
+    position: relative;
+}
+
 
 .navbar {
     background-color: #f8f9fa;
@@ -65,3 +69,16 @@
 .sublista ul li{
     white-space: nowrap;
 }
+
+.progreso {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0;
+    background-color: transparent;
+    transition: width 0.3s linear;
+    border-bottom: 2px solid white;
+  }
+
+ 

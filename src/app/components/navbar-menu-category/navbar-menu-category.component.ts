@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, fromEvent, map, startWith } from 'rxjs';
 import { Cate } from 'src/app/models/subcategory-list-bycategory';
@@ -12,10 +12,18 @@ export class NavbarMenuCategoryComponent implements OnInit {
 
   item: number;
   cate: Cate = new Cate();
-  subCount:number=0;
+  subCount: number = 0;
   public isMobile$: Observable<boolean>;
 
-  constructor(private route: ActivatedRoute) { }
+  show: string = '';
+  showing: boolean = false;
+
+  anchoProgreso: string = '';
+
+  // @ViewChild('sublista') sublist: ElementRef;
+  time: any;
+
+  constructor(private route: ActivatedRoute, private render: Renderer2) { }
 
   ngOnInit(): void {
 
@@ -28,12 +36,47 @@ export class NavbarMenuCategoryComponent implements OnInit {
       this.item = parseInt(param['id']);
       this.subCount = 0
     });
-    
+
   }
 
-  getIdSub(id:number):number{
+  getIdSub(id: number): number {
     console.log(id);
     return id;
+  }
+
+  // @HostListener('mouseenter')
+  // onMouseEnter() {
+  //   this.time = setTimeout(() => {
+  //     this.render.addClass(this.sublist.nativeElement, 'visible');
+  //   }, 1000);
+  // }
+
+  showElement(element: number) {  
+   
+    this.anchoProgreso = "element" + element;
+    this.time = setTimeout(() => {      
+      this.show = "element" + element;
+    }, 300);
+  }
+
+  showElement2(element: number) {
+    this.show = "element" + element;
+    this.showing = true;
+  }
+
+  hideElement2() {
+    clearTimeout(this.time);
+    this.showing = false;
+    this.show = '';
+  }
+
+  hideElement() { 
+    
+    if (!this.showing) {
+      this.anchoProgreso = "";   
+      clearTimeout(this.time);
+      this.show = '';
+    }
   }
 
 }

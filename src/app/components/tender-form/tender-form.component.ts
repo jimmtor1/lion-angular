@@ -68,7 +68,7 @@ export class TenderFormComponent {
     const formData = new FormData();
 
     formData.append('file', this.file);
-
+    
     formData.append('iduser', this.iduser.toString());
     formData.append('projectName', this.tender.projectName);
     formData.append('dateFrom', this.tender.dateFrom);

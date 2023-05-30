@@ -55,4 +55,8 @@ export class TenderService {
     return this.http.get<TenderProposal[]>(`${this.URL2}/${idtender}`);
   }
 
+  getOwnProposal(idtender:number, iduser:number):Observable<TenderProposal>{
+    return this.http.get<TenderProposal>(`${this.URL2}/${idtender}/${iduser}`);
+  }
+
 }

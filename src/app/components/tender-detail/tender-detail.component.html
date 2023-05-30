@@ -1,10 +1,17 @@
-<div class="container">
+<div *ngIf="loading" class="text-center mt-3">
+    <div class="spinner-grow text-danger" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
+
+
+<div *ngIf="!loading" class="container">
     <p class="h4 my-3">{{tender.projectName}}</p>
 
     <div class="row">
         <!-- tender info -->
         <div class="col-12 col-sm-8 mb-2">
-            <div class="card">
+            <div class="big card">
                 <h5 class="card-header">Detalji</h5>
                 <div class="card-body bg-light">
                     <!-- <h5 class="card-title">Special title treatment</h5> -->
@@ -35,8 +42,9 @@
                         Otvorite prilog
                     </a>
                     <!-- </div> -->
-                                     
-                    <div *ngIf="!already_offered && id_current_role==2">
+
+                    <div *ngIf="canOffer">
+                        <hr>
                         <div class="mb-3">
                             <label for="exampleFormControlTextarea1" class="form-label">Unesite vašu ponudu</label>
                             <textarea [(ngModel)]="comment" class="form-control" id="exampleFormControlTextarea1"
@@ -59,7 +67,7 @@
         <!-- client info -->
         <div class="col-12 col-sm-4">
             <!-- style="width: 18rem;" -->
-            <div class="card">
+            <div class="big card">
                 <h5 class="card-header">Tender objavio</h5>
                 <div class="card-body bg-light">
                     <div class="d-flex mb-1">
@@ -92,7 +100,7 @@
                 *ngIf="!tenderProposal" (click)="getProposals()">Pogledajte ponude...</a>
 
             <div *ngIf="tenderProposal">
-                <div *ngFor="let t of tenderProposal" class="card mb-2">
+                <div *ngFor="let t of tenderProposal" class="big card mb-2">
 
                     <div class="card-body bg-light">
 
