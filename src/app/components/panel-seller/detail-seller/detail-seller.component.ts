@@ -275,7 +275,7 @@ export class DetailSellerComponent implements OnInit {
       if (dato.idprovider > 0) {
         this.getSeller();
         this.editmode = false;
-        this.modalService.openModal("Uspješno ažurirani i sačuvani podaci.");
+        this.modalService.openModal("Uspješno ažurirani i sačuvani podaci.", "success");
       } else {
         console.log("no se guardó");
       }

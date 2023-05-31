@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Router } from '@angular/router';
-import { Observable, fromEvent, map, startWith } from 'rxjs';
 import { ModalService } from './services/modal.service';
 
 @Component({
@@ -18,13 +16,15 @@ export class AppComponent implements OnInit {
   
   modalOpen = false;
   ms = "";
+  type = "";
 
   constructor(private modalService:ModalService) {}
   
   ngOnInit(): void {
     this.modalService.modalState$.subscribe((a)=> {
       this.modalOpen = a.isOpen;    
-      this.ms = a.message;     
+      this.ms = a.message;
+      this.type = a.type;
     });
   }
 

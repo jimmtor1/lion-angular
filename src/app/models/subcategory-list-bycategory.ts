@@ -77,7 +77,7 @@ export class Cate {
                 }
                 break;
             case 2:
-                cuenta += 49;
+                cuenta += 50;
                 if (row > 0) {
                     for (let index = 0; index < row; index++) {
                         cuenta += this.subcategory3[index].length;
@@ -85,7 +85,7 @@ export class Cate {
                 }
                 break;
             case 3:
-                cuenta += 59;
+                cuenta += 60;
                 if (row > 0) {
                     for (let index = 0; index < row; index++) {
                         cuenta += this.subcategory4[index].length;

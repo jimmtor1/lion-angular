@@ -31,6 +31,10 @@ export class TenderService {
     return this.http.get<Tender[]>(`${this.URL}/authorized`);
   }
 
+  unauthorizeTender(idtender:number):Observable<Tender>{
+    return this.http.get<Tender>(`${this.URL}/unauthorize/${idtender}`);
+  }
+
   setTenderAuthorize(idtender:number):Observable<Tender>{
     return this.http.get<Tender>(`${this.URL}/authorize/${idtender}`)
   }

@@ -1,4 +1,13 @@
 .modal {
     animation: modalshow 0.2s ease-out;
-    background-color: rgba(0, 0, 0, 0.9);
+    background-color: rgba(0, 0, 0, 0.9);    
 }
+
+.success{
+    background-color: #badbcc;
+}
+
+.warning{
+    background-color: gold; 
+}
+

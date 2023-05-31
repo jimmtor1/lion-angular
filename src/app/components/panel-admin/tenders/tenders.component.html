@@ -1,6 +1,6 @@
 <div class="container mt-2">
 
-    <div class="card text-center">
+    <div class="big card text-center">
         <div class="card-header">
             <ul class="nav nav-tabs card-header-tabs">
                 <li class="nav-item">
@@ -50,8 +50,13 @@
                                 </a>
 
                          
-                                <a *ngIf="conf_att_button" (click)="confirmTender(tender.idtender)" class="btn btn-dark btn-sm"> 
+                                <a *ngIf="conf_att_button" (click)="confirmTender(tender.idtender)" class="btn btn-dark btn-sm" style="margin-right: 5px;"> 
                                     Potvrdi
+                                    <!-- <fa-icon [icon]="['fas', 'check-square']" class="fs-5"></fa-icon> -->
+                                </a>
+
+                                <a *ngIf="conf_att_button" (click)="unauthorize(tender.idtender)" class="btn btn-dark btn-sm"> 
+                                    Delete
                                     <!-- <fa-icon [icon]="['fas', 'check-square']" class="fs-5"></fa-icon> -->
                                 </a>
 

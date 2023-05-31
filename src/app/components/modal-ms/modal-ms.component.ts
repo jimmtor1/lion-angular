@@ -9,6 +9,7 @@ import { ModalService } from 'src/app/services/modal.service';
 export class ModalMsComponent {
 
   @Input() message: string;
+  @Input() type: string;
 
   constructor(private modalService:ModalService){}
 

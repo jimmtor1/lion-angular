@@ -151,7 +151,7 @@ export class ProductFormComponent implements OnInit {
     formData.append('price', this.product.price.toString());
 
     this.productService.saveAd(formData).subscribe(dato => {
-      this.modaService.openModal("Uspješno ste dodali vaš oglas.");
+      this.modaService.openModal("Uspješno ste dodali vaš oglas.", "success");
       this.router.navigate(['panelseller/products']);
     }, error => console.log(error));
 
@@ -197,7 +197,7 @@ export class ProductFormComponent implements OnInit {
 
 
     this.productService.editAd(formData).subscribe(dato => {
-      this.modaService.openModal("Uspješno ste dodali vaš oglas.");
+      this.modaService.openModal("Uspješno ste dodali vaš oglas.", "success");
       this.router.navigate(['panelseller/products']);
     }, error => console.log(error));
 

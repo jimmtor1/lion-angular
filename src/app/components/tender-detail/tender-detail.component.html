@@ -45,10 +45,16 @@
 
                     <div *ngIf="canOffer">
                         <hr>
-                        <div class="mb-3">
+                        <div class="mb-2">
                             <label for="exampleFormControlTextarea1" class="form-label">Unesite vašu ponudu</label>
                             <textarea [(ngModel)]="comment" class="form-control" id="exampleFormControlTextarea1"
                                 rows="5"></textarea>
+                        </div>
+
+                        <label class="mt-1" for="file">Fajl</label>
+                        <div class="input-group mb-3">
+                            <input type="file" (change)="onFileSelected($event)" class="form-control" multiple
+                                id="file">
                         </div>
 
                         <a (click)="saveProposal()" class="btn btn-danger">Apliciraj</a>
@@ -80,6 +86,17 @@
                         &nbsp;
                         <p class="h6">{{fed}} ,{{city}}</p>
                     </div>
+                    <div class="d-flex">
+                        <fa-icon [icon]="['fas','address-book']"></fa-icon>
+                        &nbsp;
+                        <p class="h6">{{user.address}}</p>
+                    </div>
+                    <div class="d-flex">
+                        <fa-icon [icon]="['fas','mobile-phone']"></fa-icon>
+                        &nbsp;
+                        <p class="h6">{{user.phone}}</p>
+
+                    </div>
 
                 </div>
 
@@ -104,23 +121,46 @@
 
                     <div class="card-body bg-light">
 
-                        <div class="d-flex">
-                            <fa-icon [icon]="['fas','user']"></fa-icon>
-                            &nbsp;
-                            <div class="d-flex justify-content-between w-100">
-                                <p class="h6">{{t.user.firstName}} {{t.user.firstName}}</p>
-                                <p class="text-muted">Objavljeno: {{t.date}}</p>
+                        <!-- <div class="d-flex">                            -->
+                        <div class="d-flex justify-content-between w-100">
+                            <!-- <p class="h6">{{t.user.firstName}} {{t.user.firstName}}</p> -->
+                            <div>
+                                <div class="d-flex">
+                                    <fa-icon [icon]="['fas','user']"></fa-icon>
+                                    &nbsp;
+                                    <a [routerLink]="['/provider', t.user.idprovider]">
+                                        {{t.user.companyName}}
+                                    </a>
+                                </div>
+                                <div class="d-flex">
+                                    <fa-icon [icon]="['fas','location-dot']"></fa-icon>
+                                    &nbsp;
+                                    <p class="p-0 mb-0">{{fed}} ,{{city}}</p>
+                                </div>
+                                <div class="d-flex">
+                                    <fa-icon [icon]="['fas','address-book']"></fa-icon>
+                                    &nbsp;
+                                    <p class="p-0 mb-0">{{t.user.user.address}}</p>
+                                </div>
+                                <div class="d-flex">
+                                    <fa-icon [icon]="['fas','mobile-phone']"></fa-icon>
+                                    &nbsp;
+                                    <p class="p-0">{{t.user.user.phone}}</p>
+                                </div>
+
                             </div>
+
+                            <p class="text-muted">Objavljeno: {{t.date}}</p>
                         </div>
+                        <!-- </div> -->
                         <hr class="m-0 p-0">
 
-                        <div class="d-flex">
-                            <fa-icon [icon]="['fas','location-dot']"></fa-icon>
-                            &nbsp;
-                            <p>{{fed}} ,{{city}}</p>
-                        </div>
-
                         <p class="pb-0 mb-0">{{t.comment}}</p>
+                        <a *ngIf="tender.document" class="btn btn-danger my-3"
+                            href="{{url_proposal_doc}}{{t.idProposal}}{{t.extension}}" target="_blank">
+                            <fa-icon [icon]="['fas', 'file-arrow-down']"></fa-icon>
+                            Otvorite prilog
+                        </a>
 
                     </div>
 

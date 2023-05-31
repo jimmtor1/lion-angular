@@ -28,6 +28,7 @@ export class ProductCategoryListComponent implements OnInit {
   price1: number | undefined;
   price2: number | undefined;
   page = 0;
+  defaultcategory: number;
 
   btnActive = false;
 
@@ -41,27 +42,27 @@ export class ProductCategoryListComponent implements OnInit {
 
   getProductList(): void {
     this.route.params.subscribe(params => {
+     
+      this.defaultcategory = params['def']
 
-      this.idcategory = params['id'];
-      this.idsubcategory = params['idc'];
+      if (this.defaultcategory) {
+        
+        this.getProductListByDefaultCategory();
 
-      this.category = this.categoryName[params['id'] - 1];
-      this.subcategoryName = this.subcategory[params['idc'] - 70];
+      } else {
 
-      this.productService.getAllByCategory(params['id'], params['idc']).subscribe(data => {
-        this.products = data;
-        this.loading = false;
-      });
+        this.idcategory = params['id'];
+        this.idsubcategory = params['idc'];
 
+        this.category = this.categoryName[params['id'] - 1];
+        this.subcategoryName = this.subcategory[params['idc'] - 70];
 
-      // if(this.idcategory==0){
+        this.productService.getAllByCategory(params['id'], params['idc']).subscribe(data => {
+          this.products = data;
+          this.loading = false;
+        });
 
-      //   this.productService.
-
-      // }else{
-
-      // }
-
+      }
 
     })
   }
@@ -71,7 +72,7 @@ export class ProductCategoryListComponent implements OnInit {
     this.price1 = undefined;
     this.price2 = undefined;
     this.city = 0;
-    this.fed = parseInt((event.target as HTMLSelectElement)?.value); 
+    this.fed = parseInt((event.target as HTMLSelectElement)?.value);
     this.citiesToCombo = selectListByFed(this.fed);
     this.allfilters();
   }
@@ -82,6 +83,13 @@ export class ProductCategoryListComponent implements OnInit {
     this.price2 = undefined;
     this.city = parseInt((event.target as HTMLSelectElement)?.value);
     this.allfilters();
+  }
+
+  getProductListByDefaultCategory() {
+    this.productService.getAllByDefaultCategory(this.defaultcategory).subscribe(p => {      
+      this.products = p;
+      this.loading = false;
+    });
   }
 
   getProductListByPrice() {
@@ -98,7 +106,7 @@ export class ProductCategoryListComponent implements OnInit {
   }
 
   subcategory: string[] = [
-    "All",
+    "Filteri",
     "Mobiteli",
     "Automobili",
     "Sportska oprema",
@@ -149,8 +157,8 @@ export class ProductCategoryListComponent implements OnInit {
     "Tepisi"
   ];
 
-  allfilters(){
-    this.productService.getAllFilters(this.idcategory, this.idsubcategory, this.fed, this.city, this.price1, this.price2, this.page).subscribe(p => {      
+  allfilters() {
+    this.productService.getAllFilters(this.idcategory, this.idsubcategory, this.fed, this.city, this.price1, this.price2, this.page).subscribe(p => {
       this.products = p.content;
       this.loading = false;
     }, error => { this.loading = false });

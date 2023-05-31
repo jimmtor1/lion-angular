@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-// import { Seller } from 'src/app/models/seller';
 import { Tender } from 'src/app/models/tender';
 import { ModalService } from 'src/app/services/modal.service';
 import { SellerService } from 'src/app/services/seller.service';
@@ -18,7 +17,7 @@ export class TenderFormComponent {
   file: File;
   // seller:Seller;
   loading: boolean = true;
-  // role:number=0;
+  role:number;
   authorized: boolean;
 
   constructor(private tenderService: TenderService, private sellerService: SellerService, private router: Router, private modalService: ModalService) { }
@@ -33,7 +32,7 @@ export class TenderFormComponent {
         this.iduser = JSON.parse(usuarioString);
         const rol = localStorage.getItem("role");
         if (rol) {
-          // this.role=JSON.parse(rol);
+          this.role=JSON.parse(rol);
 
           if (JSON.parse(rol) == 2) {
             // this.sellerService.getById(this.iduser).subscribe(s => {
@@ -66,8 +65,6 @@ export class TenderFormComponent {
   save() {
 
     const formData = new FormData();
-
-    formData.append('file', this.file);
     
     formData.append('iduser', this.iduser.toString());
     formData.append('projectName', this.tender.projectName);
@@ -76,8 +73,13 @@ export class TenderFormComponent {
     formData.append('description', this.tender.description);
 
     this.tenderService.save(formData).subscribe(dato => {
-      this.modalService.openModal("Uspješno ste dodali tender. U najkraćem roku očekujte ponude i izaberite najbolju za vas.");
-      this.router.navigate(['panelseller/tenders']);
+      this.modalService.openModal("Uspješno ste dodali tender. U najkraćem roku očekujte ponude i izaberite najbolju za vas.", "success");
+      if(this.role==2){
+        this.router.navigate(['panelseller/tenders']);
+      }else{
+        this.router.navigate(['paneluser/tenders']);
+      }
+      
     }, error => console.log(error));
 
   }

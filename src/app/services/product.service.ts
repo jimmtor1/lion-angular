@@ -29,6 +29,10 @@ export class ProductService {
     return this.httpClient.get<Product[]>(`${this.URL}/provider/${idprovider}`);
   }
 
+  getAllByDefaultCategory(idcategory: number,): Observable<Product[]> {
+    return this.httpClient.get<Product[]>(`${this.URL}/default/${idcategory}`);
+  }
+
   getById(id: number,): Observable<Product> {
     return this.httpClient.get<Product>(`${this.URL}/${id}`);
   }

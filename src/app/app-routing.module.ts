@@ -26,6 +26,7 @@ const routes: Routes = [
   {path:'register', component:RegisterFormComponent},
   {path: 'login', component:LoginFormComponent},
   {path: 'productCategoryList/:id/:idc', component:ProductCategoryListComponent},
+  {path: 'productCategoryList/:id/:idc/:def', component:ProductCategoryListComponent},
   {path: 'providerSubcategoryList/:id/:idc', component:SellerCategoryListComponent},
   {path: 'sellerpanel', component:SellerPanelComponent},
   {path: 'addetails/:id', component:ProductDetailComponent},

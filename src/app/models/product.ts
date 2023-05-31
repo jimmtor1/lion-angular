@@ -5,6 +5,7 @@ export class Product {
     idproduct:number = 0;
     productName:string = "";
     description:string = "";
+    defaultCategory:number;
     idcategory:number=0;
     idsubcategory:number = 0;
     idprovider:number; 

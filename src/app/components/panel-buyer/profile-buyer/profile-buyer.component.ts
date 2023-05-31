@@ -74,7 +74,7 @@ export class ProfileBuyerComponent implements OnInit {
     this.buyerService.createBuyer(this.buyer).subscribe(buy => {
       this.saving = false;
       this.editmode = false;
-      this.modalService.openModal("Uspješno ažurirani i sačuvani podaci.");
+      this.modalService.openModal("Uspješno ažurirani i sačuvani podaci.", "success");
     }, error => {
       console.log(error);
       this.editmode = false;

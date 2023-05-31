@@ -11,8 +11,8 @@ export class ModalService {
 
   constructor() { }
 
-  openModal(message: string) {
-    this.modalStateSubject.next({ isOpen: true, message });
+  openModal(message: string, type: string) {
+    this.modalStateSubject.next({ isOpen: true, message, type});
   }
 
   closeModal() {

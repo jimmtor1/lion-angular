@@ -16,7 +16,7 @@ export class SellerCategoryListComponent implements OnInit {
   categoryName: string[] = ["Građevinarstvo", "Sve za kuću", "Informatika i telekomunikacije", "Od glave do pete"];
   subcategoryName: String = "All";
   loading = true;
-  loadingnewpage=false;
+  loadingnewpage = false;
   federations: federation[] = FEDERATIONS;
   citiesToCombo: any[] = [];
   // fed: federation | null;
@@ -37,26 +37,26 @@ export class SellerCategoryListComponent implements OnInit {
 
   private getProvidersFromSubcategory(): void {
     this.route.params.subscribe(params => {
-      
+
       this.idcategory = parseInt(params['id']);
       this.category = this.categoryName[params['id'] - 1];
 
       this.idsubcategory = parseInt(params['idc']);
       this.subcategoryName = this.subcategory[params['idc']];
 
-      if (this.idsubcategory == 0 && this.idcategory > 0) {       
+      if (this.idsubcategory == 0 && this.idcategory > 0) {
         this.providerService.getAllByCategoryId(this.idcategory).subscribe(data => {
           this.sellers = data;
           this.loading = false;
         }, error => { this.loading = false; });
 
-      } else if (this.idsubcategory !== 0) {       
+      } else if (this.idsubcategory !== 0) {
         this.providerService.getAllBySubcategory(this.idsubcategory).subscribe(data => {
           this.sellers = data;
           this.loading = false;
         }, error => { this.loading = false; });
 
-      } else {              
+      } else {
         this.providerService.getAllPageable(this.page).subscribe(data => {
           this.sellers = data.content;
           this.loading = false;
@@ -71,7 +71,7 @@ export class SellerCategoryListComponent implements OnInit {
   citiesCombo(event: Event) {
     this.loading = true
     this.fed = parseInt((event.target as HTMLSelectElement)?.value);
-    this.city=0;
+    this.city = 0;
     this.citiesToCombo = selectListByFed(this.fed);
     this.allfilters();
   }
@@ -82,8 +82,8 @@ export class SellerCategoryListComponent implements OnInit {
     this.allfilters();
   }
 
-  allfilters(){
-    this.providerService.getAllFilters(this.idcategory, this.idsubcategory, this.fed, this.city, this.page).subscribe(p => {      
+  allfilters() {
+    this.providerService.getAllFilters(this.idcategory, this.idsubcategory, this.fed, this.city, this.page).subscribe(p => {
       this.sellers = p.content;
       this.loading = false;
     }, error => { this.loading = false });
@@ -118,14 +118,14 @@ export class SellerCategoryListComponent implements OnInit {
 
     } else {
 
-      if (this.idcategory>0 && this.fed > 0 && this.city == 0) {
+      if (this.idcategory > 0 && this.fed > 0 && this.city == 0) {
 
         this.providerService.getFilterCat(this.idcategory, this.fed, this.city).subscribe(p => {
           this.sellers = p;
           this.loading = false;
         }, error => { this.loading = false });
 
-      } else if (this.idcategory>0 && this.city > 0) {
+      } else if (this.idcategory > 0 && this.city > 0) {
 
         this.providerService.getFilterCat(this.idcategory, 0, this.city).subscribe(p => {
           this.sellers = p;
@@ -139,13 +139,13 @@ export class SellerCategoryListComponent implements OnInit {
         }, error => { this.loading = false });
 
         // if(this.idcategory==0){
-         
+
         // }else{
         //   this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
         //     this.router.navigateByUrl('providerSubcategoryList/' + this.idcategory + '/0');
         //   }, error => { this.loading = false });
         // }
-       
+
 
       }
 
@@ -154,9 +154,9 @@ export class SellerCategoryListComponent implements OnInit {
   }
 
   newpage() {
-    this.loadingnewpage=true;
+    this.loadingnewpage = true;
     this.page += 1;
-    this.providerService.getAllPageable(this.page).subscribe(data => {     
+    this.providerService.getAllPageable(this.page).subscribe(data => {
       this.sellers.push(...data.content);
       this.loadingnewpage = false;
     }, error => { this.loadingnewpage = false; });
@@ -164,7 +164,7 @@ export class SellerCategoryListComponent implements OnInit {
   }
 
   subcategory: string[] = [
-    "All",
+    "Filteri",
     "Zemljani radovi",
     "Betonski radovi",
     "Armirano-betonski radovi",
@@ -206,6 +206,7 @@ export class SellerCategoryListComponent implements OnInit {
     "Ostale dekoracije",
     "Klima uređaji",
     "Radijatori",
+    "Ventilatori",
     "Kamini",
     "Peći",
     "Grijalice",
@@ -231,7 +232,9 @@ export class SellerCategoryListComponent implements OnInit {
     "Dorbe i novčanici",
     "Naočale",
     "Nakit",
-
+    "Satovi",
+    "Krojači",
+    "Sahadžije"
   ];
 
 }
