@@ -12,13 +12,13 @@ export class UserService {
   // private baseURL = 'http://localhost:8080/login';
   private baseURL = `${API_URL}login`;
 
-  private user = new Userr
+  private user = new Userr();
 
   constructor(private http: HttpClient) { }
     
   isValidUser(user:Userr):Observable<Userr>{   
     
-     return this.http.post<Userr>(this.baseURL, user);
+    return this.http.post<Userr>(this.baseURL, user);
      
   }
 

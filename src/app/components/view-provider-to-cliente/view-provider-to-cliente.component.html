@@ -89,7 +89,12 @@
                         {{seller.biography}}
                     </p>
 
-
+                    <a routerLink="/chat/{{seller.user.id}}" class="btn btn-danger">
+                        <fa-icon [icon]="['fas','comment']" ></fa-icon>
+                        Pošaljite poruku
+                    </a>
+                    <br>
+                    <br>
                 </div>
 
             </div>

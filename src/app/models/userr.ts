@@ -13,9 +13,16 @@ export class Userr {
     phone:string;
     address:string;
 
+   
+    constructor(id?:number){
+        this.id = id || 0;
+    }
+
 }
 
 class Role{
     id:number;
     roleName:string;
 }
+
+

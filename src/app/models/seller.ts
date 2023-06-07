@@ -39,5 +39,4 @@ export class Company_subcategory {
     constructor(idsubcategory: Subcategory) {
         this.subcategory = idsubcategory;
     }
-
 }

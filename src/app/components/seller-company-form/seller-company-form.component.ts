@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Company_subcategory, Seller } from 'src/app/models/seller';
 import { Subcategory } from 'src/app/models/subcategory';

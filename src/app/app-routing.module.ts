@@ -18,6 +18,7 @@ import { SellerCategoryListComponent } from './components/seller-category-list/s
 import { TenderDetailComponent } from './components/tender-detail/tender-detail.component';
 import { TenderListComponent } from './components/tender-list/tender-list.component';
 import { ProducSearchListComponent } from './components/produc-search-list/produc-search-list.component';
+import { ChatComponent } from './components/chat/chat.component';
 
 const routes: Routes = [
   {path:'', component:HomeComponent},
@@ -41,6 +42,8 @@ const routes: Routes = [
   {path: 'tenderList', component:TenderListComponent},
   {path: 'sellerPanel', component:SellerPanelComponent},
   {path: 'search/:word', component:ProducSearchListComponent},
+  {path: 'chat', component:ChatComponent},
+  {path: 'chat/:iduser', component:ChatComponent},
   {path: 'paneladmin', loadChildren:() => import('./components/panel-admin/panel-admin.module').then(x=> x.PanelAdminModule)},
   {path: 'panelseller', loadChildren:() => import('./components/panel-seller/panel-seller.module').then(x=> x.PanelSellerModule)},
   {path:'paneluser',loadChildren:() => import('./components/panel-buyer/panel-buyer.module').then(x=> x.PanelBuyerModule)}

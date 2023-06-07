@@ -1,4 +1,3 @@
-import { Userr } from "./userr";
 
 export class Tender {
 
