@@ -3,25 +3,28 @@
     <ul class="menu">
         <li *ngFor="let c of cate.name, let i = index" class="submenu shadow">
 
-
             <button (mouseenter)="showElement(i)" (mouseleave)="hideElement()"
                 class="btn btn-danger dropdown-toggle rounded-0 m-0 fw-bold pb-2" href="#">{{c}}
                 <div class="progreso" [style.width]="anchoProgreso == 'element'+i?'100%':'0%'"></div>
             </button>
 
 
-            <ul class="row sublista bg-light shadow" (mouseenter)="showElement2(i)" (mouseleave)="hideElement2()"
-                [hidden]="show !== 'element'+i">
-        
+            <ul class="row sublista bg-light shadow" (mouseenter)="showElement2(i)" (mouseleave)="hideElement2()" [hidden]="show !== 'element'+i">
+
                 <div class="row mb-2">
 
                     <div class="col-3">
-                        <a *ngIf="i<4" class="py-0 btn btn-danger" [routerLink]="['/providerSubcategoryList', i+1, '0']">Pogledaj sve firme
+                        <a *ngIf="i<4" class="py-0 btn btn-danger" [routerLink]="['/providerSubcategoryList', i+1, '0']">
+                            <fa-icon [icon]="['fas', 'store']"></fa-icon>
+                            Pogledaj sve firme
                         </a>
-                        <a *ngIf="i==4" class="py-0 btn btn-danger" [routerLink]="['/productCategoryList', i+1, '0']">Svi proizvodi / Usluge</a>
+                        <a *ngIf="i==4" class="py-0 btn btn-danger" [routerLink]="['/productCategoryList', i+1, '0']">
+                            <fa-icon [icon]="['fas', 'box']"></fa-icon>
+                            Svi proizvodi / Usluge
+                        </a>
                     </div>
 
-                    <div class="col-9">                        
+                    <div class="col-9">
 
                         <a *ngIf="i<4" class="py-0 btn btn-danger"
                             [routerLink]="['/productCategoryList', '0', '0', i+1]">
@@ -29,7 +32,8 @@
                             Svi proizvodi / Usluge
                         </a>
 
-                        <a *ngIf="i==4" class=" py-0 btn btn-danger" [routerLink]="['/providerSubcategoryList', 0, '0']">
+                        <a *ngIf="i==4" class=" py-0 btn btn-danger"
+                            [routerLink]="['/providerSubcategoryList', 0, '0']">
                             <fa-icon [icon]="['fas', 'store']"></fa-icon>
                             Pogledaj sve firme
                         </a>

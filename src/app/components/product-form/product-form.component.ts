@@ -8,7 +8,6 @@ import { Subcategory } from 'src/app/models/subcategory';
 import { CategoryService } from 'src/app/services/category.service';
 import { IMG_PRODUCT_URL } from 'src/app/services/helper';
 import { ModalService } from 'src/app/services/modal.service';
-// import { AuthService } from 'src/app/services/helper';
 import { ProductService } from 'src/app/services/product.service';
 import { SellerService } from 'src/app/services/seller.service';
 
@@ -62,6 +61,8 @@ export class ProductFormComponent implements OnInit {
           this.loading=false;
         }
       });
+    }else{
+      this.router.navigate(['/login']);
     }
 
 

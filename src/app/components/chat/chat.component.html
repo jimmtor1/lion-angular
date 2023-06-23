@@ -1,95 +1,66 @@
-<div *ngIf="false"  class="container mt-3">
-
-    <!-- <div class="col-md-6">
-        <form class="form-inline">
-            <div class="form-group">
-                <label for="connect">WebSocket connection:</label>
-                <button (click)="connect()" class="btn btn-default" type="submit">Connect</button>
-                <button (click)="disconnect()" class="btn btn-default" type="submit" disabled="disabled">Disconnect
-                </button>
-            </div>
-        </form>
-    </div> -->
+<div class="container">
 
     <div class="row">
 
         <!-- list started chats: -->
-        <div class="col-4">
-            <b>Chats</b>
+        <div class="card text-center col-12 col-sm-4 px-0">
+            <div class="card-header">
+                <b>Chats</b>
+            </div>
+            <div class="card-body">
 
-            <div (click)="getChats(m.idChat)" class="selectChat" *ngFor="let m of LastMessageEachChat">
-                <div class="d-flex justify-content-between">
-                    <span>{{m.sender.id==thisidUser?m.receiver.firstName:m.sender.firstName}}</span>
+                <div (click)="getChats(m.idChat)" class="chat" [ngClass]="{'selectedChat':activeChat==m.idChat}"
+                    *ngFor="let m of LastMessageEachChat">
+                    <div class="d-flex justify-content-between">
+                        <span>{{m.sender.id==thisidUser?m.receiver.firstName+m.receiver.lastName:m.sender.firstName+m.sender.lastName}}</span>
 
-                    <span style="font-size: small;">{{m.dateTime | date: 'dd.MM.yyyy'}}</span>
+                        <span style="font-size: small;">{{m.dateTime | date: 'dd.MM.yyyy'}}</span>
+                    </div>
+
+                    <p class="text-muted mb-1 text-start"> <span *ngIf="msg.sender==m.sender">You:</span> {{m.content}}
+                    </p>
+                    <hr class="m-0">
                 </div>
 
-                <p class="text-muted mb-1"> <span *ngIf="msg.sender==m.sender">Tu:</span> {{m.content}}</p>
-                <hr class="m-0">
             </div>
 
         </div>
 
-        <div class="col-md-8">
-            <div class="p-2 border">
-                <span class="m-0 p-0 h5">
-                    <fa-icon [icon]="['fas','circle-user']"></fa-icon>
-                    {{chatingWhit}}
-                </span>
-            </div>
 
-            <div style="height: 200px; overflow: auto;" class="bg-light p-2">
+
+        <div class="card col-12 col-sm-8 px-0" style="height: 500px;">
+            <div class="card-header">
+                <fa-icon [icon]="['fas','circle-user']"></fa-icon>
+                &nbsp;
+                <b>{{chatingWhit}}</b>
+            </div>
+            <div class="card-body" style="overflow-y: auto;" #messageContainer>
+
                 <div class="d-flex" [ngClass]="{'justify-content-end': m.sender.id==thisidUser}"
                     *ngFor="let m of chatMessages">
-                    <p class="p-2 bg-dark text-white rounded-pill">{{m.content}} &nbsp;<span
-                            style="font-size: small;">{{m.dateTime | date: 'hh:mm'}}</span> </p>
+                    <p class="p-2 bg-dark text-white rounded-pill">
+                        {{m.content}} &nbsp; <span style="font-size: small;">{{m.dateTime | date: 'hh:mm'}}</span>
+                    </p>
                 </div>
-            </div>
 
-            <div class="row g-1 mt-1">
-                <div class="col-11">
-                    <input type="text" [(ngModel)]="msg.content" class="form-control" name="msg"
+            </div>
+            <div class="card-footer text-muted">
+                <div class="input-group">
+
+                    <input (keyup.enter)="sendMessage()" type="text" [(ngModel)]="msg.content" class="form-control"
                         placeholder="Write a message">
-                </div>
-                <div class="col-1">
-                    <button (click)="sendMessage()" class="btn btn-dark" type="submit">Send</button>
+                    <button (click)="sendMessage()" class="input-group-text mb-0 minibtn" id="basic-addon2">
+                        <fa-icon [icon]="['fas','paper-plane']"></fa-icon>
+                    </button>
+
                 </div>
             </div>
-
-
         </div>
 
-
-
-    </div>
-
-</div>
-
-
-<div class="card text-center mini">
-    <div class="card-header bg-danger text-white ">
-
-        <span class="m-0 p-0 h5">
-            <fa-icon [icon]="['fas','circle-user']"></fa-icon>
-            {{chatingWhit}}
-        </span>
-
-    </div>
-    <div class="card-body p-0" #messageContainer>
-
-        <div class="d-flex" [ngClass]="{'justify-content-end': m.sender.id==thisidUser}" *ngFor="let m of chatMessages">
-            <p [ngClass]="m.sender.id==thisidUser ? 'bg-dark' : 'bg-secondary'" class="p-1 m-1 text-white rounded-pill" >{{m.content}} &nbsp;
-                <span style="font-size: small;">{{m.dateTime | date: 'hh:mm'}}</span>
-            </p>
+        <div class="d-block d-sm-none">
+            <br>
         </div>
 
     </div>
-    <div class="card-footer text-muted">
-        <div class="input-group">
-            <input type="text" [(ngModel)]="msg.content" class="form-control" placeholder="Write a message">
-            <button (click)="sendMessage()" class="input-group-text mb-0 minibtn" id="basic-addon2">
-                <fa-icon [icon]="['fas','paper-plane']"></fa-icon>
-            </button>
-        </div>
-    </div>
+
 </div>

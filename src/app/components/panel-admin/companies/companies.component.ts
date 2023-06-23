@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Seller } from 'src/app/models/seller';
 import { SellerService } from 'src/app/services/seller.service';
 
@@ -11,6 +11,7 @@ export class CompaniesComponent implements OnInit {
 
   sellers:Seller[];
   active = true;
+  // @Output() SellerEditEvent = new EventEmitter<number>();
 
   constructor(private sellerService:SellerService){}
 
@@ -43,5 +44,9 @@ export class CompaniesComponent implements OnInit {
       location.reload();
     });
   }
+
+  // emitSellerEdit(idseller:number){
+  //   this.SellerEditEvent.emit(idseller);
+  // }
   
 }

@@ -1,48 +1,92 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { Company_subcategory, Seller } from 'src/app/models/seller';
+import { ActivatedRoute } from '@angular/router';
+import { Seller } from 'src/app/models/seller';
 import { Subcategory } from 'src/app/models/subcategory';
 import { CategoryService } from 'src/app/services/category.service';
-import { FEDERATIONS, IMG_PROFILE_URL, federation, selectListByFed, select_city, select_fed } from 'src/app/services/helper';
+import { select_fed, selectListByFed, select_city, IMG_PROFILE_URL, federation, FEDERATIONS } from 'src/app/services/helper';
+import { ModalService } from 'src/app/services/modal.service';
 import { SellerService } from 'src/app/services/seller.service';
 
-
-
 @Component({
-  selector: 'seller-company-form',
-  templateUrl: './seller-company-form.component.html',
-  styleUrls: ['./seller-company-form.component.css']
+  selector: 'app-company',
+  templateUrl: './company.component.html',
+  styleUrls: ['./company.component.css']
 })
-export class SellerCompanyFormComponent implements OnInit {
+export class CompanyComponent implements OnInit {
 
-  seller: Seller = new Seller();
-  selectedCategory: number;
-  subcategories: Subcategory[];
   iduser: number;
-  loading: boolean = true;
+  seller: Seller;
   image: string;
-  imageFile: File;
-  imageSelected = false;
-  company_category: Company_subcategory[] = [];
-  citiesToCombo: any[] = [];
-
-  federations: federation[] = FEDERATIONS;
-  
-  fed: federation | null;
-  city: number;
-
   urlprof_img = `${IMG_PROFILE_URL}`;
+  fed: federation;
+  city: number;
+  citiesToCombo: any[] = [];
+  subcategoriesSelected: Subcategory[] = [];
+  editmode: boolean = false;
+  subcategories: Subcategory[] = [];
+  imageSelected = false;
+  imageFile: File;
+  federations: federation[] = FEDERATIONS;
 
-  // selectedSucategories: Subcategory[] = [];
-
-  constructor(private categoryService: CategoryService, private sellerService: SellerService, private router: Router, private datePipe: DatePipe) { }
+  constructor(private route: ActivatedRoute, private datePipe: DatePipe, private sellerService: SellerService, private categoryService: CategoryService, private modalService: ModalService) { }
 
   ngOnInit(): void {
-    this.getSeller();
-    this.subcategoriesCombo();
+    
+    this.route.params.subscribe(param => {
+      if (param['iduser']) {
+        this.iduser = param['iduser'];
+        this.getSeller();        
+      }
+    });
+
+    
   }
 
+  getSeller() {
+
+    this.sellerService.getById(this.iduser).subscribe(sellerBd => {
+      this.seller = sellerBd;
+      this.image = this.urlprof_img + this.seller.image;
+
+      if (this.seller.user.federation) {
+        let x = select_fed(this.seller.user.federation);
+        if (x) {
+          this.fed = x;
+        }
+
+        if (this.fed) {
+          this.citiesToCombo = selectListByFed(this.fed.id);
+        }
+
+      }
+
+      if (this.seller.user.city) {
+        this.city = select_city(this.seller.user.city).id;
+      }
+
+      this.subcategoriesSelected = [];
+      this.seller.providerSubcategoryList.forEach(p => {
+        this.subcategoriesSelected.push(p.subcategory);
+      })
+
+    });
+  }
+
+  activeEdit() {
+    this.editmode = !this.editmode;
+
+    if (this.editmode) {
+      this.subcategoriesCombo();
+    } else {
+      this.subcategories = [];
+      this.seller.providerSubcategoryList.forEach(p => {
+        this.subcategories.push(p.subcategory);
+      })
+    }
+
+
+  }
 
   subcategoriesCombo() {
     this.categoryService.getAllsub().subscribe(subcategories => {
@@ -65,63 +109,15 @@ export class SellerCompanyFormComponent implements OnInit {
       this.subcategories.splice(21, 0, sub2);
       this.subcategories.splice(48, 0, sub3);
       this.subcategories.splice(59, 0, sub4);
-      this.loading = false;      
+
     });
-
   }
-
-  getSeller() {
-
-    const usuarioString = localStorage.getItem("iduser");
-    if (usuarioString) {
-      if (JSON.parse(usuarioString) > 0) {
-        // this.iduser = JSON.parse(usuarioString); 
-        this.sellerService.getById(JSON.parse(usuarioString)).subscribe(sellerBd => {
-          this.seller = sellerBd;
-          
-          this.fed = select_fed(this.seller.user.federation);
-          this.city = select_city(this.seller.user.city).id;
-
-          this.image = this.urlprof_img+this.seller.image;
-
-          this.seller.providerSubcategoryList.forEach(p => {
-            this.company_category.push(p);
-          })
-
-          this.citiesCombo2();
-
-        });
-
-      }
-    }
-
-
-  }
-
-  onFileSelected(event: any) {
-
-    const files: FileList = event.target.files;
-    if (files.length > 0) {
-
-      const reader = new FileReader();
-      reader.readAsDataURL(files[0]);
-
-      reader.onload = (e: any) => {
-        this.image = e.target.result;
-        this.imageFile = files[0];
-        this.imageSelected = true;
-      }
-
-    }
-
-  }
-
 
   save() {
+
     const formData = new FormData();
-    // console.log(this.seller);
-    this.company_category.forEach(sub => {
-      formData.append('idsubcategories', sub.subcategory.idsubcategory.toString())
+    this.subcategoriesSelected.forEach(sub => {
+      formData.append('idsubcategories', sub.idsubcategory.toString())
     })
 
     if (this.imageSelected) {
@@ -137,6 +133,7 @@ export class SellerCompanyFormComponent implements OnInit {
     formData.append('deliveryCost', this.seller.deliveryCost);
     formData.append('image', this.seller.image);
     formData.append('biography', this.seller.biography);
+    formData.append('identification', this.seller.identification);
 
     if (this.seller.accepted !== null) {
       formData.append('accepted', this.seller.accepted.toString());
@@ -157,7 +154,7 @@ export class SellerCompanyFormComponent implements OnInit {
     if (this.seller.endTime) {
       formData.append('endTime', this.seller.endTime.toString());
     }
-    
+
     formData.append('facebook', this.seller.facebook);
     formData.append('instagram', this.seller.instagram);
     formData.append('youtube', this.seller.youtube);
@@ -167,18 +164,18 @@ export class SellerCompanyFormComponent implements OnInit {
     formData.append('firstName', this.seller.user.firstName);
     formData.append('lastName', this.seller.user.lastName);
 
-    if(this.fed){
-      formData.append('federation', this.fed.toString());
-    }else if(this.seller.user.federation){
-      formData.append('federation', this.seller.user.federation.toString());      
+    if (this.fed) {
+      formData.append('federation', this.fed.id.toString());
+    } else if (this.seller.user.federation) {
+      formData.append('federation', this.seller.user.federation.toString());
     }
 
-    if(this.city){
+    if (this.city) {
       formData.append('city', this.city.toString());
-    }else if(this.seller.user.city){
-      formData.append('federation', this.seller.user.city.toString());      
+    } else if (this.seller.user.city) {
+      formData.append('federation', this.seller.user.city.toString());
     }
-       
+
     formData.append('phone', this.seller.user.phone);
     formData.append('password', this.seller.user.password);
 
@@ -193,50 +190,31 @@ export class SellerCompanyFormComponent implements OnInit {
     this.sellerService.save(formData).subscribe(dato => {
 
       if (dato.idprovider > 0) {
-        location.reload();
+        this.getSeller();
+        this.editmode = false;
+        this.modalService.openModal("Uspješno ažurirani i sačuvani podaci.", "success");
       } else {
         console.log("no se guardó");
       }
-
     }, error => console.log(error));
   }
 
-  subCategoryAdded(event: Event): void {
+  onFileSelected(event: any) {
 
-    let d = parseInt((event.target as HTMLSelectElement)?.value)
-    
-    let sub=this.getSubcategoryById(d);
+    const files: FileList = event.target.files;
+    if (files.length > 0) {
 
-    let exist = false;
-    this.company_category.forEach(c => {
-      if (c.subcategory == sub) {
-        exist = true;
-        return;
+      const reader = new FileReader();
+      reader.readAsDataURL(files[0]);
+
+      reader.onload = (e: any) => {
+        this.image = e.target.result;
+        this.imageFile = files[0];
+        this.imageSelected = true;
       }
-    });
 
-    if (!exist) {
-      this.company_category.push(new Company_subcategory(sub));
     }
 
-
-  }
-
-  getSubcategoryById(idsubcategory:number):Subcategory{
-
-    let sub:Subcategory=new Subcategory();
-    this.subcategories.forEach(s=>{
-      if(s.idsubcategory==idsubcategory){
-        sub = s;
-        return;
-      }
-    })
-    return sub;
-
-  }
-
-  deleteSubcategory(sub: number) {
-    this.company_category.splice(sub, 1);
   }
 
   citiesCombo(event: Event) {
@@ -245,14 +223,8 @@ export class SellerCompanyFormComponent implements OnInit {
     this.citiesToCombo = selectListByFed(fed);
   }
 
-  citiesCombo2() {
-    this.citiesToCombo = selectListByFed(this.seller.user.federation);
-  }
-
   selectedCity(event: Event) {
     this.city = parseInt((event.target as HTMLSelectElement)?.value);
-    //this.seller.user.city = parseInt((event.target as HTMLSelectElement)?.value);
   }
-
 
 }

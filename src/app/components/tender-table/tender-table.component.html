@@ -23,8 +23,8 @@
 
                 <th>{{tender.idtender}}</th>
                 <td>{{tender.projectName}}</td>
-                <td>{{tender.dateFrom}}</td>
-                <td>{{tender.dateTo}}</td>
+                <td>{{tender.dateFrom | date:'dd.MM.yyyy'}}</td>
+                <td>{{tender.dateTo | date:'dd.MM.yyyy'}}</td>
                 <td>
                     <p style="overflow: hidden; max-height: 1.2em; line-height: 1; max-width: 360px;" class="p-0 m-0">{{tender.description}}</p>
                     ...

@@ -1,8 +1,12 @@
-.selectChat{
-    cursor: pointer;    
+.selectedChat{
+background-color: lightgray;
 }
 
-.selectChat:hover{
+.chat{
+    cursor: pointer; 
+}
+
+.chat:hover{
     background-color: lightgray;    
 }
 
@@ -24,5 +28,9 @@
 
 .card-body{
     overflow: auto;
+}
+
+.card:hover{
+    box-shadow: none
 }
 

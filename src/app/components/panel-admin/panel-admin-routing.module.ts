@@ -6,6 +6,7 @@ import { CustomersComponent } from './customers/customers.component';
 import { TendersComponent } from './tenders/tenders.component';
 import { TenderDetailComponent } from '../tender-detail/tender-detail.component';
 import { CustomerComponent } from './customer/customer.component';
+import { CompanyComponent } from './company/company.component';
 
 const routes: Routes = [
   {path:'', component:PanelAdminComponent, children: [
@@ -15,6 +16,7 @@ const routes: Routes = [
     {path:'tenders', component:TendersComponent},
     {path:'tenderDetail/:idtender', component:TenderDetailComponent},
     {path:'customer/:id', component:CustomerComponent},
+    {path:'company/:iduser', component: CompanyComponent}
   ]}
 ];
 

@@ -15,7 +15,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class TenderDetailComponent implements OnInit {
 
-  tender: Tender;
+  tender: Tender = new Tender();
   user: Userr;
   id_current_user: number;
   id_current_role: number;
@@ -24,17 +24,18 @@ export class TenderDetailComponent implements OnInit {
   @Input() idtender: number;
   already_offered: boolean = false;
   canOffer: boolean = false;
-  loading=true;
+  loading = true;
   file: File;
+  type_list:string[]=['Građevina','Tekstil','Vozni park','Tehnologija']
 
   url_doc = `${DOC_URL}`;
   url_proposal_doc = `${DOC_PROPOSAL_URL}`;
-  
+
 
   fed: string;
   city: string;
 
-  constructor(private tenderService: TenderService, private route: ActivatedRoute, private userService: UserService, private sellerService:SellerService, private router: Router) { }
+  constructor(private tenderService: TenderService, private route: ActivatedRoute, private userService: UserService, private sellerService: SellerService, private router: Router) { }
 
   ngOnInit(): void {
 
@@ -47,10 +48,10 @@ export class TenderDetailComponent implements OnInit {
       if (param['idtender']) {
         this.tenderService.getById(param['idtender']).subscribe(t => {
           this.tender = t;
-
+          console.log(t.tenderTypeList);  
           const role = localStorage.getItem('role');
           if (role) {
-            this.id_current_role = JSON.parse(role);           
+            this.id_current_role = JSON.parse(role);
             if (this.id_current_role == 2 && this.id_current_user != this.tender.iduser) {
               this.get_already_offer();
               this.canOffer = true;
@@ -58,7 +59,7 @@ export class TenderDetailComponent implements OnInit {
               this.getProposals();
               this.canOffer = false;
             }
-            
+
           }
 
           this.userService.getById(this.tender.iduser).subscribe(u => {
@@ -68,7 +69,7 @@ export class TenderDetailComponent implements OnInit {
               this.fed = x.name;
             }
             this.city = select_city(this.user.city).name;
-            this.loading=false;
+            this.loading = false;
           });
         });
       } else {
@@ -83,7 +84,7 @@ export class TenderDetailComponent implements OnInit {
               this.fed = x.name;
             }
             this.city = select_city(this.user.city).name;
-            this.loading=false;
+            this.loading = false;
           });
 
           const role = localStorage.getItem('role');
@@ -108,7 +109,7 @@ export class TenderDetailComponent implements OnInit {
     this.tenderService.confirmAlreadyPosted(this.tender.idtender, this.id_current_user).subscribe(t => {
       if (t) {
         this.already_offered = true;
-        this.canOffer=false;
+        this.canOffer = false;
         this.tenderProposal.push(t);
       } else {
         this.already_offered = false;
@@ -119,9 +120,9 @@ export class TenderDetailComponent implements OnInit {
   }
 
   getProposals() {
-   
+
     this.tenderService.getProposalList(this.tender.idtender).subscribe(t => {
-      this.tenderProposal = t;   
+      this.tenderProposal = t;
     });
 
   }
@@ -138,7 +139,7 @@ export class TenderDetailComponent implements OnInit {
     this.tenderService.saveProposal(formData).subscribe(x => {
       if (x.idProposal > 0) {
         this.already_offered = true;
-        this.canOffer=false;
+        this.canOffer = false;
         this.tenderProposal.push(x);
       } else {
         alert("no se guardó")
@@ -154,6 +155,8 @@ export class TenderDetailComponent implements OnInit {
     this.file = files[0];
 
   }
+
+
 
 
 }

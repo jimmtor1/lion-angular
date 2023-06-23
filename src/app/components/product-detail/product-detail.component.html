@@ -51,6 +51,10 @@
 
                     <p *ngIf="seller.user.federation!=null">Grad: {{city}}</p>
                 </div>
+                <a (click)="emitSeller(seller.user.id);"  class="btn btn-danger">
+                    <fa-icon [icon]="['fas','comment']" ></fa-icon>
+                    Pošaljite poruku
+                </a>
             </div>
         </div>
         <!-- </div> -->

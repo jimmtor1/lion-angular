@@ -88,8 +88,8 @@
                         <fa-icon [icon]="['fas','address-book']"></fa-icon>
                         {{seller.biography}}
                     </p>
-
-                    <a routerLink="/chat/{{seller.user.id}}" class="btn btn-danger">
+                    <!-- routerLink="/chat/{{seller.user.id}}" -->
+                    <a (click)="emitSeller(seller.user.id);"  class="btn btn-danger">
                         <fa-icon [icon]="['fas','comment']" ></fa-icon>
                         Pošaljite poruku
                     </a>
@@ -105,7 +105,10 @@
         <hr>
 
         <!-- seller image product list -->
+        <h4>Proizvodi / Usluge ovog korisnika</h4>
         <div class="d-flex overflow-auto flex-nowrap">
+
+           
 
             <div *ngFor="let product of producByProvider.slice(0,5)" class="mx-1">
                 <div class="mini card h-100" style="width: 13rem;">

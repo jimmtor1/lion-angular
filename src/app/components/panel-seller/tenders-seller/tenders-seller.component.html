@@ -29,7 +29,7 @@
                                 <p class="h5">{{t.projectName}}</p>
                                 <p class="pb-0" style="overflow: hidden; max-height: 3em;">{{t.description}}</p>
 
-                                <span class="text-muted">Posted: {{t.createDate}}</span>
+                                <span class="text-muted">Objavljeno: {{t.createDate | date:'dd.MM.yyyy'}}</span>
 
                                 <a [routerLink]="['/panelseller/tenderDetail',t.idtender]" class="stretched-link"></a>
 
@@ -45,7 +45,7 @@
             <div *ngIf="page=='owntender'">
 
                 <div class="d-flex justify-content-end mb-1">
-                    <button routerLink="/panelseller/newtender" class="btn btn-secondary btn-sm">Novi tender</button>                    
+                    <button routerLink="/panelseller/newtender" class="btn btn-secondary btn-sm">Dodaj tender</button>                    
                 </div>
 
                 <div class="table-responsive">
@@ -54,7 +54,7 @@
 
                         <thead>
                             <tr>
-                                <th>Id</th>
+                                <th>ID</th>
                                 <th>Naziv projekta</th>
                                 <th>Od</th>
                                 <th>Do</th>
@@ -67,8 +67,8 @@
 
                                 <th>{{tender.idtender}}</th>
                                 <td>{{tender.projectName}}</td>
-                                <td>{{tender.dateFrom}}</td>
-                                <td>{{tender.dateTo}}</td>
+                                <td>{{tender.dateFrom | date:'dd.MM.yyyy'}}</td>
+                                <td>{{tender.dateTo | date:'dd.MM.yyyy'}}</td>
                                 <td>
                                     <p style="overflow: hidden; max-height: 1.2em; line-height: 1; max-width: 360px;"
                                         class="p-0 m-0">
@@ -79,7 +79,7 @@
                                 <td>
                                     <a routerLink="/panelseller/tenderDetail/{{tender.idtender}}" class="btn btn-dark "
                                         style="margin-right: 5px;">
-                                        detils
+                                        Detalji
                                         <fa-icon [icon]="['fas', 'circle-info']" class="fs-5"></fa-icon>
                                     </a>
 

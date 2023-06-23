@@ -36,9 +36,9 @@
                           <td>{{seller.user.email}}</td>             
                           <td>               
                             
-                            <!-- <button (click)="emitSellerEdit(seller.user.id)" class="btn btn-dark mx-2" >detalji</button> -->
+                            <button routerLink="/paneladmin/company/{{seller.user.id}}" class="btn btn-dark mx-2">detalji</button>
                             <button *ngIf="active" (click)="deactivate(seller.user.id)" class="btn btn-dark mx-2" >Deaktiviraj</button>
-                            <button *ngIf="!active" (click)="confirm(seller.user.id)" class="btn btn-dark mx-2" >Aktiviraj</button>
+                            <button *ngIf="!active" (click)="confirm(seller.user.id)" class="btn btn-dark mx-2">Aktiviraj</button>
                             
             
                           </td>           

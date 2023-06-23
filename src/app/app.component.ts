@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ModalService } from './services/modal.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -17,8 +18,10 @@ export class AppComponent implements OnInit {
   modalOpen = false;
   ms = "";
   type = "";
+  showChats: boolean;
+  providerId:number | undefined;
 
-  constructor(private modalService:ModalService) {}
+  constructor(private modalService:ModalService, private router:Router) {}
   
   ngOnInit(): void {
     this.modalService.modalState$.subscribe((a)=> {
@@ -26,7 +29,27 @@ export class AppComponent implements OnInit {
       this.ms = a.message;
       this.type = a.type;
     });
+
+    this.modalService.chatState$.subscribe((a)=> {
+      if(a.iduser==0){              
+        this.showChats = false;
+      }else{  
+        let user = localStorage.getItem('iduser');
+        if(user){
+          this.providerId = a.iduser;
+          this.showChats = true; 
+        }else{
+          this.router.navigate(['login'])
+        }     
+
+      }            
+    });
+
+    
+
   }
+
+ 
 
   //   this.isMobile$ = fromEvent(window, 'resize').pipe(
   //     map(() => window.innerWidth <= 768),

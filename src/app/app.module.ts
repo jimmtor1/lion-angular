@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
 import { DatePipe} from '@angular/common';
@@ -14,19 +14,16 @@ import { ProductFormComponent } from './components/product-form/product-form.com
 import { RegisterFormComponent } from './components/register-form/register-form.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { ProductCategoryListComponent } from './components/product-category-list/product-category-list.component';
-import { SellerPanelComponent } from './components/seller-panel/seller-panel.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 import { ProductBuyerListComponent } from './components/product-buyer-list/product-buyer-list.component';
-import { SellerCompanyFormComponent } from './components/seller-company-form/seller-company-form.component';
-import { PanelBuyerComponent } from './components/buyer-panel/panel-buyer.component';
-import { SellerDetailComponent } from './components/seller-detail/seller-detail.component';
-import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
+// import { SellerCompanyFormComponent } from './components/seller-company-form/seller-company-form.component';
+// import { SellerDetailComponent } from './components/seller-detail/seller-detail.component';
 import { BuyerListComponent } from './components/buyer-list/buyer-list.component';
 import { SellerListComponent } from './components/seller-list/seller-list.component';
 import { SellerSocialnetworkComponent } from './components/seller-socialnetwork/seller-socialnetwork.component';
 import { SubcategoryListComponent } from './components/subcategory-list/subcategory-list.component';
 
-import { faAddressBook, faAddressCard, faArrowsRotate, faBars, faBasketShopping, faBox, faBoxOpen, faBriefcase, faBuilding, faBuildingCircleExclamation, faCalendar, faCheckSquare, faCircleInfo, faCircleUser, faComment, faEnvelope, faFile, faFileArrowDown, faHandHoldingMedical, faHandshake, faHeadset, faHome, faIdBadge, faLaptop, faListCheck, faLocationDot, faMagnifyingGlass, faMobilePhone, faNewspaper, faPaperPlane, faRectangleAd, faRightFromBracket, faShareNodes, faShirt, faShoppingCart, faSignOut, faStore, faTag, faTrash, faUser, faUsers } from '@fortawesome/free-solid-svg-icons';
+import { faAddressBook, faAddressCard, faArrowLeft, faArrowsRotate, faBars, faBasketShopping, faBox, faBoxOpen, faBriefcase, faBuilding, faBuildingCircleExclamation, faCalendar, faCheckSquare, faCirclePlus, faCircleUser, faClose, faComment, faEnvelope, faFile, faFileArrowDown, faHandHoldingMedical, faHandshake, faHeadset, faHome, faLaptop, faListCheck, faLocationDot, faMagnifyingGlass, faMinus, faMobilePhone, faNewspaper, faPaperPlane, faRectangleAd, faRightFromBracket, faShareNodes, faShirt, faShoppingCart, faSignOut, faStore, faTag, faTrash, faUser, faUsers, faWindowMaximize, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { faFacebook, faInstagram, faYoutube } from '@fortawesome/free-brands-svg-icons';
 import { ViewProviderToClienteComponent } from './components/view-provider-to-cliente/view-provider-to-cliente.component';
 import { SellerCategoryListComponent } from './components/seller-category-list/seller-category-list.component';
@@ -39,6 +36,9 @@ import { NavbarMenuCategoryComponent } from './components/navbar-menu-category/n
 import { ModalMsComponent } from './components/modal-ms/modal-ms.component';
 import { ProducSearchListComponent } from './components/produc-search-list/produc-search-list.component';
 import { ChatComponent } from './components/chat/chat.component';
+import { ChatMiniComponent } from './components/chat-mini/chat-mini.component';
+import { NavbarGeneralPhoneComponent } from './components/navbar-general-phone/navbar-general-phone.component';
+import { AuthInterceptor } from './auth.interceptor';
 
 
 @NgModule({
@@ -49,14 +49,11 @@ import { ChatComponent } from './components/chat/chat.component';
     ProductFormComponent,
     RegisterFormComponent,
     LoginFormComponent,
-    ProductCategoryListComponent,
-    SellerPanelComponent,
+    ProductCategoryListComponent,    
     ProductDetailComponent,
     ProductBuyerListComponent,
-    SellerCompanyFormComponent,
-    PanelBuyerComponent,
-    SellerDetailComponent,
-    AdminPanelComponent,
+    // SellerCompanyFormComponent,
+    // SellerDetailComponent,
     BuyerListComponent,
     SellerListComponent,
     SellerSocialnetworkComponent,
@@ -71,7 +68,9 @@ import { ChatComponent } from './components/chat/chat.component';
     NavbarMenuCategoryComponent,
     ModalMsComponent,
     ProducSearchListComponent,
-    ChatComponent    
+    ChatComponent,
+    ChatMiniComponent,
+    NavbarGeneralPhoneComponent    
   ],
   imports: [
     BrowserModule,
@@ -80,7 +79,12 @@ import { ChatComponent } from './components/chat/chat.component';
     FontAwesomeModule,
     FormsModule
   ],
-  providers: [DatePipe],
+  providers: [
+    DatePipe,
+    {
+      provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
@@ -88,7 +92,7 @@ export class AppModule {
   
 
   constructor(library: FaIconLibrary) {
-    library.addIcons(faShirt, faBuilding, faHome, faLaptop, faShoppingCart, faMagnifyingGlass, faUser, faSignOut, faStore, faFacebook, faInstagram, faYoutube, faHandshake, faHeadset, faHandHoldingMedical, faTag, faRectangleAd, faShareNodes, faRightFromBracket, faUsers, faBuildingCircleExclamation, faAddressCard, faBasketShopping, faTrash, faLocationDot, faMobilePhone, faEnvelope, faBriefcase, faAddressBook, faListCheck, faFile, faBars, faCalendar, faFileArrowDown, faCheckSquare, faNewspaper, faBoxOpen, faArrowsRotate,faBox, faComment, faCircleUser, faPaperPlane);
+    library.addIcons(faShirt, faBuilding, faHome, faLaptop, faShoppingCart, faMagnifyingGlass, faUser, faSignOut, faStore, faFacebook, faInstagram, faYoutube, faHandshake, faHeadset, faHandHoldingMedical, faTag, faRectangleAd, faShareNodes, faRightFromBracket, faUsers, faBuildingCircleExclamation, faAddressCard, faBasketShopping, faTrash, faLocationDot, faMobilePhone, faEnvelope, faBriefcase, faAddressBook, faListCheck, faFile, faBars, faCalendar, faFileArrowDown, faCheckSquare, faNewspaper, faBoxOpen, faArrowsRotate,faBox, faComment, faCircleUser, faPaperPlane, faMinus, faClose, faXmark, faCirclePlus, faArrowLeft, faWindowMaximize);
   }
 
 }

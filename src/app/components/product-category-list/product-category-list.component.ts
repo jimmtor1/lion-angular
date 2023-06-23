@@ -16,7 +16,7 @@ export class ProductCategoryListComponent implements OnInit {
   products: Product[] = [];
   category: string = "";
   categoryName: string[] = ["Građevinarstvo", "Sve za kuću", "Informatika i telekomunikacije", "Od glave do pete", "Svi proizvodi / Usluge"];
-  subcategoryName: String = "All";
+  subcategoryName: String = "Filteri";
   federations: federation[] = FEDERATIONS;
   citiesToCombo: any[] = [];
   //fed: federation | null;
@@ -158,7 +158,17 @@ export class ProductCategoryListComponent implements OnInit {
   ];
 
   allfilters() {
-    this.productService.getAllFilters(this.idcategory, this.idsubcategory, this.fed, this.city, this.price1, this.price2, this.page).subscribe(p => {
+    if(this.idcategory==undefined){
+      this.idcategory=0;
+    }
+    if(this.idsubcategory==undefined){
+      this.idsubcategory=0;
+    }
+    if(this.defaultcategory==undefined){
+      this.defaultcategory=0;
+    }
+
+    this.productService.getAllFilters(this.defaultcategory,this.idcategory, this.idsubcategory, this.fed, this.city, this.price1, this.price2, this.page).subscribe(p => {
       this.products = p.content;
       this.loading = false;
     }, error => { this.loading = false });

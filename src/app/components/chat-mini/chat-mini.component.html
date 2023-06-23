@@ -1,0 +1,99 @@
+<audio #audioPlayer>
+    <source src="assets/sound/notification-mouth.wav" type="audio/mpeg">
+</audio>
+<!-- list started chats: -->
+<div *ngIf="!activeChat" class="card text-center mini-chats" [ngClass]="{'mobile-chat': isMobile}">
+    <div class="card-header bg-danger text-white ">
+        <div class="row">
+            <div class="col d-flex justify-content-start"><fa-icon [icon]="['fas','comment']"></fa-icon></div>
+            <div class="col"> <b>Poruke</b> </div>
+            <div (click)="closeMsgBox()" class="col d-flex justify-content-end text-dark">
+                <fa-icon [icon]="['fas','close']" style="font-size: 1.3em; cursor:pointer"></fa-icon>
+                <!-- <button type="button" class="btn-close btn-close-white" aria-label="Close"></button> -->
+            </div>
+        </div>
+
+    </div>
+
+    <div class="card-body" #messageContainer>
+
+        <div (click)="getChats(m.idChat)" class="selectChat" *ngFor="let m of LastMessageEachChat">
+
+            <div class="row g-0">
+                <div class="col-2 d-flex justify-content-center" style="align-items: center;">
+                    <fa-icon [icon]="['fas','circle-user']" style="font-size: 2em;"></fa-icon>
+                </div>
+                <div class="col-10">
+
+                    <div class="d-flex justify-content-between">
+                        <span>{{m.sender.id==thisidUser?m.receiver.firstName+"
+                            "+m.receiver.lastName:m.sender.firstName+" "+m.sender.lastName}}</span>
+                        <span style="font-size: small;">{{m.dateTime | date: 'dd.MM.yyyy'}}</span>
+                    </div>
+
+                    <p class="text-muted mb-0 text-start text-nowrap overflow-hidden text-truncate" scrollHeight
+                        scrollTop>
+                        <span *ngIf="msg.sender==m.sender">Tu:</span> {{m.content}}
+                    </p>
+                </div>
+            </div>
+            <hr class="m-0">
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- *ngIf="activeChat" -->
+
+<div *ngIf="activeChat || activeChat==0" class="card text-center mini-msg"
+    [ngClass]="{'minimized':minimized, 'mobile-chat':isMobile}">
+
+    <div class="card-header bg-danger text-white">
+
+        <span class="m-0 p-0 h6">
+            <div class="row">
+                <div class="col-10 d-flex justify-content-start">
+                    <div (click)="back()" style="cursor: pointer; margin-right: 0.8em;">
+                        <fa-icon [icon]="['fas','arrow-left']" class="text-dark"></fa-icon>
+                    </div>
+                    <fa-icon [icon]="['fas','circle-user']" style="margin-right: 4px;"></fa-icon>
+                    {{chatingWhit}}
+                </div>
+                <div class="col-2">
+                    <div (click)="minimizeMsgBox()" style="cursor: pointer;" class="d-flex justify-content-end">
+                        <fa-icon [icon]="['fas','minus']" class="text-dark" *ngIf="!minimized"></fa-icon>
+                        <fa-icon [icon]="['fas','window-maximize']" class="text-dark" *ngIf="minimized"></fa-icon>
+                    </div>
+                </div>
+            </div>
+        </span>
+
+    </div>
+
+
+    <div class="card-body p-0" #messageContainer>
+
+        <div class="d-flex" [ngClass]="{'justify-content-end': m.sender.id==thisidUser}" *ngFor="let m of chatMessages">
+            <p [ngClass]="m.sender.id==thisidUser ? 'bg-dark' : 'bg-secondary'"
+                class="p-1 m-1 text-white rounded-pill text-break" style="max-width: 75%;">{{m.content}} &nbsp;
+                <span style="font-size: smaller;">{{m.dateTime | date: 'hh:mm'}}</span>
+            </p>
+        </div>
+
+    </div>
+
+    <div class="card-footer text-muted">
+        <div class="input-group">
+
+            <input (keyup.enter)="sendMessage()" type="text" [(ngModel)]="msg.content" class="form-control"
+                placeholder="Napišite poruku">
+            <button (click)="sendMessage()" class="input-group-text mb-0 minibtn" id="basic-addon2">
+                <fa-icon [icon]="['fas','paper-plane']"></fa-icon>
+            </button>
+
+        </div>
+    </div>
+
+</div>

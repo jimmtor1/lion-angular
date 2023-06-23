@@ -51,8 +51,7 @@ export class DetailSellerComponent implements OnInit {
   getSeller() {
 
     this.sellerService.getById(this.iduser).subscribe(sellerBd => {
-      this.seller = sellerBd;
-
+      this.seller = sellerBd;      
       this.image = this.urlprof_img + this.seller.image;
 
       if (this.seller.user.federation) {
@@ -198,8 +197,8 @@ export class DetailSellerComponent implements OnInit {
   }
 
   save() {
-    const formData = new FormData();
-    console.log(this.subcategoriesSelected);
+
+    const formData = new FormData();   
     this.subcategoriesSelected.forEach(sub => {
       formData.append('idsubcategories', sub.idsubcategory.toString())
     })
@@ -217,6 +216,7 @@ export class DetailSellerComponent implements OnInit {
     formData.append('deliveryCost', this.seller.deliveryCost);
     formData.append('image', this.seller.image);
     formData.append('biography', this.seller.biography);
+    formData.append('identification', this.seller.identification);
 
     if (this.seller.accepted !== null) {
       formData.append('accepted', this.seller.accepted.toString());

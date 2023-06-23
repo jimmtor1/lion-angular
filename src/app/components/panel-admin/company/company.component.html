@@ -44,11 +44,12 @@
                         <input [disabled]="!editmode" type="text" class="form-control" name="ime" id="ime"
                             [(ngModel)]="seller.companyName">
                     </div>
-                    
+
                     <div class="mb-3">
                         <div class="col-12 col-sm-6">
                             <label for="ime">ID<span class="form-label">*</span></label>
-                            <label type="text" class="form-control" style="background-color: #e9ecef; border-color: #dc3545; border-radius: 20px 20px 20px 20px;" name="ID" id="ID">{{seller.identification}}</label>
+                            <input [disabled]="!editmode" type="text" class="form-control" name="ID" id="ID"
+                                [(ngModel)]="seller.identification">
                         </div>
                     </div>
                
@@ -57,8 +58,10 @@
 
                     <!-- <div *ngIf="editmode" class="mb-3"> -->
                     <!--subcategory-->
+                    <!-- (change)="subCategoryAdded($event)" -->
                     <select *ngIf="editmode" multiple name="subcategory" id="subcategory"
-                        [(ngModel)]="subcategoriesSelected" (change)="subCategoryAdded($event)" class="form-select"
+                    
+                        [(ngModel)]="subcategoriesSelected"  class="form-select" 
                         style="height: 200px;">
                         <option *ngFor="let sub of subcategories" [ngValue]="sub" [disabled]="sub.idsubcategory==0"
                             [ngClass]="sub.idsubcategory==0 ?'title':''">

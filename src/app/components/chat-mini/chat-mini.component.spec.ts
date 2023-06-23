@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SellerDetailComponent } from './seller-detail.component';
+import { ChatMiniComponent } from './chat-mini.component';
 
-describe('SellerDetailComponent', () => {
-  let component: SellerDetailComponent;
-  let fixture: ComponentFixture<SellerDetailComponent>;
+describe('ChatMiniComponent', () => {
+  let component: ChatMiniComponent;
+  let fixture: ComponentFixture<ChatMiniComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SellerDetailComponent ]
+      declarations: [ ChatMiniComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(SellerDetailComponent);
+    fixture = TestBed.createComponent(ChatMiniComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

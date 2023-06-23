@@ -3,19 +3,30 @@
     <navbar-menu-category></navbar-menu-category>
 </header>
 
-<div *ngIf="modalOpen">
-    <modal-ms [message]="ms" [type]="type" ></modal-ms>
-</div>
-
-
-<div style="min-height: 68vh;">
+<main class="pt-3">
     <router-outlet></router-outlet>
+</main>
+
+
+
+<footer class="bg-dark w-100">
+    <!-- <div class="bg-danger py-3"> -->
+    <!-- <div class="container m-0 text-center">
+            © <a class="h6" routerLink="/">DCL.ba</a> <span class="h6"> - Sva prava zadržana</span>
+        </div> -->
+    <!-- </div> -->
+    <div style="height: 40px;"></div>
+
+</footer>
+
+<div class="d-block d-sm-none">
+    <navbar-general-phone></navbar-general-phone>
 </div>
 
-<footer>
-    <div class="bg-danger py-3 mt-2">
-        <div class="container m-0 text-center">
-            © <a class="h6" routerLink="/">DCL.ba</a> <span class="h6"> - Sva prava zadržana</span>
-        </div>
-    </div>
-</footer>
+<div *ngIf="modalOpen">
+    <modal-ms [message]="ms" [type]="type"></modal-ms>
+</div>
+
+<div *ngIf="showChats">
+    <app-chat-mini [idprovider]="providerId" ></app-chat-mini>
+</div>

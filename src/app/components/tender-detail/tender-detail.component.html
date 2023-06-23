@@ -16,7 +16,12 @@
                 <div class="card-body bg-light">
                     <!-- <h5 class="card-title">Special title treatment</h5> -->
                     <p class="card-text">{{tender.description}}</p>
-
+                                      
+                    <span class="card-text">Tip: </span>
+                    <ul>
+                        <li *ngFor="let x of tender.tenderTypeList" >{{type_list[x.idtype-1]}}</li>
+                    </ul>
+                   
                     <div class="d-flex">
                         <fa-icon [icon]="['fas','calendar']"></fa-icon>
                         <p class="h6 mx-2">Period trajanja tendera</p>
@@ -26,10 +31,10 @@
                     <div class="row mb-2">
                         <!-- col-sm-1 -->
                         <div class="col-12">
-                            Od: <span>{{tender.dateFrom}}</span>
+                            Od: <span>{{tender.dateFrom | date: 'dd.MM.yyy'}}</span>
                         </div>
                         <div class="col-12">
-                            Do: <span>{{tender.dateTo}}</span>
+                            Do: <span>{{tender.dateTo | date: 'dd.MM.yyy'}}</span>
                         </div>
                     </div>
 

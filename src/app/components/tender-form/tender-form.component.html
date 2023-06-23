@@ -26,11 +26,31 @@
 
             <form (ngSubmit)="submit()">
 
-                <div class="mb-3">
-                    <label for="project_name">Naziv projekta&nbsp;<span class="form-label">*</span></label>
-                    <input type="text" class="form-control" name="project_name" id="project_name" value=""
-                        [(ngModel)]="tender.projectName">
+                <div class="row">
+                    <div class="col-12 col-sm-6 mb-3">
+                        <label for="project_name">Naziv projekta&nbsp;<span class="form-label">*</span></label>
+                        <input type="text" class="form-control" name="project_name" id="project_name" value=""
+                            [(ngModel)]="tender.projectName">
+                    </div>
+
+                    <div class="col-12 col-sm-6 mb-3">
+
+                        <label for="project_name">Tip tendera&nbsp;<span class="form-label">*</span></label>
+                        <select name="type" id="type" [(ngModel)]="tender.tenderTypeList" class="form-select" multiple>
+                            <option value="0">-Odaberite vrstu-</option>
+                            <option value="1" selected>Građevina</option>
+                            <option value="2" selected>Tekstil</option>
+                            <option value="3" selected>Vozni park</option>
+                            <option value="4" selected>Tehnologija</option>
+                        </select>
+
+                    </div>
+
                 </div>
+
+
+
+
 
                 <div class="row">
 
@@ -41,7 +61,7 @@
                     </div>
 
                     <div class="mb-3 col-12 col-sm-6">
-                        <label for="dateTo">Traj do&nbsp;</label>
+                        <label for="dateTo">Traje do&nbsp;</label>
                         <input type="date" class="form-control" id="dateTo" name="dateTo" [(ngModel)]="tender.dateTo">
                     </div>
 
@@ -60,12 +80,17 @@
 
 
                 <div class="text-center">
-                    <input type="submit" value="Dodaj" class="btn btn-danger">
+                    <input [disabled]="saving" type="submit" value="Dodaj" class="btn btn-danger">
                 </div>
 
 
             </form>
             <br>
+
+            <div *ngIf="mandatory" class="bg-warning text-center">
+                <p class="fw-bold">Popunite obavezna polja</p>
+            </div>
+
         </div>
 
 

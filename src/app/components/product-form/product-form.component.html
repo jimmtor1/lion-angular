@@ -53,7 +53,7 @@
                             [(ngModel)]="product.description"></textarea>
                     </div>
 
-                    <div class="row g-1">
+                    <div class="row mb-3">
 
                         <div class="col-12 col-sm-6">
                             <label for="price">Cijena&nbsp;<span class="form-label">*</span></label>
@@ -64,17 +64,19 @@
                         <div class="col-12 col-sm-6">
 
                             <div class="row">
-                                <label for="price">Cijena na upit&nbsp;<span class="form-label">*</span></label>
+                                <div class="col-12">
+                                    <label for="price">Cijena na upit&nbsp;<span class="form-label">*</span></label>
+                                </div>
+                                <div class="col-12">
+                                    <input type="checkbox" class="btn-check" id="btn-check-2-outlined"
+                                        (click)="priceonrequest()" [checked]="product.price==0" autocomplete="off">
+                                    <label class="btn btn-outline-secondary d-block"
+                                        for="btn-check-2-outlined">
+                                        Po dogovoru
+                                    </label>
+                                </div>
                             </div>
-
-                            <div class="row px-3">
-                                <input type="checkbox" class="btn-check" id="btn-check-2-outlined"
-                                    (click)="priceonrequest()" [checked]="product.price==0" autocomplete="off">
-                                <label class="btn btn-outline-secondary" for="btn-check-2-outlined">Po
-                                    dogovoru</label><br>
-                            </div>
-
-
+         
                         </div>
 
                     </div>

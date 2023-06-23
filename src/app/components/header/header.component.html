@@ -2,7 +2,7 @@
 <!-- computer -->
 <div *ngIf="(isMobile$ | async) === false" class="container">
     <div class="row align-items-center">
-        
+
         <div class="col-3">
             <a routerLink="/">
                 <img src="assets/images/lion_logo.png" alt="DCL.ba" class="w-100">
@@ -22,20 +22,20 @@
 
         </div>
 
-        <div class="col-3">            
+        <div class="col-3">
             <div class="row">
 
-                <div class="col text-center">
+                <div class="col-4 text-center">
 
-                    <a routerLink="login" style="text-decoration: none;" class="text-danger">
+                    <a (click)="panelredirect()" style="text-decoration: none; cursor: pointer;" class="text-danger">
                         <!-- <i class="fa fa-user-o fs-5"></i> -->
                         <fa-icon [icon]="['fas', 'user']" style="font-size: 1.1em"></fa-icon>
-                        <p class="small text-dark flex-nowrap">{{email}}</p>
+                        <p class="small text-dark text-nowrap overflow-hidden text-truncate">{{email}}</p>
                     </a>
 
                 </div>
 
-                <div class="col text-center">
+                <div class="col-4 text-center">
 
                     <a *ngIf="role == 2" routerLink="/panelseller/product" style="text-decoration: none;"
                         class="text-danger text-center">
@@ -48,6 +48,21 @@
                         <!-- <i class="fa fa-shopping-bag fs-5"></i> -->
                         <fa-icon [icon]="['fas', 'shopping-cart']" style="font-size: 1.1em"></fa-icon>
                         <p class="small text-dark">Košarica</p>
+                    </a>
+
+
+
+                </div>
+
+                <div class="col-4 text-center ">
+                    
+                    <a *ngIf="role" (click)="show_chats()" class="text-danger position-relative" style="text-decoration: none; cursor: pointer;">
+                        
+                        <fa-icon [icon]="['fas', 'comment']" style="font-size: 1.8em"></fa-icon>
+                        <span *ngIf="msg_alert" style="font-size: 0.6em;" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">
+                            {{msg_alert}}                           
+                        </span>
+
                     </a>
 
                 </div>
@@ -85,26 +100,35 @@
 
         <!-- user-icon -->
         <div class="col-3">
-            <div class="row text-center">
+            <div class="row">
 
-                <div class="col" style="border-right: 1px solid black;">
-                    <a routerLink="login" style="text-decoration: none;" class="text-center text-danger">
+                <div class="col-4 d-flex justify-content-center" style="border-right: 1px solid black;">
+                    <a routerLink="login" style="text-decoration: none;" class="text-danger bg-light">
                         <fa-icon [icon]="['fas', 'user']" style="font-size: 1.1em"></fa-icon>
                     </a>
                 </div>
 
-                <div class="col">
-                    <a *ngIf="role < 2" (click)="direction()" style="text-decoration: none; cursor: pointer;"
-                        class="text-center text-danger">
+                <div class="col-4 d-flex justify-content-center" style="border-right: 1px solid black;">
+                    <a *ngIf="role < 2" (click)="direction()" style="text-decoration: none;"  class="text-danger">
                         <fa-icon [icon]="['fas', 'shopping-cart']" style="font-size: 1.1em"></fa-icon>
                     </a>
 
-                    <a *ngIf="role == 2" routerLink="product" style="text-decoration: none;"
-                        class="text-danger text-center">
+                    <a *ngIf="role == 2" routerLink="product" style="text-decoration: none;" class="text-danger ">
                         <fa-icon [icon]="['fas', 'store']" style="font-size: 1.1em"></fa-icon>
                     </a>
 
 
+                </div>
+
+                <div class="col-4 d-flex justify-content-center">
+                    <a *ngIf="role" (click)="show_chats()" class="text-danger position-relative" style="text-decoration: none; cursor: pointer;">
+                        
+                        <fa-icon [icon]="['fas', 'comment']" style="font-size: 1.1em"></fa-icon>
+                        <span *ngIf="msg_alert" style="font-size: 0.4em;" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">
+                            {{msg_alert}}                           
+                        </span>
+
+                    </a>
                 </div>
 
             </div>
@@ -114,4 +138,6 @@
 
 </div>
 
-<!-- </header> -->
+<!-- <div *ngIf="showChats" >
+    <app-chat-mini (closeChats)="receiveValue($event)" ></app-chat-mini>
+</div> -->

@@ -45,8 +45,8 @@ export class ProductService {
     return this.httpClient.get<Product[]>(`${this.URL}/filterprice/${idcategory}/${idsubcategory}/${fed}/${city}/${price1}/${price2}`);
   }
 
-  getAllFilters(category:number, subcategory:number, federation: number, city:number, minPrice:number | undefined, maxPrice:number | undefined, pageNum:number):Observable<any>{
-    return this.httpClient.get<any>(`${this.URL}/filter/${category}/${subcategory}/${federation}/${city}/${minPrice==undefined?-1:minPrice}/${maxPrice==undefined?-1:maxPrice}/${pageNum}/28`)
+  getAllFilters(defaultcategory:number,category:number, subcategory:number, federation: number, city:number, minPrice:number | undefined, maxPrice:number | undefined, pageNum:number):Observable<any>{
+    return this.httpClient.get<any>(`${this.URL}/filter/${defaultcategory}/${category}/${subcategory}/${federation}/${city}/${minPrice==undefined?-1:minPrice}/${maxPrice==undefined?-1:maxPrice}/${pageNum}/28`)
   }
 
   getAllFilterSearch(federation: number, city:number, minPrice:number | undefined, maxPrice:number | undefined, keyword:string,pageNum:number):Observable<any>{

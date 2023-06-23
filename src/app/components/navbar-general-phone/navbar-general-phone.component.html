@@ -1,0 +1,39 @@
+<div class="row border fixed-bottom bg-white text-center text-danger pt-1">
+    <div class="col">
+        <a href="/" class="text-reset text-decoration-none">
+            <fa-icon [icon]="['fas','home']" class="d-block"></fa-icon>
+            Početna
+        </a>
+    </div>
+    <div class="col">
+        <a href="/" class="text-reset text-decoration-none">
+            <fa-icon [icon]="['fas','box']" class="d-block"></fa-icon>
+            Kategorije
+        </a>
+    </div>
+
+    <div *ngIf="role==2" class="col">
+        <a href="panelseller/product" class="text-reset text-decoration-none">
+            <fa-icon [icon]="['fas','circle-plus']" class="d-block"></fa-icon>
+            Objavi
+        </a>
+    </div>
+
+    <div class="col">
+        <a (click)="show_chats()" class="text-reset text-decoration-none" style="cursor: pointer;">
+            <fa-icon [icon]="['fas','comment']" class="d-block"></fa-icon>
+            Chat
+        </a>
+    </div>
+    
+    <div class="col">
+        <a href="login" class="text-reset text-decoration-none">
+            <fa-icon [icon]="['fas','user']" class="d-block"></fa-icon>
+            Profil
+        </a>
+    </div>
+</div>
+
+<!-- <div *ngIf="showChats">
+    <app-chat-mini (closeChats)="receiveValue($event)" ></app-chat-mini>
+</div> -->

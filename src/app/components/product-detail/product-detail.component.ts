@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Product } from 'src/app/models/product';
 import { Seller } from 'src/app/models/seller';
 import { IMG_PRODUCT_URL, select_city } from 'src/app/services/helper';
+import { ModalService } from 'src/app/services/modal.service';
 import { ProductService } from 'src/app/services/product.service';
 import { SellerService } from 'src/app/services/seller.service';
 
@@ -17,12 +18,12 @@ export class ProductDetailComponent implements OnInit {
   principalImage: string;
   producByProvider: Product[] = [];
   seller: Seller;
-  city:string;
+  city: string;
   loading = true;
 
   urlprod_img = `${IMG_PRODUCT_URL}`;
 
-  constructor(private productService: ProductService, private route: ActivatedRoute, private sellerService: SellerService) {
+  constructor(private productService: ProductService, private route: ActivatedRoute, private sellerService: SellerService, private modelChat: ModalService) {
     // this.product = new Product();
     // this.seller = new Seller();
     // this.producByProvider = [];
@@ -40,14 +41,14 @@ export class ProductDetailComponent implements OnInit {
 
           this.sellerService.getById(this.product.idprovider).subscribe(pro => {
             this.seller = pro;
-            this.city = select_city(this.seller.user.city).name; 
-            this.loading=false;
+            this.city = select_city(this.seller.user.city).name;
+            this.loading = false;
           });
 
           this.productService.getAllByProvider(this.product.idprovider).subscribe(result => {
             result.forEach(r => {
               this.producByProvider.push(r);
-              
+
             })
           });
 
@@ -59,9 +60,12 @@ export class ProductDetailComponent implements OnInit {
   }
 
   chagePrincipalImage(position: number) {
-    this.principalImage = this.urlprod_img+ this.product.productImageList[position].idimage + this.product.productImageList[position].extension;
+    this.principalImage = this.urlprod_img + this.product.productImageList[position].idimage + this.product.productImageList[position].extension;
   }
 
+  emitSeller(idseller: number) {
+    this.modelChat.openChat(idseller);
+  }
 
 }
 

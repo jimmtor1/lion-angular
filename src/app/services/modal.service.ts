@@ -9,6 +9,9 @@ export class ModalService {
   private modalStateSubject = new Subject<any>();
   modalState$ = this.modalStateSubject.asObservable();
 
+  private chatStateSubject = new Subject<any>();
+  chatState$ = this.chatStateSubject.asObservable();
+
   constructor() { }
 
   openModal(message: string, type: string) {
@@ -18,5 +21,11 @@ export class ModalService {
   closeModal() {
     this.modalStateSubject.next({ isOpen: false });
   }
+
+  openChat(id: number) {
+    this.chatStateSubject.next({ iduser: id});
+  }
+
+ 
 
 }

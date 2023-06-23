@@ -11,6 +11,7 @@ import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontaweso
 import { faBuilding, faListCheck, faSignOut, faUsers } from '@fortawesome/free-solid-svg-icons';
 import { CustomerComponent } from './customer/customer.component';
 import { FormsModule } from '@angular/forms';
+import { CompanyComponent } from './company/company.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { FormsModule } from '@angular/forms';
     CompaniesComponent,
     CustomersComponent,
     TendersComponent,
-    CustomerComponent
+    CustomerComponent,
+    CompanyComponent
   ],
   imports: [
     CommonModule,

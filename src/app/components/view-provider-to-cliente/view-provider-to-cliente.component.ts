@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from 'src/app/models/product';
 import { Seller } from 'src/app/models/seller';
 import { IMG_PRODUCT_URL, IMG_PROFILE_URL, select_city, select_fed } from 'src/app/services/helper';
+import { ModalService } from 'src/app/services/modal.service';
 import { ProductService } from 'src/app/services/product.service';
 import { SellerService } from 'src/app/services/seller.service';
 
@@ -14,17 +15,19 @@ import { SellerService } from 'src/app/services/seller.service';
 
 export class ViewProviderToClienteComponent implements OnInit {
 
-  seller: Seller=new Seller();
+  seller: Seller = new Seller();
   producByProvider: Product[] = [];
-  loading:boolean = true;
+  loading: boolean = true;
+
+
 
   url_prof_img = `${IMG_PROFILE_URL}`;
   url_prod_img = `${IMG_PRODUCT_URL}`;
 
-  fed:string = "Nije odabrano";
-  city:string = "Nije odabrano";
+  fed: string = "Nije odabrano";
+  city: string = "Nije odabrano";
 
-  constructor(private route: ActivatedRoute, private sellerService: SellerService, private productService: ProductService) { }
+  constructor(private route: ActivatedRoute, private sellerService: SellerService, private productService: ProductService, private modelChat: ModalService) { }
 
   ngOnInit(): void {
 
@@ -32,23 +35,20 @@ export class ViewProviderToClienteComponent implements OnInit {
 
       if (param['id'] != null) {
 
-        this.sellerService.getById(param['id']).subscribe(pro => {          
-          this.seller = pro; 
-
-          if(this.seller.user.federation){
-              let x = select_fed(this.seller.user.federation);
-            if(x){
+        this.sellerService.getById(param['id']).subscribe(pro => {
+          this.seller = pro;
+          if (this.seller.user.federation) {
+            let x = select_fed(this.seller.user.federation);
+            if (x) {
               this.fed = x.name;
             }
-            
           }
-          
-          if(this.seller.user.city){
+
+          if (this.seller.user.city) {
             this.city = select_city(this.seller.user.city).name;
           }
 
-         
-          this.loading = false;         
+          this.loading = false;
         });
 
         this.productService.getAllByProvider(param['id']).subscribe(result => {
@@ -56,13 +56,17 @@ export class ViewProviderToClienteComponent implements OnInit {
             this.producByProvider.push(r);
           })
         });
-        
+
       }
 
     });
-   
+
 
   }
+ 
 
-  
+  emitSeller(idseller: number) {
+    this.modelChat.openChat(idseller);    
+  }
+
 }

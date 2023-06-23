@@ -15,26 +15,32 @@ export class ChatSocketService {
   private webSocketEndPoint = `${API_URL}chat`
   topic: string = "/topic/";
   stompClient?: any;
-  userToSuscribe:number;
+  userToSuscribe: number;
 
   private msgSubject = new Subject<any>();
   msgState$ = this.msgSubject.asObservable();
-
-
-
 
   _connect() {
 
     console.log("Initialize WebSocket Connection");
     let ws = new SockJS(this.webSocketEndPoint);
+
     this.stompClient = Stomp.over(ws);
+
+    // Agrega los encabezados de autenticación
+    // const authToken = localStorage.getItem('token'); // Coloca aquí tu token de autenticación
+    // console.log("token: " + authToken)
+    // const headers = {
+    //   Authorization: 'Bearer ' + authToken,
+    // };
+   
 
     //@ts-ignore
     this.stompClient.connect({}, (frame) => {
       console.log("connected");
       this._suscribe_lastmessage();
     }, this.errorCallBack);
-    
+
 
 
     // const _this = this;
@@ -51,7 +57,7 @@ export class ChatSocketService {
 
   _suscribe_lastmessage() {
     //@ts-ignore
-    this.stompClient.subscribe(this.topic+'general/'+this.userToSuscribe, (sdkEvent) => {
+    this.stompClient.subscribe(this.topic + 'general/' + this.userToSuscribe, (sdkEvent) => {
       this.onMessageReceived(sdkEvent);
     });
   }
@@ -100,18 +106,18 @@ export class ChatSocketService {
   //@ts-ignore
   _send(message) {
     console.log("calling logout api via web socket");
-    this.stompClient?.send("/app/hello/"+message.idChat, {}, JSON.stringify(message));
+    this.stompClient?.send("/app/hello/" + message.idChat, {}, JSON.stringify(message));
   }
   //@ts-ignore
   onMessageReceived(message) {
     console.log("Message Recieved from Server :: " + message);
     //@ts-ignore
-    let x:Message = JSON.parse(message.body);
+    let x: Message = JSON.parse(message.body);
 
     this.msgSubject.next({ x });
     //this.appComponent.handleMessage(JSON.stringify(message.body));
   }
 
-  
+
 
 }

@@ -6,6 +6,7 @@ export class Seller {
     idprovider: number;   
     street: string = "";
     companyName: string = "";
+    identification: string = "";
     postalCode: string = "";
     biography: string = ""; 
     annualLeave: string = "";
