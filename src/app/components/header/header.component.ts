@@ -29,7 +29,7 @@ export class HeaderComponent {
 
     const usuarioString = localStorage.getItem("email");
     if (usuarioString) {
-      this.email = JSON.parse(usuarioString);
+      this.email = usuarioString;
     }
 
     const roleString = localStorage.getItem("role");

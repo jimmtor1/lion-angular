@@ -28,8 +28,7 @@ export class UserService {
   }
 
   login(userDto:UserDto):Observable<token>{
-    console.log(userDto);
-
+    
     return this.http.post<token>(`${this.baseURL}inicio/authenticate`, userDto)
     
 
