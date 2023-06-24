@@ -48,7 +48,7 @@ export class TenderDetailComponent implements OnInit {
       if (param['idtender']) {
         this.tenderService.getById(param['idtender']).subscribe(t => {
           this.tender = t;
-          console.log(t.tenderTypeList);  
+         
           const role = localStorage.getItem('role');
           if (role) {
             this.id_current_role = JSON.parse(role);

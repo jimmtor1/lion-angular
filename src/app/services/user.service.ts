@@ -19,12 +19,12 @@ export class UserService {
     
   isValidUser(user:Userr):Observable<Userr>{   
     
-    return this.http.post<Userr>(`${this.baseURL}login`, user);
+    return this.http.post<Userr>(`${this.baseURL}inicio`, user);
      
   }
 
   getById(id:number):Observable<Userr>{
-    return this.http.get<Userr>(`${this.baseURL}login/${id}`);
+    return this.http.get<Userr>(`${this.baseURL}inicio/${id}`);
   }
 
   login(userDto:UserDto):Observable<token>{
