@@ -8,8 +8,14 @@
     <hr>
     <div class="row">
         <div class="col">
-            <a class="btn btn-danger" *ngIf="item<4" [routerLink]="['/providerSubcategoryList', item+1, '0']">Pogledaj sve firme</a>
-            <a class="btn btn-danger" *ngIf="item==4" [routerLink]="['/productCategoryList', item+1, '0']">Svi proizvodi / Usluge</a> 
+            <a class="btn btn-danger" *ngIf="item<4" [routerLink]="['/providerSubcategoryList', item+1, '0']">
+                <fa-icon [icon]="['fas', 'store']" ></fa-icon>
+                Pogledaj sve firme
+            </a>
+            <a class="btn btn-danger" *ngIf="item==4" [routerLink]="['/productCategoryList', item+1, '0']">
+                <fa-icon [icon]="['fas', 'box']" ></fa-icon>
+                Svi proizvodi / Usluge
+            </a> 
         </div>
         <div class="col">
             <a *ngIf="item==4" class="btn btn-danger" [routerLink]="['/providerSubcategoryList', 0, '0']">
