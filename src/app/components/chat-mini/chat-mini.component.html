@@ -1,9 +1,7 @@
-<audio #audioPlayer>
-    <source src="assets/sound/notification-mouth.wav" type="audio/mpeg">
-</audio>
+
 <!-- list started chats: -->
-<div *ngIf="!activeChat" class="card text-center mini-chats" [ngClass]="{'mobile-chat': isMobile}">
-    <div class="card-header bg-danger text-white ">
+<div *ngIf="chatsListActive" class="card text-center mini-chats" [ngClass]="{'mobile-chat': isMobile}">
+    <div class="card-header bg-danger text-white">
         <div class="row">
             <div class="col d-flex justify-content-start"><fa-icon [icon]="['fas','comment']"></fa-icon></div>
             <div class="col"> <b>Poruke</b> </div>
@@ -18,8 +16,8 @@
     <div class="card-body" #messageContainer>
 
         <div (click)="getChats(m.idChat)" class="selectChat" *ngFor="let m of LastMessageEachChat">
-
-            <div class="row g-0">
+           
+            <div class="row g-0" [ngClass]="m.seen? 'row g-0' : 'row g-0 bg-info'">
                 <div class="col-2 d-flex justify-content-center" style="align-items: center;">
                     <fa-icon [icon]="['fas','circle-user']" style="font-size: 2em;"></fa-icon>
                 </div>
@@ -45,9 +43,8 @@
 
 </div>
 
-<!-- *ngIf="activeChat" -->
 
-<div *ngIf="activeChat || activeChat==0" class="card text-center mini-msg"
+<div *ngIf="activeChat" class="card text-center mini-msg"
     [ngClass]="{'minimized':minimized, 'mobile-chat':isMobile}">
 
     <div class="card-header bg-danger text-white">

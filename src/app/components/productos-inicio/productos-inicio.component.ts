@@ -1,4 +1,5 @@
 import { Component, OnInit, Provider } from '@angular/core';
+import { Router } from '@angular/router';
 import { Category } from 'src/app/models/category';
 import { Product } from 'src/app/models/product';
 import { Seller } from 'src/app/models/seller';
@@ -19,23 +20,26 @@ export class ProductosInicioComponent implements OnInit {
   categoryWithSellers: CategoryWithSellers[] = [];
   products: Product[] = [];
   image: string;
-  sellers:Seller[];
+  sellers: Seller[];
 
   urlprod_img = `${IMG_PRODUCT_URL}`;
   urlprof_img = `${IMG_PROFILE_URL}`;
 
-  constructor(private categoryService: CategoryService, private providerService: SellerService) { }
+  constructor(private categoryService: CategoryService, private providerService: SellerService, private router: Router) { }
 
   private getProductsFromCategory() {
-
-    this.categoryService.getAll().subscribe(data => {
+    
+    this.categoryService.getAll().subscribe(data => {      
       this.categories = data;
       this.products = this.categories[4].products;
+    }, error=>{
+      localStorage.clear();
+      location.reload()
     });
 
     this.providerService.getAllRandomWhitLimit(8).subscribe(data => {
       this.sellers = data;
-        //this.organizar();
+      //this.organizar();
     });
 
   }
@@ -79,13 +83,13 @@ export class ProductosInicioComponent implements OnInit {
   }
 
   get_city(id: number): string {
-   
-    if(id){
+
+    if (id) {
       return select_city(id).name;
-    }else{
+    } else {
       return "No city";
     }
-    
+
   }
 
   categoryNames: string[] = [

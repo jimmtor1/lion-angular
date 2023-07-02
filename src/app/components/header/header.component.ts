@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { fromEvent, map, startWith, Observable } from 'rxjs';
 import { ChatSocketService } from 'src/app/services/chat-socket.service';
@@ -17,11 +17,10 @@ export class HeaderComponent {
   msg_alert: number = 0
   showChats: boolean = false;
 
-
   public isMobile$: Observable<boolean>;
 
   constructor(private router: Router, private websocketService: ChatSocketService, private chatSercice:ModalService) {
-
+    
     this.isMobile$ = fromEvent(window, 'resize').pipe(
       map(() => window.innerWidth <= 768),
       startWith(window.innerWidth <= 768)
@@ -45,13 +44,18 @@ export class HeaderComponent {
 
 
     this.websocketService.msgState$.subscribe(a => {
-      if (!this.showChats) {
+      // if (!this.showChats) {
+      //   this.msg_alert += 1;
+      // }     
+      if (!this.chatSercice.isChatOpened()) {
         this.msg_alert += 1;
+        this.playNotificationSound();
       }
     });
 
   }
 
+  
   direction() {
     const roleString = localStorage.getItem("role");
     if (roleString) {
@@ -100,5 +104,9 @@ export class HeaderComponent {
 
   }
   
+  playNotificationSound() {
+    const audio = new Audio('assets/sound/notification-mouth.wav');
+    audio.play();   
+  }
 
 }

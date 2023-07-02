@@ -44,14 +44,16 @@
                         <input [disabled]="!editmode" type="text" class="form-control" name="ime" id="ime"
                             [(ngModel)]="seller.companyName">
                     </div>
-                    
+
                     <div class="mb-3">
                         <div class="col-12 col-sm-6">
                             <label for="ime">ID<span class="form-label">*</span></label>
-                            <label type="text" class="form-control" style="background-color: #e9ecef; border-color: #dc3545; border-radius: 20px 20px 20px 20px;" name="ID" id="ID">{{seller.identification}}</label>
+                            <label type="text" class="form-control"
+                                style="background-color: #e9ecef; border-color: #dc3545; border-radius: 20px 20px 20px 20px;"
+                                name="ID" id="ID">{{seller.identification}}</label>
                         </div>
                     </div>
-               
+
                     <label for="subcategory">Sve djelatnosti kojima se bavi firma&nbsp;<span
                             class="form-label">*</span></label>
 
@@ -153,43 +155,93 @@
                     <p class="mt-3">Radno vrijeme:</p>
                     <p>Dani u sedmici: </p>
 
-                    <div class="form-check form-switch">
-                        <input [disabled]="!editmode" class="form-check-input" [(ngModel)]="seller.monday"
-                            type="checkbox" id="flexSwitchCheckDefault">
-                        <label class="form-check-label" for="flexSwitchCheckDefault">Ponedjeljak</label>
-                    </div>
-                    <div class="form-check form-switch">
-                        <input [disabled]="!editmode" class="form-check-input" [(ngModel)]="seller.tuesday"
-                            type="checkbox" id="flexSwitchCheckChecked">
-                        <label class="form-check-label" for="flexSwitchCheckChecked">Utorak</label>
-                    </div>
-                    <div class="form-check form-switch">
-                        <input [disabled]="!editmode" class="form-check-input" [(ngModel)]="seller.wednesday"
-                            type="checkbox" id="flexSwitchCheckDefault">
-                        <label class="form-check-label" for="flexSwitchCheckDefault">Srijeda</label>
-                    </div>
-                    <div class="form-check form-switch">
-                        <input [disabled]="!editmode" class="form-check-input" [(ngModel)]="seller.thursday"
-                            type="checkbox" id="flexSwitchCheckChecked">
-                        <label class="form-check-label" for="flexSwitchCheckChecked">Četvrtak</label>
-                    </div>
-                    <div class="form-check form-switch">
-                        <input [disabled]="!editmode" s class="form-check-input" [(ngModel)]="seller.friday"
-                            type="checkbox" id="flexSwitchCheckChecked">
-                        <label class="form-check-label" for="flexSwitchCheckChecked">Petak</label>
-                    </div>
-                    <div class="form-check form-switch">
-                        <input [disabled]="!editmode" class="form-check-input" [(ngModel)]="seller.saturday"
-                            type="checkbox" id="flexSwitchCheckChecked">
-                        <label class="form-check-label" for="flexSwitchCheckChecked">Subota</label>
-                    </div>
-                    <div class="form-check form-switch">
-                        <input [disabled]="!editmode" class="form-check-input" [(ngModel)]="seller.sunday"
-                            type="checkbox" id="flexSwitchCheckChecked">
-                        <label class="form-check-label" for="flexSwitchCheckChecked">Nedjelja</label>
+
+                    <div class="row mb-2">
+                        <div class="form-check form-switch col-4 col-md-2">
+                            <input [disabled]="!editmode" class="form-check-input" [(ngModel)]="seller.monday"
+                                type="checkbox" id="flexSwitchCheckDefault">
+                            <label class="form-check-label" for="flexSwitchCheckDefault">Ponedjeljak</label>
+
+                        </div>
+                        <div class="col">
+                            <input  type="number" [disabled]="!editmode" [(ngModel)]="seller.timemonday" class="p-1" min="0" max="24" style="max-width: 70px;"> - <input type="number"
+                                style="max-width: 70px;" min="0" max="24" class="p-1" [disabled]="!editmode" [(ngModel)]="seller.endmonday">
+                        </div>
                     </div>
 
-                    <p class="h6 mt-3">Vrijeme:</p>
+                    <div class="row mb-2">
+                        <div class="form-check form-switch col-4 col-md-2">
+                            <input [disabled]="!editmode" class="form-check-input" [(ngModel)]="seller.tuesday"
+                                type="checkbox" id="flexSwitchCheckChecked">
+                            <label class="form-check-label" for="flexSwitchCheckChecked">Utorak</label>
+                        </div>
+                        <div class="col">
+                            <input type="number" [disabled]="!editmode" style="max-width: 70px;" min="0" max="24" class="p-1" [(ngModel)]="seller.timetuesday"> - <input type="number"
+                                style="max-width: 70px;" min="0" max="24" class="p-1" [disabled]="!editmode" [(ngModel)]="seller.endtuesday">
+                        </div>
+                    </div>
+
+                    <div class="row mb-2">
+                        <div class="form-check form-switch col-4 col-md-2">
+                            <input [disabled]="!editmode" class="form-check-input"  [(ngModel)]="seller.wednesday"
+                                type="checkbox" id="flexSwitchCheckDefault">
+                            <label class="form-check-label" for="flexSwitchCheckDefault">Srijeda</label>
+                        </div>
+                        <div class="col">
+                            <input type="number" [disabled]="!editmode" style="max-width: 70px;" min="0" max="24" class="p-1" [(ngModel)]="seller.timewednesday"> - <input type="number"
+                                style="max-width: 70px;" min="0" max="24" class="p-1" [disabled]="!editmode" [(ngModel)]="seller.endwednesday">
+                        </div>
+                    </div>
+
+                    <div class="row mb-2">
+                        <div class="form-check form-switch col-4 col-md-2">
+                            <input [disabled]="!editmode" class="form-check-input" [(ngModel)]="seller.thursday"
+                                type="checkbox" id="flexSwitchCheckChecked">
+                            <label class="form-check-label" for="flexSwitchCheckChecked">Četvrtak</label>
+                        </div>
+                        <div class="col">
+                            <input type="number" [disabled]="!editmode" style="max-width: 70px;" min="0" max="24" class="p-1" [(ngModel)]="seller.timethursday"> - <input type="number"
+                                style="max-width: 70px;" class="p-1" min="0" max="24" [disabled]="!editmode" [(ngModel)]="seller.endthursday">
+                        </div>
+                    </div>
+
+                    <div class="row mb-2">
+                        <div class="form-check form-switch col-4 col-md-2">
+                            <input [disabled]="!editmode" s class="form-check-input" [(ngModel)]="seller.friday"
+                                type="checkbox" id="flexSwitchCheckChecked">
+                            <label class="form-check-label" for="flexSwitchCheckChecked">Petak</label>
+                        </div>
+                        <div class="col">
+                            <input type="number" [disabled]="!editmode" style="max-width: 70px;" min="0" max="24" class="p-1" [(ngModel)]="seller.timefriday"> - <input type="number"
+                                style="max-width: 70px;" class="p-1" min="0" max="24" [disabled]="!editmode" [(ngModel)]="seller.endfriday">
+                        </div>
+                    </div>
+
+                    <div class="row mb-2">
+                        <div class="form-check form-switch col-4 col-md-2">
+                            <input [disabled]="!editmode" class="form-check-input" [(ngModel)]="seller.saturday"
+                                type="checkbox" id="flexSwitchCheckChecked">
+                            <label class="form-check-label" for="flexSwitchCheckChecked">Subota</label>
+                        </div>
+                        <div class="col">
+                            <input type="number" [disabled]="!editmode" style="max-width: 70px;" min="0" max="24" class="p-1" [(ngModel)]="seller.timesaturday"> - <input type="number"
+                                style="max-width: 70px;" class="p-1" min="0" max="24" [disabled]="!editmode" [(ngModel)]="seller.endsaturday">
+                        </div>
+                    </div>
+
+                    <div class="row mb-2">
+                        <div class="form-check form-switch col-4 col-md-2">
+                            <input [disabled]="!editmode" class="form-check-input" [(ngModel)]="seller.sunday"
+                                type="checkbox" id="flexSwitchCheckChecked">
+                            <label class="form-check-label" for="flexSwitchCheckChecked">Nedjelja</label>
+                        </div>
+                        <div class="col">
+                            <input type="number" [disabled]="!editmode" style="max-width: 70px;" min="0" max="24" class="p-1" [(ngModel)]="seller.timesunday"> - <input type="number"
+                                style="max-width: 70px;" min="0" max="24" class="p-1" [disabled]="!editmode" [(ngModel)]="seller.endsunday">
+                        </div>
+                    </div>
+
+                    <!-- <p class="h6 mt-3">Vrijeme:</p>
                     <div class="row mb-3">
                         <div class="col-12 col-sm-6">
                             <span>Od</span>
@@ -221,7 +273,7 @@
                             </select>
                         </div>
 
-                    </div>
+                    </div> -->
 
                     <div class="mb-3">
                         <label for="annual_leave">Godišnji odmor<span class="required">*</span></label>
@@ -269,7 +321,7 @@
                         <label class="form-label">Email</label>
                         <div class="form-check">
                             <input [disabled]="!editmode" type="checkbox" class="form-check-input"
-                                name="setting_show_email" value="yes" checked="checked">
+                                name="setting_show_email" id="setting_show_email" [(ngModel)]="seller.showEmail">
                             <label> Prikaži email na profilu</label>
                         </div>
                     </div>

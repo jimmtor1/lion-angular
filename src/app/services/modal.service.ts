@@ -12,6 +12,8 @@ export class ModalService {
   private chatStateSubject = new Subject<any>();
   chatState$ = this.chatStateSubject.asObservable();
 
+  ChatOpened:boolean = false;
+
   constructor() { }
 
   openModal(message: string, type: string) {
@@ -22,10 +24,19 @@ export class ModalService {
     this.modalStateSubject.next({ isOpen: false });
   }
 
-  openChat(id: number) {
+  openChat(id: number) {    
     this.chatStateSubject.next({ iduser: id});
+    if(id==0){
+      this.ChatOpened = false;    
+    }else{
+      this.ChatOpened = true;
+    }
+    
   }
 
- 
+  isChatOpened():boolean{
+    return this.ChatOpened;
+  }
+
 
 }

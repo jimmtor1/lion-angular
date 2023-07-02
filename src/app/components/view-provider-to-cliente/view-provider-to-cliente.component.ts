@@ -62,11 +62,18 @@ export class ViewProviderToClienteComponent implements OnInit {
     });
 
 
-  }
- 
+  } 
 
   emitSeller(idseller: number) {
-    this.modelChat.openChat(idseller);    
+    
+    this.modelChat.openChat(0);     
+
+    setTimeout(() => {
+      this.modelChat.openChat(idseller); 
+    }, 0);
+
   }
+
+  
 
 }

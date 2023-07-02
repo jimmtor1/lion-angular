@@ -4,7 +4,7 @@ import { Tender } from 'src/app/models/tender';
 import { TenderProposal } from 'src/app/models/tender-proposal';
 import { Userr } from 'src/app/models/userr';
 import { DOC_PROPOSAL_URL, DOC_URL, select_city, select_fed } from 'src/app/services/helper';
-import { SellerService } from 'src/app/services/seller.service';
+import { ModalService } from 'src/app/services/modal.service';
 import { TenderService } from 'src/app/services/tender.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -35,8 +35,8 @@ export class TenderDetailComponent implements OnInit {
   fed: string;
   city: string;
 
-  constructor(private tenderService: TenderService, private route: ActivatedRoute, private userService: UserService, private sellerService: SellerService, private router: Router) { }
-
+  constructor(private tenderService: TenderService, private route: ActivatedRoute, private userService: UserService, private modelChat: ModalService) { }
+ 
   ngOnInit(): void {
 
     const user = localStorage.getItem('iduser');
@@ -121,7 +121,7 @@ export class TenderDetailComponent implements OnInit {
 
   getProposals() {
 
-    this.tenderService.getProposalList(this.tender.idtender).subscribe(t => {
+    this.tenderService.getProposalList(this.tender.idtender).subscribe(t => {     
       this.tenderProposal = t;
     });
 
@@ -156,7 +156,10 @@ export class TenderDetailComponent implements OnInit {
 
   }
 
-
+  emitSeller(idseller: number) {
+    console.log("idseller: " + idseller);
+    this.modelChat.openChat(idseller);    
+  }
 
 
 }

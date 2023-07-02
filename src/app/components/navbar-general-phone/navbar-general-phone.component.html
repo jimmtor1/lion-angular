@@ -1,4 +1,4 @@
-<div class="row border fixed-bottom bg-white text-center text-danger pt-1">
+<div class="row border fixed-bottom bg-white text-center text-danger pt-1 pb-2">
     <div class="col">
         <a href="/" class="text-reset text-decoration-none">
             <fa-icon [icon]="['fas','home']" class="d-block"></fa-icon>
@@ -27,7 +27,7 @@
     </div>
     
     <div class="col">
-        <a href="login" class="text-reset text-decoration-none">
+        <a (click)="panelredirect()" class="text-reset text-decoration-none">
             <fa-icon [icon]="['fas','user']" class="d-block"></fa-icon>
             Profil
         </a>

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
 import { ModalService } from './services/modal.service';
 import { Router } from '@angular/router';
 
@@ -16,14 +15,21 @@ export class AppComponent implements OnInit {
   // public isMobile$: Observable<boolean>;
   
   modalOpen = false;
+ 
+  providerId:number | undefined;
+
+  //chat varibles:
   ms = "";
   type = "";
+  
   showChats: boolean;
-  providerId:number | undefined;
+  showMessages: boolean;
+
 
   constructor(private modalService:ModalService, private router:Router) {}
   
   ngOnInit(): void {
+    
     this.modalService.modalState$.subscribe((a)=> {
       this.modalOpen = a.isOpen;    
       this.ms = a.message;
@@ -31,21 +37,22 @@ export class AppComponent implements OnInit {
     });
 
     this.modalService.chatState$.subscribe((a)=> {
+      
       if(a.iduser==0){              
         this.showChats = false;
       }else{  
         let user = localStorage.getItem('iduser');
+       
         if(user){
           this.providerId = a.iduser;
-          this.showChats = true; 
+          this.showChats = true;
+          
         }else{
           this.router.navigate(['login'])
         }     
 
       }            
     });
-
-    
 
   }
 

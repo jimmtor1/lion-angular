@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import * as SockJS from 'sockjs-client';
@@ -22,7 +21,7 @@ export class ChatSocketService {
 
   _connect() {
 
-    console.log("Initialize WebSocket Connection");
+    //console.log("Initialize WebSocket Connection");
     let ws = new SockJS(this.webSocketEndPoint);
 
     this.stompClient = Stomp.over(ws);
@@ -32,12 +31,11 @@ export class ChatSocketService {
     // console.log("token: " + authToken)
     // const headers = {
     //   Authorization: 'Bearer ' + authToken,
-    // };
-   
+    // };   
 
     //@ts-ignore
     this.stompClient.connect({}, (frame) => {
-      console.log("connected");
+      //console.log("connected");
       this._suscribe_lastmessage();
     }, this.errorCallBack);
 
@@ -105,12 +103,12 @@ export class ChatSocketService {
   */
   //@ts-ignore
   _send(message) {
-    console.log("calling logout api via web socket");
+    //console.log("calling logout api via web socket");
     this.stompClient?.send("/app/hello/" + message.idChat, {}, JSON.stringify(message));
   }
   //@ts-ignore
   onMessageReceived(message) {
-    console.log("Message Recieved from Server :: " + message);
+    //console.log("Message Recieved from Server :: " + message);
     //@ts-ignore
     let x: Message = JSON.parse(message.body);
 

@@ -24,12 +24,30 @@ export class Seller {
     saturday: boolean;
     sunday: boolean;
 
-    startTime: number;
-    endTime: number;
+    timemonday: number;
+    timetuesday: number;
+    timewednesday: number;
+    timethursday: number;
+    timefriday: number;
+    timesaturday: number;
+    timesunday: number;
+
+    endmonday: number;
+    endtuesday: number;
+    endwednesday: number;
+    endthursday: number;
+    endfriday: number;
+    endsaturday: number;
+    endsunday: number;
+
+    // startTime: number;
+    // endTime: number;
 
     facebook: string = "";
     instagram: string = "";
     youtube: string = "";
+
+    showEmail:boolean;
 
 }
 

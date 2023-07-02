@@ -230,13 +230,61 @@ export class DetailSellerComponent implements OnInit {
     formData.append('saturday', this.seller.saturday.toString());
     formData.append('sunday', this.seller.sunday.toString());
 
-    if (this.seller.startTime) {
-      formData.append('startTime', this.seller.startTime.toString());
+    if(this.seller.timemonday){
+      formData.append('timemonday', this.seller.timemonday.toString());
     }
+    if(this.seller.timetuesday){
+      formData.append('timetuesday', this.seller.timetuesday.toString());
+    }
+    if(this.seller.timewednesday){
+      formData.append('timewednesday', this.seller.timewednesday.toString());
+    }
+    if(this.seller.timethursday){
+      formData.append('timethursday', this.seller.timethursday.toString());
+    }
+    if(this.seller.timefriday){
+      formData.append('timefriday', this.seller.timefriday.toString());
+    }
+    if(this.seller.timesaturday){
+      formData.append('timesaturday', this.seller.timesaturday.toString());
+    }
+    if(this.seller.timesunday){
+      formData.append('timesunday', this.seller.timesunday.toString());
+    }
+    
+    
 
-    if (this.seller.endTime) {
-      formData.append('endTime', this.seller.endTime.toString());
+    if(this.seller.endmonday){
+      formData.append('endmonday', this.seller.endmonday.toString());
     }
+    if(this.seller.endtuesday){
+      formData.append('endtuesday', this.seller.endtuesday.toString());
+    }
+    if(this.seller.endwednesday){
+      formData.append('endwednesday', this.seller.endwednesday.toString());
+    }
+    if(this.seller.endthursday){
+      formData.append('endthursday', this.seller.endthursday.toString());
+    }
+    if(this.seller.endfriday){
+      formData.append('endfriday', this.seller.endfriday.toString());
+    }
+    if(this.seller.endsaturday){
+      formData.append('endsaturday', this.seller.endsaturday.toString());
+    }
+    if(this.seller.endsunday){
+      formData.append('endsunday', this.seller.endsunday.toString());
+    }
+   
+    
+
+    // if (this.seller.startTime) {
+    //   formData.append('startTime', this.seller.startTime.toString());
+    // }
+
+    // if (this.seller.endTime) {
+    //   formData.append('endTime', this.seller.endTime.toString());
+    // }
 
     formData.append('facebook', this.seller.facebook);
     formData.append('instagram', this.seller.instagram);
@@ -259,8 +307,7 @@ export class DetailSellerComponent implements OnInit {
       formData.append('federation', this.seller.user.city.toString());
     }
 
-    formData.append('phone', this.seller.user.phone);
-    formData.append('password', this.seller.user.password);
+    formData.append('phone', this.seller.user.phone);    
 
     let myDate = this.datePipe.transform(this.seller.user.creationDate, 'yyyy-MM-dd HH:mm:ss');
 
@@ -269,6 +316,7 @@ export class DetailSellerComponent implements OnInit {
     }
 
     formData.append('idrole', this.seller.user.role.id.toString());
+    formData.append('showEmail', this.seller.showEmail.toString());
 
     this.sellerService.save(formData).subscribe(dato => {
 

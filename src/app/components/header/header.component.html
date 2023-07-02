@@ -1,4 +1,4 @@
-<!-- <header> -->
+<!-- <header> -->   
 <!-- computer -->
 <div *ngIf="(isMobile$ | async) === false" class="container">
     <div class="row align-items-center">
@@ -58,11 +58,11 @@
                     
                     <a *ngIf="role" (click)="show_chats()" class="text-danger position-relative" style="text-decoration: none; cursor: pointer;">
                         
-                        <fa-icon [icon]="['fas', 'comment']" style="font-size: 1.8em"></fa-icon>
-                        <span *ngIf="msg_alert" style="font-size: 0.6em;" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">
+                        <fa-icon [icon]="['fas', 'comment']" style="font-size: 1.1em"></fa-icon>
+                        <span *ngIf="msg_alert" style="font-size: 0.4em;" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">
                             {{msg_alert}}                           
                         </span>
-
+                        <p class="small text-dark">Poruke</p>
                     </a>
 
                 </div>
@@ -75,7 +75,7 @@
 </div>
 
 <!-- mobile -->
-<div *ngIf="(isMobile$ | async) === true" class="container">
+<div *ngIf="(isMobile$ | async) === true" class="container pt-4">
 
     <div class="row align-items-center">
 

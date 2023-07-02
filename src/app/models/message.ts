@@ -8,5 +8,6 @@ export class Message {
     content:string;
     dateTime:Date;
     idChat:number;
+    seen:boolean=true;
     
 }

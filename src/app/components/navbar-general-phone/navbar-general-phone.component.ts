@@ -31,10 +31,28 @@ export class NavbarGeneralPhoneComponent implements OnInit {
     
   }
 
-  
+   
 
   receiveValue(value: boolean) {    
     this.showChats = value;
+  }
+
+  panelredirect(){
+    const roleString = localStorage.getItem("role");
+    if (roleString) {
+
+      if (JSON.parse(roleString) == 1) {
+        this.router.navigate(['paneluser']);
+      } else if (JSON.parse(roleString) == 2) {
+        this.router.navigate(['panelseller']);
+      } else if (JSON.parse(roleString) == 3) {
+        this.router.navigate(['paneladmin']);
+      }
+    } else {      
+      this.router.navigate(['/login']);
+    }
+
+
   }
 
 }
