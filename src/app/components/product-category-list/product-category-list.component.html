@@ -90,9 +90,11 @@
                                     <!-- <p class="card-text mb-0" *ngIf="product.price>0"><b>{{product.price}} KM</b></p> -->
                                     <!-- <span class="badge rounded-pill bg-danger" *ngIf="product.price==0">Cijena po dogovoru</span>
                                     <span class="badge rounded-pill bg-danger" *ngIf="product.price>0">{{product.price}} KM</span> -->
-                                    <a routerLink="../../../addetails/{{product.idproduct}}"
+                                   
+                                    <a routerLink="/addetails/{{product.idproduct}}"
                                         class="stretched-link m-0 p-0"></a>
                                 </div>
+                                <!-- <span *ngIf="product.promoted" class="badge bg-primary w-50">Promoted</span>                              -->
                                 <div class="d-flex card-footer bg-white justify-content-end" style="border-top: none;">
                                     <span class="badge rounded-pill bg-danger" *ngIf="product.price==0">Cijena po dogovoru</span>
                                     <span class="badge rounded-pill bg-danger" *ngIf="product.price>0">{{product.price}} KM</span>
@@ -109,6 +111,7 @@
 
     </div>
 
-
+    <br>
+    <br>
 
 </div>

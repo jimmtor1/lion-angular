@@ -1,4 +1,4 @@
-import { Component, OnInit, Provider } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Category } from 'src/app/models/category';
 import { Product } from 'src/app/models/product';
@@ -28,13 +28,15 @@ export class ProductosInicioComponent implements OnInit {
   constructor(private categoryService: CategoryService, private providerService: SellerService, private router: Router) { }
 
   private getProductsFromCategory() {
-    
-    this.categoryService.getAll().subscribe(data => {      
+
+    this.categoryService.getAll().subscribe(data => {
       this.categories = data;
       this.products = this.categories[4].products;
-    }, error=>{
-      localStorage.clear();
-      location.reload()
+    }, error => {
+      // if (localStorage.getItem('iduser')) {
+      //   localStorage.clear();
+      //   location.reload()
+      // }
     });
 
     this.providerService.getAllRandomWhitLimit(8).subscribe(data => {

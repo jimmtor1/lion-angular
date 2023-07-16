@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ModalService } from './services/modal.service';
 import { Router } from '@angular/router';
 
@@ -25,6 +25,11 @@ export class AppComponent implements OnInit {
   showChats: boolean;
   showMessages: boolean;
 
+  @ViewChild('header', { static: false }) header: ElementRef;
+  @ViewChild('navbar', { static: false }) navbar: ElementRef;
+
+  mainHeight: string;
+  navbarHeight: string;
 
   constructor(private modalService:ModalService, private router:Router) {}
   
@@ -56,6 +61,17 @@ export class AppComponent implements OnInit {
 
   }
 
+  ngAfterViewInit() {
+    const alturaheader = this.header.nativeElement.offsetHeight;
+    const alturanavbar = alturaheader*0.60;
+
+    // alert(alturanavbar)
+
+    setTimeout(() => {
+      this.mainHeight = `calc(100% - ${alturaheader}px - (${alturanavbar}px)`;
+    }, 0);
+    
+  }
  
 
   //   this.isMobile$ = fromEvent(window, 'resize').pipe(

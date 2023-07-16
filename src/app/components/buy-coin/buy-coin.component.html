@@ -1,0 +1,78 @@
+<div class="container mt-5">
+
+    <h2 class="text-center">Kupovina kovanica</h2>
+    <hr>
+    <br>
+
+    <div class="row g-3">
+        <div class="col-12 col-sm-6" (click)="check_one(1)" style="cursor: pointer;">
+            <div class="p-4 border bg-light d-flex justify-content-between">
+                <div>
+                    <input class="form-check-input me-1" type="radio" name="radio" [checked]="selected_check==1"
+                        aria-label="...">
+                    <span class="h5" >100 coin + bonus 20 coins</span>
+                        
+                </div>
+                <span class="badge bg-primary rounded-pill" style="max-height: 30px;">10 KM</span>
+            </div>
+        </div>
+        <div class="col-12 col-sm-6" (click)="check_one(2)" style="cursor: pointer;">
+            <div class="p-4 border bg-light d-flex justify-content-between">
+                <div>
+                    <input class="form-check-input me-1" type="radio" name="radio" [checked]="selected_check==2"
+                        value="" aria-label="...">
+                    <span class="h5">200 coin + bonus 50 coins</span>
+                </div>
+                <span class="badge bg-primary rounded-pill" style="max-height: 30px;">20 KM</span>
+            </div>
+        </div>
+        <div class="col-12 col-sm-6" (click)="check_one(3)" style="cursor: pointer;">
+            <div class="p-4 border bg-light d-flex justify-content-between">
+                <div>
+                    <input class="form-check-input me-1" type="radio" name="radio" value=""
+                        [checked]="selected_check==3" aria-label="...">
+                    <span class="h5">500 coin + bonus 150 coins</span>
+                </div>
+                <span class="badge bg-primary rounded-pill" style="max-height: 30px;">50 KM</span>
+            </div>
+        </div>
+        <div class="col-12 col-sm-6" (click)="check_one(4)" style="cursor: pointer;">
+            <div class="p-4 border bg-light d-flex justify-content-between">
+                <div>
+                    <input class="form-check-input me-1" type="radio" name="radio" value=""
+                        [checked]="selected_check==4" aria-label="...">
+                    <span class="h5">1000 coin + bonus 350 coins</span>
+                </div>
+                <span class="badge bg-primary rounded-pill" style="max-height: 30px;">100 KM</span>
+            </div>
+        </div>
+        <div class="col-12 col-sm-6" (click)="check_one(5)" style="cursor: pointer;">
+            <div class="p-4 border bg-light d-flex justify-content-between">
+                <div>
+                    <input class="form-check-input me-1" type="radio" name="radio" value=""
+                        [checked]="selected_check==5" aria-label="...">
+                    <span class="h5">1500 coin + bonus 20 coins</span>
+                </div>
+                <span class="badge bg-primary rounded-pill" style="max-height: 30px;">150 KM</span>
+            </div>
+        </div>
+        <div class="col-12 col-sm-6" (click)="check_one(6)" style="cursor: pointer;">
+            <div class="p-4 border bg-light d-flex justify-content-between">
+                <div>
+                    <input class="form-check-input me-1" type="radio" name="radio" value=""
+                        [checked]="selected_check==6" aria-label="...">
+                    <span class="h5">2000 coin + bonus 900 coins</span>
+                </div>
+                <span class="badge bg-primary rounded-pill" style="max-height: 30px;">200 KM</span>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="text-center">
+        <button (click)="addCoins()" class="btn btn-danger">&nbsp;&nbsp; BUY COINS &nbsp;&nbsp;</button>
+    </div>
+    <br>
+    <br>
+    <br>
+</div>
+

@@ -23,6 +23,10 @@ export class TenderService {
     return this.http.get<Tender[]>(`${this.URL}/list/${iduser}`);
   }
 
+  getListByType(idType:number):Observable<Tender[]>{
+    return this.http.get<Tender[]>(`${this.URL}/type/${idType}`);
+  }
+
   getListActiceTender():Observable<Tender[]>{
     return this.http.get<Tender[]>(`${this.URL}/activelist`);
   }

@@ -15,5 +15,6 @@ export class Product {
     active:boolean = true;    
     creationDate:Date; 
     productImageList:ProductImage[];
+    promotedTo:Date;
 
 }

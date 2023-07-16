@@ -34,6 +34,7 @@ export class ProductFormComponent implements OnInit {
   seller: Seller;
   authorizedSeller = false;
   loading = true;
+  isNewProduct=true;
 
   urlprod_img = `${IMG_PRODUCT_URL}`;
 
@@ -52,6 +53,7 @@ export class ProductFormComponent implements OnInit {
 
             if (params['id']) {
               this.getProductById(params['id']);
+              this.isNewProduct = false;
             } else {
               this.subcategoriesCombo2();
             }
@@ -166,12 +168,9 @@ export class ProductFormComponent implements OnInit {
       formData.append('filesTosave', file.file);
     })
 
-    console.log("editando1");
     this.filesTodelete.forEach(imagename => {
       formData.append('filesTodelete', JSON.stringify(imagename));
     })
-
-    console.log("editando2");
 
     formData.append('idproduct', this.product.idproduct.toString());
     formData.append('productName', this.product.productName);
@@ -179,16 +178,10 @@ export class ProductFormComponent implements OnInit {
     formData.append('idcategory', "5");
     formData.append('idsubcategory', this.product.idsubcategory.toString());
 
-    console.log("editando3");
-
     formData.append('idprovider', this.iduser.toString());
     formData.append('active', this.product.active.toString());
 
-    console.log("editando4");
-
     formData.append('price', this.product.price.toString());
-
-    console.log("editando5");
 
     let myDate = this.datePipe.transform(this.product.creationDate, 'yyyy-MM-dd HH:mm:ss');
 
@@ -306,6 +299,16 @@ export class ProductFormComponent implements OnInit {
   }
 
 
+  // promote(){
+  //   const confirmacion = window.confirm("Are you sure to promote the article?");
+   
+  //   if (confirmacion) {
+            
+  //   } 
+
+  // }
+
+
 }
 
 class imgclasification {
@@ -317,3 +320,4 @@ class imgclasification {
   file: File;
 
 }
+

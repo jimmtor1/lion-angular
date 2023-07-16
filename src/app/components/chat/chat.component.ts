@@ -24,6 +24,8 @@ export class ChatComponent implements OnInit {
   chatingWhit: string | undefined;
   activeChat: number;
 
+  page = 0;
+
   constructor(private websocketService: ChatSocketService, private messageService: MessageService, private route: ActivatedRoute, private userService: UserService, private router: Router) { }
 
   ngOnInit() {
@@ -84,7 +86,7 @@ export class ChatComponent implements OnInit {
 
   getChats(idchat: number) {
 
-    this.messageService.getMessagesByChat(idchat).subscribe(c => {
+    this.messageService.getMessagesByChat(idchat, this.page).subscribe(c => {
       this.chatMessages = c;
       this.msg.idChat = idchat;
       this.activeChat = idchat;

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ChatSocketService } from 'src/app/services/chat-socket.service';
 import { ModalService } from 'src/app/services/modal.service';
 
 @Component({
@@ -11,14 +12,16 @@ export class NavbarGeneralPhoneComponent implements OnInit {
  
   role:number=0;
   showChats: boolean = false;
+  msg_alert: number = 0;
 
-  constructor(private router:Router, private chatSercice: ModalService){}
+  constructor(private router:Router, private chatSercice: ModalService, private websocketService: ChatSocketService, private route:ActivatedRoute){}
 
   ngOnInit(): void {
     const roleString = localStorage.getItem("role");
     if (roleString) {
       this.role = JSON.parse(roleString);
     }
+    this.sucribe();
   }
 
   show_chats() { 
@@ -27,11 +30,18 @@ export class NavbarGeneralPhoneComponent implements OnInit {
       this.showChats = !this.showChats;
     }else{
       this.router.navigate(['login']);
-    }  
-    
+    }
   }
 
-   
+  sucribe(){
+    this.websocketService.msgState$.subscribe(a => {     
+      if (!this.router.url.includes("/chat2/msg")) {
+        this.msg_alert += 1;
+        this.playNotificationSound();
+      }
+    });
+  }
+  
 
   receiveValue(value: boolean) {    
     this.showChats = value;
@@ -52,7 +62,11 @@ export class NavbarGeneralPhoneComponent implements OnInit {
       this.router.navigate(['/login']);
     }
 
+  }
 
+  playNotificationSound() {
+    const audio = new Audio('assets/sound/notification-mouth.wav');
+    audio.play();   
   }
 
 }

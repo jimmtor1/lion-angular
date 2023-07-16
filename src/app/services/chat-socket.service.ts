@@ -16,6 +16,8 @@ export class ChatSocketService {
   stompClient?: any;
   userToSuscribe: number;
 
+ 
+
   private msgSubject = new Subject<any>();
   msgState$ = this.msgSubject.asObservable();
 

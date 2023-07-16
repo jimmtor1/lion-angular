@@ -52,6 +52,14 @@
                                 [(ngModel)]="seller.identification">
                         </div>
                     </div>
+
+                    <div class="mb-3">
+                        <div class="col-12 col-sm-6">
+                            <label for="ime">Firma za fakturisanje<span class="form-label">*</span></label>
+                            <input [disabled]="!editmode" type="text" class="form-control" name="billedTo" id="billedTo"
+                                [(ngModel)]="seller.billedTo">
+                        </div>
+                    </div>
                
                     <label for="subcategory">Sve djelatnosti kojima se bavi firma&nbsp;<span
                             class="form-label">*</span></label>

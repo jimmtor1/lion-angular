@@ -1,0 +1,36 @@
+<div class="text-center my-2">
+    <fa-icon [icon]="['fas','comment']" style="font-size: 1.5em;"></fa-icon> <b>&nbsp;&nbsp; Poruke</b>
+</div>
+<hr class="m-0 p-0">
+<div style="overflow: auto; height: calc(100vh - 334px);" #messageContainer>
+
+    <!-- <div class="card-body" #messageContainer> -->
+
+    <div *ngFor="let m of ChatList" class="link m-0 p-0">
+        <a routerLink="/chat2/msg/{{m.idChat}}">
+            <div class="row g-0 pt-2">
+                <!-- d-flex justify-content-center  p-0 m-0 style="align-items: center;"-->
+                <!-- <div class="col-2 bg-success p-0 m-0" > -->
+                    <fa-icon [icon]="['fas','circle-user']" style="font-size: 3em;" class="m-0 p-0 col-2 text-center"></fa-icon>
+                <!-- </div> -->
+                <div class="col-10" style="padding-right: 4px;">
+
+                    <div class="d-flex justify-content-between pt-2">
+                        <span>{{m.sender.id==thisidUser?m.receiver.firstName+"
+                            "+m.receiver.lastName:m.sender.firstName+" "+m.sender.lastName}}</span>
+                        <span style="font-size: small;">{{m.dateTime | date: 'dd.MM.yyyy'}}</span>
+                    </div>
+
+                    <p class="text-muted mb-0 text-start text-nowrap overflow-hidden text-truncate" scrollHeight
+                        scrollTop>
+                        <span *ngIf="thisidUser==m.sender.id">Tu:</span> {{m.content}}
+                    </p>
+                </div>
+            </div>
+            <hr class="m-0 p-0">
+        </a>
+    </div>
+
+    <!-- </div> -->
+
+</div>

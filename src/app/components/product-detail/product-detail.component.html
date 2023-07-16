@@ -1,5 +1,5 @@
 <!-- preloader -->
-<div class="col-10 text-center" *ngIf="loading">
+<div class="text-center container" *ngIf="loading">
     <br>
     <div class="spinner-grow text-danger" role="status">
         <span class="visually-hidden">Loading...</span>
@@ -11,7 +11,7 @@
     <div class="big card mb-3">
         <!-- <div class="mx-auto" style="max-width: 940px;"> -->
         <div class="row g-0">
-            <div class="col-md-6">
+            <div class="col-md-7">
                 <div class="d-flex">
                     <img [src]="principalImage" class="img-fluid rounded-start p-3 mx-auto"
                         style="object-fit: contain; height: 500px;" alt="product-img">
@@ -33,28 +33,62 @@
                 </ul>
 
             </div>
-            <div class="col-md-6">
-                <div class="card-body">
-                    <h5 class="card-title">{{product.productName}}</h5>
-                    <p class="card-text">
-                        {{product.description}}
-                    </p>
-                    <p *ngIf="product.price!==0" class="h4">
-                        Cijena: {{product.price}} KM
-                    </p>
-                    <p *ngIf="product.price==0" class="h4">
-                        Cijena: Po dogovoru
-                    </p>
-                    <p class="h4">
-                        Lokacija
-                    </p>
 
-                    <p *ngIf="seller.user.federation!=null">Grad: {{city}}</p>
+            <div class="col-md-5">
+
+                <div class="card-body">
+
+                    <div class="card border-light mb-3 big">
+                        <div class="card-header fs-3">{{product.productName}}</div>
+                        <div class="card-body">
+                         
+                            <span *ngIf="promoted && iduser==product.idprovider" class="badge rounded-pill bg-primary mb-2">Artikal izdvojen do {{product.promotedTo | date: 'dd.MM.yy HH:mm'}}</span>
+                            <span *ngIf="promoted && iduser!==product.idprovider" class="badge rounded-pill bg-primary mb-2">IZDVOJENO</span>
+                            
+                            <p class="card-text">
+                                {{product.description}}
+                            </p>
+                            <p *ngIf="product.price!==0" class="h5">
+                                Cijena: {{product.price}} KM
+                            </p>
+                            <p *ngIf="product.price==0" class="h5">
+                                Cijena: Po dogovoru
+                            </p>
+                            <p class="h5">
+                                <fa-icon [icon]="['fas','location-dot']"></fa-icon>&nbsp; Lokacija
+                            </p>
+                            <p *ngIf="seller.user.federation!=null">Grad: {{city}}</p>
+
+                            <a *ngIf="iduser!==product.idprovider" (click)="emitSeller(seller.user.id);" class="btn btn-danger">
+                                <fa-icon [icon]="['fas','comment']"></fa-icon>
+                                Pošaljite poruku
+                            </a>
+
+                            <div *ngIf="iduser==product.idprovider" class="row bg-light mt-4 py-3">
+                                
+                                <div class="col text-center">
+                                    <a class="btn btn-danger d-block" routerLink="/promotions/{{product.idproduct}}/promote">
+                                        <fa-icon [icon]="['fas','rocket']" class="mx-2"></fa-icon>
+                                        Izdvoji
+                                    </a> 
+                                </div>
+                                
+                                <div class="col text-center">
+                                    <a class="btn btn-dark d-block" routerLink="/panelseller/product/{{product.idproduct}}">                                        
+                                        <fa-icon [icon]="['fas','pencil']" class="mx-2"></fa-icon>
+                                        Edit
+                                    </a> 
+                                </div>                                
+
+                            </div>
+
+                              
+
+                        </div>
+                    </div>
+
                 </div>
-                <a (click)="emitSeller(seller.user.id);"  class="btn btn-danger">
-                    <fa-icon [icon]="['fas','comment']" ></fa-icon>
-                    Pošaljite poruku
-                </a>
+
             </div>
         </div>
         <!-- </div> -->
@@ -105,5 +139,7 @@
         </div>
 
     </div>
-
+    <br>
+    <br>
+    <br>
 </div>

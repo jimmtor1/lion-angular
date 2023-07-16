@@ -31,9 +31,11 @@ export class ChatMiniComponent implements OnInit {
   activeChat: number | undefined;
   minimized = false;
 
+  page = 0;
+
   chatsListActive: boolean = false;
 
-  constructor(private websocketService: ChatSocketService, private messageService: MessageService, private userService: UserService, private router: Router, private chatclose: ModalService) { }
+  constructor(private websocketService: ChatSocketService, private messageService: MessageService, private userService: UserService, private chatclose: ModalService) { }
 
 
   ngOnInit() {
@@ -60,13 +62,11 @@ export class ChatMiniComponent implements OnInit {
               this.user = u.id;             
               
             });
-
             this.activeChat = -1;
             this.msg.idChat = 0;
             this.msg.sender = new Userr(this.thisidUser);
 
           }
-
         });
 
       } else {
@@ -83,95 +83,19 @@ export class ChatMiniComponent implements OnInit {
       }
 
     }
-
-
-
-
-
-
-    // let iduser = localStorage.getItem('iduser');
-    // if (iduser) {
-    //   this.thisidUser = parseInt(iduser)
-
-    //   if (this.idprovider) {
-    //     if (this.idprovider > 0) {
-
-    //       this.messageService.getLastMsgByChat(parseInt(iduser)).subscribe(m => {
-    //         this.LastMessageEachChat = m;
-    //         this.sortByDateDesc();
-    //         this.messageService.getMessagesWith(this.thisidUser, this.idprovider!).subscribe(chat => {             
-    //           if (chat) {
-    //             this.getChats(chat.id);
-    //           } else {
-    //             this.userService.getById(this.idprovider!).subscribe(u => {
-    //               this.msg.receiver = u;
-    //               this.chatingWhit = u.firstName + " " + u.lastName;
-    //               this.user = u.id;
-    //             });
-
-    //             this.msg.idChat = 0;
-    //             this.activeChat = 0;
-    //             this.msg.sender = new Userr(this.thisidUser);
-    //           }
-    //         });
-
-    //       });
-
-
-
-    //     } else {
-    //       this.messageService.getLastMsgByChat(parseInt(iduser)).subscribe(m => {
-    //         this.LastMessageEachChat = m;
-    //         this.sortByDateDesc();
-    //       });
-    //     }
-    //   } else {
-    //     this.messageService.getLastMsgByChat(parseInt(iduser)).subscribe(m => {
-    //       this.LastMessageEachChat = m;
-    //       this.sortByDateDesc();
-    //     });
-    //   }
-
-
-
-    //   this.websocketService.msgState$.subscribe((a) => {
-
-    //     if (a.x.idChat == 0) {
-    //       this.activeChat = a.x.idChat;
-    //     }
-
-    //     this.chatMessages.push(a.x);
-
-    //     const index = this.LastMessageEachChat.findIndex(obj => obj.idChat == a.x.idChat);
-    //     index !== -1 ? this.LastMessageEachChat[index] = a.x : this.LastMessageEachChat.push(a.x);
-
-    //     this.playNotificationSound();
-    //     setTimeout(() => {
-    //       this.scrollMessageContainerToBottom();
-    //     }, 0);
-
-    //   });
-
-    // } else {
-    //   this.router.navigate(['/login']);
-    // }
-
     this.checkDeviceType();
-
   }
 
   getChats(idchat: number) {
 
-    this.messageService.getMessagesByChat(idchat).subscribe(c => {
+    this.messageService.getMessagesByChat(idchat, this.page).subscribe(c => {
       this.chatMessages = c;
       this.chatsListActive = false;
       this.msg.idChat = idchat;
       this.activeChat = idchat;
       
       if (this.LastMessageEachChat.length > 0) {
-        console.log("sdkljfklasd");
         const message_extracted = this.LastMessageEachChat.find(item => item.idChat === idchat);
-        console.log(message_extracted?.sender.firstName );
         if (message_extracted?.sender.id == this.thisidUser) {
           this.msg.receiver = message_extracted.receiver;
           this.msg.sender = message_extracted.sender;
@@ -251,12 +175,10 @@ export class ChatMiniComponent implements OnInit {
     this.minimized = !this.minimized;
   }
 
-
   playNotificationSound() {
     const audio = new Audio('assets/sound/notification-mouth.wav');
     audio.play();
   }
-
 
   sendBooleanValue(value: boolean) {
     this.closeChats.emit(value);
@@ -273,7 +195,6 @@ export class ChatMiniComponent implements OnInit {
   sortByDateDesc() {
     this.LastMessageEachChat.sort((a, b) => new Date(b.dateTime).getTime() - new Date(a.dateTime).getTime());
   }
-
 
   incomingMessage(msg: Message) {
    

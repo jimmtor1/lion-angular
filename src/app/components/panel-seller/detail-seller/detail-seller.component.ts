@@ -21,6 +21,7 @@ export class DetailSellerComponent implements OnInit {
   subcategories: Subcategory[] = [];
   subcategoriesSelected: Subcategory[] = [];
   modalShow = false;
+  saving:boolean = false;
 
   citiesToCombo: any[] = [];
   company_category: Company_subcategory[] = [];
@@ -123,13 +124,13 @@ export class DetailSellerComponent implements OnInit {
 
       this.subcategories.splice(0, 0, sub);
       this.subcategories.splice(21, 0, sub2);
-      this.subcategories.splice(48, 0, sub3);
-      this.subcategories.splice(59, 0, sub4);
-
+      this.subcategories.splice(52, 0, sub3);
+      this.subcategories.splice(63, 0, sub4);
+      
     });
   }
 
-  subCategoryAdded(event: Event): void {
+  //subCategoryAdded(event: Event): void {
 
     //console.log(this.subcategoriesSelected[0].subcategoryName)
 
@@ -156,7 +157,7 @@ export class DetailSellerComponent implements OnInit {
     // }
 
 
-  }
+  //}
 
   getSubcategoryById(idsubcategory: number): Subcategory {
 
@@ -198,8 +199,10 @@ export class DetailSellerComponent implements OnInit {
 
   save() {
 
+    this.saving = true;
+
     const formData = new FormData();   
-    this.subcategoriesSelected.forEach(sub => {
+    this.subcategoriesSelected.forEach(sub => {      
       formData.append('idsubcategories', sub.idsubcategory.toString())
     })
 
@@ -216,7 +219,8 @@ export class DetailSellerComponent implements OnInit {
     formData.append('deliveryCost', this.seller.deliveryCost);
     formData.append('image', this.seller.image);
     formData.append('biography', this.seller.biography);
-    formData.append('identification', this.seller.identification);
+    // formData.append('identification', this.seller.identification);
+    // formData.append('billedTo', this.seller.billedTo);
 
     if (this.seller.accepted !== null) {
       formData.append('accepted', this.seller.accepted.toString());
@@ -316,7 +320,12 @@ export class DetailSellerComponent implements OnInit {
     }
 
     formData.append('idrole', this.seller.user.role.id.toString());
-    formData.append('showEmail', this.seller.showEmail.toString());
+    if(this.seller.showEmail){
+      formData.append('showEmail', this.seller.showEmail.toString());
+    }else{
+      formData.append('showEmail', "false");
+    }
+    
 
     this.sellerService.save(formData).subscribe(dato => {
 
@@ -327,7 +336,8 @@ export class DetailSellerComponent implements OnInit {
       } else {
         console.log("no se guardó");
       }
-    }, error => console.log(error));
+      this.saving = false;
+    }, error => {console.log(error);this.saving=false});
   }
 
  

@@ -8,13 +8,25 @@
                         (click)="getAuthorizedList()">Prijava na tender</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" style="cursor: pointer;" [ngClass]="{'active':!active}" (click)="getListByUser()">Vaši tenderi</a>
+                    <a class="nav-link" style="cursor: pointer;" [ngClass]="{'active':!active}"
+                        (click)="getListByUser()">Vaši tenderi</a>
                 </li>
             </ul>
         </div>
         <div class="card-body text-start">
 
             <div *ngIf="page=='tendertoapply'" class="row">
+
+                <div class="col-12 mb-3">
+                    <label for="project_name">Tip tendera</label>
+                    <select (click)="filter()" [(ngModel)]="selectedType" name="filter" id="filter" class="form-select">
+                        <option value=0 [disabled]="true">-Odaberite vrstu-</option>
+                        <option value=1 selected>Građevina</option>
+                        <option value=2 selected>Tekstil</option>
+                        <option value=3 selected>Vozni park</option>
+                        <option value=4 selected>Tehnologija</option>
+                    </select>
+                </div>
 
                 <!-- <p *ngIf="tenders" class="h4 my-3">Tenderi</p> -->
 
@@ -45,7 +57,7 @@
             <div *ngIf="page=='owntender'">
 
                 <div class="d-flex justify-content-end mb-1">
-                    <button routerLink="/panelseller/newtender" class="btn btn-secondary btn-sm">Dodaj tender</button>                    
+                    <button routerLink="/panelseller/newtender" class="btn btn-secondary btn-sm">Dodaj tender</button>
                 </div>
 
                 <div class="table-responsive">

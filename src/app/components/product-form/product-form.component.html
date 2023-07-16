@@ -17,7 +17,16 @@
 
             <div class="text-center">
                 <br>
-                <p class="h1">Novi oglas</p>
+                <div class="d-flex justify-content-center">
+                    <p class="h1">Novi oglas</p>
+
+                    <!-- <a *ngIf="!isNewProduct && product.promoted!==null" class="btn btn-dark h-75 mx-5" routerLink="/promotions/{{product.idproduct}}/promote">
+                        <fa-icon [icon]="['fas','rocket']" class="mx-2"></fa-icon>
+                        Izdvoji
+                    </a>                     -->
+                </div>
+                <!-- <span class="badge bg-primary" *ngIf="product.promoted">                  
+                    this product is being promoted</span> -->
                 <br>
             </div>
 
@@ -70,24 +79,23 @@
                                 <div class="col-12">
                                     <input type="checkbox" class="btn-check" id="btn-check-2-outlined"
                                         (click)="priceonrequest()" [checked]="product.price==0" autocomplete="off">
-                                    <label class="btn btn-outline-secondary d-block"
-                                        for="btn-check-2-outlined">
+                                    <label class="btn btn-outline-secondary d-block" for="btn-check-2-outlined">
                                         Po dogovoru
                                     </label>
                                 </div>
                             </div>
-         
+
                         </div>
 
                     </div>
 
 
                     <div class="input-group mt-3 mb-2">
-                        <input type="file" (change)="onFileSelected($event)" class="form-control" multiple
-                            id="imagesInput">
+                        <input type="file" accept="image/*" (change)="onFileSelected($event)" class="form-control"
+                            multiple id="imagesInput">
                     </div>
 
-                    <div class="drop-zone">
+                    <!-- <div class="drop-zone">
                         <ul #imagelist id="imagelist">
                             <li *ngFor="let image of images;" [id]="image.id">
                                 <div class="position-relative">
@@ -96,13 +104,27 @@
                                         <button class="btn btn-danger position-absolute bottom-0 end-0">
                                             <fa-icon [icon]="['fas','trash']" style="font-size: 0.8em"></fa-icon>
                                         </button>
-                                    </div>
-                                    <!-- <button type="button" class="btn btn-danger w-50 rounded-circle position-absolute bottom-0 end-0" (click)="removeImage(image)">                                                             
-                                    <fa-icon [icon]="['fas','trash']" class="m-0 p-0"></fa-icon>
-                                </button> -->
+                                    </div>                                  
                                 </div>
                             </li>
                         </ul>
+                    </div> -->
+
+                    <div class="drop-zone d-flex flex-wrap">
+                        <!-- style="width: 12rem; height: 13rem;" -->
+                        <div *ngFor="let image of images;" class="card mx-1" style="width: 11em; height: 13em;">
+                            <img [src]="image.link" class="card-img-top" style="height: 150px;" alt="...">
+                            <hr class="p-0 m-0">
+                            <div class="card-footer text-center">
+                                <button class="btn btn-danger rounded-pill">
+                                    <fa-icon [icon]="['fas','trash']" ></fa-icon>
+                                    delete
+                                    <!-- style="font-size: 0.8em" -->
+                                </button>
+                            </div>
+                        </div>
+
+                       
                     </div>
 
                     <div class="text-center">
@@ -115,4 +137,7 @@
             </div>
         </div>
     </div>
+    <br>
+    <br>
+    <br>
 </div>

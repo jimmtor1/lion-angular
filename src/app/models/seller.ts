@@ -7,6 +7,7 @@ export class Seller {
     street: string = "";
     companyName: string = "";
     identification: string = "";
+    billedTo:string=""
     postalCode: string = "";
     biography: string = ""; 
     annualLeave: string = "";

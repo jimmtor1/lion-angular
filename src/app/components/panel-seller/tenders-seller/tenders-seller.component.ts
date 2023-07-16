@@ -13,6 +13,7 @@ export class TendersSellerComponent implements OnInit {
   tenders: Tender[] = [];
   active = true;
   authorized: boolean;
+  selectedType: number=0;
 
   page = "tendertoapply";
 
@@ -24,15 +25,18 @@ export class TendersSellerComponent implements OnInit {
 
 
   getAuthorizedList() {
-    if(this.authorized){
+    if (this.authorized) {
       this.tenderService.getAuthorizedListTender().subscribe(list => {
         this.tenders = list;
-        this.page="tendertoapply";
-        this.active = true;
+        this.page = "tendertoapply";
       }, error => {
         console.log(error);
       });
-    }    
+    } else {
+      this.tenders = [];
+      this.page = "tendertoapply";
+    }
+    this.active = true;
   }
 
   getNoAutorizedList() {
@@ -51,8 +55,8 @@ export class TendersSellerComponent implements OnInit {
 
       this.tenderService.getListByIduser(JSON.parse(userid)).subscribe(list => {
         this.tenders = list;
-        this.active=false
-        this.page="owntender";
+        this.active = false
+        this.page = "owntender";
       }, error => {
         console.log(error);
       });
@@ -75,6 +79,15 @@ export class TendersSellerComponent implements OnInit {
       });
     }
 
+  }
+
+
+  filter() {
+    if (this.selectedType > 0) {
+      this.tenderService.getListByType(this.selectedType).subscribe(t => {
+        this.tenders = t;
+      });
+    }
   }
 
 }

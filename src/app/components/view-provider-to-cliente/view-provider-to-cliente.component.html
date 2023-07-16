@@ -89,10 +89,11 @@
                         {{seller.biography}}
                     </p>
                     <!-- routerLink="/chat/{{seller.user.id}}" -->
-                    <a (click)="emitSeller(seller.user.id);"  class="btn btn-danger">
+                    <a *ngIf="iduser!==seller.user.id" (click)="emitSeller(seller.user.id);"  class="btn btn-danger rounded-pill">
                         <fa-icon [icon]="['fas','comment']" ></fa-icon>
                         Pošaljite poruku
                     </a>
+                
                     <br>
                     <br>
                 </div>

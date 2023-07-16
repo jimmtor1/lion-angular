@@ -22,6 +22,7 @@ export class ProductService {
   }
 
   getAllByCategory(idcategory: number, idsubcategory: number): Observable<Product[]> {
+    console.log("idcategory "+idcategory)
     return this.httpClient.get<Product[]>(`${this.URL}/category/${idcategory}/${idsubcategory}`);
   }
 
@@ -75,7 +76,9 @@ export class ProductService {
     return this.httpClient.put<any>(`${this.URL}/w`, producImage);
   }
 
-
+  promote(form:FormData):Observable<boolean>{
+    return this.httpClient.post<boolean>(`${this.URL}/promote`, form);
+  }
 
 
 }

@@ -57,7 +57,7 @@ export class ProductCategoryListComponent implements OnInit {
         this.category = this.categoryName[params['id'] - 1];
         this.subcategoryName = this.subcategory[params['idc'] - 70];
 
-        this.productService.getAllByCategory(params['id'], params['idc']).subscribe(data => {
+        this.productService.getAllByCategory(this.idcategory, params['idc']).subscribe(data => {
           this.products = data;
           this.loading = false;
         });

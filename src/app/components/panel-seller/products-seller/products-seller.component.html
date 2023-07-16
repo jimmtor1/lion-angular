@@ -2,7 +2,7 @@
 
     <!-- buttons -->
     <div class="d-flex justify-content-end mb-1">
-        <a routerLink="/panelseller/product" class="btn btn-secondary btn-sm">Novi proizvod</a>       
+        <a routerLink="/panelseller/product" class="btn btn-secondary btn-sm">Objavi uslugu / proizvod</a>
     </div>
 
     <div class="row row-cols-2 row-cols-sm-5 g-2 mb-3">
@@ -17,9 +17,24 @@
                     <h6 class="card-title">{{product.productName}}</h6>
                     <p class="card-text mb-0" *ngIf="product.price==0"><b>Cijena po dogovoru</b></p>
                     <p class="card-text mb-0" *ngIf="product.price>0"><b>{{product.price}}</b> <b> KM</b></p>
-                    <a routerLink="/panelseller/product/{{product.idproduct}}" class="stretched-link m-0 p-0"></a>                    
+                   
+                    <div class="row g-1">
+                        <div class="col">
+                            <a class="btn btn-danger btn-sm rounded-pill d-block" routerLink="/addetails/{{product.idproduct}}">
+                                <fa-icon [icon]="['fas','eye']"></fa-icon> Prikaži
+                            </a>
+                        </div>
+                        <div class="col">
+                            <a class="btn btn-danger btn-sm rounded-pill d-block" 
+                                routerLink="/promotions/{{product.idproduct}}/promote">
+                                <fa-icon [icon]="['fas','rocket']"></fa-icon> Izdvoji
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    <br>
+    <br>
 </div>

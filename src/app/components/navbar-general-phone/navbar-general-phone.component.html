@@ -2,34 +2,38 @@
     <div class="col">
         <a href="/" class="text-reset text-decoration-none">
             <fa-icon [icon]="['fas','home']" class="d-block"></fa-icon>
-            Početna
+            <span style="font-size: small;" >Početna</span>
         </a>
     </div>
     <div class="col">
         <a href="/" class="text-reset text-decoration-none">
             <fa-icon [icon]="['fas','box']" class="d-block"></fa-icon>
-            Kategorije
+            <span style="font-size: small;" >Kategorije</span>            
         </a>
     </div>
 
     <div *ngIf="role==2" class="col">
         <a href="panelseller/product" class="text-reset text-decoration-none">
             <fa-icon [icon]="['fas','circle-plus']" class="d-block"></fa-icon>
-            Objavi
+            <span style="font-size: small;" >Objavi</span>            
         </a>
     </div>
 
     <div class="col">
-        <a (click)="show_chats()" class="text-reset text-decoration-none" style="cursor: pointer;">
+        <!-- (click)="show_chats()" -->
+        <a routerLink="chat2/chats" class="text-reset text-decoration-none position-relative" style="cursor: pointer;">
             <fa-icon [icon]="['fas','comment']" class="d-block"></fa-icon>
-            Chat
+            <span *ngIf="msg_alert" style="font-size: 0.4em;" class="position-absolute top-0 start-50 translate-middle badge bg-primary">
+                {{msg_alert}}                           
+            </span>
+            <span style="font-size: small;" >Chat</span>             
         </a>
     </div>
     
     <div class="col">
         <a (click)="panelredirect()" class="text-reset text-decoration-none">
             <fa-icon [icon]="['fas','user']" class="d-block"></fa-icon>
-            Profil
+            <span style="font-size: small;" >Profil</span>            
         </a>
     </div>
 </div>

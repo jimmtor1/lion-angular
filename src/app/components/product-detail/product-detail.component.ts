@@ -6,6 +6,7 @@ import { IMG_PRODUCT_URL, select_city } from 'src/app/services/helper';
 import { ModalService } from 'src/app/services/modal.service';
 import { ProductService } from 'src/app/services/product.service';
 import { SellerService } from 'src/app/services/seller.service';
+import { FunctionsService } from 'src/app/util/functions.service';
 
 @Component({
   selector: 'product-detail',
@@ -20,6 +21,8 @@ export class ProductDetailComponent implements OnInit {
   seller: Seller;
   city: string;
   loading = true;
+  promoted = false;
+  iduser:number;
 
   urlprod_img = `${IMG_PRODUCT_URL}`;
 
@@ -37,7 +40,7 @@ export class ProductDetailComponent implements OnInit {
         this.productService.getById(param['id']).subscribe(result => {
           this.product = result;
           this.principalImage = this.urlprod_img + this.product.productImageList[0].idimage + this.product.productImageList[0].extension;
-
+          this.isPromoted();
 
           this.sellerService.getById(this.product.idprovider).subscribe(pro => {
             this.seller = pro;
@@ -57,6 +60,12 @@ export class ProductDetailComponent implements OnInit {
       }
     });
 
+    let user = localStorage.getItem('iduser')
+    if(user){
+      this.iduser = parseInt(user);
+    }
+    
+
   }
 
   chagePrincipalImage(position: number) {
@@ -65,6 +74,10 @@ export class ProductDetailComponent implements OnInit {
 
   emitSeller(idseller: number) {
     this.modelChat.openChat(idseller);
+  }
+
+  isPromoted(){    
+    this.promoted = FunctionsService.isGreaterDate(this.product.promotedTo,new Date());    
   }
 
 }

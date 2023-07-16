@@ -134,6 +134,7 @@ export class CompanyComponent implements OnInit {
     formData.append('image', this.seller.image);
     formData.append('biography', this.seller.biography);
     formData.append('identification', this.seller.identification);
+    formData.append('billedTo', this.seller.billedTo);
 
     if (this.seller.accepted !== null) {
       formData.append('accepted', this.seller.accepted.toString());

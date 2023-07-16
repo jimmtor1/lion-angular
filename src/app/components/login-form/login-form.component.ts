@@ -30,7 +30,7 @@ export class LoginFormComponent implements OnInit {
     //this.router.navigate(['/']);
 
     const roleString = localStorage.getItem("role");
-    if (roleString) {     
+    if (roleString) {
       this.router.navigate(['/']);
       //   if (JSON.parse(roleString) == 1) {
       //     this.router.navigate(['paneluser']);
@@ -46,34 +46,40 @@ export class LoginFormComponent implements OnInit {
   }
 
   login() {
+
     this.userService.login(this.user).subscribe(data => {
-      
+
       if (data) {
-        
-        const tokenPayload = data.jwt.split(".")[1]; // Obtén la parte del token que contiene la carga útil       
-        const base64Url = tokenPayload.replace(/-/g, "+").replace(/_/g, "/");
-        const rawData = window.atob(base64Url);
 
-        let decodedToken;
-        try{          
-          decodedToken = JSON.parse(new TextDecoder().decode(new Uint8Array([...rawData].map((char) => char.charCodeAt(0)))));
-        }catch (error) {
-          console.error("Error parsing token payload(is not JSON format):", error);
-          return;
+        if (data.jwt.length > 0) {
+
+          const tokenPayload = data.jwt.split(".")[1]; // Obtén la parte del token que contiene la carga útil       
+          const base64Url = tokenPayload.replace(/-/g, "+").replace(/_/g, "/");
+          const rawData = window.atob(base64Url);
+
+          let decodedToken;
+          try {
+            decodedToken = JSON.parse(new TextDecoder().decode(new Uint8Array([...rawData].map((char) => char.charCodeAt(0)))));
+          } catch (error) {
+            console.error("Error parsing token payload(is not JSON format):", error);
+            return;
+          }
+
+          localStorage.setItem('token', data.jwt);
+          localStorage.setItem('email', decodedToken.sub);
+          localStorage.setItem('role', decodedToken.role);
+          localStorage.setItem('iduser', decodedToken.iduser);
+          localStorage.setItem('exp', decodedToken.exp);
+
+          location.reload();
+
+        } else {
+          localStorage.clear
+          this.access = 2;
         }
-        
-        localStorage.setItem('token', data.jwt);
-        localStorage.setItem('email', decodedToken.sub); 
-        localStorage.setItem('role', decodedToken.role);
-        localStorage.setItem('iduser', decodedToken.iduser);         
-         
-        location.reload();
-
-      } else {
-        localStorage.clear
-        this.access = 2;
       }
-    }, error => { console.log(error) })
+
+    }, (error: any) => { console.log(error) });
   }
 
 

@@ -10,7 +10,7 @@ import { TenderFormComponent } from '../tender-form/tender-form.component';
 
 const routes: Routes = [
   {path:'',component:PanelSellerComponent, children: [
-    {path:'',redirectTo: 'details', pathMatch:'full'},
+    {path:'',redirectTo: 'products', pathMatch:'full'},
     {path:'details', component: DetailSellerComponent},
     {path:'products', component: ProductsSellerComponent},
     {path:'tenders', component: TendersSellerComponent},

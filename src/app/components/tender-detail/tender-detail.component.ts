@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DeviceDetectorService } from 'ngx-device-detector';
 import { Tender } from 'src/app/models/tender';
 import { TenderProposal } from 'src/app/models/tender-proposal';
 import { Userr } from 'src/app/models/userr';
@@ -26,7 +27,7 @@ export class TenderDetailComponent implements OnInit {
   canOffer: boolean = false;
   loading = true;
   file: File;
-  type_list:string[]=['Građevina','Tekstil','Vozni park','Tehnologija']
+  type_list: string[] = ['Građevina', 'Tekstil', 'Vozni park', 'Tehnologija']
 
   url_doc = `${DOC_URL}`;
   url_proposal_doc = `${DOC_PROPOSAL_URL}`;
@@ -35,8 +36,8 @@ export class TenderDetailComponent implements OnInit {
   fed: string;
   city: string;
 
-  constructor(private tenderService: TenderService, private route: ActivatedRoute, private userService: UserService, private modelChat: ModalService) { }
- 
+  constructor(private tenderService: TenderService, private route: ActivatedRoute, private userService: UserService, private modelChat: ModalService, private deviceService: DeviceDetectorService, private router: Router) { }
+
   ngOnInit(): void {
 
     const user = localStorage.getItem('iduser');
@@ -48,7 +49,7 @@ export class TenderDetailComponent implements OnInit {
       if (param['idtender']) {
         this.tenderService.getById(param['idtender']).subscribe(t => {
           this.tender = t;
-         
+
           const role = localStorage.getItem('role');
           if (role) {
             this.id_current_role = JSON.parse(role);
@@ -121,7 +122,7 @@ export class TenderDetailComponent implements OnInit {
 
   getProposals() {
 
-    this.tenderService.getProposalList(this.tender.idtender).subscribe(t => {     
+    this.tenderService.getProposalList(this.tender.idtender).subscribe(t => {
       this.tenderProposal = t;
     });
 
@@ -156,10 +157,29 @@ export class TenderDetailComponent implements OnInit {
 
   }
 
-  emitSeller(idseller: number) {
-    console.log("idseller: " + idseller);
-    this.modelChat.openChat(idseller);    
-  }
+  // emitSeller(idseller: number) {
+  //   console.log("idseller: " + idseller);
+  //   this.modelChat.openChat(idseller);    
+  // }
 
+  emitSeller(idseller: number) {
+
+    const isDesktopDevice = this.deviceService.isDesktop();
+
+    if (isDesktopDevice) {
+
+      this.modelChat.openChat(0);
+
+      setTimeout(() => {
+        this.modelChat.openChat(idseller);
+      }, 0);
+
+    } else {
+
+      this.router.navigate(['/chat2/sendmsg/' + idseller]);
+
+    }
+
+  }
 
 }

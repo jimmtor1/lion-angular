@@ -1,0 +1,40 @@
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-12 col-sm-8">
+            <router-outlet></router-outlet>
+        </div>
+        <div class="col-12 col-sm-4">
+
+            <div class="card text-center">
+                <div class="card-body">
+                    <fa-icon [icon]="['fas','coins']" style="font-size: 2em;"></fa-icon>
+                    <h4 class="card-title">{{coinsQuantity}}</h4>  
+                    
+                    <div class="row bg-light mt-4 py-3">
+                                
+                        <div class="col text-center">                           
+                            <a routerLink="/buycoin" class="btn btn-dark d-block rounded-pill">
+                                <fa-icon [icon]="['fas','circle-plus']" class="mx-2"></fa-icon>
+                                add coins
+                            </a>
+                        </div>
+                        
+                        <div class="col text-center">
+                            <a class="btn btn-danger d-block rounded-pill" routerLink="promotions">                                        
+                                <fa-icon [icon]="['fas','list-check']" class="mx-2"></fa-icon>
+                                coin record
+                            </a> 
+                        </div>                                
+
+                    </div>
+                    
+                    
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>  
+</div>
