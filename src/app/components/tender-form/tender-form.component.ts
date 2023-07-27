@@ -98,7 +98,10 @@ export class TenderFormComponent {
         } else {
           this.router.navigate(['paneluser/tenders']);
         }        
-      }, error => console.log(error));
+      }, error => {
+        console.log(error);
+        this.saving = false;
+      });
 
     }else{
       this.mandatory=true;

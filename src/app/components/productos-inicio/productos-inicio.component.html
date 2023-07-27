@@ -7,22 +7,6 @@
     <p *ngIf="!sellers">Nema firmi za prikaz</p>
     <div class="d-flex overflow-auto flex-nowrap">
 
-        <!-- <div *ngFor="let s of categoryWithSellers[0].sellers" class="mx-1">
-            <div class="card h-100" style="width: 16rem;">
-                <img src="{{urlprof_img}}{{s.image}}" style="height: 150px;" class="card-img-top" alt="...">
-                <hr class="m-0 p-0">
-                <div class="card-body m-0 pb-0">
-                    <h6 class="card-title mt-0">{{s.companyName}}</h6>  
-                              
-                    <p class="m-0">{{get_city(s.user.city)}}</p>
-                    <p style="overflow: hidden; max-height: 2em; line-height: 1;" class="text-muted fs-6">
-                        {{s.biography}}
-                    </p>
-                    <a routerLink="/provider/{{s.user.id}}" class="stretched-link m-0 p-0"></a>
-                </div>
-            </div>
-        </div> -->
-
         <div *ngFor="let s of sellers" class="mx-1">
             <div class="card h-100" style="width: 16rem;">
                 
@@ -48,7 +32,7 @@
 
 </div>
 
-<h4 class="text-center text-danger mb-0">{{categoryNames[4]}}</h4>
+<h4 class="text-center text-danger mb-0">Svi proizvodi / Usluge</h4>
 <hr class="mt-1">
 
 <p *ngIf="products.length==0">Nema proizvoda za prikaz</p>
@@ -56,11 +40,14 @@
 <!-- <div class="d-flex flex-wrap justify-content-center"> -->
 <div class="row g-2">
     <!-- class="mx-1 mb-1" -->
-    <div class="col-6 col-sm-4 col-md-2" *ngFor="let product of products">
+    <div class="col-6 col-sm-4 col-md-3 col-lg-2" *ngFor="let product of products">
         <!-- style="width: 13rem;" -->
         <div class="card h-100 mx-0">
-            <img src="{{urlprod_img}}{{product.productImageList[0].idimage}}{{product.productImageList[0].extension}}"
+            <div class="position-relative">
+                <img src="{{urlprod_img}}{{product.productImageList[0].idimage}}{{product.productImageList[0].extension}}"
                 style="height: 200px; object-fit: contain;" class="card-img-top" alt="...">
+                <span *ngIf="product.promoteActive" class="badge bg-primary w-50 position-absolute bottom-0 end-0">IZDVOJENO</span>
+            </div>            
             <hr class="m-0">
             <div class="card-body py-1">
                 <h6 class="card-title">{{product.productName}}</h6>

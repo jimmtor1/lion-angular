@@ -16,15 +16,6 @@
                     autocomplete="email" value="">
             </div>
 
-
-
-            <!-- <div class="mb-3">
-                <label for="reg_password">Šifra&nbsp;<span class="form-label">*</span></label>
-                <input type="password" class="form-control" name="reg_password" id="reg_password"
-                    [(ngModel)]="user.password">
-            </div> -->
-
-
             <div class="row mb-3 g-3">
 
                 <div class="col-12 col-sm-6">
@@ -40,20 +31,6 @@
                 </div>
 
             </div>
-
-            <!-- <div class="split-row form-row-wide"> -->
-            <!-- <p class="form-row form-group">
-                    <label for="first-name">Ime<span class="required">*</span></label>
-                    <input type="text" class="input-text form-control" name="fname" id="first-name" value=""
-                        required="required" [(ngModel)]="user.firstName">
-                </p>
-
-                <p class="form-row form-group">
-                    <label for="last-name">Prezime<span class="required">*</span></label>
-                    <input type="text" class="input-text form-control" name="lname" id="last-name" value=""
-                        required="required" [(ngModel)]="user.lastName">
-                </p> -->
-            <!-- </div> -->
 
 
             <div class="row mb-3 g-3">
@@ -91,11 +68,11 @@
                         [(ngModel)]="user.password">
                 </div>
                 <div class="col-12 col-sm-6">
-                    <label for="conf_password">Potvrda Šifra&nbsp;<span class="form-label">*</span></label>
+                    <label for="conf_password">Ponovo unesite šifru&nbsp;<span class="form-label">*</span></label>
                     <input type="password" class="form-control" name="conf_password" id="conf_password"
                         [(ngModel)]="pw_confirm">
                 </div>
-                <!-- *ngIf="pw_different" -->
+
                 <div *ngIf="pw_different" class="col-12">
                     <p class="bg-warning p-0 m-0">Šifra su različite</p>
                 </div>
@@ -129,27 +106,22 @@
             <div class="mt-3">
                 <p> Vaši lični podaci će se koristiti za podršku vašem iskustvu na ovoj web stranici, za upravljanje
                     pristupom vašem računu i u druge svrhe opisane u našim
-                    <a href="" class="woocommerce-privacy-policy-link" target="_blank">pravila o privatnosti</a>.
+                    <a routerLink="/privacy" class="woocommerce-privacy-policy-link" target="_blank">pravila o
+                        privatnosti</a>.
                 </p>
             </div>
 
 
             <input type="submit" name="register" value="Registracija" data-bs-target="#exampleModal"
-                class="btn btn-danger">
-
-
-            <div class="mt-3">
-                <h3>Prijavite se danas i moći ćete:</h3>
-                <ul>
-                    <li>Ubrzajte svoj put do naplate</li>
-                    <li> Lako pratite svoje narudžbe</li>
-                    <li>Vodite evidenciju o svim vašim kupovinama</li>
-                </ul>
-            </div>
+                class="btn btn-danger rounded-pill">
         </form>
 
     </div>
 
+    <br>
+    <br>
+    <br>
+    <br>
 
 </div>
 
@@ -177,4 +149,5 @@
 
         </div>
     </div>
+
 </div>

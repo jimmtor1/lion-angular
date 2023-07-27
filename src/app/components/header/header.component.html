@@ -1,4 +1,4 @@
-<!-- <header> -->   
+<!-- <header> -->
 <!-- computer -->
 <div *ngIf="(isMobile$ | async) === false" class="container">
     <div class="row align-items-center">
@@ -9,7 +9,7 @@
             </a>
         </div>
 
-        <div class="col-6">
+        <div class="col-5">
 
             <form class="d-flex">
                 <input class="form-control border border-2 border-danger search-input" type="search"
@@ -22,16 +22,58 @@
 
         </div>
 
-        <div class="col-3">
-            <div class="row">
+        <div class="col-4">
+
+            <div class="d-flex justify-content-end">
+
+                <a (click)="panelredirect()" style="text-decoration: none; cursor: pointer; max-width: 80px;" class="col text-danger text-center">
+                    <!-- <i class="fa fa-user-o fs-5"></i> -->
+                    <fa-icon [icon]="['fas', 'user']" style="font-size: 1.1em"></fa-icon>
+                    <p class="small text-dark text-nowrap overflow-hidden text-truncate">{{email}}</p>
+                </a>
+
+                <a *ngIf="role == 2" routerLink="/promotions/promotions" style="text-decoration: none;max-width: 80px;"
+                    class="text-danger text-center col mx-1">
+                    <fa-icon [icon]="['fas', 'coins']" style="font-size: 1.1em"></fa-icon>
+                    <p class="small text-dark">Kredit</p>
+                </a>
+
+                <a *ngIf="role == 2" routerLink="/panelseller/product" style="text-decoration: none;max-width: 80px;"
+                    class="text-danger text-center col mx-1">
+                    <fa-icon [icon]="['fas', 'store']" style="font-size: 1.1em"></fa-icon>
+                    <p class="small text-dark">Objavi</p>
+                </a>
+
+                <a *ngIf="!role" routerLink="register" style="text-decoration: none; cursor: pointer; max-width: 80px;"
+                    class="text-danger col text-center">
+                    <!-- <i class="fa fa-user-o fs-5"></i> -->
+                    <fa-icon [icon]="['fas', 'user-plus']" style="font-size: 1.1em"></fa-icon>
+                    <p class="small text-dark text-nowrap overflow-hidden text-truncate">Registracija</p>
+                </a>
+
+                <a *ngIf="role" (click)="show_chats()" class="col text-danger position-relative text-center "
+                    style="text-decoration: none; cursor: pointer; max-width: 80px;">
+
+                    <fa-icon [icon]="['fas', 'comment']" style="font-size: 1.1em"></fa-icon>
+                    <span *ngIf="msg_alert" style="font-size: 0.4em;"
+                        class="col position-absolute top-0 start-25 translate-middle badge rounded-pill bg-primary">
+                        {{msg_alert}}
+                    </span>
+                    <p class="small text-dark">Poruke</p>
+                </a>
+
+            </div>
+
+            <!-- <div class="row">
 
                 <div class="col-4 text-center">
 
                     <a (click)="panelredirect()" style="text-decoration: none; cursor: pointer;" class="text-danger">
-                        <!-- <i class="fa fa-user-o fs-5"></i> -->
                         <fa-icon [icon]="['fas', 'user']" style="font-size: 1.1em"></fa-icon>
                         <p class="small text-dark text-nowrap overflow-hidden text-truncate">{{email}}</p>
                     </a>
+
+
 
                 </div>
 
@@ -43,36 +85,32 @@
                         <p class="small text-dark">Objavi</p>
                     </a>
 
-                    <a *ngIf="!role" routerLink="register" style="text-decoration: none; cursor: pointer;" class="text-danger">
-                        <!-- <i class="fa fa-user-o fs-5"></i> -->
+                    <a *ngIf="!role" routerLink="register" style="text-decoration: none; cursor: pointer;"
+                        class="text-danger">
+                      
                         <fa-icon [icon]="['fas', 'user-plus']" style="font-size: 1.1em"></fa-icon>
                         <p class="small text-dark text-nowrap overflow-hidden text-truncate">Registracija</p>
                     </a>
 
-                    <!-- <a *ngIf="role < 2" (click)="direction()" class="text-danger"
-                        style="text-decoration: none; cursor: pointer;">
-                        <fa-icon [icon]="['fas', 'shopping-cart']" style="font-size: 1.1em"></fa-icon>
-                        <p class="small text-dark">Košarica</p>
-                    </a> -->
-
-
-
+                 
                 </div>
 
                 <div class="col-4 text-center ">
-                    
-                    <a *ngIf="role" (click)="show_chats()" class="text-danger position-relative" style="text-decoration: none; cursor: pointer;">
-                        
+
+                    <a *ngIf="role" (click)="show_chats()" class="text-danger position-relative"
+                        style="text-decoration: none; cursor: pointer;">
+
                         <fa-icon [icon]="['fas', 'comment']" style="font-size: 1.1em"></fa-icon>
-                        <span *ngIf="msg_alert" style="font-size: 0.4em;" class="position-absolute top-0 start-25 translate-middle badge rounded-pill bg-primary">
-                            {{msg_alert}}                           
+                        <span *ngIf="msg_alert" style="font-size: 0.4em;"
+                            class="position-absolute top-0 start-25 translate-middle badge rounded-pill bg-primary">
+                            {{msg_alert}}
                         </span>
                         <p class="small text-dark">Poruke</p>
                     </a>
 
                 </div>
 
-            </div>
+            </div> -->
 
         </div>
 
@@ -107,14 +145,17 @@
         <div class="col-3">
             <div class="row">
 
-                <div class="col-4 d-flex justify-content-center" [ngStyle]="role ? {'border-right': '1px solid black'} : {'border-right': 'none'}" style="border-right: 1px solid black;">
-                    <a (click)="panelredirect()" style="text-decoration: none; cursor: pointer;" class="text-danger bg-light">
+                <div class="col-4 d-flex justify-content-center"
+                    [ngStyle]="role ? {'border-right': '1px solid black'} : {'border-right': 'none'}"
+                    style="border-right: 1px solid black;">
+                    <a (click)="panelredirect()" style="text-decoration: none; cursor: pointer;"
+                        class="text-danger bg-light">
                         <fa-icon [icon]="['fas', 'user']" style="font-size: 1.1em"></fa-icon>
                     </a>
                 </div>
 
                 <!-- [ngStyle]="role ? {'border-right': '1px solid black'} : {'border-right': 'none'}" -->
-                <div class="col-4 d-flex justify-content-center" >
+                <div class="col-4 d-flex justify-content-center">
                     <!-- <a *ngIf="role < 2" (click)="direction()" style="text-decoration: none;"  class="text-danger">
                         <fa-icon [icon]="['fas', 'shopping-cart']" style="font-size: 1.1em"></fa-icon>
                     </a> -->

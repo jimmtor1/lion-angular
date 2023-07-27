@@ -9,10 +9,10 @@
             </div>
             <div class="card-body">
 
-                <div (click)="getChats(m.idChat)" class="chat" [ngClass]="{'selectedChat':activeChat==m.idChat}"
+                <div (click)="getChats(m.idchat)" class="chat" [ngClass]="{'selectedChat':activeChat==m.idchat}"
                     *ngFor="let m of LastMessageEachChat">
                     <div class="d-flex justify-content-between">
-                        <span>{{m.sender.id==thisidUser?m.receiver.firstName+m.receiver.lastName:m.sender.firstName+m.sender.lastName}}</span>
+                        <span>name here</span>
 
                         <span style="font-size: small;">{{m.dateTime | date: 'dd.MM.yyyy'}}</span>
                     </div>
@@ -36,7 +36,7 @@
             </div>
             <div class="card-body" style="overflow-y: auto;" #messageContainer>
 
-                <div class="d-flex" [ngClass]="{'justify-content-end': m.sender.id==thisidUser}"
+                <div class="d-flex" [ngClass]="{'justify-content-end': m.sender==thisidUser}"
                     *ngFor="let m of chatMessages">
                     <p class="p-2 bg-dark text-white rounded-pill">
                         {{m.content}} &nbsp; <span style="font-size: small;">{{m.dateTime | date: 'hh:mm'}}</span>

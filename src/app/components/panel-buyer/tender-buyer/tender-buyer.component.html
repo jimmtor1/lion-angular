@@ -1,7 +1,7 @@
 <div class="container mt-2">
 
     <div class="d-flex justify-content-end mb-1">
-        <button routerLink="/paneluser/newtender" class="btn btn-secondary btn-sm">Novi tender</button>                    
+        <button routerLink="/paneluser/newtender" class="btn btn-secondary btn-sm">Novi tender</button>
     </div>
 
     <div class="table-responsive">
@@ -33,10 +33,9 @@
                     </td>
 
                     <td>
-                        <a routerLink="/paneluser/tenderDetail/{{tender.idtender}}" class="btn btn-dark "
-                            style="margin-right: 5px;">
-                            Detalji
-                            <fa-icon [icon]="['fas', 'circle-info']" class="fs-5"></fa-icon>
+                        <a routerLink="/paneluser/tenderDetail/{{tender.idtender}}"
+                            class="btn btn-dark btn-sm rounded-pill">
+                            Detalji                            
                         </a>
 
                     </td>
@@ -45,4 +44,5 @@
         </table>
 
     </div>
+ 
 </div>

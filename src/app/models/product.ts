@@ -16,5 +16,6 @@ export class Product {
     creationDate:Date; 
     productImageList:ProductImage[];
     promotedTo:Date;
+    promoteActive: boolean;
 
 }

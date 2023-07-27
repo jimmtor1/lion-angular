@@ -16,14 +16,12 @@ import { LoginFormComponent } from './components/login-form/login-form.component
 import { ProductCategoryListComponent } from './components/product-category-list/product-category-list.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 import { ProductBuyerListComponent } from './components/product-buyer-list/product-buyer-list.component';
-// import { SellerCompanyFormComponent } from './components/seller-company-form/seller-company-form.component';
-// import { SellerDetailComponent } from './components/seller-detail/seller-detail.component';
 import { BuyerListComponent } from './components/buyer-list/buyer-list.component';
 import { SellerListComponent } from './components/seller-list/seller-list.component';
 import { SellerSocialnetworkComponent } from './components/seller-socialnetwork/seller-socialnetwork.component';
 import { SubcategoryListComponent } from './components/subcategory-list/subcategory-list.component';
 
-import { faAddressBook, faAddressCard, faArrowLeft, faArrowsRotate, faBars, faBasketShopping, faBox, faBoxOpen, faBriefcase, faBuilding, faBuildingCircleExclamation, faCalendar, faCheckSquare, faCircleMinus, faCirclePlus, faCircleUser, faClose, faCoins, faComment, faEnvelope, faEye, faFile, faFileArrowDown, faHandHoldingMedical, faHandshake, faHeadset, faHome, faLaptop, faListCheck, faLocationDot, faMagnifyingGlass, faMinus, faMobilePhone, faNewspaper, faPaperPlane, faPencil, faRectangleAd, faRightFromBracket, faRocket, faShareNodes, faShirt, faShoppingCart, faSignOut, faStore, faTag, faTrash, faUser, faUserPlus, faUsers, faWindowMaximize, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faAddressBook, faAddressCard, faArrowLeft, faArrowsRotate, faBars, faBasketShopping, faBox, faBoxOpen, faBriefcase, faBuilding, faBuildingCircleExclamation, faCalendar, faCheckSquare, faSquareXmark, faCircleMinus, faCirclePlus, faCircleUser, faClose, faCoins, faComment, faEnvelope, faEye, faFile, faFileArrowDown, faHandHoldingMedical, faHandshake, faHeadset, faHome, faLaptop, faListCheck, faLocationDot, faMagnifyingGlass, faMinus, faMobilePhone, faNewspaper, faPaperPlane, faPencil, faRectangleAd, faRightFromBracket, faRocket, faShareNodes, faShirt, faShoppingCart, faSignOut, faStore, faTag, faTrash, faUser, faUserPlus, faUsers, faWindowMaximize, faXmark, faClock } from '@fortawesome/free-solid-svg-icons';
 import { faFacebook, faInstagram, faYoutube } from '@fortawesome/free-brands-svg-icons';
 import { ViewProviderToClienteComponent } from './components/view-provider-to-cliente/view-provider-to-cliente.component';
 import { SellerCategoryListComponent } from './components/seller-category-list/seller-category-list.component';
@@ -41,6 +39,9 @@ import { NavbarGeneralPhoneComponent } from './components/navbar-general-phone/n
 import { AuthInterceptor } from './auth.interceptor';
 import { MarketingComponent } from './marketing/marketing.component';
 import { PromotionsComponent } from './modules/promotions/promotions.component';
+import { PrivacyPageComponent } from './components/privacy-page/privacy-page.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { ResetEmailSentComponent } from './components/reset-email-sent/reset-email-sent.component';
 
 
 
@@ -73,7 +74,10 @@ import { PromotionsComponent } from './modules/promotions/promotions.component';
     ChatMiniComponent,
     NavbarGeneralPhoneComponent,
     MarketingComponent,
-    PromotionsComponent
+    PromotionsComponent,
+    PrivacyPageComponent,
+    ResetPasswordComponent,
+    ResetEmailSentComponent
   ],
   imports: [
     BrowserModule,
@@ -96,7 +100,7 @@ export class AppModule {
   
 
   constructor(library: FaIconLibrary) {
-    library.addIcons(faShirt, faBuilding, faHome, faLaptop, faShoppingCart, faMagnifyingGlass, faUser, faSignOut, faStore, faFacebook, faInstagram, faYoutube, faHandshake, faHeadset, faHandHoldingMedical, faTag, faRectangleAd, faShareNodes, faRightFromBracket, faUsers, faBuildingCircleExclamation, faAddressCard, faBasketShopping, faTrash, faLocationDot, faMobilePhone, faEnvelope, faBriefcase, faAddressBook, faListCheck, faFile, faBars, faCalendar, faFileArrowDown, faCheckSquare, faNewspaper, faBoxOpen, faArrowsRotate,faBox, faComment, faCircleUser, faPaperPlane, faMinus, faClose, faXmark, faArrowLeft, faWindowMaximize, faUserPlus, faCirclePlus, faCircleMinus, faRocket, faCoins, faPencil, faEye);
+    library.addIcons(faShirt, faBuilding, faHome, faLaptop, faShoppingCart, faMagnifyingGlass, faUser, faSignOut, faStore, faFacebook, faInstagram, faYoutube, faHandshake, faHeadset, faHandHoldingMedical, faTag, faRectangleAd, faShareNodes, faRightFromBracket, faUsers, faBuildingCircleExclamation, faAddressCard, faBasketShopping, faTrash, faLocationDot, faMobilePhone, faEnvelope, faBriefcase, faAddressBook, faListCheck, faFile, faBars, faCalendar, faFileArrowDown, faCheckSquare, faSquareXmark, faNewspaper, faBoxOpen, faArrowsRotate,faBox, faComment, faCircleUser, faPaperPlane, faMinus, faClose, faXmark, faArrowLeft, faWindowMaximize, faUserPlus, faCirclePlus, faCircleMinus, faRocket, faCoins, faPencil, faEye, faClock);
   }
 
 }

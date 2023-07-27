@@ -22,22 +22,22 @@
     <hr class="mb-0 mt-2">
 
     <!-- messages: -->
-    <div class="overflow-auto flex-grow-1" style="overflow-y: auto;" #messageContainer (scroll)="onScroll($event)">
+    <div class="overflow-auto flex-grow-1" style="overflow-y: auto;" #messageContainer (scroll)="onScroll()">
         <div *ngIf="isLoading" class="text-center mt-2">
             <div class="spinner-grow text-danger" role="status">
                 <span class="visually-hidden">Loading...</span>
             </div>
         </div>
 
-        <div *ngFor="let m of chatGroups">
-            <span class="text-muted text-center d-block my-3 text-decoration-underline">{{m.date | date: 'dd.MM.yyyy'}}</span>
+        <div *ngFor="let m of dateOrder">
+            <span class="text-muted text-center d-block my-3 text-decoration-underline">{{m | date: 'dd.MM.yyyy'}}</span>
             <!-- <h2>{{ m.date | date: 'dd/MM/yyyy' }}</h2> -->
             <!-- <div *ngFor="let chat of m.chats">
                 <div>{{ chat.dateTime | date: 'HH:mm' }}  {{ chat.content }}</div>
             </div> -->
-            <div *ngFor="let m of m.chats" class="d-flex" [ngClass]="{'justify-content-end': m.sender.id==thisidUser}">
-                <p [ngClass]="m.sender.id==thisidUser ? 'bg-dark' : 'bg-secondary'"
-                    class="p-2 m-1 text-white rounded-pill text-break" style="max-width: 78%;">{{m.content}} &nbsp;
+            <div *ngFor="let m of chatGroups2.get(m)" class="d-flex" [ngClass]="{'justify-content-end': m.sender==thisidUser}">
+                <p [ngClass]="m.sender==thisidUser ? 'bg-dark' : 'bg-secondary'"
+                    class="p-2 m-1 text-white rounded-pill text-break" style="max-width: 85%;">{{m.content}} &nbsp;
                     <span style="font-size: smaller;">{{m.dateTime | date: 'HH:mm'}}</span>
                 </p>
             </div>

@@ -25,4 +25,8 @@ export class PromotionsService {
     return this.http.get<Coin[]>(this.baseUrl + 'promotions/' + iduser + '/' + page);
   }
 
+  getAllCoins(page:number):Observable<Coin[]>{
+    return this.http.get<Coin[]>(this.baseUrl + 'promotions/' + page);
+  }
+
 }

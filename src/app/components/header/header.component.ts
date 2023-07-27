@@ -42,15 +42,15 @@ export class HeaderComponent {
       this.websocketService._connect();
     }
 
-    // this.websocketService.msgState$.subscribe(a => {
-    //   // if (!this.showChats) {
-    //   //   this.msg_alert += 1;
-    //   // }     
-    //   if (!this.chatSercice.isChatOpened()) {
-    //     this.msg_alert += 1;
-    //     this.playNotificationSound();
-    //   }
-    // });
+    this.websocketService.msgState$.subscribe(a => {
+      // if (!this.showChats) {
+      //   this.msg_alert += 1;
+      // }     
+      if (!this.chatSercice.isChatOpened()) {
+        this.msg_alert += 1;
+        //this.playNotificationSound();
+      }
+    });
 
   }
 

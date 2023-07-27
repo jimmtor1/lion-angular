@@ -67,38 +67,8 @@ export class ProductFormComponent implements OnInit {
       this.router.navigate(['/login']);
     }
 
-
-
-
-
-
-    // this.route.params.subscribe(params => {
-
-    //   if (params['id'] == 0) {
-
-    //     this.getUserById(params['id']);
-    //     this.addTitle = true;
-
-    //   } else if (this.id > 0) {  
-
-    //     this.getUserById(this.id);
-    //   }
-    //  });
-
-    // const u = localStorage.getItem("iduser");
-    // if (u) {
-    //   this.iduser = JSON.parse(u);
-    //   this.sellerService.getById(this.iduser).subscribe(s => {
-    //     this.seller = s;
-
-    //     if(this.seller.accepted){
-
-    //       this.subcategoriesCombo2();
-    //     }        
-    //   });
-    // }    
-
   }
+  
 
   getProductById(id: number) {
     this.productService.getById(id).subscribe(bdproduct => {
@@ -297,16 +267,6 @@ export class ProductFormComponent implements OnInit {
   onDragOver(event: DragEvent) {
     event.preventDefault();
   }
-
-
-  // promote(){
-  //   const confirmacion = window.confirm("Are you sure to promote the article?");
-   
-  //   if (confirmacion) {
-            
-  //   } 
-
-  // }
 
 
 }

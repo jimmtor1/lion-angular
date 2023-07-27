@@ -37,7 +37,7 @@ export class SellerCategoryListComponent implements OnInit {
 
   private getProvidersFromSubcategory(): void {
     this.route.params.subscribe(params => {
-
+      this.loading = true;
       this.idcategory = parseInt(params['id']);
       this.category = this.categoryName[params['id'] - 1];
 
@@ -89,69 +89,69 @@ export class SellerCategoryListComponent implements OnInit {
     }, error => { this.loading = false });
   }
 
-  filter() {
+  // filter() {
 
-    if (this.idsubcategory > 0) {
+  //   if (this.idsubcategory > 0) {
 
-      if (this.idsubcategory > 0 && this.fed > 0 && this.city == 0) {
+  //     if (this.idsubcategory > 0 && this.fed > 0 && this.city == 0) {
 
-        this.providerService.getFilterSub(this.idsubcategory, this.fed, this.city).subscribe(p => {
-          this.sellers = p;
-          this.loading = false;
-        }, error => { this.loading = false });
+  //       this.providerService.getFilterSub(this.idsubcategory, this.fed, this.city).subscribe(p => {
+  //         this.sellers = p;
+  //         this.loading = false;
+  //       }, error => { this.loading = false });
 
-      } else if (this.idsubcategory > 0 && this.city > 0) {
+  //     } else if (this.idsubcategory > 0 && this.city > 0) {
 
-        this.providerService.getFilterSub(this.idsubcategory, 0, this.city).subscribe(p => {
-          this.sellers = p;
-          this.loading = false;
-        }, error => { this.loading = false });
+  //       this.providerService.getFilterSub(this.idsubcategory, 0, this.city).subscribe(p => {
+  //         this.sellers = p;
+  //         this.loading = false;
+  //       }, error => { this.loading = false });
 
-      } else if (this.idsubcategory > 0 && this.fed == 0 && this.city == 0) {
+  //     } else if (this.idsubcategory > 0 && this.fed == 0 && this.city == 0) {
 
-        this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-          this.router.navigateByUrl('providerSubcategoryList/' + this.idcategory + '/' + this.idsubcategory);
-        }, error => { this.loading = false });
+  //       this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+  //         this.router.navigateByUrl('providerSubcategoryList/' + this.idcategory + '/' + this.idsubcategory);
+  //       }, error => { this.loading = false });
 
-      }
-
-
-    } else {
-
-      if (this.idcategory > 0 && this.fed > 0 && this.city == 0) {
-
-        this.providerService.getFilterCat(this.idcategory, this.fed, this.city).subscribe(p => {
-          this.sellers = p;
-          this.loading = false;
-        }, error => { this.loading = false });
-
-      } else if (this.idcategory > 0 && this.city > 0) {
-
-        this.providerService.getFilterCat(this.idcategory, 0, this.city).subscribe(p => {
-          this.sellers = p;
-          this.loading = false;
-        }, error => { this.loading = false });
-
-      } else if (this.fed == 0 && this.city == 0) {
-
-        this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-          this.router.navigateByUrl('providerSubcategoryList/' + this.idcategory + '/0');
-        }, error => { this.loading = false });
-
-        // if(this.idcategory==0){
-
-        // }else{
-        //   this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-        //     this.router.navigateByUrl('providerSubcategoryList/' + this.idcategory + '/0');
-        //   }, error => { this.loading = false });
-        // }
+  //     }
 
 
-      }
+  //   } else {
 
-    }
+  //     if (this.idcategory > 0 && this.fed > 0 && this.city == 0) {
 
-  }
+  //       this.providerService.getFilterCat(this.idcategory, this.fed, this.city).subscribe(p => {
+  //         this.sellers = p;
+  //         this.loading = false;
+  //       }, error => { this.loading = false });
+
+  //     } else if (this.idcategory > 0 && this.city > 0) {
+
+  //       this.providerService.getFilterCat(this.idcategory, 0, this.city).subscribe(p => {
+  //         this.sellers = p;
+  //         this.loading = false;
+  //       }, error => { this.loading = false });
+
+  //     } else if (this.fed == 0 && this.city == 0) {
+
+  //       this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+  //         this.router.navigateByUrl('providerSubcategoryList/' + this.idcategory + '/0');
+  //       }, error => { this.loading = false });
+
+  //       // if(this.idcategory==0){
+
+  //       // }else{
+  //       //   this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+  //       //     this.router.navigateByUrl('providerSubcategoryList/' + this.idcategory + '/0');
+  //       //   }, error => { this.loading = false });
+  //       // }
+
+
+  //     }
+
+  //   }
+
+  // }
 
   newpage() {
     this.loadingnewpage = true;

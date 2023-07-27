@@ -21,8 +21,7 @@ export class ProductService {
     return this.httpClient.get<Product[]>(this.URL);
   }
 
-  getAllByCategory(idcategory: number, idsubcategory: number): Observable<Product[]> {
-    console.log("idcategory "+idcategory)
+  getAllByCategory(idcategory: number, idsubcategory: number): Observable<Product[]> {    
     return this.httpClient.get<Product[]>(`${this.URL}/category/${idcategory}/${idsubcategory}`);
   }
 
@@ -76,8 +75,12 @@ export class ProductService {
     return this.httpClient.put<any>(`${this.URL}/w`, producImage);
   }
 
-  promote(form:FormData):Observable<boolean>{
-    return this.httpClient.post<boolean>(`${this.URL}/promote`, form);
+  promote(form:FormData):Observable<number>{
+    return this.httpClient.post<number>(`${this.URL}/promote`, form);
+  }
+
+  removePromotion(id:number):Observable<Product>{
+    return this.httpClient.get<Product>(`${this.URL}/promotion/${id}/remove`);
   }
 
 

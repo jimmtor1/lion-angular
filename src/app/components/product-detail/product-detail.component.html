@@ -39,12 +39,16 @@
                 <div class="card-body">
 
                     <div class="card border-light mb-3 big">
+
                         <div class="card-header fs-3">{{product.productName}}</div>
                         <div class="card-body">
-                         
-                            <span *ngIf="promoted && iduser==product.idprovider" class="badge rounded-pill bg-primary mb-2">Artikal izdvojen do {{product.promotedTo | date: 'dd.MM.yy HH:mm'}}</span>
-                            <span *ngIf="promoted && iduser!==product.idprovider" class="badge rounded-pill bg-primary mb-2">IZDVOJENO</span>
-                            
+
+                            <span *ngIf="promoted && iduser==product.idprovider"
+                                class="badge rounded-pill bg-primary mb-2">Artikal izdvojen do {{product.promotedTo |
+                                date: 'dd.MM.yy HH:mm'}}</span>
+                            <span *ngIf="promoted && iduser!==product.idprovider"
+                                class="badge rounded-pill bg-primary mb-2">IZDVOJENO</span>
+
                             <p class="card-text">
                                 {{product.description}}
                             </p>
@@ -59,30 +63,42 @@
                             </p>
                             <p *ngIf="seller.user.federation!=null">Grad: {{city}}</p>
 
-                            <a *ngIf="iduser!==product.idprovider" (click)="emitSeller(seller.user.id);" class="btn btn-danger">
+                            <a *ngIf="iduser!==product.idprovider" (click)="emitSeller(seller.user.id);"
+                                class="btn btn-danger">
                                 <fa-icon [icon]="['fas','comment']"></fa-icon>
                                 Pošaljite poruku
                             </a>
 
                             <div *ngIf="iduser==product.idprovider" class="row bg-light mt-4 py-3">
-                                
+
                                 <div class="col text-center">
-                                    <a class="btn btn-danger d-block" routerLink="/promotions/{{product.idproduct}}/promote">
+                                    <a class="btn btn-danger d-block"
+                                        routerLink="/promotions/{{product.idproduct}}/promote">
                                         <fa-icon [icon]="['fas','rocket']" class="mx-2"></fa-icon>
                                         Izdvoji
-                                    </a> 
+                                    </a>
                                 </div>
-                                
+
                                 <div class="col text-center">
-                                    <a class="btn btn-dark d-block" routerLink="/panelseller/product/{{product.idproduct}}">                                        
+                                    <a class="btn btn-dark d-block"
+                                        routerLink="/panelseller/product/{{product.idproduct}}">
                                         <fa-icon [icon]="['fas','pencil']" class="mx-2"></fa-icon>
-                                        Edit
-                                    </a> 
-                                </div>                                
+                                        Izmijeni
+                                    </a>
+                                </div>
 
                             </div>
 
-                              
+                            <div *ngIf="idrole==3 && promoted" class="row bg-light mt-4 py-3">
+
+                                <div class="col text-center">
+                                    <a class="btn btn-dark " (click)="del()">
+                                        <fa-icon [icon]="['fas','trash']" class="mx-2"></fa-icon>
+                                        Ukloni izdvajanje
+                                    </a>
+                                </div>
+
+                            </div>
 
                         </div>
                     </div>
@@ -98,35 +114,177 @@
 
     <!-- Seller information -->
     <div class="border border-danger rounded-2 p-2">
-        <!-- <a [routerLink]="['/sellerDetail', product.idprovider]"> -->
-        <p class="h4 text-danger">Informacije o firmi</p>
-        <!-- </a>         -->
 
-        <p>Ime firme: {{seller.companyName}}</p>
+        <div class="row">
 
-        <p>Prodavač:
-            <a [routerLink]="['/provider', product.idprovider]"> {{seller.user.firstName}} {{seller.user.lastName}}</a>
-        </p>
+            <div class="col-12 col-sm-6">
 
-        <p>Adresa: {{seller.user.address}}</p>
-        <p>Broj telefona: {{seller.user.phone}}</p>
+                <p class="h4 text-danger">Informacije o firmi</p>
+
+                <p>Ime firme: {{seller.companyName}}</p>
+
+                <p>Prodavač:
+                    <a [routerLink]="['/provider', product.idprovider]"> {{seller.user.firstName}}
+                        {{seller.user.lastName}}</a>
+                </p>
+
+                <p>Adresa: {{seller.user.address}}</p>
+                <p>Broj telefona: {{seller.user.phone}}</p>
+
+                <p *ngIf="seller.showEmail">
+                    <fa-icon [icon]="['fas','envelope']"></fa-icon>
+                    {{seller.user.email}}
+                </p>
+
+                <ul>
+                    <li *ngIf="seller.facebook" class="list-group-item">                        
+                        <a href="{{seller.facebook}}">
+                            <fa-icon [icon]="['fab','facebook']"></fa-icon>
+                            {{seller.facebook}}
+                        </a>                        
+                    </li>
+                    <li *ngIf="seller.instagram" class="list-group-item">
+                        <a href="{{seller.instagram}}">
+                            <fa-icon [icon]="['fab','instagram']"></fa-icon>
+                            {{seller.facebook}}
+                        </a>                         
+                    </li>
+                    <li *ngIf="seller.youtube" class="list-group-item">
+                        <a href="{{seller.youtube}}">
+                            <fa-icon [icon]="['fab','youtube']"></fa-icon>
+                            {{seller.youtube}}
+                        </a> 
+                    </li>
+                </ul>
+
+            </div>
+
+            <div class="col-12 col-sm-6">
+                              
+                <b>Radno vrijeme</b>
+                <hr>
+                
+
+                <div class="row mb-1">
+
+                    <div class="col-4 col-md-2 d-flex">
+                        <fa-icon *ngIf="seller.monday" [icon]="['fas', 'check-square']" class="text-success"></fa-icon>
+                        <fa-icon *ngIf="!seller.monday" [icon]="['fas', 'square-xmark']" class="text-danger"></fa-icon>
+                        <label class="form-check-label" for="flexSwitchCheckDefault">Ponedjeljak</label>
+                    </div>
+                    
+                    <div class="col" style="margin-left: 20px;">
+                        <span class="badge rounded-pill bg-light text-dark">{{seller.timemonday}}</span> -
+                        <span class="badge rounded-pill bg-light text-dark">{{seller.endmonday}}</span>
+                    </div>
+                </div>
+
+                <div class="row mb-1">
+                    <div class="d-flex col-4 col-md-2">
+                        <fa-icon *ngIf="seller.tuesday" [icon]="['fas', 'check-square']" class="text-success"></fa-icon>
+                        <fa-icon *ngIf="!seller.tuesday" [icon]="['fas', 'square-xmark']" class="text-danger"></fa-icon>
+                        <label class="form-check-label" for="flexSwitchCheckChecked">Utorak</label>
+                    </div>
+                    <div class="col" style="margin-left: 20px;">
+                        <span class="badge rounded-pill bg-light text-dark">{{seller.timetuesday}}</span> -
+                        <span class="badge rounded-pill bg-light text-dark">{{seller.endtuesday}}</span>
+                    </div>
+                </div>
+
+                <div class="row mb-1">
+                    <div class="d-flex col-4 col-md-2">
+                        <fa-icon *ngIf="seller.wednesday" [icon]="['fas', 'check-square']"
+                            class="text-success"></fa-icon>
+                        <fa-icon *ngIf="!seller.wednesday" [icon]="['fas', 'square-xmark']"
+                            class="text-danger"></fa-icon>
+                        <label class="form-check-label" for="flexSwitchCheckDefault">Srijeda</label>
+                    </div>
+                    <div class="col" style="margin-left: 20px;">
+                        <span class="badge rounded-pill bg-light text-dark">{{seller.timewednesday}}</span> -
+                        <span class="badge rounded-pill bg-light text-dark">{{seller.endwednesday}}</span>
+                    </div>
+                </div>
+
+                <div class="row mb-1">
+                    <div class="d-flex col-4 col-md-2">
+                        <fa-icon *ngIf="seller.thursday" [icon]="['fas', 'check-square']"
+                            class="text-success"></fa-icon>
+                        <fa-icon *ngIf="!seller.thursday" [icon]="['fas', 'square-xmark']"
+                            class="text-danger"></fa-icon>
+                        <label class="form-check-label" for="flexSwitchCheckChecked">Četvrtak</label>
+                    </div>
+                    <div class="col" style="margin-left: 20px;">
+                        <span class="badge rounded-pill bg-light text-dark">{{seller.timethursday}}</span> -
+                        <span class="badge rounded-pill bg-light text-dark">{{seller.endthursday}}</span>
+                    </div>
+                </div>
+
+                <div class="row mb-1">
+                    <div class="d-flex col-4 col-md-2">
+                        <fa-icon *ngIf="seller.friday" [icon]="['fas', 'check-square']" class="text-success"></fa-icon>
+                        <fa-icon *ngIf="!seller.friday" [icon]="['fas', 'square-xmark']" class="text-danger"></fa-icon>
+                        <label class="form-check-label" for="flexSwitchCheckChecked">Petak</label>
+                    </div>
+                    <div class="col" style="margin-left: 20px;">
+                        <span class="badge rounded-pill bg-light text-dark">{{seller.timefriday}}</span> -
+                        <span class="badge rounded-pill bg-light text-dark">{{seller.endfriday}}</span>
+                    </div>
+                </div>
+
+                <div class="row mb-1">
+                    <div class="d-flex col-4 col-md-2">
+                        <fa-icon *ngIf="seller.saturday" [icon]="['fas', 'check-square']"
+                            class="text-success"></fa-icon>
+                        <fa-icon *ngIf="!seller.saturday" [icon]="['fas', 'square-xmark']"
+                            class="text-danger"></fa-icon>
+                        <label class="form-check-label" for="flexSwitchCheckChecked">Subota</label>
+                    </div>
+                    <div class="col" style="margin-left: 20px;">
+                        <span class="badge rounded-pill bg-light text-dark">{{seller.timesaturday}}</span> -
+                        <span class="badge rounded-pill bg-light text-dark">{{seller.endsaturday}}</span>
+                    </div>
+                </div>
+
+                <div class="row mb-1">
+                    <div class="d-flex col-4 col-md-2">
+                        <fa-icon *ngIf="seller.sunday" [icon]="['fas', 'check-square']" class="text-success"></fa-icon>
+                        <fa-icon *ngIf="!seller.sunday" [icon]="['fas', 'square-xmark']" class="text-danger"></fa-icon>
+                        <label class="form-check-label" for="flexSwitchCheckChecked">Nedjelja</label>
+                    </div>
+                    <div class="col" style="margin-left: 20px;">
+                        <span class="badge rounded-pill bg-light text-dark">{{seller.timesunday}}</span> -
+                        <span class="badge rounded-pill bg-light text-dark">{{seller.endsunday}}</span>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+
+
+        </div>
 
         <hr>
         <!-- seller image product list -->
         <p class="h5">Ostali proizvodi / usluge ovog korisnika</p>
-        <p></p>
         <hr>
+
         <div class="d-flex overflow-auto flex-nowrap">
 
             <div *ngFor="let product of producByProvider.slice(0,5)" class="mx-1">
                 <div class="mini card h-100" style="width: 13rem;">
-                    <img src="{{urlprod_img}}{{product.productImageList[0].idimage}}{{product.productImageList[0].extension}}"
-                        style="height: 200px;" class="card-img-top" alt="...">
+
+                    <div class="position-relative">
+                        <img src="{{urlprod_img}}{{product.productImageList[0].idimage}}{{product.productImageList[0].extension}}"
+                            style="height: 200px;" class="card-img-top" alt="...">
+                        <span *ngIf="product.promoteActive"
+                            class="badge bg-primary w-50 position-absolute bottom-0 end-0">IZDVOJENO</span>
+                    </div>
+
                     <hr class="m-0">
                     <div class="card-body py-1">
                         <h6 class="card-title">{{product.productName}}</h6>
-                        <!-- <p class="card-text mb-0" *ngIf="product.price==0"><b>Cijena po dogovoru</b></p>
-                        <p class="card-text mb-0" *ngIf="product.price>0"><b>{{product.price}} KM</b></p> -->
                         <a routerLink="../../addetails/{{product.idproduct}}" class="stretched-link m-0 p-0"></a>
                     </div>
                     <div class="d-flex card-footer bg-white justify-content-end" style="border-top: none;">

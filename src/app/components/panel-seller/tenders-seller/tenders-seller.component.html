@@ -17,6 +17,7 @@
 
             <div *ngIf="page=='tendertoapply'" class="row">
 
+                <!-- filter -->
                 <div class="col-12 mb-3">
                     <label for="project_name">Tip tendera</label>
                     <select (click)="filter()" [(ngModel)]="selectedType" name="filter" id="filter" class="form-select">
@@ -28,8 +29,7 @@
                     </select>
                 </div>
 
-                <!-- <p *ngIf="tenders" class="h4 my-3">Tenderi</p> -->
-
+                
                 <div class="col-12">
 
                     <div *ngIf="tenders">

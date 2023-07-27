@@ -48,6 +48,7 @@ export class TenderDetailComponent implements OnInit {
     this.route.params.subscribe(param => {
       if (param['idtender']) {
         this.tenderService.getById(param['idtender']).subscribe(t => {
+        
           this.tender = t;
 
           const role = localStorage.getItem('role');
@@ -57,6 +58,7 @@ export class TenderDetailComponent implements OnInit {
               this.get_already_offer();
               this.canOffer = true;
             } else if ((this.id_current_role !== 3 && this.id_current_user == this.tender.iduser) || this.id_current_role == 3) {
+              
               this.getProposals();
               this.canOffer = false;
             }
@@ -106,9 +108,11 @@ export class TenderDetailComponent implements OnInit {
   }
 
   get_already_offer() {
-
+    
     this.tenderService.confirmAlreadyPosted(this.tender.idtender, this.id_current_user).subscribe(t => {
+    
       if (t) {
+       
         this.already_offered = true;
         this.canOffer = false;
         this.tenderProposal.push(t);
@@ -122,7 +126,7 @@ export class TenderDetailComponent implements OnInit {
 
   getProposals() {
 
-    this.tenderService.getProposalList(this.tender.idtender).subscribe(t => {
+    this.tenderService.getProposalList(this.tender.idtender).subscribe(t => {      
       this.tenderProposal = t;
     });
 
@@ -157,10 +161,7 @@ export class TenderDetailComponent implements OnInit {
 
   }
 
-  // emitSeller(idseller: number) {
-  //   console.log("idseller: " + idseller);
-  //   this.modelChat.openChat(idseller);    
-  // }
+
 
   emitSeller(idseller: number) {
 
@@ -180,6 +181,14 @@ export class TenderDetailComponent implements OnInit {
 
     }
 
+  }
+
+  getCityProposal(iduser:number):string{
+    return select_city(iduser).name;
+  }
+
+  getFedProposal(iduser:number):string | undefined{
+    return select_fed(iduser)?.name;
   }
 
 }

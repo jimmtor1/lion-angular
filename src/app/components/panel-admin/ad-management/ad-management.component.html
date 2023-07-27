@@ -1,0 +1,42 @@
+<div class="container mt-2">
+
+    <div class="bg-light row py-3 mb-2">
+        <div class="col">
+            <input type="text" class="form-control" placeholder="name add">
+        </div>
+
+        <div class="col">
+            <input type="text" class="form-control" placeholder="name company">
+        </div>
+
+        <div class="col form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="promotedcheck" value="option1">
+            <label class="form-check-label" for="promotedcheck">Promoted</label>
+        </div>
+
+        <div class="col">
+            <button class="btn btn-danger">search</button>
+        </div>
+
+    </div>
+
+    <div class="list-group">
+        <div class="list-group-item bg-light" aria-current="true">
+            <h3 class="text-center">Ad List</h3>
+        </div>
+
+        <div class="list-group-item" aria-current="true" *ngFor="let product of products">
+            <div class="d-flex align-center">
+                <img src="{{imageurl}}{{product.productImageList[0].idimage}}{{product.productImageList[0].extension}}"
+                    class="img-fluid rounded-start" alt="..." style="height: 80px;">
+                <div class="w-100 d-flex">
+                    <h5 class="mx-2 h-25 my-auto">{{product.productName}}</h5>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+
+</div>

@@ -43,24 +43,24 @@
                             </td>
 
                             <td>                             
-                                <a routerLink="/paneladmin/tenderDetail/{{tender.idtender}}" class="btn btn-dark btn-sm" style="margin-right: 5px;">
+                                <a routerLink="/paneladmin/tenderDetail/{{tender.idtender}}" class="btn btn-dark btn-sm rounded-pill" style="margin-right: 5px;">
                                     Detalji
                                     <!-- <fa-icon [icon]="['fas', 'circle-info']" class="fs-5">
                                     </fa-icon> -->
                                 </a>
 
                          
-                                <a *ngIf="conf_att_button" (click)="confirmTender(tender.idtender)" class="btn btn-dark btn-sm" style="margin-right: 5px;"> 
+                                <a *ngIf="conf_att_button" (click)="confirmTender(tender.idtender)" class="btn btn-dark btn-sm rounded-pill" style="margin-right: 5px;"> 
                                     Potvrdi
                                     <!-- <fa-icon [icon]="['fas', 'check-square']" class="fs-5"></fa-icon> -->
                                 </a>
 
-                                <a *ngIf="conf_att_button" (click)="unauthorize(tender.idtender)" class="btn btn-dark btn-sm"> 
+                                <a *ngIf="conf_att_button" (click)="unauthorize(tender.idtender)" class="btn btn-dark btn-sm rounded-pill"> 
                                     Delete
                                     <!-- <fa-icon [icon]="['fas', 'check-square']" class="fs-5"></fa-icon> -->
                                 </a>
 
-                                <a *ngIf="!conf_att_button" routerLink="{{urlpdf}}/{{tender.idtender}}{{tender.document}}" target="_blank" class="btn btn-dark btn-sm"> 
+                                <a *ngIf="!conf_att_button" routerLink="{{urlpdf}}/{{tender.idtender}}{{tender.document}}" target="_blank" class="btn btn-dark btn-sm rounded-pill"> 
                                     Prilog
                                     <!-- <fa-icon [icon]="['fas', 'check-square']" class="fs-5"></fa-icon> -->
                                 </a>

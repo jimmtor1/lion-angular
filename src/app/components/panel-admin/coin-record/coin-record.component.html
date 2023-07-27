@@ -1,0 +1,77 @@
+<div class="container mt-2">
+    <!-- *ngIf="loading" -->
+   
+    <!-- *ngIf="!loading" -->
+    <div class="table-responsive border">
+
+        <div *ngIf="loading" class="text-center position-fixed top-50 start-50">
+            <div class="spinner-grow text-danger" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+
+        <table class="table table-striped" [ngClass]="{'bg-secondary': loading}">
+
+            <thead>
+                <tr>
+                    <th>Order Id</th>
+                    <th>Date</th>
+                    <th>Quantity</th>
+                    <th>Company Name</th>
+                    <th>Company ID</th>
+                    <th>Billing Company Name</th>
+                    <!-- <th>Actions</th> -->
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let coin of coinrecord">
+                    <th>{{coin.idcoin}}</th>
+                    <td>{{coin.buyDate | date: 'dd.MM.yyyy HH:mm'}}</td>
+                    <td><span [ngClass]="coin.quantity<0?'text-danger':'text-success'">{{coin.quantity}}</span></td>
+                    <td>{{coin.userR.companyName}}</td>
+                    <td>{{coin.userR.companyId}}</td>
+                    <td>{{coin.userR.billedTo}}</td>
+                    <!-- <td>                       
+                        <a class="btn btn-dark mx-1 btn-sm rounded-pill">button</a>
+                    </td> -->
+                </tr>
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <div class="d-flex justify-content-center">
+
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link border-danger text-dark" style="cursor: pointer;" (click)="previousPage()"
+                        aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li class="page-item"><a class="page-link border-danger text-dark" style="cursor: pointer;"
+                        [ngClass]="{'active': page==paginationNumbers[0]}"
+                        (click)="changePageLeft(paginationNumbers[0])">{{paginationNumbers[0]+1}}</a></li>
+                <li class="page-item"><a class="page-link border-danger text-dark" style="cursor: pointer;"
+                        [ngClass]="{'active': page==paginationNumbers[1]}"
+                        (click)="changePageMiddle(paginationNumbers[1])">{{paginationNumbers[1]+1}}</a></li>
+                <li class="page-item"><a class="page-link border-danger text-dark" style="cursor: pointer;"
+                        [ngClass]="{'active': page==paginationNumbers[2]}"
+                        (click)="changePageRight(paginationNumbers[2])">{{paginationNumbers[2]+1}}</a></li>
+
+                <li class="page-item">
+                    <a class="page-link border-danger text-dark" style="cursor: pointer;" (click)="nextPage()"
+                        aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+    </div>
+
+    <br>
+    <br>
+</div>

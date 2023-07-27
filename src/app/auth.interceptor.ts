@@ -14,30 +14,31 @@ export class AuthInterceptor implements HttpInterceptor {
   constructor(private router:Router) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    
+    console.log('interceptando')
     const token = localStorage.getItem("token");   
-    const exp = localStorage.getItem("exp");   
+    const exp = localStorage.getItem("exp"); 
+     
     if(token){
       
       if(exp){      
-
+       
         let now = parseInt(new Date().getTime().toString().substring(0, 10));
 
         if(now>=parseInt(exp)){
           alert("your session has expired");
           localStorage.clear();
-          this.router.navigate(['login']);
-          
+          this.router.navigate(['login']);          
         }
       }
       
-
-      const cloned = request.clone({
+      const cloned = request.clone({        
         headers: request.headers.set('Authorization', `Bearer ${token}`)
-      })
-      return next.handle(cloned)
-    }
+      });
+      console.log('interceptando ' + JSON.stringify(cloned))
+      return next.handle(cloned);
 
+    }
+   
     return next.handle(request);
   }
 }

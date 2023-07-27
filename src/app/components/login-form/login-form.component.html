@@ -5,8 +5,10 @@
 
         <form (ngSubmit)="login()">
             <div class="mb-3">
-                <label class="form-label" for="reg_email" style="font-weight: bold;">Korisničko ime ili email adresa&nbsp;<span class="form-label">*</span></label>                
-                <input required="" type="email" class="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp" [(ngModel)]="user.email">
+                <label class="form-label" for="reg_email" style="font-weight: bold;">Korisničko ime ili email
+                    adresa&nbsp;<span class="form-label">*</span></label>
+                <input required="" type="email" class="form-control" name="email" id="exampleInputEmail1"
+                    aria-describedby="emailHelp" [(ngModel)]="user.email">
                 <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
             </div>
             <div class="mb-3">
@@ -21,18 +23,24 @@
                     </div>
                     <div class="col d-flex justify-content-end">
                         <p>Nemate račun? &nbsp; &nbsp;</p>
-                        <a routerLink="../register" href="#">Registracija</a>
+                        <a routerLink="../register" style="cursor: pointer;">Registracija</a>
                     </div>
                 </div>
-                
-            </div>
+                <div class="d-flex justify-content-end">
+                    <a routerLink="/emailresetsend" >Zaboravili ste šifru?</a>
+                </div>
+            </div>  
 
             <div *ngIf="access==2" class="bg-warning text-center">
-                <p class="fw-bold" >netačni podaci</p>
+                <p class="fw-bold">Netačni podaci</p>
             </div>
+
+
 
             <button type="submit" class="btn btn-danger">Prijava</button>
         </form>
-        
+
     </div>
+    <br>
+    <br>
 </div>

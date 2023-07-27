@@ -1,0 +1,39 @@
+<div class="container">
+    <div class="card mx-auto mt-5" style="max-width: 600px;">
+        <div class="card-body">
+
+            <div *ngIf="!emailsent && !loading">
+                <!-- <h5 class="card-title">Reset password</h5> -->
+
+                <form (ngSubmit)="send()">
+                    <label for="email" style="font-weight: bold;">Unesite vaš email kako bismo vam poslali link za promjenu šifre:</label>
+                    <input type="email" name="email" id="email" class="form-control" [(ngModel)]="email">
+                    <div class="d-flex mt-3 justify-content-end">
+                        <input type="submit" class="btn btn-danger rounded-pill" value="Pošalji link">
+                    </div>
+                </form>
+
+            </div>
+
+            <div *ngIf="emailsent">
+                <h5>Poslali smo vam link na: {{email}}</h5>
+            </div>
+
+            <div *ngIf="not_found">
+                <h5>Izvinite, ovaj korisnik nije pronađen.</h5>
+            </div>
+
+
+            <div *ngIf="loading" class="text-center">
+                <div class="spinner-grow text-danger" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+    <br>
+    <br>
+</div>

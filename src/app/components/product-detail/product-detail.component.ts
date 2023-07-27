@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from 'src/app/models/product';
 import { Seller } from 'src/app/models/seller';
@@ -23,20 +23,22 @@ export class ProductDetailComponent implements OnInit {
   loading = true;
   promoted = false;
   iduser:number;
+  idrole:number;
+
+  @ViewChild('scrollable') messageContainer: ElementRef;
 
   urlprod_img = `${IMG_PRODUCT_URL}`;
+  
 
-  constructor(private productService: ProductService, private route: ActivatedRoute, private sellerService: SellerService, private modelChat: ModalService) {
-    // this.product = new Product();
-    // this.seller = new Seller();
-    // this.producByProvider = [];
-  }
+  constructor(private productService: ProductService, private route: ActivatedRoute, private sellerService: SellerService, private modelChat: ModalService) {}
 
   ngOnInit(): void {
 
     this.principalImage = "";
     this.route.params.subscribe(param => {
+     
       if (param['id'] != null) {
+        this.loading = true;
         this.productService.getById(param['id']).subscribe(result => {
           this.product = result;
           this.principalImage = this.urlprod_img + this.product.productImageList[0].idimage + this.product.productImageList[0].extension;
@@ -49,10 +51,9 @@ export class ProductDetailComponent implements OnInit {
           });
 
           this.productService.getAllByProvider(this.product.idprovider).subscribe(result => {
-            result.forEach(r => {
-              this.producByProvider.push(r);
-
-            })
+            //result.forEach(r => {
+              this.producByProvider = result;            
+            //})
           });
 
         })
@@ -63,6 +64,11 @@ export class ProductDetailComponent implements OnInit {
     let user = localStorage.getItem('iduser')
     if(user){
       this.iduser = parseInt(user);
+    }
+
+    let role = localStorage.getItem('role')
+    if(role){
+      this.idrole = parseInt(role);
     }
     
 
@@ -78,6 +84,21 @@ export class ProductDetailComponent implements OnInit {
 
   isPromoted(){    
     this.promoted = FunctionsService.isGreaterDate(this.product.promotedTo,new Date());    
+  }
+
+  del(){
+    if(this.idrole=3){
+
+      const confirm = window.confirm("Are you sure?");
+
+      if(confirm){
+        this.productService.removePromotion(this.product.idproduct).subscribe(p=>{
+          this.product = p;
+          this.isPromoted();
+        });
+      }
+      
+    }
   }
 
 }

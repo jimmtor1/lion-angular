@@ -19,7 +19,6 @@ export class ProductCategoryListComponent implements OnInit {
   subcategoryName: String = "Filteri";
   federations: federation[] = FEDERATIONS;
   citiesToCombo: any[] = [];
-  //fed: federation | null;
   fed: number = 0;
   city: number = 0;
   idsubcategory: number;
@@ -41,14 +40,13 @@ export class ProductCategoryListComponent implements OnInit {
   }
 
   getProductList(): void {
+    
     this.route.params.subscribe(params => {
      
       this.defaultcategory = params['def']
 
-      if (this.defaultcategory) {
-        
+      if (this.defaultcategory) {        
         this.getProductListByDefaultCategory();
-
       } else {
 
         this.idcategory = params['id'];
@@ -92,12 +90,13 @@ export class ProductCategoryListComponent implements OnInit {
     });
   }
 
-  getProductListByPrice() {
+  getProductListByPrice() { 
+    console.log("getProductListByPrice")   
     this.loading = true;
     this.allfilters();
   }
 
-  doChage() {
+  doChage() {    
     if (this.price2 !== undefined && this.price2 > 0) {
       this.btnActive = true;
     } else {
@@ -172,12 +171,13 @@ export class ProductCategoryListComponent implements OnInit {
       this.products = p.content;
       this.loading = false;
     }, error => { this.loading = false });
+
   }
 
   filter() {
 
     // if (this.idsubcategory > 0) {
-
+   
     if (this.fed > 0 && this.city == 0 && this.price2 == null) {
 
       this.productService.getFilterFederationCity(this.idcategory, this.idsubcategory, this.fed, this.city).subscribe(p => {

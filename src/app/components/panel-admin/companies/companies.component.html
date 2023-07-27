@@ -24,7 +24,9 @@
                           <th >Ime</th>
                           <th >Prezime</th> 
                           <th >email</th> 
-                          <th >Radnja</th>     
+                          <th >Coins</th> 
+                          <th >Radnja</th>   
+                              
                         </tr>
                       </thead>
                       <tbody>
@@ -34,11 +36,17 @@
                           <td>{{seller.user.firstName}}</td>
                           <td>{{seller.user.lastName}}</td>  
                           <td>{{seller.user.email}}</td>             
+                          <td>
+                            <a class="btn btn-dark btn-sm rounded-pill" routerLink="/paneladmin/coincompany/{{seller.idprovider}}">
+                              {{seller.coin}}
+                              <fa-icon [icon]="['fas','eye']"></fa-icon>
+                            </a>
+                          </td>             
                           <td>               
                             
-                            <button routerLink="/paneladmin/company/{{seller.user.id}}" class="btn btn-dark mx-2">detalji</button>
-                            <button *ngIf="active" (click)="deactivate(seller.user.id)" class="btn btn-dark mx-2" >Deaktiviraj</button>
-                            <button *ngIf="!active" (click)="confirm(seller.user.id)" class="btn btn-dark mx-2">Aktiviraj</button>
+                            <button routerLink="/paneladmin/company/{{seller.user.id}}" class="btn btn-dark btn-sm mx-2">detalji</button>
+                            <button *ngIf="active" (click)="deactivate(seller.user.id)" class="btn btn-dark btn-sm mx-2" >Deaktiviraj</button>
+                            <button *ngIf="!active" (click)="confirm(seller.user.id)" class="btn btn-dark btn-sm mx-2">Aktiviraj</button>
                             
             
                           </td>           

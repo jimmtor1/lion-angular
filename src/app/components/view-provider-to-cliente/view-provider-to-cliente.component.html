@@ -35,6 +35,112 @@
 
                 </div>
 
+
+                <div >
+                     
+                    <p class="h6 mb-0 mt-2">
+                        <fa-icon [icon]="['fas','clock']"></fa-icon>
+                        Radno vrijeme:
+                    </p>                             
+                    
+                    <hr class="my-1">
+                    
+    
+                    <div class="row mb-1">
+    
+                        <div class="col-4 col-md-2 d-flex">
+                            <fa-icon *ngIf="seller.monday" [icon]="['fas', 'check-square']" class="text-success"></fa-icon>
+                            <fa-icon *ngIf="!seller.monday" [icon]="['fas', 'square-xmark']" class="text-danger"></fa-icon>
+                            <label class="form-check-label" for="flexSwitchCheckDefault">Ponedjeljak</label>
+                        </div>
+                        
+                        <div class="col" style="margin-left: 20px;">
+                            <span class="badge rounded-pill bg-light text-dark">{{seller.timemonday}}</span> -
+                            <span class="badge rounded-pill bg-light text-dark">{{seller.endmonday}}</span>
+                        </div>
+                    </div>
+    
+                    <div class="row mb-1">
+                        <div class="d-flex col-4 col-md-2">
+                            <fa-icon *ngIf="seller.tuesday" [icon]="['fas', 'check-square']" class="text-success"></fa-icon>
+                            <fa-icon *ngIf="!seller.tuesday" [icon]="['fas', 'square-xmark']" class="text-danger"></fa-icon>
+                            <label class="form-check-label" for="flexSwitchCheckChecked">Utorak</label>
+                        </div>
+                        <div class="col" style="margin-left: 20px;">
+                            <span class="badge rounded-pill bg-light text-dark">{{seller.timetuesday}}</span> -
+                            <span class="badge rounded-pill bg-light text-dark">{{seller.endtuesday}}</span>
+                        </div>
+                    </div>
+    
+                    <div class="row mb-1">
+                        <div class="d-flex col-4 col-md-2">
+                            <fa-icon *ngIf="seller.wednesday" [icon]="['fas', 'check-square']"
+                                class="text-success"></fa-icon>
+                            <fa-icon *ngIf="!seller.wednesday" [icon]="['fas', 'square-xmark']"
+                                class="text-danger"></fa-icon>
+                            <label class="form-check-label" for="flexSwitchCheckDefault">Srijeda</label>
+                        </div>
+                        <div class="col" style="margin-left: 20px;">
+                            <span class="badge rounded-pill bg-light text-dark">{{seller.timewednesday}}</span> -
+                            <span class="badge rounded-pill bg-light text-dark">{{seller.endwednesday}}</span>
+                        </div>
+                    </div>
+    
+                    <div class="row mb-1">
+                        <div class="d-flex col-4 col-md-2">
+                            <fa-icon *ngIf="seller.thursday" [icon]="['fas', 'check-square']"
+                                class="text-success"></fa-icon>
+                            <fa-icon *ngIf="!seller.thursday" [icon]="['fas', 'square-xmark']"
+                                class="text-danger"></fa-icon>
+                            <label class="form-check-label" for="flexSwitchCheckChecked">Četvrtak</label>
+                        </div>
+                        <div class="col" style="margin-left: 20px;">
+                            <span class="badge rounded-pill bg-light text-dark">{{seller.timethursday}}</span> -
+                            <span class="badge rounded-pill bg-light text-dark">{{seller.endthursday}}</span>
+                        </div>
+                    </div>
+    
+                    <div class="row mb-1">
+                        <div class="d-flex col-4 col-md-2">
+                            <fa-icon *ngIf="seller.friday" [icon]="['fas', 'check-square']" class="text-success"></fa-icon>
+                            <fa-icon *ngIf="!seller.friday" [icon]="['fas', 'square-xmark']" class="text-danger"></fa-icon>
+                            <label class="form-check-label" for="flexSwitchCheckChecked">Petak</label>
+                        </div>
+                        <div class="col" style="margin-left: 20px;">
+                            <span class="badge rounded-pill bg-light text-dark">{{seller.timefriday}}</span> -
+                            <span class="badge rounded-pill bg-light text-dark">{{seller.endfriday}}</span>
+                        </div>
+                    </div>
+    
+                    <div class="row mb-1">
+                        <div class="d-flex col-4 col-md-2">
+                            <fa-icon *ngIf="seller.saturday" [icon]="['fas', 'check-square']"
+                                class="text-success"></fa-icon>
+                            <fa-icon *ngIf="!seller.saturday" [icon]="['fas', 'square-xmark']"
+                                class="text-danger"></fa-icon>
+                            <label class="form-check-label" for="flexSwitchCheckChecked">Subota</label>
+                        </div>
+                        <div class="col" style="margin-left: 20px;">
+                            <span class="badge rounded-pill bg-light text-dark">{{seller.timesaturday}}</span> -
+                            <span class="badge rounded-pill bg-light text-dark">{{seller.endsaturday}}</span>
+                        </div>
+                    </div>
+    
+                    <div class="row mb-1">
+                        <div class="d-flex col-4 col-md-2">
+                            <fa-icon *ngIf="seller.sunday" [icon]="['fas', 'check-square']" class="text-success"></fa-icon>
+                            <fa-icon *ngIf="!seller.sunday" [icon]="['fas', 'square-xmark']" class="text-danger"></fa-icon>
+                            <label class="form-check-label" for="flexSwitchCheckChecked">Nedjelja</label>
+                        </div>
+                        <div class="col" style="margin-left: 20px;">
+                            <span class="badge rounded-pill bg-light text-dark">{{seller.timesunday}}</span> -
+                            <span class="badge rounded-pill bg-light text-dark">{{seller.endsunday}}</span>
+                        </div>
+                    </div>
+    
+                </div>
+
+
             </div>
 
             <div class="col-12 col-md-8">
@@ -128,5 +234,6 @@
         </div>
 
     </div>
-
+    <hr>
+    <hr>
 </div>

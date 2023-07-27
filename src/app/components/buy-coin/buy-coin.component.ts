@@ -27,7 +27,7 @@ export class BuyCoinComponent implements OnInit {
 
   addCoins(){
 
-    const confirm = window.confirm("Are you sure to buy the selected package?");
+    const confirm = window.confirm("Jeste li sigurni da želite kupiti ovaj paket tokena? Potvrdite kako biste kupili tokene i dobili fakturu na ime firme.");
 
     if(confirm && this.selected_check>0){
 

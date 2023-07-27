@@ -42,14 +42,14 @@ export class ChatComponent implements OnInit {
               this.getChats(chat.id);
             } else {
               this.userService.getById(param['iduser']).subscribe(u => {
-                this.msg.receiver = u;
+                //this.msg.receiver = u;
                 this.chatingWhit = u.firstName + u.lastName;
                 this.user = u.id;
               });
 
-              this.msg.idChat = 0;
+              this.msg.idchat = 0;
               this.activeChat = 0;
-              this.msg.sender = new Userr(this.thisidUser);
+              this.msg.sender = this.thisidUser;
             }
           });
         }
@@ -70,7 +70,7 @@ export class ChatComponent implements OnInit {
           this.chatMessages.push(a.x);
         }
 
-        const index = this.LastMessageEachChat.findIndex(obj => obj.idChat == a.x.idChat);
+        const index = this.LastMessageEachChat.findIndex(obj => obj.idchat == a.x.idChat);
         index !== -1 ? this.LastMessageEachChat[index] = a.x : this.LastMessageEachChat.push(a.x);
 
       });
@@ -86,23 +86,23 @@ export class ChatComponent implements OnInit {
 
   getChats(idchat: number) {
 
-    this.messageService.getMessagesByChat(idchat, this.page).subscribe(c => {
+    this.messageService.getMessagesByChat(idchat, this.thisidUser,this.page).subscribe(c => {
       this.chatMessages = c;
-      this.msg.idChat = idchat;
+      this.msg.idchat = idchat;
       this.activeChat = idchat;
 
-      const message_extracted = this.LastMessageEachChat.find(item => item.idChat === idchat);
+      const message_extracted = this.LastMessageEachChat.find(item => item.idchat === idchat);
 
-      if (message_extracted?.sender.id == this.thisidUser) {
-        this.msg.receiver = message_extracted.receiver;
+      if (message_extracted?.sender == this.thisidUser) {
+        //this.msg.receiver = message_extracted.receiver;
         this.msg.sender = message_extracted.sender;
-        this.chatingWhit = message_extracted.receiver.firstName + message_extracted?.sender.lastName;
-        this.user = message_extracted.receiver.id;
+        //this.chatingWhit = message_extracted.receiver.firstName + message_extracted?.sender.lastName;
+        //this.user = message_extracted.receiver.id;
       } else {
-        this.msg.receiver = message_extracted?.sender!;
-        this.msg.sender = message_extracted?.receiver!;
-        this.chatingWhit = message_extracted?.sender.firstName + message_extracted?.sender.lastName!;
-        this.user = message_extracted?.sender.id!;
+        //this.msg.receiver = message_extracted?.sender!;
+        //this.msg.sender = message_extracted?.receiver!;
+        //this.chatingWhit = message_extracted?.sender.firstName + message_extracted?.sender.lastName!;
+        //this.user = message_extracted?.sender.id!;
       }
 
       setTimeout(() => {
@@ -127,10 +127,10 @@ export class ChatComponent implements OnInit {
       this.msg.dateTime = new Date();
       this.websocketService._send(this.msg);
 
-      if (this.msg.idChat !== 0) {
+      if (this.msg.idchat !== 0) {
         const newMsg = { ...this.msg };
         this.chatMessages.push(newMsg);
-        const index = this.LastMessageEachChat.findIndex(obj => obj.idChat == this.msg.idChat);
+        const index = this.LastMessageEachChat.findIndex(obj => obj.idchat == this.msg.idchat);
         index !== -1 ? this.LastMessageEachChat[index] = newMsg : this.LastMessageEachChat.push(newMsg);
       }
 

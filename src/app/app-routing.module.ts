@@ -21,6 +21,9 @@ import { ChatMiniComponent } from './components/chat-mini/chat-mini.component';
 import { AuthGuard } from './auth.guard';
 import { MarketingComponent } from './marketing/marketing.component';
 import { BuyCoinComponent } from './components/buy-coin/buy-coin.component';
+import { PrivacyPageComponent } from './components/privacy-page/privacy-page.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { ResetEmailSentComponent } from './components/reset-email-sent/reset-email-sent.component';
 
 const routes: Routes = [
   {path:'', component:HomeComponent},
@@ -33,7 +36,8 @@ const routes: Routes = [
   {path: 'providerSubcategoryList/:id/:idc', component:SellerCategoryListComponent},
   {path: 'addetails/:id', component:ProductDetailComponent},
   {path: 'adBuyerList', component:ProductBuyerListComponent},
-  {path: 'subcategoryList/:id', component:SubcategoryListComponent}, 
+  {path: 'subcategoryList/:id', component:SubcategoryListComponent},
+  {path: 'subcategoryList/:id/:title', component:SubcategoryListComponent},
   {path: 'provider/:id', component:ViewProviderToClienteComponent},
   {path: 'tenderDetail/:idtender', component:TenderDetailComponent},
   {path: 'tenderList', component:TenderListComponent},
@@ -43,6 +47,9 @@ const routes: Routes = [
   {path: 'chat/:iduser', component:ChatComponent, canActivate:[AuthGuard]},
   {path: 'navbarphone', component:NavbarGeneralPhoneComponent},
   {path: 'marketing', component:MarketingComponent},
+  {path: 'privacy', component:PrivacyPageComponent},
+  {path: 'passwordreset/:token', component:ResetPasswordComponent},
+  {path: 'emailresetsend', component:ResetEmailSentComponent},
   {path: 'buycoin', component:BuyCoinComponent, canActivate:[AuthGuard]},
   {path: 'paneladmin', loadChildren:() => import('./components/panel-admin/panel-admin.module').then(x=> x.PanelAdminModule), canActivate:[AuthGuard]},
   {path: 'panelseller', loadChildren:() => import('./components/panel-seller/panel-seller.module').then(x=> x.PanelSellerModule), canActivate:[AuthGuard]},

@@ -1,7 +1,6 @@
 import { AfterViewChecked, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Message } from 'src/app/models/message';
-import { Userr } from 'src/app/models/userr';
 import { ChatSocketService } from 'src/app/services/chat-socket.service';
 import { MessageService } from 'src/app/services/message.service';
 import { ModalService } from 'src/app/services/modal.service';
@@ -29,6 +28,9 @@ export class MsgListComponent implements OnInit, AfterViewChecked {
 
   chatGroups: any[] = [];
 
+  chatGroups2: Map<string, Message[]> = new Map();
+  dateOrder: string[];
+
   constructor(private route: ActivatedRoute, private msgService: MessageService, private websocketService: ChatSocketService, private userService: UserService, private modalService: ModalService) { }
 
   ngAfterViewChecked(): void {
@@ -53,14 +55,14 @@ export class MsgListComponent implements OnInit, AfterViewChecked {
 
             this.userService.getById(params['idprov']).subscribe(u => {
 
-              this.msg.receiver = u;
+              // this.msg.receiver = u.id;
               this.chatingWhit = u.firstName + " " + u.lastName;
               this.chatingWhiid = u.id;
 
             });
             //this.activeChat = -1;
-            this.msg.idChat = 0;
-            this.msg.sender = new Userr(this.thisidUser);
+            this.msg.idchat = 0;
+            this.msg.sender = this.thisidUser;
             this.suscribeAchat();
             this.modalService.openChat
           }
@@ -75,30 +77,26 @@ export class MsgListComponent implements OnInit, AfterViewChecked {
   getChats(idchat: number) {
     this.isLoading = true;
 
-    this.msg.idChat = idchat;
+    this.msg.idchat = idchat;
     this.thisidUser = localStorage.getItem('iduser') ? parseInt(localStorage.getItem('iduser')!) : 0;
 
-    this.msgService.getMessagesByChat(idchat, this.page).subscribe(m => {
-      // this.MsgList = m.concat(this.MsgList);
-      this.MsgList = this.MsgList.concat(m);
-      if (this.chatingWhit == "") {
-        this.chatingWhit = m[0].receiver.id == this.thisidUser ? m[0].sender.firstName + " " + m[0].sender.lastName : m[0].receiver.firstName + " " + m[0].receiver.lastName;
-        this.chatingWhiid = m[0].receiver.id == this.thisidUser ? m[0].sender.id : m[0].receiver.id;
-      }
+    this.msgService.getMessagesByChat(idchat, this.thisidUser, this.page).subscribe(m => {
 
-      this.groupChatsByDate();
+      let messages: Message[] = m.content;
+      this.groupChatsByDate(messages);
 
-      if (this.page == 0) {
-        setTimeout(() => {
+      setTimeout(() => {
+        if (this.page == 0) {
           this.scrollMessageContainerToBottom();
-        }, 0);
-      } else {
-        setTimeout(() => {
+        } else {
+
           const container = this.messageContainer.nativeElement;
           const contentHeight = container.scrollHeight;
-          this.messageContainer.nativeElement.scrollTo(0, contentHeight - this.scrollPosition - 80);
-        }, 0);
-      }
+          this.messageContainer.nativeElement.scrollTo(0, contentHeight - this.scrollPosition);
+
+        }
+        this.isLoading = false;
+      });
 
 
       if (!this.isSuscribed) {
@@ -113,27 +111,40 @@ export class MsgListComponent implements OnInit, AfterViewChecked {
 
     //add date to msg
     this.msg.dateTime = new Date();
-    this.msg.sender = new Userr(this.thisidUser);
-    this.msg.receiver = new Userr(this.chatingWhiid);
+    this.msg.sender = this.thisidUser
+    //this.msg.receiver = new Userr(this.chatingWhiid);
 
     //send to server
     this.websocketService._send(this.msg);
 
     //show in msgbox
     const newMsg = { ...this.msg };
-   
-    const long = this.chatGroups.length;
-    if (FunctionsService.isSameDate(this.msg.dateTime, new Date(this.chatGroups[long - 1].date))) {
-      this.chatGroups[long - 1].chats.push(newMsg);
-    } else {
-      this.chatGroups.push(new Date(newMsg.dateTime).toDateString(), { date: newMsg.dateTime, chats: [newMsg] });
-    }
-  
+
+    this.addNewMessageToMap(newMsg);
+    this.setDateOrder();
+
+    // const long = this.chatGroups.length;
+    // if (FunctionsService.isSameDate(this.msg.dateTime, new Date(this.chatGroups[long - 1].date))) {
+    //   this.chatGroups[long - 1].chats.push(newMsg);
+    // } else {
+    //   this.chatGroups.push(new Date(newMsg.dateTime).toDateString(), { date: newMsg.dateTime, chats: [newMsg] });
+    // }
+
     this.msg.content = "";
     setTimeout(() => {
       this.scrollMessageContainerToBottom();
     }, 0);
 
+  }
+
+  addNewMessageToMap(msg: Message) {
+    const dateKey = new Date(msg.dateTime).toDateString();
+    if (this.chatGroups2.has(dateKey)) {
+      this.chatGroups2.get(dateKey)?.push(msg);
+    } else {
+      this.chatGroups2.set(dateKey, [msg]);
+      this.setDateOrder();
+    }
   }
 
   scrollMessageContainerToBottom() {
@@ -163,7 +174,7 @@ export class MsgListComponent implements OnInit, AfterViewChecked {
 
   }
 
-  onScroll(event: any) {
+  onScroll() {
     const container = this.messageContainer.nativeElement;
     const scrollPosition = container.scrollTop;
     const containerHeight = container.offsetHeight;
@@ -172,7 +183,7 @@ export class MsgListComponent implements OnInit, AfterViewChecked {
     if (scrollPosition === 0 && !this.isLoading && contentHeight > containerHeight) {
       this.page++;
       this.scrollPosition = contentHeight;
-      this.getChats(this.msg.idChat);
+      this.getChats(this.msg.idchat);
     }
   }
 
@@ -180,22 +191,43 @@ export class MsgListComponent implements OnInit, AfterViewChecked {
     this.fechamsgshowed = date;
   }
 
-  groupChatsByDate() {
-    this.MsgList.sort((a, b) => new Date(a.dateTime).getTime() - new Date(b.dateTime).getTime())
-    const groupsMap = this.MsgList.reduce((map, chat) => {
-      const dateKey = new Date(chat.dateTime).toDateString();
-      if (map.has(dateKey)) {
-        map.get(dateKey).chats.push(chat);
+  // groupChatsByDate() {
+  //   this.MsgList.sort((a, b) => new Date(a.dateTime).getTime() - new Date(b.dateTime).getTime())
+  //   const groupsMap = this.MsgList.reduce((map, chat) => {
+  //     const dateKey = new Date(chat.dateTime).toDateString();
+  //     if (map.has(dateKey)) {
+  //       map.get(dateKey).chats.push(chat);
+  //     } else {
+  //       map.set(dateKey, { date: chat.dateTime, chats: [chat] });
+  //     }
+  //     return map;
+  //   }, new Map());
+  //   // .sort((a, b) => a.date - b.date)    
+  //   this.chatGroups = Array.from(groupsMap.values());
+  //   // .reverse()
+  //   //this.chatGroups = sortedGroups;
+
+  // }
+
+  groupChatsByDate(messages: Message[]) {
+
+    messages.sort((b, a) => b.id - a.id);
+
+    for (let index = 0; index < messages.length; index++) {
+
+      const dateKey = new Date(messages[index].dateTime).toDateString();
+      if (this.chatGroups2.has(dateKey)) {
+        this.chatGroups2.get(dateKey)?.push(messages[index]);
       } else {
-        map.set(dateKey, { date: chat.dateTime, chats: [chat] });
+        this.chatGroups2.set(dateKey, [messages[index]]);
       }
-      return map;
-    }, new Map());
-    // .sort((a, b) => a.date - b.date)    
-    this.chatGroups = Array.from(groupsMap.values());
-    // .reverse()
-    //this.chatGroups = sortedGroups;
- 
+    }
+    this.setDateOrder();
+
+  }
+
+  setDateOrder() {
+    this.dateOrder = Array.from(this.chatGroups2.keys()).sort((a, b) => new Date(a).getTime() - new Date(b).getTime());
   }
 
 

@@ -11,6 +11,7 @@ import { Cate } from 'src/app/models/subcategory-list-bycategory';
 export class SubcategoryListComponent implements OnInit {
 
   item: number;
+  title2:string;
   cate: Cate = new Cate();  
 
   constructor(private route: ActivatedRoute) { }
@@ -19,6 +20,8 @@ export class SubcategoryListComponent implements OnInit {
 
     this.route.params.subscribe(param => {
       this.item = parseInt(param['id']);
+
+      this.title2 = param['title'];
      
     })
 

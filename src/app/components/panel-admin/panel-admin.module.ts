@@ -12,6 +12,9 @@ import { faBuilding, faListCheck, faSignOut, faUsers } from '@fortawesome/free-s
 import { CustomerComponent } from './customer/customer.component';
 import { FormsModule } from '@angular/forms';
 import { CompanyComponent } from './company/company.component';
+import { CoinRecordComponent } from './coin-record/coin-record.component';
+import { AdManagementComponent } from './ad-management/ad-management.component';
+import { CoinbycompanyComponent } from './coinbycompany/coinbycompany.component';
 
 
 @NgModule({
@@ -22,7 +25,10 @@ import { CompanyComponent } from './company/company.component';
     CustomersComponent,
     TendersComponent,
     CustomerComponent,
-    CompanyComponent
+    CompanyComponent,
+    CoinRecordComponent,
+    AdManagementComponent,
+    CoinbycompanyComponent    
   ],
   imports: [
     CommonModule,

@@ -1,7 +1,7 @@
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Userr } from '../models/userr';
-import { Observable, map } from 'rxjs';
+import { Observable, catchError, map, throwError } from 'rxjs';
 import { API_URL } from './helper';
 import { UserDto, token } from '../models/user-dto';
 
@@ -10,7 +10,6 @@ import { UserDto, token } from '../models/user-dto';
 })
 export class UserService {
 
-  // private baseURL = 'http://localhost:8080/login';
   private baseURL = `${API_URL}`;
 
   private user = new Userr();
@@ -30,28 +29,22 @@ export class UserService {
   login(userDto:UserDto):Observable<token>{
     
     return this.http.post<token>(`${this.baseURL}inicio/authenticate`, userDto)
-    
-
-    // return this.http.post(`${this.baseURL}inicio/authenticate`, userDto, {      
-    //   observe: 'response'
-      
-    // }).pipe(map((response:HttpResponse<any>)=>{
-      
-    //   const body = response.body;
-    //   const headers = response.body;
-    //   console.log("pipe");
-    //   const bearerToken = headers.get('Authorization')!;
-    //   const token = bearerToken.replace('Bearer ', '');
-
-    //   localStorage.setItem('token', token);
-      
-    //   return body;
-    // }));
-    
+        
   }
 
   getToken(){
     return localStorage.getItem('token')
+  }
+
+  sendemail(email:string):Observable<boolean>{
+    return this.http.post<boolean>(`${this.baseURL}email`, email).pipe(catchError(error => {return throwError("error")}));
+  }
+
+  resetPassword(form:FormData):Observable<boolean>{
+    return this.http.post<boolean>(`${this.baseURL}inicio/reset`, form).pipe(
+      catchError(error => {return throwError('error');})
+    );
+
   }
 
 }

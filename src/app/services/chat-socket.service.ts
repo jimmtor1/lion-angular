@@ -106,7 +106,7 @@ export class ChatSocketService {
   //@ts-ignore
   _send(message) {
     //console.log("calling logout api via web socket");
-    this.stompClient?.send("/app/hello/" + message.idChat, {}, JSON.stringify(message));
+    this.stompClient?.send("/app/hello/" + message.idchat, {}, JSON.stringify(message));
   }
   //@ts-ignore
   onMessageReceived(message) {

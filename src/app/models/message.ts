@@ -1,13 +1,18 @@
 
-import { Userr } from "./userr";
+// import { Userr } from "./userr";
 
 export class Message {
 
-    sender: Userr;
-    receiver: Userr;
-    content:string;
-    dateTime:Date;
-    idChat:number;
-    seen:boolean=true;
-    
+    // sender: Userr;
+    // receiver: Userr;
+    id: number;
+    idchat: number;
+    sender: number;
+    content: string;
+    dateTime: Date;
+    seen: boolean = true;
+
+    receiver?:number;
+
+
 }

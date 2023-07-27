@@ -1,11 +1,15 @@
 <div class="container">
 
     <br>
+    
     <div class="d-flex justify-content-center">
         <!-- <fa-icon [icon]="['fas', 'building']" style="font-size: 1.5em;"></fa-icon>         -->
-        <h1 class="text-center mx-1" >{{cate.name[item]}}</h1>
-    </div>        
+        <h1 *ngIf="!title2" class="text-center mx-1" >{{cate.name[item]}}</h1>
+        <h1 *ngIf="title2" class="text-center mx-1" >{{title2}}</h1>
+    </div>
+
     <hr>
+    
     <div class="row">
         <div class="col">
             <a class="btn btn-danger" *ngIf="item<4" [routerLink]="['/providerSubcategoryList', item+1, '0']">
@@ -31,13 +35,12 @@
         </div>
     </div>
     
-    
-
     <ul class="nav flex-column" >
 
         <li class="nav-item" *ngFor="let title of cate.title[item], let i = index">
             <p class="h4 mt-1">{{title}}</p>          
-            
+                 
+           
             <ul class="nav flex-column">
                 <div *ngIf="item==0">                    
                     <li class="nav-item" *ngFor="let sub of cate.subcategory1[i], let j = index">

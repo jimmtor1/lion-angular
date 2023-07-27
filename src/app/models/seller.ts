@@ -50,6 +50,8 @@ export class Seller {
 
     showEmail:boolean;
 
+    coin:number;
+
 }
 
 export class Company_subcategory {

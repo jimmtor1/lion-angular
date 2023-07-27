@@ -7,23 +7,22 @@
     <!-- <div class="card-body" #messageContainer> -->
 
     <div *ngFor="let m of ChatList" class="link m-0 p-0">
-        <a routerLink="/chat2/msg/{{m.idChat}}">
+        <a routerLink="/chat2/msg/{{m.idchat}}">
             <div class="row g-0 pt-2">
                 <!-- d-flex justify-content-center  p-0 m-0 style="align-items: center;"-->
                 <!-- <div class="col-2 bg-success p-0 m-0" > -->
-                    <fa-icon [icon]="['fas','circle-user']" style="font-size: 3em;" class="m-0 p-0 col-2 text-center"></fa-icon>
+                <fa-icon [icon]="['fas','circle-user']" style="font-size: 3em;" class="m-0 p-0 col-2 text-center"></fa-icon>
                 <!-- </div> -->
                 <div class="col-10" style="padding-right: 4px;">
 
                     <div class="d-flex justify-content-between pt-2">
-                        <span>{{m.sender.id==thisidUser?m.receiver.firstName+"
-                            "+m.receiver.lastName:m.sender.firstName+" "+m.sender.lastName}}</span>
+                        <span>{{m.first_name +" "+ m.last_name}}</span>
                         <span style="font-size: small;">{{m.dateTime | date: 'dd.MM.yyyy'}}</span>
                     </div>
 
                     <p class="text-muted mb-0 text-start text-nowrap overflow-hidden text-truncate" scrollHeight
                         scrollTop>
-                        <span *ngIf="thisidUser==m.sender.id">Tu:</span> {{m.content}}
+                        <span *ngIf="thisidUser==m.sender">Tu:</span> {{m.content}}
                     </p>
                 </div>
             </div>
