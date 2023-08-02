@@ -1,6 +1,6 @@
 <div class="container mt-5">
 
-    
+
     <div class="row">
 
         <div class="col-12 col-sm-4 col-md-3 mb-3">
@@ -12,7 +12,7 @@
 
                 <select name="federation" (change)="citiesCombo($event)" [(ngModel)]="fed" class="form-select"
                     id="select_federation">
-                    <option value="0">--Odaberite kanton    --</option>
+                    <option value="0">--Odaberite kanton --</option>
                     <option [value]="fed.id" [disabled]="fed.id==0" *ngFor="let fed of federations">{{fed.name}}
                     </option>
                 </select>
@@ -23,8 +23,8 @@
             <div class="mb-2">
 
                 <label for="city">Grad</label>
-              
-                <select name="city" (change)="selectedCity($event)" class="form-select" id="select_city" >
+
+                <select name="city" (change)="selectedCity($event)" class="form-select" id="select_city">
                     <option value="0">--Odaberite Grad--</option>
                     <option *ngFor="let c of citiesToCombo" [value]="c.id">{{c.name}}</option>
                 </select>
@@ -43,12 +43,13 @@
                     </div>
                     <div class="col-12 col-lg-6">
                         <div class="mb-2">
-                            <label for="do"  class="form-label">do</label>
+                            <label for="do" class="form-label">do</label>
                             <input [(ngModel)]="price2" (keyup)="doChage()" type="number" class="form-control" id="do">
                         </div>
                     </div>
                 </div>
-                <button (click)="getProductListByPrice()" [disabled]="!btnActive"  type="button" class="btn btn-dark btn-sm w-100">
+                <button (click)="getProductListByPrice()" [disabled]="!btnActive" type="button"
+                    class="btn btn-dark btn-sm w-100">
                     <fa-icon [icon]="['fas', 'magnifying-glass']"></fa-icon>
                 </button>
             </div>
@@ -56,7 +57,7 @@
         </div>
 
         <div class="col-12 col-sm-8 col-md-9">
-            
+
             <p class="h3"> Pretraživanje za: {{word}}</p>
 
             <div class="bg-light">
@@ -69,33 +70,34 @@
                 <div *ngIf="!loading">
 
                     <div *ngIf="products.length==0" class="d-flex justify-content-center align-center py-2">
-                        <span>                           
-                            <fa-icon [icon]="['fas', 'box-open']" ></fa-icon>
+                        <span>
+                            <fa-icon [icon]="['fas', 'box-open']"></fa-icon>
                             Nije pronađen nijedan proizvod
                         </span>
                     </div>
-                    
 
-                    <div *ngIf="products.length>0"  class="row g-2 mb-3 pb-3 px-1">
+
+                    <div *ngIf="products.length>0" class="row g-2 mb-3 pb-3 px-1">
                         <div class="col-6 col-lg-3" *ngFor="let product of products">
-                            <div class="card h-100">
+
+                            <app-product-card-mini [product]="product" ></app-product-card-mini>
+
+                            <!-- <div class="card h-100">
                                 <img src="{{urlprod_img}}{{product.productImageList[0].idimage}}{{product.productImageList[0].extension}}"
                                     style="height: 200px; object-fit: contain;" class="card-img-top" alt="...">
                                 <hr class="m-0">
                                 <div class="card-body py-1">
                                     <p class="card-title" style="font-size: small;">{{product.productName}}</p>
-                                    <!-- <p class="card-text mb-0" *ngIf="product.price==0"><b>Cijena po dogovoru</b></p> -->
-                                    <!-- <p class="card-text mb-0" *ngIf="product.price>0"><b>{{product.price}} KM</b></p> -->
-                                    <!-- <span class="badge rounded-pill bg-danger" *ngIf="product.price==0">Cijena po dogovoru</span>
-                                    <span class="badge rounded-pill bg-danger" *ngIf="product.price>0">{{product.price}} KM</span> -->
-                                    <a routerLink="/addetails/{{product.idproduct}}"
-                                        class="stretched-link m-0 p-0"></a>
+                                    <a routerLink="/addetails/{{product.idproduct}}" class="stretched-link m-0 p-0"></a>
                                 </div>
                                 <div class="d-flex card-footer bg-white justify-content-end" style="border-top: none;">
-                                    <span class="badge rounded-pill bg-danger" *ngIf="product.price==0">Cijena po dogovoru</span>
-                                    <span class="badge rounded-pill bg-danger" *ngIf="product.price>0">{{product.price}} KM</span>
+                                    <span class="badge rounded-pill bg-danger" *ngIf="product.price==0">Cijena po
+                                        dogovoru</span>
+                                    <span class="badge rounded-pill bg-danger" *ngIf="product.price>0">{{product.price}}
+                                        KM</span>
                                 </div>
-                            </div>
+                            </div> -->
+
                         </div>
                     </div>
 

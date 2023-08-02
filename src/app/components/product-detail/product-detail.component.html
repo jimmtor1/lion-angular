@@ -272,8 +272,12 @@
 
         <div class="d-flex overflow-auto flex-nowrap">
 
-            <div *ngFor="let product of producByProvider.slice(0,5)" class="mx-1">
-                <div class="mini card h-100" style="width: 13rem;">
+            <div *ngFor="let product of producByProvider.slice(0,5)" class="mx-1" style="max-width: 200px;">
+                
+                <app-product-card-mini [product]="product"></app-product-card-mini>  
+
+
+                <!-- <div class="mini card h-100" style="width: 13rem;">
 
                     <div class="position-relative">
                         <img src="{{urlprod_img}}{{product.productImageList[0].idimage}}{{product.productImageList[0].extension}}"
@@ -291,7 +295,8 @@
                         <span class="badge rounded-pill bg-danger" *ngIf="product.price==0">Cijena po dogovoru</span>
                         <span class="badge rounded-pill bg-danger" *ngIf="product.price>0">{{product.price}} KM</span>
                     </div>
-                </div>
+                </div> -->
+
             </div>
 
         </div>

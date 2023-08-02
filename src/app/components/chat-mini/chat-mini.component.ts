@@ -55,7 +55,7 @@ export class ChatMiniComponent implements OnInit {
       if (this.idprovider && this.idprovider > 0) {
 
         this.messageService.getMessagesWith(this.thisidUser, this.idprovider!).subscribe(chat => {
-
+          this.chatGroups2.clear();
           if (chat) {
             this.chatingWhit = chat.users[0].id !== this.thisidUser ? chat.users[0].firstName + " " + chat.users[0].lastName : chat.users[1].firstName + " " + chat.users[1].lastName;
             this.getChats(chat.id);
@@ -82,8 +82,7 @@ export class ChatMiniComponent implements OnInit {
   }
 
   getChats(idchat: number, chatingWith?: string, idchatingWith?: number) {
-
-
+    
     if (!this.activeChat) {
       this.activeChat = -1;
     }
@@ -99,17 +98,23 @@ export class ChatMiniComponent implements OnInit {
       this.idprovider = idchatingWith;
     }
 
-    this.messageService.getMessagesByChat(idchat, this.thisidUser,this.page).subscribe(c => {
+    this.messageService.getMessagesByChat(idchat, this.thisidUser, this.page).subscribe(c => {
 
       let messages: Message[] = c.content;
+
+      //console.log("mensajes traidos: " + JSON.stringify(messages));
+
       this.groupChatsByDate(messages);
 
+
       setTimeout(() => {
-        
+
         //console.log("c: " + JSON.stringify(this.chatMessages));
-        const index = this.LastMessageEachChat.findIndex(obj => obj.idchat == idchat);
-        index !== -1 ? this.LastMessageEachChat[index].seen=true : this.LastMessageEachChat[index].seen=false;
-      
+        if (this.LastMessageEachChat.length>0) {
+          const index = this.LastMessageEachChat.findIndex(obj => obj.idchat == idchat);
+          index !== -1 ? this.LastMessageEachChat[index].seen = true : this.LastMessageEachChat[index].seen = false;
+        }
+
         setTimeout(() => {
           if (this.page == 0) {
             this.scrollMessageContainerToBottom();
@@ -297,7 +302,7 @@ export class ChatMiniComponent implements OnInit {
     for (let index = 0; index < messages.length; index++) {
 
       const dateKey = new Date(messages[index].dateTime).toDateString();
-      this.chatGroups2.clear(); 
+
       if (this.chatGroups2.has(dateKey)) {
         this.chatGroups2.get(dateKey)?.push(messages[index]);
       } else {

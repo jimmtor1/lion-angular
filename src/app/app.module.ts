@@ -9,7 +9,6 @@ import { DatePipe} from '@angular/common';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
-import { ProductosInicioComponent } from './components/productos-inicio/productos-inicio.component';
 import { ProductFormComponent } from './components/product-form/product-form.component';
 import { RegisterFormComponent } from './components/register-form/register-form.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
@@ -30,7 +29,6 @@ import { TenderDetailComponent } from './components/tender-detail/tender-detail.
 import { TenderListComponent } from './components/tender-list/tender-list.component';
 import { TenderTableComponent } from './components/tender-table/tender-table.component';
 import { HeaderComponent } from './components/header/header.component';
-import { NavbarMenuCategoryComponent } from './components/navbar-menu-category/navbar-menu-category.component';
 import { ModalMsComponent } from './components/modal-ms/modal-ms.component';
 import { ProducSearchListComponent } from './components/produc-search-list/produc-search-list.component';
 import { ChatComponent } from './components/chat/chat.component';
@@ -42,14 +40,16 @@ import { PromotionsComponent } from './modules/promotions/promotions.component';
 import { PrivacyPageComponent } from './components/privacy-page/privacy-page.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { ResetEmailSentComponent } from './components/reset-email-sent/reset-email-sent.component';
-
+import { CancelSuscriptionComponent } from './components/cancel-suscription/cancel-suscription.component';
+import { ProductCardMiniComponent } from './components/shared/product-card-mini/product-card-mini.component';
+import { NewCategoryListComponent } from './components/new-category-list/new-category-list.component';
+import { SubcategoryListComponent2 } from './components/subcategory-list copy/subcategory-list.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
-    ProductosInicioComponent,
+    HomeComponent,    
     ProductFormComponent,
     RegisterFormComponent,
     LoginFormComponent,
@@ -60,6 +60,7 @@ import { ResetEmailSentComponent } from './components/reset-email-sent/reset-ema
     SellerListComponent,
     SellerSocialnetworkComponent,
     SubcategoryListComponent,
+    SubcategoryListComponent2,
     ViewProviderToClienteComponent,
     SellerCategoryListComponent,
     TenderFormComponent,
@@ -67,7 +68,6 @@ import { ResetEmailSentComponent } from './components/reset-email-sent/reset-ema
     TenderListComponent,
     TenderTableComponent, 
     HeaderComponent,
-    NavbarMenuCategoryComponent,
     ModalMsComponent,
     ProducSearchListComponent,
     ChatComponent,
@@ -77,7 +77,10 @@ import { ResetEmailSentComponent } from './components/reset-email-sent/reset-ema
     PromotionsComponent,
     PrivacyPageComponent,
     ResetPasswordComponent,
-    ResetEmailSentComponent
+    ResetEmailSentComponent,
+    CancelSuscriptionComponent,
+    ProductCardMiniComponent,
+    NewCategoryListComponent
   ],
   imports: [
     BrowserModule,

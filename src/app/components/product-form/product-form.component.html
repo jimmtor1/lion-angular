@@ -62,7 +62,28 @@
                             [(ngModel)]="product.description"></textarea>
                     </div>
 
-                    <div class="row mb-3">
+
+                    <div class="form-check">
+                        <input class="form-check-input" [(ngModel)]="product.type" value="1" type="radio" name="type" id="type1">
+                        <label class="form-check-label" for="type1">
+                            Novo
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" [(ngModel)]="product.type" value="2" type="radio" name="type" id="type2">
+                        <label class="form-check-label" for="type2">
+                            Korišćeno
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" [(ngModel)]="product.type" value="3" type="radio" name="type" id="type3">
+                        <label class="form-check-label" for="type3">
+                            Usluga
+                        </label>
+                    </div>
+
+
+                    <div class="row my-3">
 
                         <div class="col-12 col-sm-6">
                             <label for="price">Cijena&nbsp;<span class="form-label">*</span></label>
@@ -117,14 +138,14 @@
                             <hr class="p-0 m-0">
                             <div class="card-footer text-center">
                                 <button class="btn btn-danger rounded-pill">
-                                    <fa-icon [icon]="['fas','trash']" ></fa-icon>
+                                    <fa-icon [icon]="['fas','trash']"></fa-icon>
                                     delete
                                     <!-- style="font-size: 0.8em" -->
                                 </button>
                             </div>
                         </div>
 
-                       
+
                     </div>
 
                     <div class="text-center">

@@ -20,7 +20,7 @@ export class SubcategoryListComponent implements OnInit {
 
     this.route.params.subscribe(param => {
       this.item = parseInt(param['id']);
-
+      
       this.title2 = param['title'];
      
     })

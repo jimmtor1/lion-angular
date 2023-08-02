@@ -1,0 +1,55 @@
+<div class="container">
+    
+    <br>
+    
+    <div class="d-flex justify-content-center">      
+        <h1 class="text-center mx-1" >{{titleCategory.name}}</h1>
+    </div>
+
+    <hr>
+    
+    <div class="row">
+        <div class="col">
+            <a class="btn btn-danger" *ngIf="item<5" [routerLink]="['/providerSubcategoryList', item, '0']">
+                <fa-icon [icon]="['fas', 'store']" ></fa-icon>
+                Pogledaj sve firme
+            </a>
+            <a class="btn btn-danger" *ngIf="item==5" [routerLink]="['/productCategoryList', item, '0']">
+                <fa-icon [icon]="['fas', 'box']" ></fa-icon>
+                Svi proizvodi / Usluge
+            </a> 
+        </div>
+        <div class="col">
+            <a *ngIf="item==5" class="btn btn-danger" [routerLink]="['/providerSubcategoryList', 0, '0']">
+                <fa-icon [icon]="['fas', 'store']" ></fa-icon>
+                Pogledaj sve firme
+            </a>
+
+            <a *ngIf="item<5" class="btn btn-danger" [routerLink]="['/productCategoryList', '0', '0', item+1]">
+                <fa-icon [icon]="['fas', 'box']" ></fa-icon>
+                Svi proizvodi / Usluge
+            </a>
+
+        </div>
+    </div>
+    
+    <ul class="nav flex-column" >
+  
+        <li class="nav-item" *ngFor="let subtitles of mapCategoryService.level2.get(titleCategory.id)"> 
+            <p class="h4 mt-1">{{subtitles.name}}</p> 
+           
+            <ul class="nav flex-column">
+                <div >   
+                    <li class="nav-item" *ngFor="let sub of mapCategoryService.level3.get(subtitles.id)">
+                        <a [routerLink]="['/providerSubcategoryList/'+item+'/', sub.id]" class="nav-link bg-dark text-white border-bottom" >{{sub.name}}</a>                       
+                    </li>
+                </div>
+            </ul>
+
+        </li>
+
+    </ul>
+    <br>
+    <br>
+    <br>
+</div>

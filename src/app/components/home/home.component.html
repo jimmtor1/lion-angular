@@ -98,9 +98,8 @@
     <div class="row row-banner" style="margin: auto 0;">
 
         <div class="mb-2 col-m-12 col-xl-6 d-flex justify-content-center pg">
-            <a class="" routerLink="marketing" >
-                <img class="rounded-3 pg" src="assets/images/BANNER-570X152.jpg"
-                    alt="">
+            <a class="" routerLink="marketing">
+                <img class="rounded-3 pg" src="assets/images/BANNER-570X152.jpg" alt="">
             </a>
         </div>
 
@@ -109,13 +108,11 @@
 
 
             <a routerLink="marketing" style="margin-right: 3px;">
-                <img class="rounded-3" src="assets/images/BANNER-270X152.jpg"
-                    alt="">
+                <img class="rounded-3" src="assets/images/BANNER-270X152.jpg" alt="">
             </a>
 
             <a routerLink="marketing">
-                <img class="rounded-3" src="assets/images/BANNER-270X152.jpg"
-                    alt="">
+                <img class="rounded-3" src="assets/images/BANNER-270X152.jpg" alt="">
             </a>
 
 
@@ -170,8 +167,8 @@
             <div class="card mb-3" style="max-width: 540px;">
                 <div class="row g-0">
                     <div class="col-4">
-                        <img src="assets/images/betonski-radovi-1-600x500.jpg"
-                            class="img-fluid rounded-start" alt="...">
+                        <img src="assets/images/betonski-radovi-1-600x500.jpg" class="img-fluid rounded-start"
+                            alt="...">
                     </div>
                     <div class="col-8">
                         <div class="card-body p-1">
@@ -187,8 +184,8 @@
             <div class="card mb-3" style="max-width: 540px;">
                 <div class="row g-0">
                     <div class="col-4">
-                        <img src="assets/images/zagreb-20120904-00546-600x500.jpg"
-                            class="img-fluid rounded-start" alt="...">
+                        <img src="assets/images/zagreb-20120904-00546-600x500.jpg" class="img-fluid rounded-start"
+                            alt="...">
                     </div>
                     <div class="col-8">
                         <div class="card-body p-1">
@@ -207,8 +204,8 @@
             <div class="card mb-3" style="max-width: 540px;">
                 <div class="row g-0">
                     <div class="col-4">
-                        <img src="assets/images/ARCO-regal-570x321-1-600x500.jpg"
-                            class="img-fluid rounded-start" alt="...">
+                        <img src="assets/images/ARCO-regal-570x321-1-600x500.jpg" class="img-fluid rounded-start"
+                            alt="...">
                     </div>
                     <div class="col-8">
                         <div class="card-body p-1">
@@ -224,8 +221,7 @@
             <div class="card mb-3" style="max-width: 540px;">
                 <div class="row g-0">
                     <div class="col-4">
-                        <img src="assets/images/o_341193_1024-600x500.jpg"
-                            class="img-fluid rounded-start" alt="...">
+                        <img src="assets/images/o_341193_1024-600x500.jpg" class="img-fluid rounded-start" alt="...">
                     </div>
                     <div class="col-8">
                         <div class="card-body p-1">
@@ -241,8 +237,7 @@
             <div class="card mb-3" style="max-width: 540px;">
                 <div class="row g-0">
                     <div class="col-4">
-                        <img src="assets/images/gradjevinarstvo-600x500.jpg"
-                            class="img-fluid rounded-start" alt="...">
+                        <img src="assets/images/gradjevinarstvo-600x500.jpg" class="img-fluid rounded-start" alt="...">
                     </div>
                     <div class="col-8">
                         <div class="card-body p-1">
@@ -258,8 +253,7 @@
             <div class="card mb-3" style="max-width: 540px;">
                 <div class="row g-0">
                     <div class="col-4">
-                        <img src="assets/images/4041338731-600x500.jpg"
-                            class="img-fluid rounded-start" alt="...">
+                        <img src="assets/images/4041338731-600x500.jpg" class="img-fluid rounded-start" alt="...">
                     </div>
                     <div class="col-8">
                         <div class="card-body p-1">
@@ -271,17 +265,54 @@
             </div>
         </div>
     </div>
-    <div>
-        <productos-inicio></productos-inicio> 
+
+    <div class="bg-white mb-3 mt-3">
+
+        <h4 class="text-center text-danger mb-0">Firme / Trgovine</h4>
+        <hr class="mt-1">
+
+        <!-- <p *ngIf="categoryWithSellers[0].sellers.length==0">Nema firmi za prikaz</p> -->
+        <p *ngIf="!sellers">Nema firmi za prikaz</p>
+        <div class="d-flex overflow-auto flex-nowrap">
+
+            <div *ngFor="let s of sellers" class="mx-1">
+                <div class="card h-100" style="width: 16rem;">
+
+                    <img *ngIf="s.image" src="{{urlprof_img}}{{s.image}}" style="height: 150px; object-fit: contain;"
+                        class="card-img-top" alt="...">
+
+                    <img *ngIf="!s.image" src="assets/images/no-image-icon.svg" style="height: 150px;"
+                        class="card-img-top" alt="...">
+
+                    <hr class="m-0 p-0">
+                    <div class="card-body m-0 pb-0">
+                        <h6 class="card-title mt-0">{{s.companyName}}</h6>
+
+                        <p class="m-0">{{get_city(s.user.city)}}</p>
+                        <p style="overflow: hidden; max-height: 2em; line-height: 1;" class="text-muted fs-6">
+                            {{s.biography}}
+                        </p>
+                        <a routerLink="/provider/{{s.user.id}}" class="stretched-link m-0 p-0"></a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
     </div>
+
+    <h4 class="text-center text-danger mb-0">Svi proizvodi / Usluge</h4>
+    <hr class="mt-1 mb-0">
+    <div class="row g-2">
+        <div class="col-6 col-sm-4 col-md-3 col-lg-2" *ngFor="let product of products">
+            <app-product-card-mini [product]="product"></app-product-card-mini>
+        </div>
+    </div>
+
     <br>
     <br>
     <br>
     <!-- <productos-inicio></productos-inicio> -->
 
 </div>
-
-
-
-
-

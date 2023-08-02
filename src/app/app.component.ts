@@ -1,6 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ModalService } from './services/modal.service';
 import { Router } from '@angular/router';
+import { CategoryService } from './services/category.service';
+// import { Capacitor } from '@capacitor/core';
+// import { App } from '@capacitor/app';
 
 @Component({
   selector: 'app-root',
@@ -9,10 +12,6 @@ import { Router } from '@angular/router';
 })
 
 export class AppComponent implements OnInit {
-
-  // email: string = "Prijava";
-  // role:number=0;
-  // public isMobile$: Observable<boolean>;
   
   modalOpen = false;
  
@@ -35,11 +34,15 @@ export class AppComponent implements OnInit {
   
   ngOnInit(): void {
     
+    // if (Capacitor.getPlatform() === 'android'){this.registerAndroidListener()} ;
+
     this.modalService.modalState$.subscribe((a)=> {
       this.modalOpen = a.isOpen;    
       this.ms = a.message;
       this.type = a.type;
     });
+
+    
 
     this.modalService.chatState$.subscribe((a)=> {
       
@@ -61,11 +64,16 @@ export class AppComponent implements OnInit {
 
   }
 
+  // registerAndroidListener() {
+  //   App.addListener('backButton', (data) => {
+  //     if (data.canGoBack) window.history.back();
+  //     else App.exitApp();
+  //   });
+  // }
+
   ngAfterViewInit() {
     const alturaheader = this.header.nativeElement.offsetHeight;
     const alturanavbar = alturaheader*0.60;
-
-    // alert(alturanavbar)
 
     setTimeout(() => {
       this.mainHeight = `calc(100% - ${alturaheader}px - (${alturanavbar}px)`;
@@ -74,42 +82,6 @@ export class AppComponent implements OnInit {
   }
  
 
-  //   this.isMobile$ = fromEvent(window, 'resize').pipe(
-  //     map(() => window.innerWidth <= 768),
-  //     startWith(window.innerWidth <= 768)
-  //   );
-
-  //   const usuarioString = localStorage.getItem("email");    
-  //   if (usuarioString) {
-  //     this.email = JSON.parse(usuarioString);      
-  //   } 
-
-  //   const roleString = localStorage.getItem("role"); 
-  //   if(roleString){
-  //     this.role = JSON.parse(roleString);
-  //   }
-
-  // }
-
-  // direction(){
-  //   const roleString = localStorage.getItem("role");    
-  //   if (roleString) {
-  //     if(JSON.parse(roleString)==1){
-  //       this.router.navigate(['/productCategoryList/5/0']);       
-  //     }
-  //   } else{
-  //     this.router.navigate(['login']);
-  //   }
-    
-  // }
-
-  // logout(){    
-  //   localStorage.clear();
-  //   this.router.navigate([''])
-  //   this.email = "Prijava"; 
-  //   // location.reload();    
-  // }
-
- 
+  
 
 }

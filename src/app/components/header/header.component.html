@@ -35,7 +35,7 @@
                 <a *ngIf="role == 2" routerLink="/promotions/promotions" style="text-decoration: none;max-width: 80px;"
                     class="text-danger text-center col mx-1">
                     <fa-icon [icon]="['fas', 'coins']" style="font-size: 1.1em"></fa-icon>
-                    <p class="small text-dark">Kredit</p>
+                    <p class="small text-dark">Tokeni</p>
                 </a>
 
                 <a *ngIf="role == 2" routerLink="/panelseller/product" style="text-decoration: none;max-width: 80px;"
@@ -118,7 +118,7 @@
 </div>
 
 <!-- mobile -->
-<div *ngIf="(isMobile$ | async) === true" class="container pt-4">
+<div *ngIf="(isMobile$ | async) === true" class="container pt-3">
 
     <div class="row align-items-center">
 

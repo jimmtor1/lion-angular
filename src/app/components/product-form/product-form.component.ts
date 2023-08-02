@@ -35,6 +35,7 @@ export class ProductFormComponent implements OnInit {
   authorizedSeller = false;
   loading = true;
   isNewProduct=true;
+  
 
   urlprod_img = `${IMG_PRODUCT_URL}`;
 
@@ -122,7 +123,8 @@ export class ProductFormComponent implements OnInit {
     formData.append('idprovider', this.iduser.toString());
     formData.append('active', this.product.active.toString());
     formData.append('price', this.product.price.toString());
-
+    formData.append('type', this.product.type.toString());
+  
     this.productService.saveAd(formData).subscribe(dato => {
       this.modaService.openModal("Uspješno ste dodali vaš oglas.", "success");
       this.router.navigate(['panelseller/products']);

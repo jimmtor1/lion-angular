@@ -81,11 +81,11 @@
         </div>
         <!-- *ngFor="let m of chatGroups2"  -->
         <div *ngFor="let m of dateOrder">
-            <span class="text-muted d-block border-bottom" style="font-size: smaller; margin-top: 10px;">{{m |
+            <span class="text-muted d-block border-bottom" style="font-size: smaller; margin-top: 10px; margin-bottom: 5px;">{{m |
                 date: 'dd.MM.yyyy'}}</span>
-            <div *ngFor="let m of chatGroups2.get(m)" class="d-flex" [ngClass]="{'justify-content-end': m.sender==thisidUser}">
+            <div *ngFor="let m of chatGroups2.get(m)" class="d-flex my-1" [ngClass]="{'justify-content-end': m.sender==thisidUser}">
                 <p [ngClass]="m.sender==thisidUser ? 'bg-dark' : 'bg-secondary'"
-                    class="p-1 text-white rounded text-break m-0" style="max-width: 85%;">{{m.content}} &nbsp;
+                    class="p-1 text-white rounded text-break m-0" style="max-width: 85%; font-size: small;">{{m.content}} &nbsp;
                     <span style="font-size: smaller;">{{m.dateTime | date: 'HH:mm'}}</span>
                 </p>
             </div>

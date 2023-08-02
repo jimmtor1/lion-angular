@@ -1,15 +1,15 @@
 
 // export const API_URL = 'http://localhost:8080/';
-// export const IMG_PROFILE_URL = 'https://test2.dcl.ba/images/profile-images/';
-// export const IMG_PRODUCT_URL = 'https://test2.dcl.ba/images/product-images/';
-// export const DOC_URL = 'https://test2.dcl.ba/images/documents/'; //tender documents
-// export const DOC_PROPOSAL_URL = 'https://test2.dcl.ba/images/proposal-documents/';
+export const IMG_PROFILE_URL = 'https://test2.dcl.ba/images/profile-images/';
+export const IMG_PRODUCT_URL = 'https://test2.dcl.ba/images/product-images/';
+export const DOC_URL = 'https://test2.dcl.ba/images/documents/'; //tender documents
+export const DOC_PROPOSAL_URL = 'https://test2.dcl.ba/images/proposal-documents/';
 
 export const API_URL = 'https://test1.dcl.ba/';
-export const IMG_PROFILE_URL = '/images/profile-images/';
-export const IMG_PRODUCT_URL = '/images/product-images/';   
-export const DOC_URL = '/images/documents/';
-export const DOC_PROPOSAL_URL = '/images/proposal-documents/'
+// export const IMG_PROFILE_URL = '/images/profile-images/';
+// export const IMG_PRODUCT_URL = '/images/product-images/';   
+// export const DOC_URL = '/images/documents/';
+// export const DOC_PROPOSAL_URL = '/images/proposal-documents/'
 
 export class federation {
     id: number;
@@ -30,7 +30,7 @@ export const FEDERATIONS = [
     new federation(6, "Srednjobosanski kanton"),
     new federation(7, "Hercegovačko-neretvanski kanton"),
     new federation(8, "Zapadnohercegovački kanton"),
-   // new federation(9, "Bosansko-podrinjski kanton"),
+    // new federation(9, "Bosansko-podrinjski kanton"),
     new federation(9, "Kanton Sarajevo"),
     new federation(10, "Kanton 10"),
     new federation(0, "REPUBLIKA SRPSKA"), //title
@@ -43,17 +43,17 @@ export const FEDERATIONS = [
 ];
 
 
-export function select_fed(id: number):federation | null {
-    
+export function select_fed(id: number): federation | null {
+
     let federation = null;
     for (let index = 0; index < FEDERATIONS.length; index++) {
-        if(FEDERATIONS[index].id==id){  
+        if (FEDERATIONS[index].id == id) {
             federation = FEDERATIONS[index];
             break;
-        }        
+        }
     }
     return federation;
-   
+
 }
 
 class city {
@@ -230,14 +230,17 @@ export function select_city(id: number) {
 }
 
 export function selectListByFed(id: number) {
-    let cities:city[]=[];
+    let cities: city[] = [];
 
-    CITIES.forEach(c=>{
-        if(c.idFed==id){
+    CITIES.forEach(c => {
+        if (c.idFed == id) {
             cities.push(c);
         }
     });
 
     return cities;
 }
+
+
+
 

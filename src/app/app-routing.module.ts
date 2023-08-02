@@ -7,8 +7,6 @@ import { LoginFormComponent } from './components/login-form/login-form.component
 import { ProductCategoryListComponent } from './components/product-category-list/product-category-list.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 import { ProductBuyerListComponent } from './components/product-buyer-list/product-buyer-list.component';
-// import { SellerCompanyFormComponent } from './components/seller-company-form/seller-company-form.component';
-// import { SellerDetailComponent } from './components/seller-detail/seller-detail.component';
 import { SubcategoryListComponent } from './components/subcategory-list/subcategory-list.component';
 import { ViewProviderToClienteComponent } from './components/view-provider-to-cliente/view-provider-to-cliente.component';
 import { SellerCategoryListComponent } from './components/seller-category-list/seller-category-list.component';
@@ -24,6 +22,9 @@ import { BuyCoinComponent } from './components/buy-coin/buy-coin.component';
 import { PrivacyPageComponent } from './components/privacy-page/privacy-page.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { ResetEmailSentComponent } from './components/reset-email-sent/reset-email-sent.component';
+import { CancelSuscriptionComponent } from './components/cancel-suscription/cancel-suscription.component';
+import { NewCategoryListComponent } from './components/new-category-list/new-category-list.component';
+import { SubcategoryListComponent2 } from './components/subcategory-list copy/subcategory-list.component';
 
 const routes: Routes = [
   {path:'', component:HomeComponent},
@@ -37,6 +38,7 @@ const routes: Routes = [
   {path: 'addetails/:id', component:ProductDetailComponent},
   {path: 'adBuyerList', component:ProductBuyerListComponent},
   {path: 'subcategoryList/:id', component:SubcategoryListComponent},
+  {path: 'subcategoryList2/:id', component:SubcategoryListComponent2},
   {path: 'subcategoryList/:id/:title', component:SubcategoryListComponent},
   {path: 'provider/:id', component:ViewProviderToClienteComponent},
   {path: 'tenderDetail/:idtender', component:TenderDetailComponent},
@@ -50,6 +52,8 @@ const routes: Routes = [
   {path: 'privacy', component:PrivacyPageComponent},
   {path: 'passwordreset/:token', component:ResetPasswordComponent},
   {path: 'emailresetsend', component:ResetEmailSentComponent},
+  {path: 'cancelsuscription', component:CancelSuscriptionComponent},
+  {path: 'newCategory', component:NewCategoryListComponent},
   {path: 'buycoin', component:BuyCoinComponent, canActivate:[AuthGuard]},
   {path: 'paneladmin', loadChildren:() => import('./components/panel-admin/panel-admin.module').then(x=> x.PanelAdminModule), canActivate:[AuthGuard]},
   {path: 'panelseller', loadChildren:() => import('./components/panel-seller/panel-seller.module').then(x=> x.PanelSellerModule), canActivate:[AuthGuard]},
