@@ -10,6 +10,7 @@ import { CompanyComponent } from './company/company.component';
 import { CoinRecordComponent } from './coin-record/coin-record.component';
 import { AdManagementComponent } from './ad-management/ad-management.component';
 import { CoinbycompanyComponent } from './coinbycompany/coinbycompany.component';
+import { SettingComponent } from './setting/setting.component';
 
 const routes: Routes = [
   {path:'', component:PanelAdminComponent, children: [
@@ -22,7 +23,8 @@ const routes: Routes = [
     {path:'company/:iduser', component: CompanyComponent},
     {path:'coinrecord', component: CoinRecordComponent},
     {path:'admanagement', component: AdManagementComponent},
-    {path:'coincompany/:iduser', component: CoinbycompanyComponent}
+    {path:'coincompany/:iduser', component: CoinbycompanyComponent},
+    {path:'setting', component: SettingComponent}
   ]}
 ];
 

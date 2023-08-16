@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { Product } from 'src/app/models/product';
+import { ProductSimple } from 'src/app/models/product-simple';
+import { Product2 } from 'src/app/models/product2';
 import { IMG_PRODUCT_URL } from 'src/app/services/helper';
 import { ProductService } from 'src/app/services/product.service';
 
@@ -10,9 +11,9 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class ProductsSellerComponent {
 
-  products: Product[] = [];
+  products: ProductSimple[] = [];
   iduser: number;
-  urlprod_img = `${IMG_PRODUCT_URL}`;
+  urlprod_img = IMG_PRODUCT_URL;
 
   constructor(private productService: ProductService) { }
 
@@ -25,7 +26,8 @@ export class ProductsSellerComponent {
   }
 
   getProductList(): void {
-    this.productService.getAllByProvider(this.iduser).subscribe(data => {
+    // this.productService.getAllByProvider(this.iduser).subscribe(data => {
+      this.productService.getProducs2byuser(this.iduser).subscribe(data => {
       this.products = data;
     });
 

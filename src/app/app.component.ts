@@ -1,9 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ModalService } from './services/modal.service';
 import { Router } from '@angular/router';
-import { CategoryService } from './services/category.service';
-// import { Capacitor } from '@capacitor/core';
-// import { App } from '@capacitor/app';
+import { Capacitor } from '@capacitor/core';
+ import { App } from '@capacitor/app';
+// import { App as CapacitorApp } from '@capacitor/app';
 
 @Component({
   selector: 'app-root',
@@ -34,7 +34,7 @@ export class AppComponent implements OnInit {
   
   ngOnInit(): void {
     
-    // if (Capacitor.getPlatform() === 'android'){this.registerAndroidListener()} ;
+    if (Capacitor.getPlatform() === 'android'){this.registerAndroidListener()} ;
 
     this.modalService.modalState$.subscribe((a)=> {
       this.modalOpen = a.isOpen;    
@@ -56,7 +56,7 @@ export class AppComponent implements OnInit {
           this.showChats = true;
           
         }else{
-          this.router.navigate(['login'])
+          this.router.navigate(['/login'])
         }     
 
       }            
@@ -64,12 +64,14 @@ export class AppComponent implements OnInit {
 
   }
 
-  // registerAndroidListener() {
-  //   App.addListener('backButton', (data) => {
-  //     if (data.canGoBack) window.history.back();
-  //     else App.exitApp();
-  //   });
-  // }
+  //CapacitorApp.addListener('backButton', ({canGoBack}) => { if(!canGoBack){ CapacitorApp.exitApp(); } else { window.history.back(); } });
+
+  registerAndroidListener() {
+    App.addListener('backButton', (data) => {
+      if (data.canGoBack) window.history.back();
+      else App.exitApp();
+    });
+  }
 
   ngAfterViewInit() {
     const alturaheader = this.header.nativeElement.offsetHeight;

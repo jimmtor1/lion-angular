@@ -15,6 +15,7 @@ import { CompanyComponent } from './company/company.component';
 import { CoinRecordComponent } from './coin-record/coin-record.component';
 import { AdManagementComponent } from './ad-management/ad-management.component';
 import { CoinbycompanyComponent } from './coinbycompany/coinbycompany.component';
+import { SettingComponent } from './setting/setting.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { CoinbycompanyComponent } from './coinbycompany/coinbycompany.component'
     CompanyComponent,
     CoinRecordComponent,
     AdManagementComponent,
-    CoinbycompanyComponent    
+    CoinbycompanyComponent,
+    SettingComponent    
   ],
   imports: [
     CommonModule,

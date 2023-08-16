@@ -4,6 +4,9 @@ import { Observable } from 'rxjs';
 import { Product } from 'src/app/models/product';
 import { ProductImage } from '../models/product-image';
 import { API_URL } from './helper';
+import { Product2 } from '../models/product2';
+import { Product2WithImages } from '../models/product2WithImages';
+import { ProductSimple } from '../models/product-simple';
 
 
 @Injectable({
@@ -14,6 +17,7 @@ export class ProductService {
 
   private URL = `${API_URL}product`
   private URLimages = `${API_URL}productImage/product`
+  private URL2 = `${API_URL}product/product2`
 
   constructor(private httpClient: HttpClient) { }
 
@@ -83,5 +87,41 @@ export class ProductService {
     return this.httpClient.get<Product>(`${this.URL}/promotion/${id}/remove`);
   }
 
+  // __________________________________________________________________
+
+  //get data product2
+  getProducs2bycagetory(idcategory: number): Observable<ProductSimple[]>{
+    return this.httpClient.get<ProductSimple[]>(`${this.URL2}/${idcategory}`);
+  }
+
+  saveProduc2(formData: FormData): Observable<Product2> {
+    return this.httpClient.post<Product2>(this.URL2, formData);
+  }
+
+  getProducs2byuser(iduser: number): Observable<ProductSimple[]>{
+    return this.httpClient.get<ProductSimple[]>(`${this.URL2}/provider/${iduser}`);
+  }
+
+  getProduc2byId(id: number): Observable<Product2WithImages>{
+    return this.httpClient.get<Product2WithImages>(`${this.URL2}/one/${id}`);
+  }
+
+  getProducs2bykeyword(keword: string): Observable<ProductSimple[]>{
+    return this.httpClient.get<ProductSimple[]>(`${this.URL2}/search/${keword}`);
+  }
+
+  getProducs2All(pagePromoted: number, pageUnpromoted:number): Observable<any>{
+    return this.httpClient.get<any>(`${this.URL2}/all/${pagePromoted}/${pageUnpromoted}`);
+  }
+
+  getProducs2All2(pageUnpromoted:number): Observable<any>{
+    return this.httpClient.get<any>(`${this.URL2}/Unpromoted/${pageUnpromoted}`);
+  }
+
+  getProducts2AllFilters(category:number, federation: number, city:number, minPrice:number | undefined, maxPrice:number | undefined, pageNum:number):Observable<any>{
+    return this.httpClient.get<any>(`${this.URL}/filter/${category}/${federation}/${city}/${minPrice==undefined?-1:minPrice}/${maxPrice==undefined?-1:maxPrice}/${pageNum}`)
+  }
+
+ 
 
 }

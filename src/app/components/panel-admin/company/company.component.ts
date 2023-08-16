@@ -1,6 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { NewCategory } from 'src/app/models/newCategory';
 import { Seller } from 'src/app/models/seller';
 import { Subcategory } from 'src/app/models/subcategory';
 import { CategoryService } from 'src/app/services/category.service';
@@ -22,9 +23,9 @@ export class CompanyComponent implements OnInit {
   fed: federation;
   city: number;
   citiesToCombo: any[] = [];
-  subcategoriesSelected: Subcategory[] = [];
+  subcategoriesSelected: NewCategory[] = [];
   editmode: boolean = false;
-  subcategories: Subcategory[] = [];
+  subcategories: NewCategory[] = [];
   imageSelected = false;
   imageFile: File;
   federations: federation[] = FEDERATIONS;
@@ -67,7 +68,7 @@ export class CompanyComponent implements OnInit {
 
       this.subcategoriesSelected = [];
       this.seller.providerSubcategoryList.forEach(p => {
-        this.subcategoriesSelected.push(p.subcategory);
+        this.subcategoriesSelected.push(p.category);
       })
 
     });
@@ -81,7 +82,7 @@ export class CompanyComponent implements OnInit {
     } else {
       this.subcategories = [];
       this.seller.providerSubcategoryList.forEach(p => {
-        this.subcategories.push(p.subcategory);
+        this.subcategories.push(p.category);
       })
     }
 
@@ -89,26 +90,26 @@ export class CompanyComponent implements OnInit {
   }
 
   subcategoriesCombo() {
-    this.categoryService.getAllsub().subscribe(subcategories => {
+    this.categoryService.getAll2().subscribe(subcategories => {
       this.subcategories = subcategories;
 
-      let sub: Subcategory = new Subcategory();
-      sub.category = 1;
-      sub.subcategoryName = "Građevinarstvo";
-      let sub2: Subcategory = new Subcategory();
-      sub2.category = 2;
-      sub2.subcategoryName = "Sve za kuću";
-      let sub3: Subcategory = new Subcategory();
-      sub3.category = 3;
-      sub3.subcategoryName = "Informatika i telekomunikacije";
-      let sub4: Subcategory = new Subcategory();
-      sub4.category = 4;
-      sub4.subcategoryName = "Od glave do pete";
+      // let sub: Subcategory = new Subcategory();
+      // sub.category = 1;
+      // sub.subcategoryName = "Građevinarstvo";
+      // let sub2: Subcategory = new Subcategory();
+      // sub2.category = 2;
+      // sub2.subcategoryName = "Sve za kuću";
+      // let sub3: Subcategory = new Subcategory();
+      // sub3.category = 3;
+      // sub3.subcategoryName = "Informatika i telekomunikacije";
+      // let sub4: Subcategory = new Subcategory();
+      // sub4.category = 4;
+      // sub4.subcategoryName = "Od glave do pete";
 
-      this.subcategories.splice(0, 0, sub);
-      this.subcategories.splice(21, 0, sub2);
-      this.subcategories.splice(48, 0, sub3);
-      this.subcategories.splice(59, 0, sub4);
+      // this.subcategories.splice(0, 0, sub);
+      // this.subcategories.splice(21, 0, sub2);
+      // this.subcategories.splice(48, 0, sub3);
+      // this.subcategories.splice(59, 0, sub4);
 
     });
   }
@@ -117,7 +118,7 @@ export class CompanyComponent implements OnInit {
 
     const formData = new FormData();
     this.subcategoriesSelected.forEach(sub => {
-      formData.append('idsubcategories', sub.idsubcategory.toString())
+      formData.append('idsubcategories', sub.idcategory!.toString())
     })
 
     if (this.imageSelected) {

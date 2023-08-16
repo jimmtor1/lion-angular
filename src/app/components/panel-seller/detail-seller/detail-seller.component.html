@@ -1,4 +1,4 @@
-<div *ngIf="seller" class="container mt-2">
+<div *ngIf="seller" class="container mt-2 mb-3">
 
     <div class="d-flex justify-content-end mb-1">
         <button *ngIf="!editmode" (click)="activeEdit()" class="btn btn-secondary btn-sm">Ažuriraj podatke</button>
@@ -11,11 +11,9 @@
                         <span class="visually-hidden">Loading...</span>
                     </div>
                 </div>
-
             </button>
         </div>
     </div>
-
 
 
     <div class="card mb-3 shadow">
@@ -74,19 +72,17 @@
                     <label for="subcategory">Sve djelatnosti kojima se bavi firma &nbsp;<span
                             class="form-label">*</span></label>
 
-                    <!-- <div *ngIf="editmode" class="mb-3"> -->
                     <!--subcategory-->
                     <select *ngIf="editmode" multiple name="subcategory" id="subcategory"
-                        [(ngModel)]="subcategoriesSelected" class="form-select" style="height: 200px;">
-                        <option *ngFor="let sub of subcategories" [ngValue]="sub" [disabled]="sub.idsubcategory==0"
-                            [ngClass]="sub.idsubcategory==0 ?'title':''">
-                            {{sub.subcategoryName}}
+                        [(ngModel)]="subcategoriesSelected" (change)="viewchange();" class="form-select" style="height: 200px;">
+                        <option  *ngFor="let sub of subcategories" [ngValue]="sub" [disabled]="sub.level==1" [ngClass]="sub.level==1 ?'title':''">
+                            {{sub.name}}
                         </option>
                     </select>
 
                     <div class="border rounded p-1" style="min-height: 100px;">
                         <span *ngFor="let sel of subcategoriesSelected, let i = index"
-                            class="badge rounded-pill bg-dark" style="margin-right: 5px;">{{sel.subcategoryName}}
+                            class="badge rounded-pill bg-dark" style="margin-right: 5px;">{{sel.name}}
                             <!-- <button (click)="deleteSubcategory(sel)">X</button> -->
                         </span>
                     </div>

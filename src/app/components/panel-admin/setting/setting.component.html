@@ -1,0 +1,162 @@
+<div class="container my-3">
+
+    <h2 class="text-center mb-3">Setting</h2>
+
+    <div *ngIf="loading" class="text-center">
+        <div class="spinner-grow text-danger" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+
+    <div *ngIf="!loading">
+
+
+        <h4>Carousers Images (1600 x 340)</h4>
+
+        <div class="row mb-2 pb-1  bg-light">
+            <div class="col-12 col-sm-6 drop-zone d-flex align-items-center">
+                <img *ngIf="!imageSrc[0]" src="{{urlbanner_img+banner[0].imageName}}"
+                    class="img-fluid" alt="...">
+                <img *ngIf="imageSrc[0]" [src]="imageSrc[0]" class="img-fluid" alt="...">
+            </div>
+            <div class="col-12 col-sm-6">
+
+                <div class="row mb-2">
+                    <div class="col-8">
+                        <label for="img0" class="form-label">Change Image</label>
+                        <input class="form-control" accept="image/webp" type="file" id="img0"
+                            (change)="onFileSelected($event,0)">
+                    </div>
+                </div>
+                <div class="row px-2 mb-1">
+                    <input type="text" class="form-control" [(ngModel)]="banner[0].link">
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <button type="button" (click)="save(0)" class="btn btn-danger">Change</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row mb-2 pb-1 bg-light">
+            <div class="col-12 col-sm-6 drop-zone d-flex align-items-center">
+                <img *ngIf="!imageSrc[1]" src="{{urlbanner_img+banner[1].imageName}}"
+                    class="img-fluid" alt="...">
+                <img *ngIf="imageSrc[1]" [src]="imageSrc[1]" class="img-fluid" alt="...">
+            </div>
+            <div class="col-12 col-sm-6">
+                <div class="row mb-2">
+                    <div class="col-8">
+                        <label for="img1" class="form-label">Change Image</label>
+                        <input class="form-control" accept="image/webp" type="file" id="img1"
+                            (change)="onFileSelected($event,1)">
+                    </div>
+                </div>
+                <div class="row px-2 mb-1">
+                    <input type="text" class="form-control" [(ngModel)]="banner[1].link">
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <button type="button" (click)="save(1)" class="btn btn-danger">Change</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-2 pb-1 bg-light">
+            <div class="col-12 col-sm-6 drop-zone d-flex align-items-center">
+                <img *ngIf="!imageSrc[2]" src="{{urlbanner_img+banner[2].imageName}}"
+                    class="img-fluid" alt="...">
+                <img *ngIf="imageSrc[2]" [src]="imageSrc[2]" class="img-fluid" alt="...">
+            </div>
+            <div class="col-12 col-sm-6">
+                <div class="row mb-2">
+                    <div class="col-8">
+                        <label for="img2" class="form-label">Change Image</label>
+                        <input class="form-control" accept="image/webp" type="file" id="img2"
+                            (change)="onFileSelected($event,2)">
+                    </div>
+                </div>
+                <div class="row px-2 mb-1">
+                    <input type="text" class="form-control" [(ngModel)]="banner[2].link">
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <button type="button" (click)="save(2)" class="btn btn-danger">Change</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <hr>
+
+        <h4>Banner Images</h4>
+
+        <div class="row mb-2 pb-1 bg-light">
+            <div class="col-12 col-sm-6 drop-zone d-flex align-items-center">
+                <img *ngIf="!imageSrc[3]" src="{{urlbanner_img}}BANNER-570X152.jpg" class="img-fluid" alt="...">
+                <img *ngIf="imageSrc[3]" [src]="imageSrc[3]" class="img-fluid" alt="...">
+            </div>
+            <div class="col col-sm-6">
+                <div class="row mb-2">
+                    <div class="col-8">
+                        <label for="img3" class="form-label">Change Image</label>
+                        <input class="form-control" accept="image/webp" type="file" id="img3"
+                            (change)="onFileSelected($event,3)">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <button type="button" (click)="save(3)" class="btn btn-danger">Change</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-2 pb-1 bg-light">
+            <div class="col-12 col-sm-6 drop-zone d-flex align-items-center">
+                <img *ngIf="!imageSrc[4]" src="{{urlbanner_img}}BANNER-270X152(1).jpg" class="img-fluid" alt="...">
+                <img *ngIf="imageSrc[4]" [src]="imageSrc[4]" class="img-fluid" alt="...">
+            </div>
+            <div class="col-12 col-sm-6">
+                <div class="row mb-2">
+                    <div class="col-8">
+                        <label for="img4" class="form-label">Change Image</label>
+                        <input class="form-control" accept="image/webp" type="file" id="img4"
+                            (change)="onFileSelected($event,4)">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <button type="button" (click)="save(4)" class="btn btn-danger">Change</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-2 pb-1 bg-light">
+            <div class="col-12 col-sm-6 drop-zone d-flex align-items-center">
+                <img *ngIf="!imageSrc[5]" src="{{urlbanner_img}}BANNER-270X152(2).jpg" class="img-fluid" alt="...">
+                <img *ngIf="imageSrc[5]" [src]="imageSrc[5]" class="img-fluid" alt="...">
+            </div>
+            <div class="col-12 col-sm-6">
+                <div class="row mb-2">
+                    <div class="col-8">
+                        <label for="img5" class="form-label">Change Image</label>
+                        <input class="form-control" accept="image/webp" type="file" id="img5"
+                            (change)="onFileSelected($event,5)">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <button type="button" (click)="save(5)" class="btn btn-danger">Change</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+</div>

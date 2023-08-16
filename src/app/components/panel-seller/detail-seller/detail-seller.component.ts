@@ -6,6 +6,7 @@ import { SellerService } from 'src/app/services/seller.service';
 import { DatePipe } from '@angular/common';
 import { CategoryService } from 'src/app/services/category.service';
 import { ModalService } from 'src/app/services/modal.service';
+import { NewCategory } from 'src/app/models/newCategory';
 
 @Component({
   selector: 'app-detail-seller',
@@ -18,8 +19,9 @@ export class DetailSellerComponent implements OnInit {
   iduser: number;
   urlprof_img = `${IMG_PROFILE_URL}`;
   image: string;
-  subcategories: Subcategory[] = [];
-  subcategoriesSelected: Subcategory[] = [];
+  subcategories: NewCategory[] = [];
+  // subcategoriesSelected: Company_subcategory[] = [];
+  subcategoriesSelected: NewCategory[] = [];
   modalShow = false;
   saving:boolean = false;
 
@@ -49,10 +51,15 @@ export class DetailSellerComponent implements OnInit {
 
   }
 
+  viewchange(){
+    console.log(this.subcategoriesSelected);
+  }
+
   getSeller() {
 
     this.sellerService.getById(this.iduser).subscribe(sellerBd => {
-      this.seller = sellerBd;      
+      this.seller = sellerBd;    
+       
       this.image = this.urlprof_img + this.seller.image;
 
       if (this.seller.user.federation) {
@@ -73,7 +80,7 @@ export class DetailSellerComponent implements OnInit {
 
       this.subcategoriesSelected = [];
       this.seller.providerSubcategoryList.forEach(p => {
-        this.subcategoriesSelected.push(p.subcategory);
+        this.subcategoriesSelected.push(p.category);
       })
 
     });
@@ -98,7 +105,7 @@ export class DetailSellerComponent implements OnInit {
     } else {
       this.subcategories = [];
       this.seller.providerSubcategoryList.forEach(p => {
-        this.subcategories.push(p.subcategory);
+        //this.subcategories.push(p.subcategory); fixing
       })
     }
 
@@ -106,26 +113,9 @@ export class DetailSellerComponent implements OnInit {
   }
 
   subcategoriesCombo() {
-    this.categoryService.getAllsub().subscribe(subcategories => {
-      this.subcategories = subcategories;
-
-      let sub: Subcategory = new Subcategory();
-      sub.category = 1;
-      sub.subcategoryName = "Građevinarstvo";
-      let sub2: Subcategory = new Subcategory();
-      sub2.category = 2;
-      sub2.subcategoryName = "Sve za kuću";
-      let sub3: Subcategory = new Subcategory();
-      sub3.category = 3;
-      sub3.subcategoryName = "Informatika i telekomunikacije";
-      let sub4: Subcategory = new Subcategory();
-      sub4.category = 4;
-      sub4.subcategoryName = "Od glave do pete";
-
-      this.subcategories.splice(0, 0, sub);
-      this.subcategories.splice(21, 0, sub2);
-      this.subcategories.splice(52, 0, sub3);
-      this.subcategories.splice(63, 0, sub4);
+    //this.categoryService.getAllsub().subscribe(subcategories => {
+    this.categoryService.getAll2type().subscribe(subcategories => {
+      this.subcategories = subcategories;    
       
     });
   }
@@ -163,10 +153,10 @@ export class DetailSellerComponent implements OnInit {
 
     let sub: Subcategory = new Subcategory();
     this.subcategories.forEach(s => {
-      if (s.idsubcategory == idsubcategory) {
-        sub = s;
-        return;
-      }
+      // if (s.idsubcategory == idsubcategory) {  fixing
+      //   sub = s;
+      //   return;
+      // }
     })
     return sub;
 
@@ -191,7 +181,7 @@ export class DetailSellerComponent implements OnInit {
   }
 
   deleteSubcategory(subcategory:Subcategory) {
-    const index = this.subcategoriesSelected.findIndex(sub => sub.idsubcategory === subcategory.idsubcategory);
+    const index = this.subcategoriesSelected.findIndex(sub => sub.idcategory === subcategory.idsubcategory);
     if (index >= 0) {
       this.subcategoriesSelected.splice(index, 1);
     }
@@ -200,10 +190,15 @@ export class DetailSellerComponent implements OnInit {
   save() {
 
     this.saving = true;
+    let categoriesReady:number[]=[];
 
     const formData = new FormData();   
-    this.subcategoriesSelected.forEach(sub => {      
-      formData.append('idsubcategories', sub.idsubcategory.toString())
+    this.subcategoriesSelected.forEach(sub => { 
+      formData.append('idsubcategories', sub.id.toString()); 
+      if(!categoriesReady.includes(sub.type!)){
+        formData.append('idsubcategories', sub.type.toString()); 
+        categoriesReady.push(sub.type);   
+      }      
     })
 
     if (this.imageSelected) {
@@ -219,9 +214,7 @@ export class DetailSellerComponent implements OnInit {
     formData.append('deliveryCost', this.seller.deliveryCost);
     formData.append('image', this.seller.image);
     formData.append('biography', this.seller.biography);
-    // formData.append('identification', this.seller.identification);
-    // formData.append('billedTo', this.seller.billedTo);
-
+   
     if (this.seller.accepted !== null) {
       formData.append('accepted', this.seller.accepted.toString());
     }
@@ -280,16 +273,6 @@ export class DetailSellerComponent implements OnInit {
       formData.append('endsunday', this.seller.endsunday.toString());
     }
    
-    
-
-    // if (this.seller.startTime) {
-    //   formData.append('startTime', this.seller.startTime.toString());
-    // }
-
-    // if (this.seller.endTime) {
-    //   formData.append('endTime', this.seller.endTime.toString());
-    // }
-
     formData.append('facebook', this.seller.facebook);
     formData.append('instagram', this.seller.instagram);
     formData.append('youtube', this.seller.youtube);
@@ -325,9 +308,8 @@ export class DetailSellerComponent implements OnInit {
     }else{
       formData.append('showEmail', "false");
     }
-    
-
-    this.sellerService.save(formData).subscribe(dato => {
+      
+     this.sellerService.save(formData).subscribe(dato => {
 
       if (dato.idprovider > 0) {
         this.getSeller();
@@ -337,7 +319,7 @@ export class DetailSellerComponent implements OnInit {
         console.log("no se guardó");
       }
       this.saving = false;
-    }, error => {console.log(error);this.saving=false});
+     }, error => {console.log(error);this.saving=false});
   }
 
  

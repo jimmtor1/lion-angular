@@ -6,26 +6,25 @@
     </div>
 </div>
 
-<div *ngIf="!loading" class="container pt-3">
+<div *ngIf="!loading" class="container pt-3 mb-3">
     <!-- style="max-width: 940px;" -->
     <div class="big card mb-3">
         <!-- <div class="mx-auto" style="max-width: 940px;"> -->
         <div class="row g-0">
             <div class="col-md-7">
-                <div class="d-flex">
-                    <img [src]="principalImage" class="img-fluid rounded-start p-3 mx-auto"
+                <div class="d-flex" >
+                    <img  [src]="this.urlprod_img+product.mainImage" class="img-fluid rounded-start p-3 mx-auto"
                         style="object-fit: contain; height: 500px;" alt="product-img">
                 </div>
 
-                <!-- <img [src]="principalImage" class="img-fluid rounded-start p-3 mx-auto" alt="product-img"> -->
 
                 <!-- thumbnail image list -->
-                <ul class="list-unstyled d-flex overflow-auto flex-nowrap" style="margin-left: 14px;">
-                    <li *ngFor="let img of product.productImageList, let i = index" class="flex-row"
+                <ul class="list-unstyled d-flex overflow-auto flex-nowrap"  style="margin-left: 14px;">
+                    <li *ngFor="let img of productImageList, let i = index" class="flex-row"
                         style="margin-right: 6px; cursor: pointer;">
                         <div class="car" style="width: 5rem;">
                             <a (click)="chagePrincipalImage(i);">
-                                <img src="{{urlprod_img}}{{img.idimage}}{{img.extension}}"
+                                <img src="{{urlprod_img}}{{img.extension}}"
                                     class="card-img-top card-img-bottom" style="height: 80px;" alt="...">
                             </a>
                         </div>
@@ -43,10 +42,10 @@
                         <div class="card-header fs-3">{{product.productName}}</div>
                         <div class="card-body">
 
-                            <span *ngIf="promoted && iduser==product.idprovider"
+                            <span *ngIf="promoted && iduser==product.iduser"
                                 class="badge rounded-pill bg-primary mb-2">Artikal izdvojen do {{product.promotedTo |
                                 date: 'dd.MM.yy HH:mm'}}</span>
-                            <span *ngIf="promoted && iduser!==product.idprovider"
+                            <span *ngIf="promoted && iduser!==product.iduser"
                                 class="badge rounded-pill bg-primary mb-2">IZDVOJENO</span>
 
                             <p class="card-text">
@@ -63,13 +62,13 @@
                             </p>
                             <p *ngIf="seller.user.federation!=null">Grad: {{city}}</p>
 
-                            <a *ngIf="iduser!==product.idprovider" (click)="emitSeller(seller.user.id);"
+                            <a *ngIf="iduser!==product.iduser" (click)="emitSeller(seller.user.id);"
                                 class="btn btn-danger">
                                 <fa-icon [icon]="['fas','comment']"></fa-icon>
                                 Pošaljite poruku
                             </a>
 
-                            <div *ngIf="iduser==product.idprovider" class="row bg-light mt-4 py-3">
+                            <div *ngIf="iduser==product.iduser" class="row bg-light mt-4 py-3">
 
                                 <div class="col text-center">
                                     <a class="btn btn-danger d-block"
@@ -124,7 +123,7 @@
                 <p>Ime firme: {{seller.companyName}}</p>
 
                 <p>Prodavač:
-                    <a [routerLink]="['/provider', product.idprovider]"> {{seller.user.firstName}}
+                    <a [routerLink]="['/provider', product.iduser]"> {{seller.user.firstName}}
                         {{seller.user.lastName}}</a>
                 </p>
 
@@ -138,21 +137,19 @@
 
                 <ul>
                     <li *ngIf="seller.facebook" class="list-group-item">                        
-                        <a href="{{seller.facebook}}">
-                            <fa-icon [icon]="['fab','facebook']"></fa-icon>
-                            {{seller.facebook}}
+                        <a href="{{seller.facebook}}" target="_blank">
+                            <fa-icon [icon]="['fab','facebook']" style="font-size: 50px;"></fa-icon>                            
                         </a>                        
                     </li>
                     <li *ngIf="seller.instagram" class="list-group-item">
-                        <a href="{{seller.instagram}}">
-                            <fa-icon [icon]="['fab','instagram']"></fa-icon>
-                            {{seller.facebook}}
+                        <a href="{{seller.instagram}}" target="_blank">
+                            <fa-icon [icon]="['fab','instagram']"></fa-icon>                            
                         </a>                         
                     </li>
                     <li *ngIf="seller.youtube" class="list-group-item">
-                        <a href="{{seller.youtube}}">
+                        <a href="{{seller.youtube}}" target="_blank">
                             <fa-icon [icon]="['fab','youtube']"></fa-icon>
-                            {{seller.youtube}}
+                            <!-- {{seller.youtube}} -->
                         </a> 
                     </li>
                 </ul>

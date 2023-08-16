@@ -1,4 +1,4 @@
-<div class="container mt-2">
+<div class="container mt-2 mb-3">
 
     <!-- buttons -->
     <div class="d-flex justify-content-end mb-1">
@@ -10,7 +10,7 @@
         <div *ngFor="let product of products" class="col">
 
             <div class="card h-100">
-                <img src="{{urlprod_img}}{{product.productImageList[0].idimage}}{{product.productImageList[0].extension}}"
+                <img src="{{urlprod_img}}{{product.mainImage}}"
                     style="height: 200px;" class="card-img-top" alt="...">
                 <hr class="m-0">
                 <div class="card-body">

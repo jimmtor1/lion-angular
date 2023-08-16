@@ -26,18 +26,35 @@ export class CategoryService {
     return this.httpClient.get<Category[]>(this.URL);
   }
 
-  getSubcategories(id:number):Observable<Subcategory[]>{
-    return this.httpClient.get<Subcategory[]>(`${this.URL2}/${id}`);
-  }
-
   getAllsub():Observable<Subcategory[]>{
     return this.httpClient.get<Subcategory[]>(`${this.URL3}`);
   }
 
+  // getSubcategories(id:number):Observable<Subcategory[]>{
+  //   return this.httpClient.get<Subcategory[]>(`${this.URL2}/${id}`);
+  // }
+  
   //______________new version cateogry_______________________________
+
+  getSubcategories2():Observable<NewCategory[]>{
+    return this.httpClient.get<NewCategory[]>(`${this.URL4}/productonly`);
+  }
+
+  getSublist(id:number):Observable<NewCategory[]>{
+    return this.httpClient.get<NewCategory[]>(`${this.URL4}/sublist/${id}`);
+  }
+
+  getSublistfromid(id:number):Observable<NewCategory[]>{
+    return this.httpClient.get<NewCategory[]>(`${this.URL4}/sublistfromid/${id}`);
+  }
 
   getAll2():Observable<NewCategory[]>{    
     return this.httpClient.get<NewCategory[]>(this.URL4);
   }
 
+  getAll2type():Observable<NewCategory[]>{    
+    return this.httpClient.get<NewCategory[]>(this.URL4+"/typeseller");
+  }
+
+ 
 }

@@ -23,7 +23,6 @@ export class BuyerService {
   }
 
   createSeller(seller:Seller):Observable<Seller>{  
-    console.log("guardando service"); 
     return this.http.post<Seller>(`${this.baseUrl2}/register`, seller);
   }
 

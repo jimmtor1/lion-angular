@@ -1,318 +1,343 @@
 <!-- carrusel -->
-<div id="carouselExampleFade" class="carousel slide carousel-fade d-none d-sm-block" data-bs-ride="carousel">
-    <div class="carousel-inner">
-        <div class="carousel-item active d-flex justify-content-center">
-            <img src="assets/images/D_NQ_790622-MLA69393513459_052023-OO.webp" class="d-block" alt="...">
+<div>
+    <div id="carouselExampleFade" class="carousel slide carousel-fade d-none d-sm-block" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active d-flex justify-content-center">
+                <a [href]="banner.length>0?banner[0].link:''">
+                    <img *ngIf="banner.length>0" src="{{urlbanner_img+banner[0].imageName}}" class="d-block" alt="...">
+                </a>
+            </div>
+            <div class="carousel-item d-flex justify-content-center">
+                <a [href]="banner.length>0?banner[1].link:''">
+                    <img *ngIf="banner.length>0" src="{{urlbanner_img+banner[1].imageName}}" class="d-block" alt="...">
+                </a>
+            </div>
+            <div class="carousel-item d-flex justify-content-center">
+                <a [href]="banner.length>0?banner[2].link:''">
+                    <img *ngIf="banner.length>0" src="{{urlbanner_img+banner[2].imageName}}" class="d-block" alt="...">
+                </a>
+            </div>
         </div>
-        <div class="carousel-item d-flex justify-content-center">
-            <img src="assets/images/D_NQ_937834-MLA69393511417_052023-OO.webp" class="d-block" alt="...">
-        </div>
-        <div class="carousel-item d-flex justify-content-center">
-            <img src="assets/images/D_NQ_863459-MLA69393473823_052023-OO.webp" class="d-block" alt="...">
-        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
     </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-    </button>
-</div>
-<!-- carrusel end -->
+    <!-- carrusel end -->
 
-<!-- carrusel computer -->
-<div id="carouselExampleFade" class="carousel slide carousel-fade d-sm-none h-50" data-bs-ride="carousel">
-    <div class="carousel-inner">
+    <!-- carrusel computer -->
+    <div id="carouselExampleFade" class="carousel slide carousel-fade d-sm-none h-50" data-bs-ride="carousel">
+        <div class="carousel-inner">
 
-        <div class="carousel-item active d-flex justify-content-center">
-            <img src="assets/images/D_NQ_949374-MLA69383731340_052023-F.webp" class="d-block w-100" alt="...">
-        </div>
+            <div class="carousel-item active d-flex justify-content-center">
+                <img src="{{urlbanner_img}}BANNER-270X152(1).jpg" class="d-block w-100" alt="...">
+            </div>
 
-        <div class="carousel-item d-flex justify-content-center">
-            <img src="assets/images/descarga.webp" class="d-block w-100" alt="...">
-        </div>
+            <div class="carousel-item d-flex justify-content-center">
+                <img src="{{urlbanner_img}}BANNER-270X152(1).jpg" class="d-block w-100" alt="...">
+            </div>
 
-        <!-- <div class="carousel-item d-flex justify-content-center">
+            <!-- <div class="carousel-item d-flex justify-content-center">
             <img src="assets/images/D_NQ_863459-MLA69393473823_052023-OO.webp" class="d-block" alt="...">
         </div> -->
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-    </button>
-</div>
-
-<!-- cinta roja version2 -->
-<div class="container mt-3">
-    <div class="border border-2 border-danger d-flex justify-content-between overflow-auto flex-nowrap rounded pt-2">
-
-        <div class="d-flex mx-2 ">
-            <fa-icon [icon]="['fas', 'building']" class="fs-4 mx-2"></fa-icon>
-            <div>
-                <strong style="white-space: nowrap;">Sve firme</strong>
-                <p>BiH</p>
-            </div>
         </div>
-        <div class="d-flex mx-2">
-            <fa-icon [icon]="['fas', 'handshake']" class="fs-4 mx-2"></fa-icon>
-            <div>
-                <strong>Zadovoljni</strong>
-                <div>Klijenati</div>
-            </div>
-        </div>
-        <div class="d-flex mx-2">
-            <fa-icon [icon]="['fas', 'headset']" class="fs-4 mx-2"></fa-icon>
-            <div>
-                <strong style="white-space: nowrap;">365 dana</strong>
-                <div>Podrške</div>
-            </div>
-        </div>
-        <div class="d-flex mx-2">
-            <fa-icon [icon]="['fas', 'hand-holding-medical']" class="fs-4 mx-2"></fa-icon>
-            <div>
-                <strong>Sigurna</strong>
-                <div>Kupovina</div>
-            </div>
-        </div>
-        <div class="d-flex mx-2">
-            <fa-icon [icon]="['fas', 'tag']" class="fs-4 mx-2"></fa-icon>
-            <div>
-                <strong style="white-space: nowrap;">Samo najbolji</strong>
-                <div>Kvalitet</div>
-            </div>
-        </div>
-
-    </div>
-</div>
-
-
-<div class="container mt-2">
-
-
-    <div class="row row-banner" style="margin: auto 0;">
-
-        <div class="mb-2 col-m-12 col-xl-6 d-flex justify-content-center pg">
-            <a class="" routerLink="marketing">
-                <img class="rounded-3 pg" src="assets/images/BANNER-570X152.jpg" alt="">
-            </a>
-        </div>
-
-        <div class="col-m-12 col-xl-6 d-flex justify-content-center pq">
-
-
-
-            <a routerLink="marketing" style="margin-right: 3px;">
-                <img class="rounded-3" src="assets/images/BANNER-270X152.jpg" alt="">
-            </a>
-
-            <a routerLink="marketing">
-                <img class="rounded-3" src="assets/images/BANNER-270X152.jpg" alt="">
-            </a>
-
-
-
-        </div>
-
-
-
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
     </div>
 
-</div>
+    <!-- cinta roja version2 -->
+    <div class="container mt-3">
+        <div
+            class="border border-2 border-danger d-flex justify-content-between overflow-auto flex-nowrap rounded pt-2">
 
-<div class="container bg-light">
-
-    <div class="row py-0">
-
-        <div class="col-6 col-md-3">
-            <div class="card mb-3" style="max-width: 540px;">
-                <div class="row g-0">
-                    <div class="col-4">
-                        <img src="assets/images/istockphoto-1278244116-612x612-1-600x500.jpg"
-                            class="img-fluid rounded-start" alt="...">
-                    </div>
-                    <div class="col-8">
-                        <div class="card-body p-1">
-                            <p class="card-text">Armirano-betonski radovi</p>
-                            <a routerLink="providerSubcategoryList/1/3" class="stretched-link"></a>
-                        </div>
-                    </div>
+            <div class="d-flex mx-2 ">
+                <fa-icon [icon]="['fas', 'building']" class="fs-4 mx-2"></fa-icon>
+                <div>
+                    <strong style="white-space: nowrap;">Sve firme</strong>
+                    <p>BiH</p>
                 </div>
             </div>
-        </div>
-
-        <div class="col-6 col-md-3">
-            <div class="card mb-3" style="max-width: 540px;">
-                <div class="row g-0">
-                    <div class="col-4">
-                        <img src="assets/images/png-clipart-video-cameras-bible-film-clapperboard-audio-visual-studio-mix-600x500.png"
-                            class="img-fluid rounded-start" alt="...">
-                    </div>
-                    <div class="col-8">
-                        <div class="card-body p-1">
-                            <p class="card-text">Audio, video i foto</p>
-                            <a routerLink="providerSubcategoryList/3/51" class="stretched-link"></a>
-                        </div>
-                    </div>
+            <div class="d-flex mx-2">
+                <fa-icon [icon]="['fas', 'handshake']" class="fs-4 mx-2"></fa-icon>
+                <div>
+                    <strong>Zadovoljni</strong>
+                    <div>Klijenti</div>
                 </div>
             </div>
-        </div>
-
-        <div class="col-6 col-md-3">
-            <div class="card mb-3" style="max-width: 540px;">
-                <div class="row g-0">
-                    <div class="col-4">
-                        <img src="assets/images/betonski-radovi-1-600x500.jpg" class="img-fluid rounded-start"
-                            alt="...">
-                    </div>
-                    <div class="col-8">
-                        <div class="card-body p-1">
-                            <p class="card-text">Betonski radovi</p>
-                            <a routerLink="providerSubcategoryList/1/2" class="stretched-link"></a>
-                        </div>
-                    </div>
+            <div class="d-flex mx-2">
+                <fa-icon [icon]="['fas', 'headset']" class="fs-4 mx-2"></fa-icon>
+                <div>
+                    <strong style="white-space: nowrap;">365 dana</strong>
+                    <div>Podrške</div>
                 </div>
             </div>
-        </div>
-
-        <div class="col-6 col-md-3">
-            <div class="card mb-3" style="max-width: 540px;">
-                <div class="row g-0">
-                    <div class="col-4">
-                        <img src="assets/images/zagreb-20120904-00546-600x500.jpg" class="img-fluid rounded-start"
-                            alt="...">
-                    </div>
-                    <div class="col-8">
-                        <div class="card-body p-1">
-                            <p class="card-text">Bravarski radovi</p>
-                            <a routerLink="providerSubcategoryList/1/9" class="stretched-link"></a>
-                        </div>
-                    </div>
+            <div class="d-flex mx-2">
+                <fa-icon [icon]="['fas', 'hand-holding-medical']" class="fs-4 mx-2"></fa-icon>
+                <div>
+                    <strong>Sigurna</strong>
+                    <div>Kupovina</div>
                 </div>
             </div>
+            <div class="d-flex mx-2">
+                <fa-icon [icon]="['fas', 'tag']" class="fs-4 mx-2"></fa-icon>
+                <div>
+                    <strong style="white-space: nowrap;">Samo najbolji</strong>
+                    <div>Kvalitet</div>
+                </div>
+            </div>
+
         </div>
     </div>
 
-    <div class="row py-0">
 
-        <div class="col-6 col-md-3">
-            <div class="card mb-3" style="max-width: 540px;">
-                <div class="row g-0">
-                    <div class="col-4">
-                        <img src="assets/images/ARCO-regal-570x321-1-600x500.jpg" class="img-fluid rounded-start"
-                            alt="...">
-                    </div>
-                    <div class="col-8">
-                        <div class="card-body p-1">
-                            <p class="card-text">Dnevni boravak namještaj</p>
-                            <a routerLink="providerSubcategoryList/2/23" class="stretched-link"></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="container mt-2">
 
-        <div class="col-6 col-md-3">
-            <div class="card mb-3" style="max-width: 540px;">
-                <div class="row g-0">
-                    <div class="col-4">
-                        <img src="assets/images/o_341193_1024-600x500.jpg" class="img-fluid rounded-start" alt="...">
-                    </div>
-                    <div class="col-8">
-                        <div class="card-body p-1">
-                            <p class="card-text">Gradjevinarstvo</p>
-                            <a routerLink="providerSubcategoryList/1/0" class="stretched-link"></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <div class="col-6 col-md-3">
-            <div class="card mb-3" style="max-width: 540px;">
-                <div class="row g-0">
-                    <div class="col-4">
-                        <img src="assets/images/gradjevinarstvo-600x500.jpg" class="img-fluid rounded-start" alt="...">
-                    </div>
-                    <div class="col-8">
-                        <div class="card-body p-1">
-                            <p class="card-text">Gradjevinski radovi</p>
-                            <a routerLink="providerSubcategoryList/1/0" class="stretched-link"></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <div class="row row-banner" style="margin: auto 0;">
 
-        <div class="col-6 col-md-3">
-            <div class="card mb-3" style="max-width: 540px;">
-                <div class="row g-0">
-                    <div class="col-4">
-                        <img src="assets/images/4041338731-600x500.jpg" class="img-fluid rounded-start" alt="...">
-                    </div>
-                    <div class="col-8">
-                        <div class="card-body p-1">
-                            <p class="card-text">Krovopokrivački radovi</p>
-                            <a routerLink="providerSubcategoryList/1/7" class="stretched-link"></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="bg-white mb-3 mt-3">
-
-        <h4 class="text-center text-danger mb-0">Firme / Trgovine</h4>
-        <hr class="mt-1">
-
-        <!-- <p *ngIf="categoryWithSellers[0].sellers.length==0">Nema firmi za prikaz</p> -->
-        <p *ngIf="!sellers">Nema firmi za prikaz</p>
-        <div class="d-flex overflow-auto flex-nowrap">
-
-            <div *ngFor="let s of sellers" class="mx-1">
-                <div class="card h-100" style="width: 16rem;">
-
-                    <img *ngIf="s.image" src="{{urlprof_img}}{{s.image}}" style="height: 150px; object-fit: contain;"
-                        class="card-img-top" alt="...">
-
-                    <img *ngIf="!s.image" src="assets/images/no-image-icon.svg" style="height: 150px;"
-                        class="card-img-top" alt="...">
-
-                    <hr class="m-0 p-0">
-                    <div class="card-body m-0 pb-0">
-                        <h6 class="card-title mt-0">{{s.companyName}}</h6>
-
-                        <p class="m-0">{{get_city(s.user.city)}}</p>
-                        <p style="overflow: hidden; max-height: 2em; line-height: 1;" class="text-muted fs-6">
-                            {{s.biography}}
-                        </p>
-                        <a routerLink="/provider/{{s.user.id}}" class="stretched-link m-0 p-0"></a>
-                    </div>
-                </div>
+            <div class="mb-2 col-m-12 col-xl-6 d-flex justify-content-center pg">
+                <a class="" routerLink="marketing">
+                    <img class="rounded-3 pg" src="{{urlbanner_img}}BANNER-570X152.jpg" alt="">
+                </a>
             </div>
 
-        </div>
+            <div class="col-m-12 col-xl-6 d-flex justify-content-center pq">
 
+
+
+                <a routerLink="marketing" style="margin-right: 3px;">
+                    <img class="rounded-3" src="{{urlbanner_img}}BANNER-270X152(1).jpg" alt="">
+                </a>
+
+                <a routerLink="marketing">
+                    <img class="rounded-3" src="{{urlbanner_img}}BANNER-270X152(2).jpg" alt="">
+                </a>
+
+
+
+            </div>
+
+
+
+        </div>
 
     </div>
 
-    <h4 class="text-center text-danger mb-0">Svi proizvodi / Usluge</h4>
-    <hr class="mt-1 mb-0">
-    <div class="row g-2">
-        <div class="col-6 col-sm-4 col-md-3 col-lg-2" *ngFor="let product of products">
-            <app-product-card-mini [product]="product"></app-product-card-mini>
-        </div>
-    </div>
+    <div class="container bg-light mb-3">
 
-    <br>
-    <br>
-    <br>
-    <!-- <productos-inicio></productos-inicio> -->
+        <div class="row py-0">
+
+            <div class="col-6 col-md-3">
+                <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row g-0">
+                        <div class="col-4">
+                            <img src="assets/images/istockphoto-1278244116-612x612-1-600x500.jpg"
+                                class="img-fluid rounded-start" alt="...">
+                        </div>
+                        <div class="col-8">
+                            <div class="card-body p-1">
+                                <p class="card-text">Armirano-betonski radovi</p>
+                                <a routerLink="providerSubcategoryList/Građevinarstvo/Armirano-betonski radovi/29"
+                                    class="stretched-link"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6 col-md-3">
+                <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row g-0">
+                        <div class="col-4">
+                            <img src="assets/images/png-clipart-video-cameras-bible-film-clapperboard-audio-visual-studio-mix-600x500.png"
+                                class="img-fluid rounded-start" alt="...">
+                        </div>
+                        <div class="col-8">
+                            <div class="card-body p-1">
+                                <p class="card-text">Audio, video i foto</p>
+                                <a routerLink="providerSubcategoryList/Informatika i telekomunikacije/Servis TV, audio i video uređaja/77"
+                                    class="stretched-link"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6 col-md-3">
+                <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row g-0">
+                        <div class="col-4">
+                            <img src="assets/images/betonski-radovi-1-600x500.jpg" class="img-fluid rounded-start"
+                                alt="...">
+                        </div>
+                        <div class="col-8">
+                            <div class="card-body p-1">
+                                <p class="card-text">Betonski radovi</p>
+                                <a routerLink="providerSubcategoryList/Građevinarstvo/Betonski radovi/28"
+                                    class="stretched-link"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6 col-md-3">
+                <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row g-0">
+                        <div class="col-4">
+                            <img src="assets/images/zagreb-20120904-00546-600x500.jpg" class="img-fluid rounded-start"
+                                alt="...">
+                        </div>
+                        <div class="col-8">
+                            <div class="card-body p-1">
+                                <p class="card-text">Bravarski radovi</p>
+                                <a routerLink="providerSubcategoryList/Građevinarstvo/Bravarski radovi/35"
+                                    class="stretched-link"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row py-0">
+
+            <div class="col-6 col-md-3">
+                <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row g-0">
+                        <div class="col-4">
+                            <img src="assets/images/ARCO-regal-570x321-1-600x500.jpg" class="img-fluid rounded-start"
+                                alt="...">
+                        </div>
+                        <div class="col-8">
+                            <div class="card-body p-1">
+                                <p class="card-text">Dnevni boravak namještaj</p>
+                                <a routerLink="providerSubcategoryList/Sve za kuću/Dnevni boravak namještaj/49"
+                                    class="stretched-link"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6 col-md-3">
+                <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row g-0">
+                        <div class="col-4">
+                            <img src="assets/images/o_341193_1024-600x500.jpg" class="img-fluid rounded-start"
+                                alt="...">
+                        </div>
+                        <div class="col-8">
+                            <div class="card-body p-1">
+                                <p class="card-text">Gradjevinarstvo</p>
+                                <a routerLink="providerSubcategoryList/Građevinarstvo/Filteri/1"
+                                    class="stretched-link"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6 col-md-3">
+                <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row g-0">
+                        <div class="col-4">
+                            <img src="assets/images/gradjevinarstvo-600x500.jpg" class="img-fluid rounded-start"
+                                alt="...">
+                        </div>
+                        <div class="col-8">
+                            <div class="card-body p-1">
+                                <p class="card-text">Gradjevinski radovi</p>
+                                <a routerLink="providerSubcategoryList/Građevinarstvo/Filteri/1"
+                                    class="stretched-link"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6 col-md-3">
+                <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row g-0">
+                        <div class="col-4">
+                            <img src="assets/images/4041338731-600x500.jpg" class="img-fluid rounded-start" alt="...">
+                        </div>
+                        <div class="col-8">
+                            <div class="card-body p-1">
+                                <p class="card-text">Krovopokrivački radovi</p>
+                                <a routerLink="providerSubcategoryList/Građevinarstvo/Krovopokrivački radovi/33"
+                                    class="stretched-link"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white mb-3 mt-3">
+
+            <h4 class="text-center text-danger mb-0">Firme / Trgovine</h4>
+            <hr class="mt-1">
+
+            <!-- <p *ngIf="categoryWithSellers[0].sellers.length==0">Nema firmi za prikaz</p> -->
+            <p *ngIf="!sellers">Nema firmi za prikaz</p>
+            <div class="d-flex overflow-auto flex-nowrap">
+
+                <div *ngFor="let s of sellers" class="mx-1">
+                    <div class="card h-100" style="width: 16rem;">
+
+                        <img *ngIf="s.image" src="{{urlprof_img}}{{s.image}}"
+                            style="height: 150px; object-fit: contain;" class="card-img-top" alt="...">
+
+                        <img *ngIf="!s.image" src="assets/images/no-image-icon.svg" style="height: 150px;"
+                            class="card-img-top" alt="...">
+
+                        <hr class="m-0 p-0">
+                        <div class="card-body m-0 pb-0">
+                            <h6 class="card-title mt-0">{{s.companyName}}</h6>
+
+                            <p class="m-0">{{get_city(s.user.city)}}</p>
+                            <p style="overflow: hidden; max-height: 2em; line-height: 1;" class="text-muted fs-6">
+                                {{s.biography}}
+                            </p>
+                            <a routerLink="/provider/{{s.user.id}}" class="stretched-link m-0 p-0"></a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+
+        <h4 class="text-center text-danger mb-0">Svi proizvodi / Usluge</h4>
+        <hr class="mt-1 mb-0">
+
+        <!-- <div class="row g-2"> -->
+            <!-- <div class="col-6 col-sm-4 col-md-3 col-lg-2" > -->
+                <!-- *ngFor="let product of products" -->
+                <!-- <app-product-card-mini [product]="product"></app-product-card-mini> -->
+                <all-random-products [triggerProcedure]="triggerChild" grilla="col-6 col-sm-4 col-md-3 col-lg-2"
+                                     (procedureFinished)="onChildProcedureFinished()">
+                </all-random-products>
+            <!-- </div> -->
+        <!-- </div> -->
+
+        <br>
+        <br>
+        <br>
+        <!-- <productos-inicio></productos-inicio> -->
+
+    </div>
 
 </div>

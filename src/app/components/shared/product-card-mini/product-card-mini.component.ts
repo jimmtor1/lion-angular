@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Product } from 'src/app/models/product';
+import { ProductSimple } from 'src/app/models/product-simple';
 import { IMG_PRODUCT_URL } from 'src/app/services/helper';
 
 @Component({
@@ -9,11 +9,11 @@ import { IMG_PRODUCT_URL } from 'src/app/services/helper';
 })
 export class ProductCardMiniComponent {
 
-  @Input() product : Product;
+  @Input() product : ProductSimple;
   urlprod_img = `${IMG_PRODUCT_URL}`;
   type:string[] = ['NOVO','KORIŠTENO','USLUGA']
   
-
+  
   // idproduct:number;
   // urlImage:string;
   // productName:string;

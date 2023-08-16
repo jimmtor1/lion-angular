@@ -1,5 +1,5 @@
 import { Userr } from "./userr";
-import { Subcategory } from "./subcategory";
+import { NewCategory } from "./newCategory";
 
 export class Seller {
 
@@ -12,6 +12,7 @@ export class Seller {
     biography: string = ""; 
     annualLeave: string = "";
     deliveryCost: string = "";
+    // providerSubcategoryList: Company_subcategory[];
     providerSubcategoryList: Company_subcategory[];
     accepted: boolean;
     image: string = "";
@@ -56,9 +57,9 @@ export class Seller {
 
 export class Company_subcategory {
     id: number;
-    subcategory: Subcategory;
+    category: NewCategory;
 
-    constructor(idsubcategory: Subcategory) {
-        this.subcategory = idsubcategory;
+    constructor(idsubcategory: NewCategory) {
+        this.category = idsubcategory;
     }
 }

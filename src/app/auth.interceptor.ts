@@ -25,9 +25,10 @@ export class AuthInterceptor implements HttpInterceptor {
         let now = parseInt(new Date().getTime().toString().substring(0, 10));
 
         if(now>=parseInt(exp)){
-          alert("your session has expired");
           localStorage.clear();
-          this.router.navigate(['login']);          
+          location.reload();
+          // this.router.navigate(['/']);  
+          alert("your session has expired");
         }
       }
       

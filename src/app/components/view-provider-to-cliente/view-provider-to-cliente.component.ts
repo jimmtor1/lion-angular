@@ -7,6 +7,8 @@ import { ModalService } from 'src/app/services/modal.service';
 import { ProductService } from 'src/app/services/product.service';
 import { SellerService } from 'src/app/services/seller.service';
 import { DeviceDetectorService } from 'ngx-device-detector';
+import { Product2 } from 'src/app/models/product2';
+import { ProductSimple } from 'src/app/models/product-simple';
 
 @Component({
   selector: 'view-provider-to-cliente',
@@ -17,7 +19,7 @@ import { DeviceDetectorService } from 'ngx-device-detector';
 export class ViewProviderToClienteComponent implements OnInit {
 
   seller: Seller = new Seller();
-  producByProvider: Product[] = [];
+  producByProvider: ProductSimple[] = [];
   loading: boolean = true;
   iduser:number = 0;
 
@@ -38,7 +40,7 @@ export class ViewProviderToClienteComponent implements OnInit {
       if (param['id'] != null) {
 
         this.sellerService.getById(param['id']).subscribe(pro => {
-          this.seller = pro;
+          this.seller = pro;          
           if (this.seller.user.federation) {
             let x = select_fed(this.seller.user.federation);
             if (x) {
@@ -53,11 +55,18 @@ export class ViewProviderToClienteComponent implements OnInit {
           this.loading = false;
         });
 
-        this.productService.getAllByProvider(param['id']).subscribe(result => {
+        // this.productService.getAllByProvider(param['id']).subscribe(result => {
+        //   result.forEach(r => {
+        //     this.producByProvider.push(r);
+        //   })
+        // });
+        this.productService.getProducs2byuser(param['id']).subscribe(result => {
           result.forEach(r => {
             this.producByProvider.push(r);
           })
         });
+
+
 
       }
 

@@ -12,7 +12,7 @@ import { SellerService } from 'src/app/services/seller.service';
 export class SellerCategoryListComponent implements OnInit {
 
   sellers: Seller[] = [];
-  category: string = "";
+  //category: string = "";
   categoryName: string[] = ["Građevinarstvo", "Sve za kuću", "Informatika i telekomunikacije", "Od glave do pete"];
   subcategoryName: String = "All";
   loading = true;
@@ -29,6 +29,15 @@ export class SellerCategoryListComponent implements OnInit {
 
   urlprof_img = `${IMG_PROFILE_URL}`;
 
+
+  // ____________________________________________
+
+  category: string
+  subcategory: string;
+
+
+  //____________________________________________
+
   constructor(private providerService: SellerService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
@@ -38,31 +47,40 @@ export class SellerCategoryListComponent implements OnInit {
   private getProvidersFromSubcategory(): void {
     this.route.params.subscribe(params => {
       this.loading = true;
-      this.idcategory = parseInt(params['id']);
-      this.category = this.categoryName[params['id'] - 1];
 
-      this.idsubcategory = parseInt(params['idc']);
-      this.subcategoryName = this.subcategory[params['idc']];
+      this.category = params['category'];
+      this.subcategory = params['subcategory'];
 
-      if (this.idsubcategory == 0 && this.idcategory > 0) {
+      this.idcategory = parseInt(params['idcategory']);
+      // this.category = this.categoryName[params['id'] - 1];
+
+      // this.idsubcategory = parseInt(params['idc']);
+      // this.subcategoryName = this.subcategory[params['idc']];
+
+      if (this.idcategory != 0) {
         this.providerService.getAllByCategoryId(this.idcategory).subscribe(data => {
           this.sellers = data;
           this.loading = false;
         }, error => { this.loading = false; });
-
-      } else if (this.idsubcategory !== 0) {
-        this.providerService.getAllBySubcategory(this.idsubcategory).subscribe(data => {
+      } else {
+        this.providerService.getAllAccepted().subscribe(data => {
           this.sellers = data;
           this.loading = false;
         }, error => { this.loading = false; });
-
-      } else {
-        this.providerService.getAllPageable(this.page).subscribe(data => {
-          this.sellers = data.content;
-          this.loading = false;
-        }, error => { this.loading = false; });
-
       }
+      // } else if (this.idsubcategory !== 0) {
+      //   this.providerService.getAllBySubcategory(this.idsubcategory).subscribe(data => {
+      //     this.sellers = data;
+      //     this.loading = false;
+      //   }, error => { this.loading = false; });
+
+      // } else {
+      //   this.providerService.getAllPageable(this.page).subscribe(data => {
+      //     this.sellers = data.content;
+      //     this.loading = false;
+      //   }, error => { this.loading = false; });
+
+      // }
 
     });
 
@@ -83,7 +101,7 @@ export class SellerCategoryListComponent implements OnInit {
   }
 
   allfilters() {
-    this.providerService.getAllFilters(this.idcategory, this.idsubcategory, this.fed, this.city, this.page).subscribe(p => {
+    this.providerService.getAllFilters(this.idcategory, this.fed, this.city, this.page).subscribe(p => {
       this.sellers = p.content;
       this.loading = false;
     }, error => { this.loading = false });
@@ -163,78 +181,78 @@ export class SellerCategoryListComponent implements OnInit {
 
   }
 
-  subcategory: string[] = [
-    "Filteri",
-    "Zemljani radovi",
-    "Betonski radovi",
-    "Armirano-betonski radovi",
-    "Zidarski radovi",
-    "Tesarski radovi",
-    "Izolacijski radovi",
-    "Krovopokrivački radovi",
-    "Limarski radovi",
-    "Bravarski radovi",
-    "Stolarski radovi",
-    "Keramički radovi",
-    "Fasadski radovi",
-    "Grijanje i hlađenje",
-    "Hidroinstalacije",
-    "Elektroinstalacije",
-    "Strojarske instalacije",
-    "Prozori",
-    "Sobna vrata",
-    "Ulazna vrata",
-    "Roletne",
-    "Kuhinje",
-    "Stolovi i stolice",
-    "Dnevni boravak namještaj",
-    "Stilski namještaj",
-    "Dječije sobe",
-    "Kupaonski namještaj",
-    "Predsoblja namještaj",
-    "Led rasvjeta",
-    "Lusteri",
-    "Stropna rasvjeta i plafonjere",
-    "Zidna rasvjeta",
-    "Podne lampe",
-    "Stolne lampe",
-    "Ugradbena rasvjeta",
-    "Vanjska rasvjeta",
-    "Vaze",
-    "Zidni sat",
-    "Tapete",
-    "Ostale dekoracije",
-    "Klima uređaji",
-    "Radijatori",
-    "Ventilatori",
-    "Kamini",
-    "Peći",
-    "Grijalice",
-    "Jastuci",
-    "Posteljina",
-    "Prekrivači i deke",
-    "Zavjese",
-    "Tepisi",
-    "Servis TV, audio i video uređaja",
-    "Servis mobitela",
-    "Servis kućanskih aparata",
-    "Servis klima uređaja",
-    "Servis računara",
-    "Servis igraćih konzola",
-    "Web hosting",
-    "Web i software izrada",
-    "Mreže serveri i telekomunikacije",
-    "Mreže sigurnost",
-    "Odjeća",
-    "Obuća",
-    "Radna odjeća i zaštitna oprema",
-    "Dječija odjeća i obuća",
-    "Dorbe i novčanici",
-    "Naočale",
-    "Nakit",
-    "Satovi",
-    "Krojači",
-    "Sahadžije"
-  ];
+  // subcategory: string[] = [
+  //   "Filteri",
+  //   "Zemljani radovi",
+  //   "Betonski radovi",
+  //   "Armirano-betonski radovi",
+  //   "Zidarski radovi",
+  //   "Tesarski radovi",
+  //   "Izolacijski radovi",
+  //   "Krovopokrivački radovi",
+  //   "Limarski radovi",
+  //   "Bravarski radovi",
+  //   "Stolarski radovi",
+  //   "Keramički radovi",
+  //   "Fasadski radovi",
+  //   "Grijanje i hlađenje",
+  //   "Hidroinstalacije",
+  //   "Elektroinstalacije",
+  //   "Strojarske instalacije",
+  //   "Prozori",
+  //   "Sobna vrata",
+  //   "Ulazna vrata",
+  //   "Roletne",
+  //   "Kuhinje",
+  //   "Stolovi i stolice",
+  //   "Dnevni boravak namještaj",
+  //   "Stilski namještaj",
+  //   "Dječije sobe",
+  //   "Kupaonski namještaj",
+  //   "Predsoblja namještaj",
+  //   "Led rasvjeta",
+  //   "Lusteri",
+  //   "Stropna rasvjeta i plafonjere",
+  //   "Zidna rasvjeta",
+  //   "Podne lampe",
+  //   "Stolne lampe",
+  //   "Ugradbena rasvjeta",
+  //   "Vanjska rasvjeta",
+  //   "Vaze",
+  //   "Zidni sat",
+  //   "Tapete",
+  //   "Ostale dekoracije",
+  //   "Klima uređaji",
+  //   "Radijatori",
+  //   "Ventilatori",
+  //   "Kamini",
+  //   "Peći",
+  //   "Grijalice",
+  //   "Jastuci",
+  //   "Posteljina",
+  //   "Prekrivači i deke",
+  //   "Zavjese",
+  //   "Tepisi",
+  //   "Servis TV, audio i video uređaja",
+  //   "Servis mobitela",
+  //   "Servis kućanskih aparata",
+  //   "Servis klima uređaja",
+  //   "Servis računara",
+  //   "Servis igraćih konzola",
+  //   "Web hosting",
+  //   "Web i software izrada",
+  //   "Mreže serveri i telekomunikacije",
+  //   "Mreže sigurnost",
+  //   "Odjeća",
+  //   "Obuća",
+  //   "Radna odjeća i zaštitna oprema",
+  //   "Dječija odjeća i obuća",
+  //   "Dorbe i novčanici",
+  //   "Naočale",
+  //   "Nakit",
+  //   "Satovi",
+  //   "Krojači",
+  //   "Sahadžije"
+  // ];
 
 }

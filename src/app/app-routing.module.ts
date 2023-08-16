@@ -7,7 +7,6 @@ import { LoginFormComponent } from './components/login-form/login-form.component
 import { ProductCategoryListComponent } from './components/product-category-list/product-category-list.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 import { ProductBuyerListComponent } from './components/product-buyer-list/product-buyer-list.component';
-import { SubcategoryListComponent } from './components/subcategory-list/subcategory-list.component';
 import { ViewProviderToClienteComponent } from './components/view-provider-to-cliente/view-provider-to-cliente.component';
 import { SellerCategoryListComponent } from './components/seller-category-list/seller-category-list.component';
 import { TenderDetailComponent } from './components/tender-detail/tender-detail.component';
@@ -32,14 +31,16 @@ const routes: Routes = [
   {path:'product', component:ProductFormComponent, canActivate:[AuthGuard]},
   {path:'register', component:RegisterFormComponent},
   {path: 'login', component:LoginFormComponent},
-  {path: 'productCategoryList/:id/:idc', component:ProductCategoryListComponent},
-  {path: 'productCategoryList/:id/:idc/:def', component:ProductCategoryListComponent},
-  {path: 'providerSubcategoryList/:id/:idc', component:SellerCategoryListComponent},
+  {path: 'productCategoryList/:category/:subcategory/:idcategory', component:ProductCategoryListComponent},
+  // {path: 'productCategoryList/:id/:idc', component:ProductCategoryListComponent},
+  // {path: 'productCategoryList/:id/:idc/:def', component:ProductCategoryListComponent},
+  //{path: 'providerSubcategoryList/:id/:idc', component:SellerCategoryListComponent},
+  {path: 'providerSubcategoryList/:category/:subcategory/:idcategory', component:SellerCategoryListComponent},
   {path: 'addetails/:id', component:ProductDetailComponent},
   {path: 'adBuyerList', component:ProductBuyerListComponent},
-  {path: 'subcategoryList/:id', component:SubcategoryListComponent},
+  // {path: 'subcategoryList/:id', component:SubcategoryListComponent},
   {path: 'subcategoryList2/:id', component:SubcategoryListComponent2},
-  {path: 'subcategoryList/:id/:title', component:SubcategoryListComponent},
+  // {path: 'subcategoryList/:id/:title', component:SubcategoryListComponent},
   {path: 'provider/:id', component:ViewProviderToClienteComponent},
   {path: 'tenderDetail/:idtender', component:TenderDetailComponent},
   {path: 'tenderList', component:TenderListComponent},

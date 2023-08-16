@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container mb-3">
     
     <br>
     
@@ -10,22 +10,22 @@
     
     <div class="row">
         <div class="col">
-            <a class="btn btn-danger" *ngIf="item<5" [routerLink]="['/providerSubcategoryList', item, '0']">
+            <a class="btn btn-danger" *ngIf="item<5" [routerLink]="['/providerSubcategoryList', titleCategory.name, 'Filteri',item]">
                 <fa-icon [icon]="['fas', 'store']" ></fa-icon>
                 Pogledaj sve firme
             </a>
-            <a class="btn btn-danger" *ngIf="item==5" [routerLink]="['/productCategoryList', item, '0']">
+            <a class="btn btn-danger" *ngIf="item==5" [routerLink]="['/productCategoryList', titleCategory.name,'Filteri',item]">
                 <fa-icon [icon]="['fas', 'box']" ></fa-icon>
                 Svi proizvodi / Usluge
             </a> 
         </div>
         <div class="col">
-            <a *ngIf="item==5" class="btn btn-danger" [routerLink]="['/providerSubcategoryList', 0, '0']">
+            <a *ngIf="item==5" class="btn btn-danger" [routerLink]="['/providerSubcategoryList', titleCategory.name, 'Filteri',0]">
                 <fa-icon [icon]="['fas', 'store']" ></fa-icon>
                 Pogledaj sve firme
             </a>
 
-            <a *ngIf="item<5" class="btn btn-danger" [routerLink]="['/productCategoryList', '0', '0', item+1]">
+            <a *ngIf="item<5" class="btn btn-danger" [routerLink]="['/productCategoryList', titleCategory.name, 'Filteri', item ]">
                 <fa-icon [icon]="['fas', 'box']" ></fa-icon>
                 Svi proizvodi / Usluge
             </a>
@@ -40,8 +40,9 @@
            
             <ul class="nav flex-column">
                 <div >   
-                    <li class="nav-item" *ngFor="let sub of mapCategoryService.level3.get(subtitles.id)">
-                        <a [routerLink]="['/providerSubcategoryList/'+item+'/', sub.id]" class="nav-link bg-dark text-white border-bottom" >{{sub.name}}</a>                       
+                    <li  class="nav-item" *ngFor="let sub of mapCategoryService.level3.get(subtitles.id)">
+                        <a *ngIf="item<5" [routerLink]="['/providerSubcategoryList', titleCategory.name, sub.name,sub.id]" class="nav-link bg-dark text-white border-bottom" >{{sub.name}}</a>                       
+                        <a *ngIf="item==5" [routerLink]="['/productCategoryList/', titleCategory.name, sub.name, sub.id]" class="nav-link bg-dark text-white border-bottom" >{{sub.name}}</a>                       
                     </li>
                 </div>
             </ul>

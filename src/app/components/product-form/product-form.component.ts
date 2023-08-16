@@ -1,10 +1,10 @@
 import { DatePipe } from '@angular/common';
 import { Component, ElementRef, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Product } from 'src/app/models/product';
+import { NewCategory } from 'src/app/models/newCategory';
 import { ProductImage } from 'src/app/models/product-image';
+import { Product2 } from 'src/app/models/product2';
 import { Seller } from 'src/app/models/seller';
-import { Subcategory } from 'src/app/models/subcategory';
 import { CategoryService } from 'src/app/services/category.service';
 import { IMG_PRODUCT_URL } from 'src/app/services/helper';
 import { ModalService } from 'src/app/services/modal.service';
@@ -22,8 +22,21 @@ export class ProductFormComponent implements OnInit {
   @Input() id: number;
 
   images: imgclasification[] = [];
-  subcategories: Subcategory[];
-  product: Product = new Product();
+  product: Product2 = {
+    idproduct: null,
+    productName: "",
+    description: "",
+    price: 0,
+    active: true,
+    promotedTo: null,
+    type: 1,
+    mainImage: "",
+    iduser: undefined,
+    creationDate: undefined,
+    promoteActive: false,
+    categoryList: [] = [],
+    // imageList: []
+  };
 
   productImage: ProductImage[] = [];
   filesTodelete: ProductImage[] = [];
@@ -34,46 +47,56 @@ export class ProductFormComponent implements OnInit {
   seller: Seller;
   authorizedSeller = false;
   loading = true;
-  isNewProduct=true;
-  
+  isNewProduct = true;
+
+
+  categories: NewCategory[][] = [];
 
   urlprod_img = `${IMG_PRODUCT_URL}`;
 
 
-  constructor(private sellerService: SellerService, private renderer2: Renderer2, private categoryService: CategoryService, private productService: ProductService, private router: Router, private route: ActivatedRoute, private datePipe: DatePipe, private modaService: ModalService) { }
+  constructor(private sellerService: SellerService, private renderer2: Renderer2, private categoryService: CategoryService, private productService: ProductService, private router: Router, private route: ActivatedRoute, private datePipe: DatePipe, private modaService: ModalService) {
+
+  }
 
   ngOnInit(): void {
 
     const u = localStorage.getItem("iduser");
     if (u) {
       this.iduser = JSON.parse(u);
+      this.product.iduser = parseInt(u);
       this.sellerService.isActive(JSON.parse(u)).subscribe(s => {
         this.authorizedSeller = s
+
         if (s) {
           this.route.params.subscribe(params => {
 
             if (params['id']) {
               this.getProductById(params['id']);
+              this.getImagesByid(params['id']);
               this.isNewProduct = false;
+
             } else {
               this.subcategoriesCombo2();
             }
-            this.loading=false;
+            this.loading = false;
           })
-        }else{
-          this.loading=false;
+        } else {
+          this.loading = false;
         }
       });
-    }else{
+    } else {
       this.router.navigate(['/login']);
     }
 
   }
-  
+
 
   getProductById(id: number) {
-    this.productService.getById(id).subscribe(bdproduct => {
+    this.productService.getProduc2byId(id).subscribe(bdproduct => {
+      
       this.product = bdproduct;
+      console.log(this.product);
       this.subcategoriesCombo2();
 
       if (this.product.price == 0) {
@@ -81,79 +104,131 @@ export class ProductFormComponent implements OnInit {
       } else {
         this.priceRequest = false;
       }
-      //this.citiesToCombo = this.cities[this.product.federation];
+      
       this.onFileSelected2();
     })
   }
 
-
-  subcategoriesCombo2() {
-    this.categoryService.getSubcategories(5).subscribe(subcategories => {
-      this.subcategories = subcategories;
+  getImagesByid(idproduct:number){
+    this.productService.getImagesById(idproduct).subscribe(i=>{
+      this.productImage = i;
     });
+    
   }
 
-  selectedSub(event: Event) {
-    this.product.idsubcategory = parseInt((event.target as HTMLSelectElement)?.value);
+  subcategoriesCombo2() {
+    this.categoryService.getSubcategories2().subscribe(subcategories => {
+      
+      this.categories.push(subcategories);
+      if (!this.isNewProduct && this.product.categoryList.length > 2) {
+
+        for (let index = 1; index < this.product.categoryList.length - 1; index++) {
+          this.categoryService.getSublist(this.product.categoryList[index].idcategory).subscribe(data => {
+            
+            this.categories.push(data);
+          });
+        }
+
+      }
+
+    });
+
+
+
+  }
+
+  selectedSub(event: Event, i: number) {
+    let idcategory = parseInt((event.target as HTMLSelectElement)?.value);
+
+    if (this.product.categoryList.length >= i) {
+      this.product.categoryList[i] = idcategory;
+    } else {
+      this.product.categoryList.push(idcategory);
+    }
+
+    while (this.categories.length > i + 1) {
+      this.categories.pop();
+    }
+
+    this.fillSubList(idcategory);
+  }
+
+  fillSubList(idcategory: number) {
+    this.categoryService.getSublist(idcategory).subscribe(s => {
+      
+      if (s.length > 0) {
+        this.categories.push(s);
+        
+      }
+    })
   }
 
 
   submit() {
 
-    if (this.product.idproduct > 0) {
-      this.edit();
+    if (this.product.idproduct != undefined) {
+      this.edit2();
     } else {
-      this.save();
+      this.save2();
     }
 
   }
 
-  save() {
-
+  
+  save2() {
+    this.loading = true;
     const formData = new FormData();
+
     this.images.forEach(file => {
-      formData.append('files', file.file);
+      formData.append('imageList', file.file);
     })
+
     formData.append('productName', this.product.productName);
     formData.append('description', this.product.description);
-    formData.append('idcategory', "5");
-    formData.append('idsubcategory', this.product.idsubcategory.toString());
-
-
-    formData.append('idprovider', this.iduser.toString());
-    formData.append('active', this.product.active.toString());
     formData.append('price', this.product.price.toString());
     formData.append('type', this.product.type.toString());
-  
-    this.productService.saveAd(formData).subscribe(dato => {
-      this.modaService.openModal("Uspješno ste dodali vaš oglas.", "success");
-      this.router.navigate(['panelseller/products']);
-    }, error => console.log(error));
+    formData.append('iduser', this.product.iduser!.toString());
+    
+
+    this.product.categoryList.forEach((category: { toString: () => string | Blob; }) => {
+      formData.append('prodcats', category.toString());
+    });
+
+    this.productService.saveProduc2(formData).subscribe(p => {
+      if (p && p.idproduct != undefined) {
+        this.loading = false;
+        this.modaService.openModal("Uspješno ste dodali vaš oglas.", "success");
+        this.router.navigate(['panelseller/products']);
+      }
+    }, error => {console.log(error);this.loading=false})
 
   }
 
-  edit() {
+  
+  edit2() {
 
     const formData = new FormData();
 
     this.images.forEach(file => {
-      formData.append('filesTosave', file.file);
+      formData.append('imageList', file.file);
     })
 
     this.filesTodelete.forEach(imagename => {
       formData.append('filesTodelete', JSON.stringify(imagename));
     })
 
-    formData.append('idproduct', this.product.idproduct.toString());
+    formData.append('idproduct', this.product.idproduct!.toString());
     formData.append('productName', this.product.productName);
     formData.append('description', this.product.description);
-    formData.append('idcategory', "5");
-    formData.append('idsubcategory', this.product.idsubcategory.toString());
-
-    formData.append('idprovider', this.iduser.toString());
-    formData.append('active', this.product.active.toString());
-
     formData.append('price', this.product.price.toString());
+    formData.append('type', this.product.type.toString());
+    formData.append('iduser', this.product.iduser!.toString());
+    formData.append('active', this.product.active.toString());
+    formData.append('mainImage', this.product.mainImage);
+
+    this.product.categoryList.forEach((category: { toString: () => string | Blob; }) => {
+      formData.append('prodcats', category.toString());
+    });
 
     let myDate = this.datePipe.transform(this.product.creationDate, 'yyyy-MM-dd HH:mm:ss');
 
@@ -161,12 +236,10 @@ export class ProductFormComponent implements OnInit {
       formData.append('creationDate2', myDate);
     }
 
-
     this.productService.editAd(formData).subscribe(dato => {
-      this.modaService.openModal("Uspješno ste dodali vaš oglas.", "success");
+      this.modaService.openModal("Uspješno ste izmijenili vaš oglas.", "success");
       this.router.navigate(['panelseller/products']);
     }, error => console.log(error));
-
 
   }
 
@@ -203,14 +276,14 @@ export class ProductFormComponent implements OnInit {
   }
 
   onFileSelected2() {
-    this.productService.getImagesById(this.product.idproduct).subscribe(productImg => {
+    this.productService.getImagesById(this.product.idproduct!).subscribe(productImg => {
       this.productImage = productImg;
       let im: imgclasification;
 
       for (let i = 0; i < productImg.length; i++) {
         im = new imgclasification();
         im.isNew = false;
-        im.link = this.urlprod_img + productImg[i].idimage + productImg[i].extension;
+        im.link = this.urlprod_img + productImg[i].extension;
         im.id = productImg[i].idimage.toString();
         im.productImage = productImg[i];
         this.images.push(im);
@@ -222,9 +295,9 @@ export class ProductFormComponent implements OnInit {
   removeImage(im: imgclasification): void {
 
     const imageElement = document.getElementById(`${im.id}`);
-
+   
     if (im.isNew && imageElement !== null) {
-
+      
       imageElement.remove();
       let index = this.images.indexOf(im);
       this.images.splice(index, 1);
@@ -232,7 +305,7 @@ export class ProductFormComponent implements OnInit {
     } else if (!im.isNew && imageElement !== null) {
 
       this.filesTodelete.push(im.productImage);
-      // console.log(this.filesTodelete[0]);
+      
       imageElement.remove();
       let index = this.images.indexOf(im);
       this.images.splice(index, 1);

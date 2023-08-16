@@ -71,15 +71,15 @@
                     
                         [(ngModel)]="subcategoriesSelected"  class="form-select" 
                         style="height: 200px;">
-                        <option *ngFor="let sub of subcategories" [ngValue]="sub" [disabled]="sub.idsubcategory==0"
-                            [ngClass]="sub.idsubcategory==0 ?'title':''">
-                            {{sub.subcategoryName}}
+                        <option *ngFor="let sub of subcategories" [ngValue]="sub" [disabled]="sub.idcategory==0"
+                            [ngClass]="sub.idcategory==0 ?'title':''">
+                            {{sub.name}}
                         </option>
                     </select>
 
                     <div class="border rounded p-1" style="min-height: 100px;">
                         <span *ngFor="let sel of subcategoriesSelected, let i = index"
-                            class="badge rounded-pill bg-dark" style="margin-right: 5px;">{{sel.subcategoryName}}
+                            class="badge rounded-pill bg-dark" style="margin-right: 5px;">{{sel.name}}
                             <!-- <button (click)="deleteSubcategory(sel)">X</button> -->
                         </span>
                     </div>

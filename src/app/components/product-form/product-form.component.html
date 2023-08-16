@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container mb-3">
 
     <div *ngIf="loading" class="text-center mt-3">
         <div class="spinner-grow text-danger" role="status">
@@ -42,17 +42,25 @@
                                 autocomplete="Ime proizvoda" value="" [(ngModel)]="product.productName">
                         </div>
 
-                        <div class="col-12 col-sm-6">
-                            <label>Kategorija proizvoda&nbsp;<span class="form-label">*</span></label>
-                            <select name="idsubcategory" (change)="selectedSub($event)"
-                                [(ngModel)]="product.idsubcategory" class="form-select">
-                                <option value="">--Odaberite podkategoriju--</option>
-                                <option *ngFor="let sub of subcategories" value={{sub.idsubcategory}}>
-                                    {{sub.subcategoryName}}
-                                </option>
+
+                        <!-- [(ngModel)]="product.categoryList[i+1].idcategory" -->
+                        <div *ngFor="let cat of categories, let i = index" class="col-12 col-sm-6">                          
+                            <label *ngIf="i==0">Kategorija proizvoda&nbsp;<span class="form-label">*</span></label>
+                            <label *ngIf="i>0">Podkategorija proizvoda&nbsp;<span class="form-label">*</span></label>
+                            
+                            <select *ngIf="isNewProduct" [name]="cat[0].name" (change)="selectedSub($event,i)" class="form-select" [(ngModel)]="product.categoryList[i]">                                                            
+                                <option *ngIf="i==0" value="">--Odaberite kategoriju--</option>
+                                <option *ngIf="i>0" value="">--Odaberite Podkategoriju--</option>
+                                <option *ngFor="let sub of cat" value={{sub.id}}>{{sub.name}}</option>
+                            </select>
+
+                            <select *ngIf="!isNewProduct" [name]="cat[0].name" (change)="selectedSub($event,i)" class="form-select" [(ngModel)]="product.categoryList[i+1].idcategory">                                                            
+                                <option *ngIf="i==0" value="">--Odaberite kategoriju--</option>
+                                <option *ngIf="i>0" value="">--Odaberite Podkategoriju--</option>
+                                <option *ngFor="let sub of cat" value={{sub.id}}>{{sub.name}}</option>
                             </select>
                         </div>
-
+                       
                     </div>
 
                     <div class="mb-3">
@@ -63,20 +71,23 @@
                     </div>
 
 
-                    <div class="form-check">
-                        <input class="form-check-input" [(ngModel)]="product.type" value="1" type="radio" name="type" id="type1">
+                    <div class="form-check">                        
+                        <input class="form-check-input" [(ngModel)]="product.type" [value]=1 type="radio" name="type"
+                            id="type1">
                         <label class="form-check-label" for="type1">
                             Novo
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" [(ngModel)]="product.type" value="2" type="radio" name="type" id="type2">
+                        <input class="form-check-input" [(ngModel)]="product.type" [value]=2 type="radio" name="type"
+                            id="type2">
                         <label class="form-check-label" for="type2">
-                            Korišćeno
+                            Korišteno
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" [(ngModel)]="product.type" value="3" type="radio" name="type" id="type3">
+                        <input class="form-check-input" [(ngModel)]="product.type" [value]=3 type="radio" name="type"
+                            id="type3">
                         <label class="form-check-label" for="type3">
                             Usluga
                         </label>
@@ -88,7 +99,7 @@
                         <div class="col-12 col-sm-6">
                             <label for="price">Cijena&nbsp;<span class="form-label">*</span></label>
                             <input type="number" class="form-control" name="price" id="price" rows="3"
-                                [(ngModel)]="product.price" [disabled]="priceRequest">
+                                [(ngModel)]="product.price" [disabled]="priceRequest">                               
                         </div>
 
                         <div class="col-12 col-sm-6">
@@ -133,15 +144,15 @@
 
                     <div class="drop-zone d-flex flex-wrap">
                         <!-- style="width: 12rem; height: 13rem;" -->
-                        <div *ngFor="let image of images;" class="card mx-1" style="width: 11em; height: 13em;">
+                        <div *ngFor="let image of images;" class="card mx-1" style="width: 11em; height: 13em;" [id]="image.id">
                             <img [src]="image.link" class="card-img-top" style="height: 150px;" alt="...">
                             <hr class="p-0 m-0">
                             <div class="card-footer text-center">
-                                <button class="btn btn-danger rounded-pill">
+                                <label (click)="removeImage(image)" class="btn btn-danger rounded-pill">
                                     <fa-icon [icon]="['fas','trash']"></fa-icon>
-                                    delete
+                                    Izbriši
                                     <!-- style="font-size: 0.8em" -->
-                                </button>
+                                </label>
                             </div>
                         </div>
 
@@ -149,9 +160,8 @@
                     </div>
 
                     <div class="text-center">
-                        <input type="submit" value="Dodaj" class="btn btn-danger">
+                        <input type="submit" value="{{isNewProduct?'Dodaj':'Izmijeni'}}" class="btn btn-danger">
                     </div>
-
 
                 </form>
                 <br>

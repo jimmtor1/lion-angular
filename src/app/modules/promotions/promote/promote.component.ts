@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from 'src/app/models/product';
+import { Product2 } from 'src/app/models/product2';
 import { IMG_PRODUCT_URL } from 'src/app/services/helper';
 import { ModalService } from 'src/app/services/modal.service';
 import { ProductService } from 'src/app/services/product.service';
@@ -13,7 +14,7 @@ import { ProductService } from 'src/app/services/product.service';
 export class PromoteComponent implements OnInit {
 
   imageurl = `${IMG_PRODUCT_URL}`
-  product: Product = new Product();
+  product: Product2;
   active = 0;
   iduser:string;
 
@@ -23,7 +24,7 @@ export class PromoteComponent implements OnInit {
 
     this.route.params.subscribe(param => {
       if (param['idproduct']) {
-        this.productService.getById(param['idproduct']).subscribe(p => {
+        this.productService.getProduc2byId(param['idproduct']).subscribe(p => {
           this.product = p;
           console.log("p " + JSON.stringify(p));
         });
@@ -36,7 +37,7 @@ export class PromoteComponent implements OnInit {
   addPromotion() {
     const form = new FormData();
 
-    form.append('idproduct', this.product.idproduct.toString());
+    form.append('idproduct', this.product.idproduct!.toString());
     form.append('choice', this.active.toString());
     form.append('iduser', this.getIduser());
 

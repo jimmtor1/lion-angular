@@ -10,7 +10,7 @@ import { MapCategoryService } from 'src/app/services/map-category.service';
 })
 export class NewCategoryListComponent implements OnInit {
 
-  constructor(private categoryService: CategoryService, public mapCategoryService: MapCategoryService) {}
+  constructor(private categoryService: CategoryService, public mapCategoryService: MapCategoryService) { }
 
   anchoProgreso: string = '';
   time: any;
@@ -24,20 +24,21 @@ export class NewCategoryListComponent implements OnInit {
     this.categoryService.getAll2().subscribe(list => {
       this.categoryList = list;
       this.order();
-    })
+    });
+
   }
-  
+
   order() {
 
     this.categoryList.forEach((item) => {
 
-        const key: number = item.level==1?item.id:item.idcategory!;
+      const key: number = item.level == 1 ? item.id : item.idcategory!;
 
-        if (!this.mapCategoryService.has(key,item.level)) {
-          this.mapCategoryService.set(key, [item], item.level);          
-        } else {
-          this.mapCategoryService.get(key,item.level)?.push(item)
-        }
+      if (!this.mapCategoryService.has(key, item.level)) {
+        this.mapCategoryService.set(key, [item], item.level);
+      } else {
+        this.mapCategoryService.get(key, item.level)?.push(item)
+      }
     });
 
   }
@@ -48,15 +49,17 @@ export class NewCategoryListComponent implements OnInit {
     this.time = setTimeout(() => {
       this.show = "element" + element;
     }, 300);
+
   }
 
-  hideElement() { 
-    
+  hideElement() {
+
     if (!this.showing) {
-      this.anchoProgreso = "";   
+      this.anchoProgreso = "";
       clearTimeout(this.time);
       this.show = '';
     }
+    
   }
 
   showElement2(element: number) {

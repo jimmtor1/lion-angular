@@ -4,6 +4,7 @@ export class NewCategory{
     name:string;    
     idcategory:number | null;
     level:number;
+    type:number;
     list:[]=[];
 
 }

@@ -18,9 +18,8 @@ import { ProductBuyerListComponent } from './components/product-buyer-list/produ
 import { BuyerListComponent } from './components/buyer-list/buyer-list.component';
 import { SellerListComponent } from './components/seller-list/seller-list.component';
 import { SellerSocialnetworkComponent } from './components/seller-socialnetwork/seller-socialnetwork.component';
-import { SubcategoryListComponent } from './components/subcategory-list/subcategory-list.component';
 
-import { faAddressBook, faAddressCard, faArrowLeft, faArrowsRotate, faBars, faBasketShopping, faBox, faBoxOpen, faBriefcase, faBuilding, faBuildingCircleExclamation, faCalendar, faCheckSquare, faSquareXmark, faCircleMinus, faCirclePlus, faCircleUser, faClose, faCoins, faComment, faEnvelope, faEye, faFile, faFileArrowDown, faHandHoldingMedical, faHandshake, faHeadset, faHome, faLaptop, faListCheck, faLocationDot, faMagnifyingGlass, faMinus, faMobilePhone, faNewspaper, faPaperPlane, faPencil, faRectangleAd, faRightFromBracket, faRocket, faShareNodes, faShirt, faShoppingCart, faSignOut, faStore, faTag, faTrash, faUser, faUserPlus, faUsers, faWindowMaximize, faXmark, faClock } from '@fortawesome/free-solid-svg-icons';
+import { faAddressBook, faAddressCard, faArrowLeft, faArrowsRotate, faBars, faBasketShopping, faBox, faBoxOpen, faBriefcase, faBuilding, faBuildingCircleExclamation, faCalendar, faCheckSquare, faSquareXmark, faCircleMinus, faCirclePlus, faCircleUser, faClose, faCoins, faComment, faEnvelope, faEye, faFile, faFileArrowDown, faHandHoldingMedical, faHandshake, faHeadset, faHome, faLaptop, faListCheck, faLocationDot, faMagnifyingGlass, faMinus, faMobilePhone, faNewspaper, faPaperPlane, faPencil, faRectangleAd, faRightFromBracket, faRocket, faShareNodes, faShirt, faShoppingCart, faSignOut, faStore, faTag, faTrash, faUser, faUserPlus, faUsers, faWindowMaximize, faXmark, faClock, faGear } from '@fortawesome/free-solid-svg-icons';
 import { faFacebook, faInstagram, faYoutube } from '@fortawesome/free-brands-svg-icons';
 import { ViewProviderToClienteComponent } from './components/view-provider-to-cliente/view-provider-to-cliente.component';
 import { SellerCategoryListComponent } from './components/seller-category-list/seller-category-list.component';
@@ -44,6 +43,7 @@ import { CancelSuscriptionComponent } from './components/cancel-suscription/canc
 import { ProductCardMiniComponent } from './components/shared/product-card-mini/product-card-mini.component';
 import { NewCategoryListComponent } from './components/new-category-list/new-category-list.component';
 import { SubcategoryListComponent2 } from './components/subcategory-list copy/subcategory-list.component';
+import { AllRandomProductsComponent } from './components/shared/all-random-products/all-random-products.component';
 
 
 @NgModule({
@@ -59,7 +59,6 @@ import { SubcategoryListComponent2 } from './components/subcategory-list copy/su
     BuyerListComponent,
     SellerListComponent,
     SellerSocialnetworkComponent,
-    SubcategoryListComponent,
     SubcategoryListComponent2,
     ViewProviderToClienteComponent,
     SellerCategoryListComponent,
@@ -80,7 +79,8 @@ import { SubcategoryListComponent2 } from './components/subcategory-list copy/su
     ResetEmailSentComponent,
     CancelSuscriptionComponent,
     ProductCardMiniComponent,
-    NewCategoryListComponent
+    NewCategoryListComponent,
+    AllRandomProductsComponent
   ],
   imports: [
     BrowserModule,
@@ -103,7 +103,7 @@ export class AppModule {
   
 
   constructor(library: FaIconLibrary) {
-    library.addIcons(faShirt, faBuilding, faHome, faLaptop, faShoppingCart, faMagnifyingGlass, faUser, faSignOut, faStore, faFacebook, faInstagram, faYoutube, faHandshake, faHeadset, faHandHoldingMedical, faTag, faRectangleAd, faShareNodes, faRightFromBracket, faUsers, faBuildingCircleExclamation, faAddressCard, faBasketShopping, faTrash, faLocationDot, faMobilePhone, faEnvelope, faBriefcase, faAddressBook, faListCheck, faFile, faBars, faCalendar, faFileArrowDown, faCheckSquare, faSquareXmark, faNewspaper, faBoxOpen, faArrowsRotate,faBox, faComment, faCircleUser, faPaperPlane, faMinus, faClose, faXmark, faArrowLeft, faWindowMaximize, faUserPlus, faCirclePlus, faCircleMinus, faRocket, faCoins, faPencil, faEye, faClock);
+    library.addIcons(faShirt, faBuilding, faHome, faLaptop, faShoppingCart, faMagnifyingGlass, faUser, faSignOut, faStore, faFacebook, faInstagram, faYoutube, faHandshake, faHeadset, faHandHoldingMedical, faTag, faRectangleAd, faShareNodes, faRightFromBracket, faUsers, faBuildingCircleExclamation, faAddressCard, faBasketShopping, faTrash, faLocationDot, faMobilePhone, faEnvelope, faBriefcase, faAddressBook, faListCheck, faFile, faBars, faCalendar, faFileArrowDown, faCheckSquare, faSquareXmark, faNewspaper, faBoxOpen, faArrowsRotate,faBox, faComment, faCircleUser, faPaperPlane, faMinus, faClose, faXmark, faArrowLeft, faWindowMaximize, faUserPlus, faCirclePlus, faCircleMinus, faRocket, faCoins, faPencil, faEye, faClock, faGear);
   }
 
 }

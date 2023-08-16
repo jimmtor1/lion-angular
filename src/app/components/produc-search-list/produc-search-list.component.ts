@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Product } from 'src/app/models/product';
+import { ProductSimple } from 'src/app/models/product-simple';
+import { Product2 } from 'src/app/models/product2';
 import { FEDERATIONS, IMG_PRODUCT_URL, federation, selectListByFed } from 'src/app/services/helper';
 import { ProductService } from 'src/app/services/product.service';
 
@@ -11,7 +12,7 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class ProducSearchListComponent implements OnInit {
   
-  products: Product[] = [];
+  products: ProductSimple[] = [];
   federations: federation[] = FEDERATIONS;
   urlprod_img = `${IMG_PRODUCT_URL}`;
   citiesToCombo: any[] = [];
@@ -67,8 +68,9 @@ export class ProducSearchListComponent implements OnInit {
     }
   }
 
-  lookfor(word:string){    
-    this.productService.getSearchProduct(word).subscribe(p=>{     
+  lookfor(word:string){ 
+    //this.productService.getSearchProduct(word).subscribe(p=>{    
+    this.productService.getProducs2bykeyword(word).subscribe(p=>{     
        this.products = p;
        this.loading = false;
     });

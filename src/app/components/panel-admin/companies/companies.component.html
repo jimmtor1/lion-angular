@@ -1,4 +1,4 @@
-<div class="container mt-2">
+<div class="container mt-2 mb-3">
 
     <div class="card text-center">
         <div class="card-header">
@@ -37,7 +37,7 @@
                           <td>{{seller.user.lastName}}</td>  
                           <td>{{seller.user.email}}</td>             
                           <td>
-                            <a class="btn btn-dark btn-sm rounded-pill" routerLink="/paneladmin/coincompany/{{seller.idprovider}}">
+                            <a class="btn btn-dark btn-sm rounded-pill" routerLink="/paneladmin/coincompany/{{seller.user.id}}">
                               {{seller.coin}}
                               <fa-icon [icon]="['fas','eye']"></fa-icon>
                             </a>

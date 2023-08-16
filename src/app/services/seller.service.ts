@@ -19,8 +19,8 @@ export class SellerService {
     return this.http.get<any>(`${this.URL}/${pageNum}/50`)
   }
 
-  getAllFilters(category:number, subcategory:number, federation: number, city:number,pageNum:number):Observable<any>{
-    return this.http.get<any>(`${this.URL}/filter/${category}/${subcategory}/${federation}/${city}/${pageNum}/28`)
+  getAllFilters(category:number,  federation: number, city:number,pageNum:number):Observable<any>{
+    return this.http.get<any>(`${this.URL}/filter/${category}/${federation}/${city}/${pageNum}/28`)
   }
 
   getById(id:number):Observable<Seller>{
