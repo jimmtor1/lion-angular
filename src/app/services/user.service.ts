@@ -18,17 +18,17 @@ export class UserService {
     
   isValidUser(user:Userr):Observable<Userr>{   
     
-    return this.http.post<Userr>(`${this.baseURL}inicio`, user);
+    return this.http.post<Userr>(`${this.baseURL}start`, user);
      
   }
 
   getById(id:number):Observable<Userr>{
-    return this.http.get<Userr>(`${this.baseURL}inicio/${id}`);
+    return this.http.get<Userr>(`${this.baseURL}start/${id}`);
   }
 
   login(userDto:UserDto):Observable<token>{
     
-    return this.http.post<token>(`${this.baseURL}inicio/authenticate`, userDto)
+    return this.http.post<token>(`${this.baseURL}start/authenticate`, userDto)
         
   }
 
@@ -41,7 +41,7 @@ export class UserService {
   }
 
   resetPassword(form:FormData):Observable<boolean>{
-    return this.http.post<boolean>(`${this.baseURL}inicio/reset`, form).pipe(
+    return this.http.post<boolean>(`${this.baseURL}start/reset`, form).pipe(
       catchError(error => {return throwError('error');})
     );
 

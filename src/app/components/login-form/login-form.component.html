@@ -20,16 +20,19 @@
                     <div class="col">
                         <!-- <input type="checkbox" class="form-check-input" id="exampleCheck1">
                         <label class="form-check-label" for="exampleCheck1">Zapamti me</label> -->
+                        <button type="submit" class="btn btn-danger">Prijava</button>
                     </div>
                     <div class="col d-flex justify-content-end">
                         <p>Nemate račun? &nbsp; &nbsp;</p>
                         <a routerLink="../register" style="cursor: pointer;">Registracija</a>
                     </div>
                 </div>
+
                 <div class="d-flex justify-content-end">
-                    <a routerLink="/emailresetsend" >Zaboravili ste šifru?</a>
+                    <a routerLink="/emailresetsend">Zaboravili ste šifru?</a>
                 </div>
-            </div>  
+
+            </div>
 
             <div *ngIf="access==2" class="bg-warning text-center">
                 <p class="fw-bold">Netačni podaci</p>
@@ -37,7 +40,7 @@
 
 
 
-            <button type="submit" class="btn btn-danger">Prijava</button>
+
         </form>
 
     </div>

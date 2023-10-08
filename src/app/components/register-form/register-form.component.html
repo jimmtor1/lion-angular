@@ -138,7 +138,8 @@
             </div>
 
             <div class="modal-body">
-                <p>Čestitamo {{name}}, uspješno ste kreirali profil. Potrebno je da ga potvrdite na email.</p>
+                <p *ngIf="name!==''">Čestitamo {{name}}, uspješno ste kreirali profil. Potrebno je da ga potvrdite na email.</p>
+                <p *ngIf="name==''" >Nije mogao sačuvati zapis</p>
             </div>
 
             <div class="modal-footer">

@@ -1,26 +1,28 @@
 <!-- computer -->
 
-<nav class="navbar bg-danger justify-content-center d-none d-md-flex">    
+<nav class="navbar bg-danger justify-content-center d-none d-md-flex">
     <ul class="menu">
         <li *ngFor="let c of mapCategoryService.level1 | keyvalue, let i = index" class="submenu shadow">
-          
-            <button (mouseenter)="showElement(i)" (mouseleave)="hideElement()" 
+
+            <button (mouseenter)="showElement(i)" (mouseleave)="hideElement()"
                 class="btn btn-danger dropdown-toggle rounded-0 m-0 fw-bold pb-2" href="#">
                 {{c.value[0].name}}
                 <div class="progreso" [style.width]="anchoProgreso == 'element'+i?'100%':'0%'"></div>
             </button>
 
-            <ul class="row sublista bg-light shadow" (mouseenter)="showElement2(i)" (mouseleave)="hideElement2()" [hidden]="show !== 'element'+i">
+            <ul class="row sublista bg-light shadow" (mouseenter)="showElement2(i)" (mouseleave)="hideElement2()"
+                [hidden]="show !== 'element'+i">
 
                 <div class="row mb-2">
 
                     <div class="col-3">
-                        <a *ngIf="i<4" class="py-0 btn btn-danger"
+                        <a *ngIf="i!==4" class="py-0 btn btn-danger"
                             [routerLink]="['/providerSubcategoryList', c.value[0].name, 'Filteri', i+1]">
                             <fa-icon [icon]="['fas', 'store']"></fa-icon>
                             Pogledaj sve firme
                         </a>
-                        <a *ngIf="i==4" class="py-0 btn btn-danger" [routerLink]="['/productCategoryList', c.value[0].name,'Filteri', i+1]">
+                        <a *ngIf="i==4" class="py-0 btn btn-danger"
+                            [routerLink]="['/productCategoryList', c.value[0].name,'Filteri', i+1]">
                             <fa-icon [icon]="['fas', 'box']"></fa-icon>
                             Svi proizvodi / Usluge
                         </a>
@@ -28,7 +30,7 @@
 
                     <div class="col-9">
 
-                        <a *ngIf="i<4" class="py-0 btn btn-danger"
+                        <a *ngIf="i!==4" class="py-0 btn btn-danger"
                             [routerLink]="['/productCategoryList', c.value[0].name, 'Filteri', i+1]">
                             <fa-icon [icon]="['fas', 'box']"></fa-icon>
                             Svi proizvodi / Usluge
@@ -49,16 +51,22 @@
                     <p class="m-1 h6 fw-bold flex-nowrap p-0">{{t.name}}</p>
 
                     <ul *ngFor="let d of mapCategoryService.level3.get(t.id)">
-                        
-                        <div >
-                           
+
+                        <div>
+
                             <li class="d-block">
+                                <a *ngIf="d.type==1" class="d-block link p-1"
+                                    [routerLink]="['/providerSubcategoryList/',c.value[0].name, d.name, d.id ]">{{d.name}}</a>
+                                <a *ngIf="d.type==0" class="d-block link p-1"
+                                    [routerLink]="['/productCategoryList',c.value[0].name,d.name, d.id ]">{{d.name}}</a>
+                            </li>
+                            <!-- <li class="d-block">
                                 <a *ngIf="i<4" class="d-block link p-1" [routerLink]="['/providerSubcategoryList/',c.value[0].name, d.name, d.id ]">{{d.name}}</a>
                                 <a *ngIf="i==4" class="d-block link p-1" [routerLink]="['/productCategoryList',c.value[0].name,d.name, d.id ]">{{d.name}}</a>
-                            </li>
+                            </li> -->
 
                         </div>
-                       
+
 
                     </ul>
 
@@ -68,33 +76,84 @@
     </ul>
 </nav>
 
-<!-- nav-mobile -->
-<ul  class="nav flex-nowrap bg-danger justify-content-evenly py-1 d-md-none">
-    
-    <li class="nav-item text-center" style="width: 20%;">
-        <fa-icon [icon]="['fas', 'building']" style="font-size: 1em" class="text-white"></fa-icon>
-        <a [routerLink]="['/subcategoryList2/0']" class="nav-link text-white px-1" style="font-size: 0.7em">
-            Građevina
-        </a>
-    </li>
-    <li class="nav-item text-center" style="width: 20%;">
-        <fa-icon [icon]="['fas', 'home']" style="font-size: 1em" class="text-white"></fa-icon>
-        <a [routerLink]="['/subcategoryList2/1']" class="nav-link text-white px-1" style="font-size: 0.7em">Sve za
-            kuću</a>
-    </li>
-    <li class="nav-item text-center" style="width: 20%;">
-        <fa-icon [icon]="['fas', 'laptop']" style="font-size: 1em" class="text-white"></fa-icon>
-        <a [routerLink]="['/subcategoryList2/2']" class="nav-link text-white px-1"
-            style="font-size: 0.7em">Informatika</a>
-    </li>
-    <li class="nav-item text-center" style="width: 20%;">
+<!-- <div class="d-md-none">
+    <circle-category></circle-category>
+</div> -->
 
-        <fa-icon [icon]="['fas', 'shirt']" style="font-size: 1em" class="text-white"></fa-icon>
-        <a [routerLink]="['/subcategoryList2/3']" class="nav-link text-white px-1" style="font-size: 0.7em">Odjeca</a>
-    </li>
-    <li class="nav-item text-center" style="width: 20%;">
-        <fa-icon [icon]="['fas', 'shopping-cart']" style="font-size: 1em" class="text-white"></fa-icon>
-        <a [routerLink]="['/subcategoryList2/4']" class="nav-link text-white px-1 text-wrap" style="font-size: 0.7em">Svi proizvodi
-            / Usluge</a>
-    </li>
-</ul>
+<!-- nav-mobile -->
+<!-- <div class="row bg-danger py-1 d-md-none">
+
+    <div class="row align-items-center">
+
+        <div class="col-8">
+
+            <div class="row rows-3">
+
+                <div class="col text-center ">
+                    <fa-icon [icon]="['fas', 'building']" style="font-size: 1em" class=" text-white"></fa-icon>
+                    <a [routerLink]="['/subcategoryList2/1']" class="nav-link text-white px-1" style="font-size: 0.7em">
+                        Građevina
+                    </a>
+                </div>
+                <div class="col text-center rounded-circle">
+                    <fa-icon [icon]="['fas', 'home']" style="font-size: 1em" class="text-white"></fa-icon>
+                    <a [routerLink]="['/subcategoryList2/2']" class="nav-link text-white px-1"
+                        style="font-size: 0.7em">Sve za kuću</a>
+                </div>
+                <div class="col text-center">
+                    <fa-icon [icon]="['fas', 'laptop']" style="font-size: 1em" class="text-white"></fa-icon>
+                    <a [routerLink]="['/subcategoryList2/3']" class="nav-link text-white px-1"
+                        style="font-size: 0.7em">Informatika</a>
+                </div>
+
+            </div>
+            
+           
+
+            <div class="row rows-3">
+
+                <div class="col text-center">
+
+                    <fa-icon [icon]="['fas', 'shirt']" style="font-size: 1em" class="text-white"></fa-icon>
+                    <a [routerLink]="['/subcategoryList2/4']" class="nav-link text-white px-1"
+                        style="font-size: 0.7em">Odjeca</a>
+                </div>
+
+
+
+                <div class="col text-center">
+                    <fa-icon [icon]="['fas', 'car']" style="font-size: 1em" class="text-white"></fa-icon>
+                    <a [routerLink]="['/subcategoryList2/215']" class="nav-link text-white px-1"
+                        style="font-size: 0.7em">Auto / Moto</a>
+                </div>
+                <div class="col text-center">
+                    <fa-icon [icon]="['fas', 'truck']" style="font-size: 1em" class="text-white"></fa-icon>
+                    <a [routerLink]="['/subcategoryList2/216']" class="nav-link text-white px-1 text-wrap"
+                        style="font-size: 0.7em">Teretni program</a>
+                </div>
+
+            </div>
+
+
+
+
+
+        </div>
+
+        <div class="col-4">
+
+            <div class="text-center">
+                <fa-icon [icon]="['fas', 'shopping-cart']" style="font-size: 1em" class="text-white"></fa-icon>
+                <a [routerLink]="['/subcategoryList2/5']" class="nav-link text-white px-1 text-wrap"
+                    style="font-size: 0.7em">Svi proizvodi / Usluge</a>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+
+</div> -->

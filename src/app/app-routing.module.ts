@@ -6,13 +6,13 @@ import { RegisterFormComponent } from './components/register-form/register-form.
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { ProductCategoryListComponent } from './components/product-category-list/product-category-list.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
-import { ProductBuyerListComponent } from './components/product-buyer-list/product-buyer-list.component';
+// import { ProductBuyerListComponent } from './components/product-buyer-list/product-buyer-list.component';
 import { ViewProviderToClienteComponent } from './components/view-provider-to-cliente/view-provider-to-cliente.component';
 import { SellerCategoryListComponent } from './components/seller-category-list/seller-category-list.component';
 import { TenderDetailComponent } from './components/tender-detail/tender-detail.component';
 import { TenderListComponent } from './components/tender-list/tender-list.component';
 import { ProducSearchListComponent } from './components/produc-search-list/produc-search-list.component';
-import { ChatComponent } from './components/chat/chat.component';
+// import { ChatComponent } from './components/chat/chat.component';
 import { NavbarGeneralPhoneComponent } from './components/navbar-general-phone/navbar-general-phone.component';
 import { ChatMiniComponent } from './components/chat-mini/chat-mini.component';
 import { AuthGuard } from './auth.guard';
@@ -24,6 +24,7 @@ import { ResetEmailSentComponent } from './components/reset-email-sent/reset-ema
 import { CancelSuscriptionComponent } from './components/cancel-suscription/cancel-suscription.component';
 import { NewCategoryListComponent } from './components/new-category-list/new-category-list.component';
 import { SubcategoryListComponent2 } from './components/subcategory-list copy/subcategory-list.component';
+import { TruckComponent } from './components/truck/truck.component';
 
 const routes: Routes = [
   {path:'', component:HomeComponent},
@@ -32,22 +33,18 @@ const routes: Routes = [
   {path:'register', component:RegisterFormComponent},
   {path: 'login', component:LoginFormComponent},
   {path: 'productCategoryList/:category/:subcategory/:idcategory', component:ProductCategoryListComponent},
-  // {path: 'productCategoryList/:id/:idc', component:ProductCategoryListComponent},
-  // {path: 'productCategoryList/:id/:idc/:def', component:ProductCategoryListComponent},
-  //{path: 'providerSubcategoryList/:id/:idc', component:SellerCategoryListComponent},
   {path: 'providerSubcategoryList/:category/:subcategory/:idcategory', component:SellerCategoryListComponent},
-  {path: 'addetails/:id', component:ProductDetailComponent},
-  {path: 'adBuyerList', component:ProductBuyerListComponent},
-  // {path: 'subcategoryList/:id', component:SubcategoryListComponent},
+  {path: 'providerSubcategoryList/:category/:subcategory/:idcategory/:keyword', component:SellerCategoryListComponent},
+  {path: 'artikal/:id', component:ProductDetailComponent},
+  // {path: 'adBuyerList', component:ProductBuyerListComponent},
   {path: 'subcategoryList2/:id', component:SubcategoryListComponent2},
-  // {path: 'subcategoryList/:id/:title', component:SubcategoryListComponent},
-  {path: 'provider/:id', component:ViewProviderToClienteComponent},
+  {path: 'firma/:id', component:ViewProviderToClienteComponent},
   {path: 'tenderDetail/:idtender', component:TenderDetailComponent},
   {path: 'tenderList', component:TenderListComponent},
   {path: 'search/:word', component:ProducSearchListComponent},
-  {path: 'chat', component:ChatComponent, canActivate:[AuthGuard]},
+  // {path: 'chat', component:ChatComponent, canActivate:[AuthGuard]},
   {path: 'chating', component:ChatMiniComponent, canActivate:[AuthGuard]},
-  {path: 'chat/:iduser', component:ChatComponent, canActivate:[AuthGuard]},
+  // {path: 'chat/:iduser', component:ChatComponent, canActivate:[AuthGuard]},
   {path: 'navbarphone', component:NavbarGeneralPhoneComponent},
   {path: 'marketing', component:MarketingComponent},
   {path: 'privacy', component:PrivacyPageComponent},
@@ -55,6 +52,7 @@ const routes: Routes = [
   {path: 'emailresetsend', component:ResetEmailSentComponent},
   {path: 'cancelsuscription', component:CancelSuscriptionComponent},
   {path: 'newCategory', component:NewCategoryListComponent},
+  {path: 'truckform', component:TruckComponent},
   {path: 'buycoin', component:BuyCoinComponent, canActivate:[AuthGuard]},
   {path: 'paneladmin', loadChildren:() => import('./components/panel-admin/panel-admin.module').then(x=> x.PanelAdminModule), canActivate:[AuthGuard]},
   {path: 'panelseller', loadChildren:() => import('./components/panel-seller/panel-seller.module').then(x=> x.PanelSellerModule), canActivate:[AuthGuard]},

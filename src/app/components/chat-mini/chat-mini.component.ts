@@ -1,9 +1,12 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { ChatRoom } from 'src/app/models/chat-room';
 import { Message } from 'src/app/models/message';
+import { Product2 } from 'src/app/models/product2';
 import { ChatSocketService } from 'src/app/services/chat-socket.service';
+import { IMG_PRODUCT_URL } from 'src/app/services/helper';
 import { MessageService } from 'src/app/services/message.service';
 import { ModalService } from 'src/app/services/modal.service';
+import { ProductService } from 'src/app/services/product.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -19,6 +22,8 @@ export class ChatMiniComponent implements OnInit {
   @ViewChild('audioPlayer') audioPlayer!: ElementRef;
 
   isMobile: boolean = false;
+
+  urlimage = IMG_PRODUCT_URL;
 
   msg: Message = new Message();
   user: number;
@@ -39,9 +44,11 @@ export class ChatMiniComponent implements OnInit {
 
   page = 0;
 
+  product: Product2;
+
   chatsListActive: boolean = false;
 
-  constructor(private websocketService: ChatSocketService, private messageService: MessageService, private userService: UserService, private chatclose: ModalService) { }
+  constructor(private websocketService: ChatSocketService, private messageService: MessageService, private userService: UserService, private chatclose: ModalService, private productService: ProductService) { }
 
 
   ngOnInit() {
@@ -55,10 +62,16 @@ export class ChatMiniComponent implements OnInit {
       if (this.idprovider && this.idprovider > 0) {
 
         this.messageService.getMessagesWith(this.thisidUser, this.idprovider!).subscribe(chat => {
+
           this.chatGroups2.clear();
+
           if (chat) {
             this.chatingWhit = chat.users[0].id !== this.thisidUser ? chat.users[0].firstName + " " + chat.users[0].lastName : chat.users[1].firstName + " " + chat.users[1].lastName;
+            
             this.getChats(chat.id);
+            if(this.chatclose.idproduct>0){
+              this.sendAutomaticMessage(this.chatclose.idproduct);
+            }
           } else {
 
             this.userService.getById(this.idprovider!).subscribe(u => {
@@ -70,6 +83,11 @@ export class ChatMiniComponent implements OnInit {
             this.activeChat = -1;
             this.msg.idchat = 0;
             this.msg.sender = this.thisidUser;
+
+            if(this.chatclose.idproduct>0){
+              this.sendAutomaticMessage(this.chatclose.idproduct);
+            }
+
           }
         });
 
@@ -79,6 +97,11 @@ export class ChatMiniComponent implements OnInit {
 
     }
     this.checkDeviceType();
+  }
+
+  chargeChatsFromRoomList(idchat: number, chatingWith?: string, idchatingWith?: number){
+    this.chatGroups2.clear();
+    this.getChats(idchat,chatingWith,idchatingWith);
   }
 
   getChats(idchat: number, chatingWith?: string, idchatingWith?: number) {
@@ -110,7 +133,7 @@ export class ChatMiniComponent implements OnInit {
       setTimeout(() => {
 
         //console.log("c: " + JSON.stringify(this.chatMessages));
-        if (this.LastMessageEachChat.length>0) {
+        if (this.LastMessageEachChat.length > 0) {
           const index = this.LastMessageEachChat.findIndex(obj => obj.idchat == idchat);
           index !== -1 ? this.LastMessageEachChat[index].seen = true : this.LastMessageEachChat[index].seen = false;
         }
@@ -145,7 +168,7 @@ export class ChatMiniComponent implements OnInit {
   }
 
   sendMessage() {
-
+    
     //add date to msg
     this.msg.dateTime = new Date();
     this.msg.sender = this.thisidUser;
@@ -155,9 +178,8 @@ export class ChatMiniComponent implements OnInit {
     if (this.activeChat !== -1) {
       this.msg.idchat = this.activeChat!;
     }
-
+    // console.log(this.msg);
     //send to server
-    // console.log("enviando: " + this.msg)
     this.websocketService._send(this.msg);
 
     //show in msgbox
@@ -168,6 +190,7 @@ export class ChatMiniComponent implements OnInit {
     this.setDateOrder();
 
     this.msg.content = "";
+    this.msg.productImage = "";
     setTimeout(() => {
       this.scrollMessageContainerToBottom();
     }, 0);
@@ -191,7 +214,6 @@ export class ChatMiniComponent implements OnInit {
   }
 
   closeMsgBox() {
-    //this.activeChat = 0;
     this.chatclose.openChat(0);
   }
 
@@ -211,6 +233,7 @@ export class ChatMiniComponent implements OnInit {
   }
 
   playNotificationSound() {
+    console.log("si es aqui")
     const audio = new Audio('assets/sound/notification-mouth.wav');
     audio.play();
   }
@@ -222,20 +245,13 @@ export class ChatMiniComponent implements OnInit {
   checkDeviceType() {
     const screenWidth = window.innerWidth;
     this.isMobile = screenWidth < 576; // Establece la condición para dispositivos móviles según el ancho de la pantalla
-    // if (this.isMobile) {
-    //   this.renderer.addClass(document.body, 'mobile'); // Agrega la clase 'mobile' al elemento <body> si es un dispositivo móvil
-    // }
+
   }
 
   sortByDateDesc() {
     this.LastMessageEachChat.sort((a, b) => new Date(b.dateTime).getTime() - new Date(a.dateTime).getTime());
   }
 
-  // sortByDateMsgDesc() {
-  //   console.log("ordenando")
-  //   console.log(this.chatMessages);
-  //   this.chatMessages.sort((b, a) => new Date(b.dateTime).getTime() - new Date(a.dateTime).getTime());
-  // }
 
   incomingMessage(msg: Message) {
 
@@ -329,6 +345,16 @@ export class ChatMiniComponent implements OnInit {
       this.scrollPosition = contentHeight;
       this.getChats(this.activeChat!);
     }
+  }
+
+  sendAutomaticMessage(productId: number) {
+    
+    this.productService.getProduc2byId(productId).subscribe(p => {
+      this.msg.productImage = p.mainImage;
+      this.msg.content = "Poštovanje, zanima me " + p.productName;
+      this.sendMessage();
+    });
+    this.chatclose.idproduct = 0;
   }
 
 

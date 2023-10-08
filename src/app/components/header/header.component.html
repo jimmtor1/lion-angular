@@ -11,22 +11,44 @@
 
         <div class="col-5">
 
-            <form class="d-flex">
+            <!-- <form class="d-flex">
                 <input class="form-control border border-2 border-danger search-input" type="search"
                     placeholder="Pretraži proizvode" aria-label="Search" name="keyword" [(ngModel)]="word">
                 <button class="btn btn-danger search-button" (click)="search()" style="width: 60px;" type="submit">
                     <i class="fa fa-search"></i>
                     <fa-icon [icon]="['fas', 'magnifying-glass']"></fa-icon>
                 </button>
+            </form> -->
+
+            <form>
+                <div class="input-group mb-3 col-5">
+
+                    <select [(ngModel)]="selectsearch" class="btn btn-outline-danger search-select bg-light text-dark p-0" style="text-align: left;" name="selectsearch" id="selectsearch">
+                        <option value="1">Proizvodi</option>
+                        <option value="2">Firme</option>
+                    </select>
+
+                    <input type="text" class="form-control" [(ngModel)]="word" name="keyword"  aria-label="Text input with dropdown button">
+
+                    <button class="btn btn-danger search-button" (click)="search()" style="width: 50px;" type="submit">
+                        <!-- <i class="fa fa-search"></i> -->
+                        <fa-icon [icon]="['fas', 'magnifying-glass']"></fa-icon>
+                    </button>
+                </div>
             </form>
 
         </div>
+
+
+
+
 
         <div class="col-4">
 
             <div class="d-flex justify-content-end">
 
-                <a (click)="panelredirect()" style="text-decoration: none; cursor: pointer; max-width: 80px;" class="col text-danger text-center">
+                <a (click)="panelredirect()" style="text-decoration: none; cursor: pointer; max-width: 80px;"
+                    class="col text-danger text-center">
                     <!-- <i class="fa fa-user-o fs-5"></i> -->
                     <fa-icon [icon]="['fas', 'user']" style="font-size: 1.1em"></fa-icon>
                     <p class="small text-dark text-nowrap overflow-hidden text-truncate">{{email}}</p>
@@ -118,7 +140,7 @@
 </div>
 
 <!-- mobile -->
-<div *ngIf="(isMobile$ | async) === true" class="container pt-3">
+<div *ngIf="(isMobile$ | async) === true" class="container pt-3 pb-2">
 
     <div class="row align-items-center">
 
@@ -130,22 +152,40 @@
         </div>
 
         <!-- searcher -->
-        <div class="col-7 px-0">
-            <form class="d-flex">
+        <div class="px-0" [ngClass]="role == 2?'col-8':'col-9'">
+            <!-- <form class="d-flex">
                 <input class="form-control border border-2 border-danger search-input" type="search"
                     placeholder="Pretraži proizvode" aria-label="Search" name="keyword" [(ngModel)]="word">
-                <button class="btn btn-danger search-button" (click)="search()" style="width: 50px;" type="submit">
-                    <!-- <i class="fa fa-search"></i> -->
+                <button class="btn btn-danger search-button" (click)="search()" style="width: 50px;" type="submit">                   
                     <fa-icon [icon]="['fas', 'magnifying-glass']"></fa-icon>
                 </button>
+            </form> -->
+
+            <form>
+                
+                <div class="input-group col-5">
+
+                    <select [(ngModel)]="selectsearch" class="btn btn-outline-danger search-select bg-light text-dark p-0" style="text-align: left;" name="selectsearch" id="selectsearch">
+                        <option value="1">Proizvodi</option>
+                        <option value="2">Firme</option>
+                    </select>
+
+                    <input type="text" class="form-control" name="keyword" [(ngModel)]="word" aria-label="Text input with dropdown button">
+
+                    <button class="btn btn-danger search-button" (click)="search()" style="width: 40px;" type="submit">
+                        <i class="fa fa-search"></i>
+                        <fa-icon [icon]="['fas', 'magnifying-glass']"></fa-icon>
+                    </button>
+                </div>
             </form>
+
         </div>
 
         <!-- user-icon -->
-        <div class="col-3">
-            <div class="row">
+        <div [ngClass]="role == 2?'col-2':'col-1'">
+            <div class="row align-items-center">
 
-                <div class="col-4 d-flex justify-content-center"
+                <div [ngClass]="role == 2?'col-6':'col-12'" class="col-6 d-flex justify-content-center align-items-center"
                     [ngStyle]="role ? {'border-right': '1px solid black'} : {'border-right': 'none'}"
                     style="border-right: 1px solid black;">
                     <a (click)="panelredirect()" style="text-decoration: none; cursor: pointer;"
@@ -155,12 +195,12 @@
                 </div>
 
                 <!-- [ngStyle]="role ? {'border-right': '1px solid black'} : {'border-right': 'none'}" -->
-                <div class="col-4 d-flex justify-content-center">
+                <div *ngIf="role == 2" class="col-6 d-flex justify-content-center">
                     <!-- <a *ngIf="role < 2" (click)="direction()" style="text-decoration: none;"  class="text-danger">
                         <fa-icon [icon]="['fas', 'shopping-cart']" style="font-size: 1.1em"></fa-icon>
                     </a> -->
 
-                    <a *ngIf="role == 2" routerLink="product" style="text-decoration: none;" class="text-danger ">
+                    <a  routerLink="product" style="text-decoration: none;" class="text-danger ">
                         <fa-icon [icon]="['fas', 'store']" style="font-size: 1.1em"></fa-icon>
                     </a>
                 </div>

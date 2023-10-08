@@ -35,7 +35,7 @@ export class ProductFormComponent implements OnInit {
     creationDate: undefined,
     promoteActive: false,
     categoryList: [] = [],
-    // imageList: []
+    visits: 0
   };
 
   productImage: ProductImage[] = [];
@@ -48,15 +48,17 @@ export class ProductFormComponent implements OnInit {
   authorizedSeller = false;
   loading = true;
   isNewProduct = true;
-
+  next = false;
+  showAdditionalData = false;
 
   categories: NewCategory[][] = [];
 
   urlprod_img = `${IMG_PRODUCT_URL}`;
 
+  formData: FormData;
 
   constructor(private sellerService: SellerService, private renderer2: Renderer2, private categoryService: CategoryService, private productService: ProductService, private router: Router, private route: ActivatedRoute, private datePipe: DatePipe, private modaService: ModalService) {
-
+    this.formData = new FormData();
   }
 
   ngOnInit(): void {
@@ -78,8 +80,9 @@ export class ProductFormComponent implements OnInit {
 
             } else {
               this.subcategoriesCombo2();
+              this.loading = false;
             }
-            this.loading = false;
+            
           })
         } else {
           this.loading = false;
@@ -94,9 +97,9 @@ export class ProductFormComponent implements OnInit {
 
   getProductById(id: number) {
     this.productService.getProduc2byId(id).subscribe(bdproduct => {
-      
+
       this.product = bdproduct;
-      console.log(this.product);
+      //  console.log(this.product); 
       this.subcategoriesCombo2();
 
       if (this.product.price == 0) {
@@ -104,27 +107,33 @@ export class ProductFormComponent implements OnInit {
       } else {
         this.priceRequest = false;
       }
-      
+
+      if (this.product.categoryList[1]) {
+        if (this.product.categoryList[1].idcategory == 228) {
+          this.next = true;
+        }
+      }
+      this.loading = false;
       this.onFileSelected2();
     })
   }
 
-  getImagesByid(idproduct:number){
-    this.productService.getImagesById(idproduct).subscribe(i=>{
+  getImagesByid(idproduct: number) {
+    this.productService.getImagesById(idproduct).subscribe(i => {
       this.productImage = i;
     });
-    
+
   }
 
   subcategoriesCombo2() {
     this.categoryService.getSubcategories2().subscribe(subcategories => {
-      
+
       this.categories.push(subcategories);
       if (!this.isNewProduct && this.product.categoryList.length > 2) {
 
         for (let index = 1; index < this.product.categoryList.length - 1; index++) {
           this.categoryService.getSublist(this.product.categoryList[index].idcategory).subscribe(data => {
-            
+
             this.categories.push(data);
           });
         }
@@ -151,14 +160,19 @@ export class ProductFormComponent implements OnInit {
     }
 
     this.fillSubList(idcategory);
+
+    if (idcategory == 228) {
+      this.next = true;
+    }
+
   }
 
   fillSubList(idcategory: number) {
     this.categoryService.getSublist(idcategory).subscribe(s => {
-      
+
       if (s.length > 0) {
         this.categories.push(s);
-        
+
       }
     })
   }
@@ -174,72 +188,81 @@ export class ProductFormComponent implements OnInit {
 
   }
 
-  
+
   save2() {
     this.loading = true;
-    const formData = new FormData();
+    //const formData = new FormData();
 
     this.images.forEach(file => {
-      formData.append('imageList', file.file);
+      this.formData.append('imageList', file.file);
     })
 
-    formData.append('productName', this.product.productName);
-    formData.append('description', this.product.description);
-    formData.append('price', this.product.price.toString());
-    formData.append('type', this.product.type.toString());
-    formData.append('iduser', this.product.iduser!.toString());
-    
+    this.formData.append('productName', this.product.productName);
+    this.formData.append('description', this.product.description);
+    this.formData.append('price', this.product.price.toString());
+    this.formData.append('type', this.product.type.toString());
+    this.formData.append('iduser', this.product.iduser!.toString());
+
 
     this.product.categoryList.forEach((category: { toString: () => string | Blob; }) => {
-      formData.append('prodcats', category.toString());
+      this.formData.append('prodcats', category.toString());
     });
 
-    this.productService.saveProduc2(formData).subscribe(p => {
-      if (p && p.idproduct != undefined) {
-        this.loading = false;
-        this.modaService.openModal("Uspješno ste dodali vaš oglas.", "success");
-        this.router.navigate(['panelseller/products']);
-      }
-    }, error => {console.log(error);this.loading=false})
+    if (this.next) {
+      this.next_previous(true);
+    } else {
+      this.productService.saveProduc2(this.formData).subscribe(p => {
+        if (p && p.idproduct != undefined) {
+          this.loading = false;
+          this.modaService.openModal("Uspješno ste dodali vaš oglas.", "success");
+          this.router.navigate(['panelseller/products']);
+        }
+      }, error => { console.log(error); this.loading = false })
+    }
+
 
   }
 
-  
+
   edit2() {
 
-    const formData = new FormData();
-
     this.images.forEach(file => {
-      formData.append('imageList', file.file);
+      this.formData.append('imageList', file.file);
     })
 
     this.filesTodelete.forEach(imagename => {
-      formData.append('filesTodelete', JSON.stringify(imagename));
+      this.formData.append('filesTodelete', JSON.stringify(imagename));
     })
 
-    formData.append('idproduct', this.product.idproduct!.toString());
-    formData.append('productName', this.product.productName);
-    formData.append('description', this.product.description);
-    formData.append('price', this.product.price.toString());
-    formData.append('type', this.product.type.toString());
-    formData.append('iduser', this.product.iduser!.toString());
-    formData.append('active', this.product.active.toString());
-    formData.append('mainImage', this.product.mainImage);
+    this.formData.append('idproduct', this.product.idproduct!.toString());
+    this.formData.append('productName', this.product.productName);
+    this.formData.append('description', this.product.description);
+    this.formData.append('price', this.product.price.toString());
+    this.formData.append('type', this.product.type.toString());
+    this.formData.append('iduser', this.product.iduser!.toString());
+    this.formData.append('active', this.product.active.toString());
+    this.formData.append('mainImage', this.product.mainImage);
 
-    this.product.categoryList.forEach((category: { toString: () => string | Blob; }) => {
-      formData.append('prodcats', category.toString());
+    this.product.categoryList.forEach((category: { idcategory: string | Blob; }) => {
+      this.formData.append('prodcats', category.idcategory);
     });
 
     let myDate = this.datePipe.transform(this.product.creationDate, 'yyyy-MM-dd HH:mm:ss');
 
     if (myDate !== null) {
-      formData.append('creationDate2', myDate);
+      this.formData.append('creationDate2', myDate);
     }
 
-    this.productService.editAd(formData).subscribe(dato => {
-      this.modaService.openModal("Uspješno ste izmijenili vaš oglas.", "success");
-      this.router.navigate(['panelseller/products']);
-    }, error => console.log(error));
+    if (this.next) {
+      this.next_previous(true);
+    } else {
+      this.productService.editAd(this.formData).subscribe(dato => {
+        this.modaService.openModal("Uspješno ste izmijenili vaš oglas.", "success");
+        this.router.navigate(['panelseller/products']);
+      }, error => console.log(error));
+    }
+
+
 
   }
 
@@ -295,9 +318,9 @@ export class ProductFormComponent implements OnInit {
   removeImage(im: imgclasification): void {
 
     const imageElement = document.getElementById(`${im.id}`);
-   
+
     if (im.isNew && imageElement !== null) {
-      
+
       imageElement.remove();
       let index = this.images.indexOf(im);
       this.images.splice(index, 1);
@@ -305,7 +328,7 @@ export class ProductFormComponent implements OnInit {
     } else if (!im.isNew && imageElement !== null) {
 
       this.filesTodelete.push(im.productImage);
-      
+
       imageElement.remove();
       let index = this.images.indexOf(im);
       this.images.splice(index, 1);
@@ -343,6 +366,11 @@ export class ProductFormComponent implements OnInit {
     event.preventDefault();
   }
 
+  next_previous(showAddtional: boolean) {
+    this.showAdditionalData = showAddtional;
+    this.loading = false;
+  }
+
 
 }
 
@@ -355,4 +383,6 @@ class imgclasification {
   file: File;
 
 }
+
+
 

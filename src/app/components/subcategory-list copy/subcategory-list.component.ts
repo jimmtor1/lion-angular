@@ -24,7 +24,7 @@ export class SubcategoryListComponent2 implements OnInit {
   ngOnInit(): void {
 
     this.route.params.subscribe(param => {
-      this.item = parseInt(param['id']) + 1;
+    this.item = parseInt(param['id']);
 
       let x = this.mapCategoryService.get(this.item, 1);
 

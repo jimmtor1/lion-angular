@@ -33,6 +33,9 @@ export class RegisterFormComponent implements OnInit {
   name = "";
   result = "";
 
+  
+
+
   @ViewChild('miModal') miModal: any;
 
 
@@ -58,26 +61,22 @@ export class RegisterFormComponent implements OnInit {
 
   }
 
-  // selectedSub(event: Event) {
-  //   this.product.idsubcategory = parseInt((event.target as HTMLSelectElement)?.value);
-  // }
-
   saveBuyer() {
-
+    
     this.buyerService.createBuyer(this.buyer).subscribe(dato => {
-      if (dato) {
+      if (dato.id) {
         this.modalShow = true;
         this.name = dato.user.firstName;
-        this.result = "Registracija nije završena";
-      } else {
         this.result = "Registracija je uspješno završena";
+      } else {
+        this.result = "Registracija nije završena";
       }
 
       //this.router.navigate(['login']);
     }, error => {
       this.modalShow = true;
       console.log(error);
-      this.result = "Registracija je uspješno završena";
+      this.result = "Registracija nije završena";
     });
   }
 
@@ -89,11 +88,11 @@ export class RegisterFormComponent implements OnInit {
         this.name = dato.user.firstName;
         this.result = "Registracija je uspješno završena";
       } else {
-        this.result = "Registracija je uspješno završena";
+        this.result = "Registracija nije završena";
       }    
     }, error => {
       this.modalShow = true;
-      this.result = "Registracija je uspješno završena";
+      this.result = "Registracija nije završena";
       console.log(error);
     }
 
@@ -124,14 +123,6 @@ export class RegisterFormComponent implements OnInit {
 
   }
 
-  // subcategoriesCombo(event: Event) {    
-  //   this.selectedCategory = parseInt((event.target as HTMLSelectElement)?.value);    
-  //   this.product.idcategory = this.selectedCategory; 
-
-  //   this.categoryService.getSubcategories(this.selectedCategory).subscribe(subcategories => {
-  //     this.subcategories = subcategories;
-  //   });
-  // }
 
   citiesCombo(event: Event) {
     const fed = parseInt((event.target as HTMLSelectElement)?.value);

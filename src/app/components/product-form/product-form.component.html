@@ -1,4 +1,4 @@
-<div class="container mb-3">
+<div *ngIf="!showAdditionalData" class="container">
 
     <div *ngIf="loading" class="text-center mt-3">
         <div class="spinner-grow text-danger" role="status">
@@ -159,11 +159,16 @@
 
                     </div>
 
-                    <div class="text-center">
+                    <div *ngIf="!next" class="text-center">
                         <input type="submit" value="{{isNewProduct?'Dodaj':'Izmijeni'}}" class="btn btn-danger">
                     </div>
 
+                    <div *ngIf="next" class="text-center d-flex justify-content-end">
+                        <input type="submit" value="Dalje ->" class="btn btn-dark">
+                    </div>
+
                 </form>
+
                 <br>
             </div>
         </div>
@@ -171,4 +176,8 @@
     <br>
     <br>
     <br>
+</div>
+
+<div *ngIf="showAdditionalData" >
+    <app-truck [formData]="formData" (dataEvent)="next_previous($event)"></app-truck>
 </div>

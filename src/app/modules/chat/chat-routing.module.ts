@@ -8,7 +8,7 @@ const routes: Routes = [
   {path:'',component:ChatComponent, children: [
     {path:'',redirectTo: 'chats', pathMatch:'full'},
     {path:'chats', component: ChatListComponent},
-    {path:'msg/:idchat', component: MsgListComponent},
+    {path:'msg/:idchat/:idprov', component: MsgListComponent},
     {path:'sendmsg/:idprov', component: MsgListComponent}
   ]}
 ];

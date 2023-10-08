@@ -11,8 +11,8 @@ export class Message {
     content: string;
     dateTime: Date;
     seen: boolean = true;
+    productImage:string;
 
     receiver?:number;
-
 
 }

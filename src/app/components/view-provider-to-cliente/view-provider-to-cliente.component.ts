@@ -1,13 +1,11 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Product } from 'src/app/models/product';
 import { Seller } from 'src/app/models/seller';
 import { IMG_PRODUCT_URL, IMG_PROFILE_URL, select_city, select_fed } from 'src/app/services/helper';
 import { ModalService } from 'src/app/services/modal.service';
 import { ProductService } from 'src/app/services/product.service';
 import { SellerService } from 'src/app/services/seller.service';
 import { DeviceDetectorService } from 'ngx-device-detector';
-import { Product2 } from 'src/app/models/product2';
 import { ProductSimple } from 'src/app/models/product-simple';
 
 @Component({
@@ -21,7 +19,7 @@ export class ViewProviderToClienteComponent implements OnInit {
   seller: Seller = new Seller();
   producByProvider: ProductSimple[] = [];
   loading: boolean = true;
-  iduser:number = 0;
+  iduser: number = 0;
 
   url_prof_img = `${IMG_PROFILE_URL}`;
   url_prod_img = `${IMG_PRODUCT_URL}`;
@@ -29,8 +27,8 @@ export class ViewProviderToClienteComponent implements OnInit {
   fed: string = "Nije odabrano";
   city: string = "Nije odabrano";
 
-  constructor(private route: ActivatedRoute, private sellerService: SellerService, private productService: ProductService, private modelChat: ModalService, private deviceService: DeviceDetectorService, private router:Router) {
-   
+  constructor(private route: ActivatedRoute, private sellerService: SellerService, private productService: ProductService, private modelChat: ModalService, private deviceService: DeviceDetectorService, private router: Router) {
+
   }
 
   ngOnInit(): void {
@@ -40,7 +38,7 @@ export class ViewProviderToClienteComponent implements OnInit {
       if (param['id'] != null) {
 
         this.sellerService.getById(param['id']).subscribe(pro => {
-          this.seller = pro;          
+          this.seller = pro;
           if (this.seller.user.federation) {
             let x = select_fed(this.seller.user.federation);
             if (x) {
@@ -55,23 +53,16 @@ export class ViewProviderToClienteComponent implements OnInit {
           this.loading = false;
         });
 
-        // this.productService.getAllByProvider(param['id']).subscribe(result => {
-        //   result.forEach(r => {
-        //     this.producByProvider.push(r);
-        //   })
-        // });
         this.productService.getProducs2byuser(param['id']).subscribe(result => {
           result.forEach(r => {
             this.producByProvider.push(r);
           })
         });
 
-
-
       }
 
       let iduser = localStorage.getItem('iduser');
-      if(iduser){
+      if (iduser) {
         this.iduser = parseInt(iduser);
       }
 
@@ -92,9 +83,9 @@ export class ViewProviderToClienteComponent implements OnInit {
         this.modelChat.openChat(idseller);
       }, 0);
 
-    }else{
+    } else {
 
-      this.router.navigate(['/chat2/sendmsg/'+idseller]);
+      this.router.navigate(['/chat2/sendmsg/' + idseller]);
 
     }
 
@@ -102,6 +93,6 @@ export class ViewProviderToClienteComponent implements OnInit {
 
   }
 
-  
+
 
 }

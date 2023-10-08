@@ -18,9 +18,10 @@
     .pg{
         width: 100%;
     }
-    .pq {
+    
+    /* .pq {
         display: none !important;
-    }
+    } */
 }
 
 @media (max-width: 576px){

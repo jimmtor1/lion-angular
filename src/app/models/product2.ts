@@ -11,5 +11,6 @@ export interface Product2{
     creationDate:Date | undefined;
     promoteActive:boolean;
     categoryList:number[] | any;
+    visits: number;
 }
 

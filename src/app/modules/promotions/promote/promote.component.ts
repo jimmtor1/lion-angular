@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Product } from 'src/app/models/product';
 import { Product2 } from 'src/app/models/product2';
 import { IMG_PRODUCT_URL } from 'src/app/services/helper';
 import { ModalService } from 'src/app/services/modal.service';
 import { ProductService } from 'src/app/services/product.service';
+
 
 @Component({
   selector: 'app-promote',
@@ -31,7 +31,6 @@ export class PromoteComponent implements OnInit {
       }
     });
 
-
   }
 
   addPromotion() {
@@ -43,7 +42,7 @@ export class PromoteComponent implements OnInit {
 
     this.productService.promote(form).subscribe(b => {
       if (b==1) {
-        this.router.navigate(['/addetails/'+this.product.idproduct])
+        this.router.navigate(['/artikal/'+this.product.idproduct])
         this.modaService.openModal("Sada se vaš proizvod promovira.", "success");
       }else if(b==-1){
         alert("Nemate dovoljno novčića.");        

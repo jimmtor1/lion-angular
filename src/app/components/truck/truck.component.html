@@ -1,0 +1,107 @@
+<div class="container mb-3 mt-3">
+
+    <div *ngIf="loading" class="text-center mt-3">
+        <div class="spinner-grow text-danger" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+
+    <div *ngIf="!loading">
+
+       
+
+        <div class="card mt-3 shadow px-5 py-3">
+            <h3 class="text-center">Dodatne informacije</h3>
+            <form (ngSubmit)="submit()">
+
+                <div class="row">
+                    <div class="col-12 col-sm-6 mb-3">
+                        <label for="model" class="form-label">MODEL</label>
+                        <select class="form-select" aria-label="model" id="model" name="model"
+                            [(ngModel)]="truck.brand">
+                            <option value=0 selected>--Izaberi--</option>
+                            <option value={{brand.id}} *ngFor="let brand of brands">{{brand.brandName}}</option>
+                        </select>
+                    </div>
+                    <div class="col-12 col-sm-6 mb-3">
+                        <label for="modelyear" class="form-label">GODIŠTE</label>
+                        <input type="number" min="1900" max="2099" class="form-control" step="1" id="modelyear"
+                            name="modelyear" placeholder="YYYY" [(ngModel)]="truck.modelYear">
+                    </div>
+                    <div class="col-12 col-sm-6 mb-3">
+                        <label for="axes" class="form-label">BROJ OSOVINA</label>
+                        <input type="number" min="1" max="12" class="form-control" step="1" id="axes" name="axes"
+                            placeholder="BROJ OSOVINA" [(ngModel)]="truck.axes">
+                    </div>
+                    <div class="col-12 col-sm-6 mb-3">
+                        <label for="tip" class="form-label">TIP</label>
+                        <select class="form-select" aria-label="Tip" id="tip" name="tip" [(ngModel)]="truck.truckType">
+                            <option value=0 selected>--Izaberi--</option>
+                            <option value={{type.id}} *ngFor="let type of trucktypes">{{type.truckType}}</option>
+                        </select>
+                    </div>
+                    <div class="col-12 col-sm-6 mb-3">
+                        <label for="kilowatt" class="form-label">Kilovata</label>
+                        <input type="number" min="1" class="form-control" step="1" id="kilowatt" name="kilowatt"
+                            placeholder="Kilovata" [(ngModel)]="truck.kilowatt">
+                    </div>
+                    <div class="col-12 col-sm-6 mb-3">
+                        <label for="horsepower" class="form-label">Konjskih snaga</label>
+                        <input type="number" min="1" class="form-control" step="1" id="horsepower" name="horsepower"
+                            placeholder="Konjskih snaga" [(ngModel)]="truck.horsepower">
+                    </div>
+                    <div class="col-12 col-sm-6 mb-3">
+                        <label for="chassis" class="form-label">Broj šasije</label>
+                        <input type="text" class="form-control" id="chassis" name="chassis" placeholder="Broj šasije"
+                            [(ngModel)]="truck.chassis">
+                    </div>
+
+                    <div class="col-12 col-sm-6 d-flex align-items-center mb-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" (click)="lastMonths()"
+                                value="{{truck.registered}}" id="registered" name="registered"
+                                [(ngModel)]="truck.registered">
+                            <label class="form-check-label" for="registered">
+                                Registrovan
+                            </label>
+                        </div>
+                    </div>
+
+                    <div *ngIf="truck.registered" class="col-12 col-sm-6 d-flex align-items-center">
+                        <label for="registerDate" class="form-label">Registrovan do: </label>
+                        <select class="form-select" aria-label="Datum registracije" id="registerDate"
+                            name="registerDate" [(ngModel)]="truck.registrationDate">
+                            <option value=0 selected>--Izaberi--</option>
+                            <option value={{date}} *ngFor="let date of registerDates">{{date}}</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="d-flex justify-content-start mt-4">
+                            <input type="button" (click)="previous()" class="btn btn-dark rounded-pill" value="Nazad">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="d-flex justify-content-end mt-4">
+                            <input type="submit" value="{{isNewProduct?'Dodaj':'Izmijeni'}}"
+                                class="btn btn-danger rounded-pill">
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+            </form>
+
+
+        </div>
+
+        <br>
+        <br>
+        <br>
+    </div>
+</div>

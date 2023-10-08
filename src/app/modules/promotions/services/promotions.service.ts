@@ -18,7 +18,7 @@ export class PromotionsService {
   }
 
   getCoins(iduser:number):Observable<number>{
-    return this.http.get<number>(this.baseUrl + 'provider/' + iduser + '/coins');
+    return this.http.get<number>(this.baseUrl + 'firma/' + iduser + '/coins');
   }
 
   getListCoinsByUser(iduser:number, page:number):Observable<Coin[]>{

@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { fromEvent, map, startWith, Observable } from 'rxjs';
 import { ChatSocketService } from 'src/app/services/chat-socket.service';
@@ -16,6 +16,7 @@ export class HeaderComponent {
   word = "";
   msg_alert: number = 0
   showChats: boolean = false;
+  selectsearch = 1;
 
   public isMobile$: Observable<boolean>;
 
@@ -67,11 +68,16 @@ export class HeaderComponent {
 
   }
 
-  search() {
-    console.log("word: " + this.word)
-    if (this.word !== '') {
-      this.router.navigate(['search', this.word]);
-    }
+  search() {     
+    if(this.selectsearch==1){      
+      if (this.word !== '') {      
+        this.router.navigate(['search', this.word]);
+      }
+    }else{
+      console.log("test")
+      this.router.navigate(['providerSubcategoryList/Firme/Filteri/0', this.word]);
+    } 
+   
   }
 
   show_chats() {

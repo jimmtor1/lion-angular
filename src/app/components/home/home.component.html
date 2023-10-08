@@ -27,33 +27,49 @@
             <span class="visually-hidden">Next</span>
         </button>
     </div>
-    <!-- carrusel end -->
 
-    <!-- carrusel computer -->
-    <div id="carouselExampleFade" class="carousel slide carousel-fade d-sm-none h-50" data-bs-ride="carousel">
-        <div class="carousel-inner">
 
-            <div class="carousel-item active d-flex justify-content-center">
-                <img src="{{urlbanner_img}}BANNER-270X152(1).jpg" class="d-block w-100" alt="...">
+    <!-- carrusel phone -->
+    <div class="d-md-none">
+
+        <div id="carouselExampleFade" class="carousel slide carousel-fade h-50" data-bs-ride="carousel">
+            <div class="carousel-inner">
+    
+                <div class="carousel-item d-flex justify-content-center">
+                    <a [href]="banner.length>0?banner[0].link:''" class="w-100">
+                        <img *ngIf="banner.length>0" src="{{urlbanner_img+banner[4].imageName}}" class="d-block w-100"
+                            alt="...">
+                    </a>
+                </div>
+    
+                <div class="carousel-item d-flex justify-content-center active">
+                    <a [href]="banner.length>0?banner[0].link:''" class="w-100">
+                        <img *ngIf="banner.length>0" src="{{urlbanner_img+banner[4].imageName}}" class="d-block w-100"
+                            alt="...">
+                    </a>
+                </div>
+    
+                <!-- <div class="carousel-item d-flex justify-content-center">
+                    <a [href]="banner.length>0?banner[0].link:''" class="w-100">
+                        <img *ngIf="banner.length>0" src="{{urlbanner_img+banner[5].imageName}}" class="d-block w-100"
+                            alt="...">
+                    </a>
+                </div> -->
+    
             </div>
-
-            <div class="carousel-item d-flex justify-content-center">
-                <img src="{{urlbanner_img}}BANNER-270X152(1).jpg" class="d-block w-100" alt="...">
-            </div>
-
-            <!-- <div class="carousel-item d-flex justify-content-center">
-            <img src="assets/images/D_NQ_863459-MLA69393473823_052023-OO.webp" class="d-block" alt="...">
-        </div> -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
+
+        <circle-category></circle-category>
     </div>
+    
 
     <!-- cinta roja version2 -->
     <div class="container mt-3">
@@ -99,7 +115,7 @@
         </div>
     </div>
 
-
+    <!-- banners -->
     <div class="container mt-2">
 
 
@@ -107,27 +123,22 @@
 
             <div class="mb-2 col-m-12 col-xl-6 d-flex justify-content-center pg">
                 <a class="" routerLink="marketing">
-                    <img class="rounded-3 pg" src="{{urlbanner_img}}BANNER-570X152.jpg" alt="">
+                    <img *ngIf="banner.length>0" class="rounded-3 pg" src="{{urlbanner_img+banner[3].imageName}}"
+                        alt="">
                 </a>
             </div>
 
             <div class="col-m-12 col-xl-6 d-flex justify-content-center pq">
 
-
-
-                <a routerLink="marketing" style="margin-right: 3px;">
-                    <img class="rounded-3" src="{{urlbanner_img}}BANNER-270X152(1).jpg" alt="">
+                <a  routerLink="marketing" style="margin-right: 3px;" class="w-100">
+                    <img *ngIf="banner.length>0" class="rounded-3 w-100"  src="{{urlbanner_img+banner[4].imageName}}" alt="">
                 </a>
 
-                <a routerLink="marketing">
-                    <img class="rounded-3" src="{{urlbanner_img}}BANNER-270X152(2).jpg" alt="">
+                <a routerLink="marketing" class="w-100">
+                    <img *ngIf="banner.length>0" class="rounded-3 w-100"  src="{{urlbanner_img+banner[5].imageName}}" alt="">
                 </a>
-
-
 
             </div>
-
-
 
         </div>
 
@@ -252,13 +263,12 @@
                 <div class="card mb-3" style="max-width: 540px;">
                     <div class="row g-0">
                         <div class="col-4">
-                            <img src="assets/images/gradjevinarstvo-600x500.jpg" class="img-fluid rounded-start"
-                                alt="...">
+                            <img src="assets/images/car image.png" class="img-fluid rounded-start" alt="...">
                         </div>
                         <div class="col-8">
                             <div class="card-body p-1">
-                                <p class="card-text">Gradjevinski radovi</p>
-                                <a routerLink="providerSubcategoryList/Građevinarstvo/Filteri/1"
+                                <p class="card-text">Automobili</p>
+                                <a routerLink="providerSubcategoryList/Trgovina/Automobili/98"
                                     class="stretched-link"></a>
                             </div>
                         </div>
@@ -284,6 +294,9 @@
             </div>
         </div>
 
+
+
+
         <div class="bg-white mb-3 mt-3">
 
             <h4 class="text-center text-danger mb-0">Firme / Trgovine</h4>
@@ -306,11 +319,11 @@
                         <div class="card-body m-0 pb-0">
                             <h6 class="card-title mt-0">{{s.companyName}}</h6>
 
-                            <p class="m-0">{{get_city(s.user.city)}}</p>
+                            <p class="m-0">{{get_city(s.city)}}</p>
                             <p style="overflow: hidden; max-height: 2em; line-height: 1;" class="text-muted fs-6">
                                 {{s.biography}}
                             </p>
-                            <a routerLink="/provider/{{s.user.id}}" class="stretched-link m-0 p-0"></a>
+                            <a routerLink="/firma/{{s.id}}" class="stretched-link m-0 p-0"></a>
                         </div>
                     </div>
                 </div>
@@ -324,13 +337,13 @@
         <hr class="mt-1 mb-0">
 
         <!-- <div class="row g-2"> -->
-            <!-- <div class="col-6 col-sm-4 col-md-3 col-lg-2" > -->
-                <!-- *ngFor="let product of products" -->
-                <!-- <app-product-card-mini [product]="product"></app-product-card-mini> -->
-                <all-random-products [triggerProcedure]="triggerChild" grilla="col-6 col-sm-4 col-md-3 col-lg-2"
-                                     (procedureFinished)="onChildProcedureFinished()">
-                </all-random-products>
-            <!-- </div> -->
+        <!-- <div class="col-6 col-sm-4 col-md-3 col-lg-2" > -->
+        <!-- *ngFor="let product of products" -->
+        <!-- <app-product-card-mini [product]="product"></app-product-card-mini> -->
+        <all-random-products [triggerProcedure]="triggerChild" grilla="col-6 col-sm-4 col-md-3 col-lg-2"
+            (procedureFinished)="onChildProcedureFinished()">
+        </all-random-products>
+        <!-- </div> -->
         <!-- </div> -->
 
         <br>

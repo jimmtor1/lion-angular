@@ -5,7 +5,7 @@ import { ChatSocketService } from 'src/app/services/chat-socket.service';
 import { MessageService } from 'src/app/services/message.service';
 import { ModalService } from 'src/app/services/modal.service';
 import { UserService } from 'src/app/services/user.service';
-import { FunctionsService } from 'src/app/util/functions.service';
+// import { FunctionsService } from 'src/app/util/functions.service';
 
 @Component({
   selector: 'app-msg-list',
@@ -15,7 +15,8 @@ import { FunctionsService } from 'src/app/util/functions.service';
 export class MsgListComponent implements OnInit, AfterViewChecked {
 
   MsgList: Message[] = [];
-  thisidUser = 0;
+  thisidUser = parseInt(localStorage.getItem('iduser')!);
+
   msg: Message = new Message();
   chatingWhit = "";
   chatingWhiid = 0;
@@ -43,24 +44,18 @@ export class MsgListComponent implements OnInit, AfterViewChecked {
 
       if (params['idchat']) {
 
-        this.getChats(params['idchat']);
+        this.getChats(params['idchat']);       
+        this.getChatingWith(params['idprov']);
 
       } else if (params['idprov']) {
+
 
         this.msgService.getMessagesWith(this.thisidUser, params['idprov']).subscribe(chat => {
 
           if (chat) {
             this.getChats(chat.id);
           } else {
-
-            this.userService.getById(params['idprov']).subscribe(u => {
-
-              // this.msg.receiver = u.id;
-              this.chatingWhit = u.firstName + " " + u.lastName;
-              this.chatingWhiid = u.id;
-
-            });
-            //this.activeChat = -1;
+            this.getChatingWith(params['idprov']);
             this.msg.idchat = 0;
             this.msg.sender = this.thisidUser;
             this.suscribeAchat();
@@ -74,6 +69,19 @@ export class MsgListComponent implements OnInit, AfterViewChecked {
 
   }
 
+  getChatingWith(idprov: number) {
+   
+    this.userService.getById(idprov).subscribe(u => {
+      
+      // this.msg.receiver = u.id;
+      this.chatingWhit = u.firstName + " " + u.lastName;
+      this.chatingWhiid = u.id;
+
+    });
+    //this.activeChat = -1;
+
+  }
+
   getChats(idchat: number) {
     this.isLoading = true;
 
@@ -81,7 +89,7 @@ export class MsgListComponent implements OnInit, AfterViewChecked {
     this.thisidUser = localStorage.getItem('iduser') ? parseInt(localStorage.getItem('iduser')!) : 0;
 
     this.msgService.getMessagesByChat(idchat, this.thisidUser, this.page).subscribe(m => {
-
+      
       let messages: Message[] = m.content;
       this.groupChatsByDate(messages);
 
@@ -111,8 +119,8 @@ export class MsgListComponent implements OnInit, AfterViewChecked {
 
     //add date to msg
     this.msg.dateTime = new Date();
-    this.msg.sender = this.thisidUser
-    //this.msg.receiver = new Userr(this.chatingWhiid);
+    this.msg.sender = this.thisidUser;
+    this.msg.receiver = this.chatingWhiid;
 
     //send to server
     this.websocketService._send(this.msg);

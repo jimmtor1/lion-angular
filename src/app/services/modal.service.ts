@@ -14,6 +14,8 @@ export class ModalService {
 
   ChatOpened:boolean = false;
 
+  idproduct:number = 0;
+
   constructor() { }
 
   openModal(message: string, type: string) {
@@ -31,6 +33,14 @@ export class ModalService {
     }else{
       this.ChatOpened = true;
     }
+    
+  }
+
+  openChatAndSend(iduser: number, idproduct:number) { 
+
+    this.chatStateSubject.next({iduser: iduser});    
+    this.ChatOpened = true;
+    this.idproduct = idproduct;
     
   }
 

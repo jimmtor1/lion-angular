@@ -2,7 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ModalService } from './services/modal.service';
 import { Router } from '@angular/router';
 import { Capacitor } from '@capacitor/core';
- import { App } from '@capacitor/app';
+import { App } from '@capacitor/app';
 // import { App as CapacitorApp } from '@capacitor/app';
 
 @Component({
@@ -29,6 +29,8 @@ export class AppComponent implements OnInit {
 
   mainHeight: string;
   navbarHeight: string;
+
+ 
 
   constructor(private modalService:ModalService, private router:Router) {}
   

@@ -14,10 +14,10 @@
 
             <div class="col-12 col-md-4">
 
-                <div class="border text-center p-1">
-
+                <div class="border text-center p-1 d-flex" style="min-height: 300px;">
+                    <!-- style="height: 300px; max-width: 330px;" -->
                     <img *ngIf="seller.image" [src]="url_prof_img + seller.image" alt=""
-                        style="height: 300px; max-width: 330px;">
+                        style="object-fit: contain; max-height: 300px;" class="w-100">
 
                     <img *ngIf="!seller.image" src="/assets/images/no-image-icon.svg" alt=""
                         style="height: 300px; max-width: 330px;">
@@ -212,10 +212,15 @@
                         {{seller.user.email}}
                     </p>
 
-                    <p class="rounded border bg-light">
+                    
+                        
+                    
+                    <p class="rounded border bg-light" style="white-space: pre-line;">
                         <fa-icon [icon]="['fas','address-book']"></fa-icon>
                         {{seller.biography}}
                     </p>
+                                              
+                    
                     <!-- routerLink="/chat/{{seller.user.id}}" -->
                     <a *ngIf="iduser!==seller.user.id" (click)="emitSeller(seller.user.id);"
                         class="btn btn-danger rounded-pill">

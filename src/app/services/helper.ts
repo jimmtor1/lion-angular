@@ -1,19 +1,20 @@
+// export const API_URL = 'http://localhost:8444/';
+export const IMG_PROFILE_URL = 'https://dcl.ba/images/profile-images/';
+export const IMG_PRODUCT_URL = 'https://dcl.ba/images/product-images/';
+export const IMG_BANNER_URL = 'https://dcl.ba/images/banner-images/';
+export const DOC_URL = 'https://dcl.ba/images/documents/'; //tender documents
+export const DOC_PROPOSAL_URL = 'https://dcl.ba/images/proposal-documents/';
 
-export const API_URL = 'http://localhost:8080/';
-export const IMG_PROFILE_URL = 'https://test2.dcl.ba/images/profile-images/';
-export const IMG_PRODUCT_URL = 'https://test2.dcl.ba/images/product-images/';
-export const IMG_BANNER_URL = 'https://test2.dcl.ba/images/banner-images/';
-export const DOC_URL = 'https://test2.dcl.ba/images/documents/'; //tender documents
-export const DOC_PROPOSAL_URL = 'https://test2.dcl.ba/images/proposal-documents/';
-
-// export const API_URL = 'https://test1.dcl.ba/';
+ export const API_URL = 'https://aldin.bhf.ba:8444/';
+// export const API_URL = 'http://23.88.108.217:8444/';
 // export const IMG_PROFILE_URL = '/images/profile-images/';
 // export const IMG_PRODUCT_URL = '/images/product-images/';   
 // export const DOC_URL = '/images/documents/';
 // export const DOC_PROPOSAL_URL = '/images/proposal-documents/'
+// export const IMG_BANNER_URL = '/images/banner-images/';
 
 export class federation {
-    id: number;
+    id: number
     name: string;
     constructor(id: number, name: string) {
         this.id = id;

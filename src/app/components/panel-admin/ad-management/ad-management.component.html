@@ -27,7 +27,7 @@
 
         <div class="list-group-item" aria-current="true" *ngFor="let product of products">
             <div class="d-flex align-center">
-                <img src="{{imageurl}}{{product.productImageList[0].idimage}}{{product.productImageList[0].extension}}"
+                <img src="{{imageurl}}{{product.mainImage}}"
                     class="img-fluid rounded-start" alt="..." style="height: 80px;">
                 <div class="w-100 d-flex">
                     <h5 class="mx-2 h-25 my-auto">{{product.productName}}</h5>

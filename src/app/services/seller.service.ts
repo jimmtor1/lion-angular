@@ -3,6 +3,7 @@ import { Injectable, Provider } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Seller } from '../models/seller';
 import { API_URL } from './helper';
+import { SellerSimple } from '../models/seller-simple';
 
 @Injectable({
   providedIn: 'root'
@@ -19,8 +20,8 @@ export class SellerService {
     return this.http.get<any>(`${this.URL}/${pageNum}/50`)
   }
 
-  getAllFilters(category:number,  federation: number, city:number,pageNum:number):Observable<any>{
-    return this.http.get<any>(`${this.URL}/filter/${category}/${federation}/${city}/${pageNum}/28`)
+  getAllFilters(category:number,  federation: number, city:number, keyword:string, pageNum:number):Observable<any>{
+    return this.http.get<any>(`${this.URL}/filter/${category}/${federation}/${city}/${keyword}/${pageNum}/28`)
   }
 
   getById(id:number):Observable<Seller>{
@@ -29,6 +30,10 @@ export class SellerService {
 
   getAllAccepted():Observable<Seller[]>{
     return this.http.get<Seller[]>(`${this.URL}/accepted`);
+  }
+
+  getAllAcceptedSimple():Observable<SellerSimple[]>{
+    return this.http.get<SellerSimple[]>(`${this.URL}/acceptedSimple`);
   }
 
   getAllProcess():Observable<Seller[]>{
@@ -51,12 +56,12 @@ export class SellerService {
   //   return this.http.get<SellerByCategory[]>(`${this.URL}/category`);
   // }
 
-  getAllRandomWhitLimit(limit:number):Observable<Seller[]>{
-    return this.http.get<Seller[]>(`${this.URL}/randomlist/${limit}`);
+  getAllRandomWhitLimit(limit:number):Observable<SellerSimple[]>{
+    return this.http.get<SellerSimple[]>(`${this.URL}/randomlist/${limit}`);
   }
 
-  getAllByCategoryId(idsub:number){
-    return this.http.get<Seller[]>(`${this.URL}/category/${idsub}`);
+  getAllByCategoryId(idsub:number):Observable<SellerSimple[]>{
+    return this.http.get<SellerSimple[]>(`${this.URL}/category/${idsub}`);
   }
 
   getAllBySubcategory(idsub:number){
@@ -79,5 +84,7 @@ export class SellerService {
   isActive(id:number):Observable<boolean>{
     return this.http.get<boolean>(`${this.URL}/state/${id}`)
   }
+
+  
 
 }

@@ -1,4 +1,5 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ViewportScroller } from '@angular/common';
+import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductImage } from 'src/app/models/product-image';
 import { ProductSimple } from 'src/app/models/product-simple';
@@ -10,6 +11,7 @@ import { ProductService } from 'src/app/services/product.service';
 import { SellerService } from 'src/app/services/seller.service';
 import { FunctionsService } from 'src/app/util/functions.service';
 
+
 @Component({
   selector: 'product-detail',
   templateUrl: './product-detail.component.html',
@@ -17,56 +19,55 @@ import { FunctionsService } from 'src/app/util/functions.service';
 })
 export class ProductDetailComponent implements OnInit {
 
+  @ViewChild('slider') sliderElement!: ElementRef;
+
   product: Product2;
-  //principalImage: string;
   producByProvider: ProductSimple[] = [];
   seller: Seller;
   city: string;
-  loading = true;
+  loading = false;
   promoted = false;
   iduser: number;
   idrole: number;
   productImageList: ProductImage[];
 
-  @ViewChild('scrollable') messageContainer: ElementRef;
-
   urlprod_img = `${IMG_PRODUCT_URL}`;
+  slideWidth: number = 0;
+  currentIndex: number = 0;
 
+  isTruck=false;
 
-  constructor(private productService: ProductService, private route: ActivatedRoute, private sellerService: SellerService, private modelChat: ModalService) { }
+  constructor(private viewportScroller: ViewportScroller,private productService: ProductService, private route: ActivatedRoute, private sellerService: SellerService, private modelChat: ModalService, private renderer: Renderer2) { }
 
   ngOnInit(): void {
-
-    //this.principalImage = "";
+   
     this.route.params.subscribe(param => {
 
       if (param['id'] != null) {
-
-        this.loading = true;
-        // this.productService.getById(param['id']).subscribe(result => {
+        this.loading = true;       
         this.productService.getProduc2byId(param['id']).subscribe(result => {
-          this.product = result;
-
-          //this.principalImage = this.urlprod_img + this.product.productImageList[0].idimage + this.product.productImageList[0].extension;
+          this.product = result;          
           this.isPromoted();
 
+          this._isTruck(this.product.categoryList);
+         
           this.sellerService.getById(this.product.iduser!).subscribe(pro => {
-
             this.seller = pro;
             this.city = select_city(this.seller.user.city).name;
-            this.loading = false;
+            this.loading = false;           
+            this.viewportScroller.scrollToPosition([0, 0]);           
+            setTimeout(() => {
+              this.slideWidth = this.sliderElement.nativeElement.querySelector('.slide').clientWidth;
+            }, 500);
+
           });
-          // this.productService.getAllByProvider(this.product.idprovider).subscribe(result => {
           this.productService.getProducs2byuser(this.product.iduser!).subscribe(result => {
-            //result.forEach(r => {
             this.producByProvider = result;
-            //})
           });
 
         });
 
         this.productService.getImagesById(param['id']).subscribe(rs => {
-
           this.productImageList = rs;
         });
 
@@ -83,46 +84,10 @@ export class ProductDetailComponent implements OnInit {
       this.idrole = parseInt(role);
     }
 
-
   }
 
-
-  //section mouse moved_______________________________________
-  private isDragging = false;
-  private startX = 0;
-  onMouseDown(event: MouseEvent) {
-    this.isDragging = true;
-    this.startX = event.clientX;
-  }
-
-  onMouseMove(event: MouseEvent) {
-    if (this.isDragging) {
-      const deltaX = event.clientX - this.startX;
-
-      if (deltaX > 10) {
-        console.log("derecha")
-        // Usuario empujó hacia la derecha
-        // Ejecutar función para cambiar la imagen hacia la derecha
-      } else if (deltaX < -10) {
-        console.log("izquierda")
-        // Usuario empujó hacia la izquierda
-        // Ejecutar función para cambiar la imagen hacia la izquierda
-      }
-    }
-  }
-
-  onMouseUp() {
-    this.isDragging = false;
-  }
-
-//____________________________________________________
-
-  chagePrincipalImage(position: number) {
-    this.product.mainImage = this.productImageList[position].extension;
-  }
-
-  emitSeller(idseller: number) {
-    this.modelChat.openChat(idseller);
+  emitSeller(idseller: number, idproduct:number) {
+    this.modelChat.openChatAndSend(idseller, idproduct);
   }
 
   isPromoted() {
@@ -143,6 +108,44 @@ export class ProductDetailComponent implements OnInit {
 
     // }
   }
+
+  // ______________________slide funcionality_________________________
+
+
+
+
+  prevSlide() {
+    this.moveToIndex(this.currentIndex - 1);
+  }
+
+  nextSlide() {
+    this.moveToIndex(this.currentIndex + 1);
+  }
+
+  moveToIndex(index: number) {
+
+    if (index < 0) {
+      index = this.productImageList.length - 1;
+    } else if (index >= this.productImageList.length) {
+      index = 0;
+    }
+    this.currentIndex = index;
+    const transformValue = `translateX(-${this.currentIndex * this.slideWidth}px)`;
+    this.renderer.setStyle(this.sliderElement.nativeElement, 'transform', transformValue);
+  }
+
+  
+  _isTruck(categories:any[]){
+    
+    for (let i = 0; i < categories.length; i++) {
+     
+      if (categories[i].idcategory == 222) {       
+        this.isTruck = true;
+        break; // Si encontramos el 5, salir del bucle
+      }
+    }
+  }
+
 
 }
 

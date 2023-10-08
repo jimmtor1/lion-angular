@@ -1,10 +1,10 @@
 import { Component, HostListener } from '@angular/core';
 import { Banner } from 'src/app/models/banner';
 import { Product2 } from 'src/app/models/product2';
-import { Seller } from 'src/app/models/seller';
+import { SellerSimple } from 'src/app/models/seller-simple';
 import { BannerService } from 'src/app/services/banner.service';
 import { IMG_BANNER_URL, IMG_PROFILE_URL, select_city } from 'src/app/services/helper';
-import { ProductService } from 'src/app/services/product.service';
+// import { ProductService } from 'src/app/services/product.service';
 import { SellerService } from 'src/app/services/seller.service';
 
 @Component({
@@ -15,7 +15,9 @@ import { SellerService } from 'src/app/services/seller.service';
 
 export class HomeComponent {
   products: Product2[] = [];
-  sellers: Seller[];
+  // previousproduct:previousproducts;
+  
+  sellers: SellerSimple[];
   urlprof_img = `${IMG_PROFILE_URL}`;
   urlbanner_img = `${IMG_BANNER_URL}`;
   banner: Banner[] = [];
@@ -34,40 +36,38 @@ export class HomeComponent {
   allowScroll = false;
   grilla = "col-6 col-sm-4 col-md-4 col-lg-3"
 
-  constructor(private productService: ProductService, private providerService: SellerService, private bannerService: BannerService) {
+  constructor(private providerService: SellerService, private bannerService: BannerService) {
 
-    this.productList();
+    // this.productList();
 
     this.providerService.getAllRandomWhitLimit(8).subscribe(data => {
       this.sellers = data;
     });
 
     this.bannerService.getAll().subscribe(b => {
-      this.banner = b;
+      this.banner = b;     
     });
 
 
   }
 
   onChildProcedureFinished() {
-    this.triggerChild = false; // Habilita el botón nuevamente
+    this.triggerChild = false; // Habilita el scroll nuevamente
     this.allowScroll = true;
   }
 
   @HostListener('window:scroll', ['$event'])
-  onScroll(event: any) {
-    // console.log(this.cargando);
+  onScroll(event: any) {    
     if (!this.cargando) {
-
+      
       const windowHeight = 'innerHeight' in window ? window.innerHeight : document.documentElement.offsetHeight;
       const body = document.body, html = document.documentElement;
       const docHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
       const windowBottom = windowHeight + window.pageYOffset;
-
-      if (windowBottom >= docHeight * 0.95) {
+      
+      if (windowBottom >= docHeight * 0.95) {        
         this.allowScroll = false;
-        this.triggerChild = true;
-        //this.productList();
+        this.triggerChild = true;   //envia señal de que el scroll llegó al final para cargar nuevos elementos en el child
       }
     }
   }
@@ -94,68 +94,68 @@ export class HomeComponent {
   }
 
 
-  productList() {
-    this.cargando = true;
-    // //verificar cual consulta realizar
-    // console.log("menor a esto")
-    // console.log("this.ChargedPromotedPages.length "+this.ChargedPromotedPages.length)
-    // console.log("this.totalPagesPromoted "+this.totalPagesPromoted)
-    // console.log("totalpagespromoted " + this.totalPagesPromoted)
-    // console.log("totalpagesunpromoted" + this.totalPagesUnpromoted) 
-    if ((!this.totalPagesPromoted && !this.totalPagesUnpromoted) || this.ChargedPromotedPages.length < this.totalPagesPromoted) {
+  // productList() {
+  //   this.cargando = true;
+  //   // //verificar cual consulta realizar
+  //   // console.log("menor a esto")
+  //   // console.log("this.ChargedPromotedPages.length "+this.ChargedPromotedPages.length)
+  //   // console.log("this.totalPagesPromoted "+this.totalPagesPromoted)
+  //   // console.log("totalpagespromoted " + this.totalPagesPromoted)
+  //   // console.log("totalpagesunpromoted" + this.totalPagesUnpromoted) 
+  //   if ((!this.totalPagesPromoted && !this.totalPagesUnpromoted) || this.ChargedPromotedPages.length < this.totalPagesPromoted) {
+     
+  //     this.productService.getProducs2All(this.pagePromoted, this.pageUnpromoted).subscribe(data => {
 
-      this.productService.getProducs2All(this.pagePromoted, this.pageUnpromoted).subscribe(data => {
+  //       if (data.promotedProducts.content.length > 0) {
+  //         //this.previousproduct.products = this.previousproduct.products.concat(data.promotedProducts.content);
+  //         this.products = this.products.concat(data.promotedProducts.content);
 
-        if (data.promotedProducts.content.length > 0) {
+  //         this.ChargedPromotedPages.push(data.promotedProducts.pageable.pageNumber)
+  //         this.totalPagesPromoted = data.promotedProducts.totalPages;
+  //         if (this.ChargedPromotedPages.length < this.totalPagesPromoted) {
+  //           this.pagePromoted = this.getRandomNumberInRange(0, this.totalPagesPromoted - 1, this.ChargedPromotedPages);
+  //         }
 
-          this.products = this.products.concat(data.promotedProducts.content);
+  //       } else {
+  //         this.totalPagesPromoted = 0;
+  //       }
 
-          this.ChargedPromotedPages.push(data.promotedProducts.pageable.pageNumber)
-          this.totalPagesPromoted = data.promotedProducts.totalPages;
-          if (this.ChargedPromotedPages.length < this.totalPagesPromoted) {
-            this.pagePromoted = this.getRandomNumberInRange(0, this.totalPagesPromoted - 1, this.ChargedPromotedPages);
-          }
+  //       if (data.unpromotedProducts) {
+  //         this.products = this.products.concat(data.unpromotedProducts.content);
+  //         this.ChargedUnpromotedPages.push(data.unpromotedProducts.pageable.pageNumber)
+  //         this.totalPagesUnpromoted = data.unpromotedProducts.totalPages;
+  //         if (this.ChargedUnpromotedPages.length < this.totalPagesUnpromoted) {
+  //           this.pageUnpromoted = this.getRandomNumberInRange(0, this.totalPagesUnpromoted - 1, this.ChargedUnpromotedPages);
+  //         }
+  //       }
 
-        } else {
-          this.totalPagesPromoted = 0;
-        }
+  //       this.cargando = false;
 
-        if (data.unpromotedProducts) {
-          this.products = this.products.concat(data.unpromotedProducts.content);
-          this.ChargedUnpromotedPages.push(data.unpromotedProducts.pageable.pageNumber)
-          this.totalPagesUnpromoted = data.unpromotedProducts.totalPages;
-          if (this.ChargedUnpromotedPages.length < this.totalPagesUnpromoted) {
-            this.pageUnpromoted = this.getRandomNumberInRange(0, this.totalPagesUnpromoted - 1, this.ChargedUnpromotedPages);
-          }
-        }
+  //     })
 
-        this.cargando = false;
+  //   }
+  //   else if (this.ChargedPromotedPages.length == this.totalPagesPromoted && (this.ChargedUnpromotedPages.length != this.totalPagesUnpromoted)) {
 
-      })
+  //     this.productService.getProducs2All2(this.pageUnpromoted).subscribe(data => {
 
-    }
-    else if (this.ChargedPromotedPages.length == this.totalPagesPromoted && (this.ChargedUnpromotedPages.length != this.totalPagesUnpromoted)) {
+  //       if (data) {
+  //         this.products = this.products.concat(data.content);
+  //         this.ChargedUnpromotedPages.push(data.pageable.pageNumber)
+  //         this.totalPagesUnpromoted = data.totalPages;
+  //         if (this.ChargedUnpromotedPages.length < this.totalPagesUnpromoted) {
+  //           this.pageUnpromoted = this.getRandomNumberInRange(0, this.totalPagesUnpromoted - 1, this.ChargedUnpromotedPages);
+  //         }
+  //       }
+  //       this.cargando = false;
+  //     });
 
-      this.productService.getProducs2All2(this.pageUnpromoted).subscribe(data => {
+  //   } else {
 
-        if (data) {
-          this.products = this.products.concat(data.content);
-          this.ChargedUnpromotedPages.push(data.pageable.pageNumber)
-          this.totalPagesUnpromoted = data.totalPages;
-          if (this.ChargedUnpromotedPages.length < this.totalPagesUnpromoted) {
-            this.pageUnpromoted = this.getRandomNumberInRange(0, this.totalPagesUnpromoted - 1, this.ChargedUnpromotedPages);
-          }
-        }
-        this.cargando = false;
-      });
+  //     this.cargando = false;
 
-    } else {
-
-      this.cargando = false;
-
-    }
+  //   }
 
 
-  }
+  // }
 
 }

@@ -5,6 +5,7 @@ import * as Stomp from 'stompjs';
 import { Message } from '../models/message';
 import { API_URL } from './helper';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -16,6 +17,7 @@ export class ChatSocketService {
   stompClient?: any;
   userToSuscribe: number;
 
+
  
 
   private msgSubject = new Subject<any>();
@@ -25,8 +27,10 @@ export class ChatSocketService {
 
     //console.log("Initialize WebSocket Connection");
     let ws = new SockJS(this.webSocketEndPoint);
-
+    
     this.stompClient = Stomp.over(ws);
+
+    this.stompClient.debug = null;
 
     // Agrega los encabezados de autenticación
     // const authToken = localStorage.getItem('token'); // Coloca aquí tu token de autenticación
@@ -58,6 +62,7 @@ export class ChatSocketService {
   _suscribe_lastmessage() {
     //@ts-ignore
     this.stompClient.subscribe(this.topic + 'general/' + this.userToSuscribe, (sdkEvent) => {
+      
       this.onMessageReceived(sdkEvent);
     });
   }

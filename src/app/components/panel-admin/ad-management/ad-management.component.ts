@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from 'src/app/models/product';
+import { Product2 } from 'src/app/models/product2';
 import { IMG_PRODUCT_URL } from 'src/app/services/helper';
 import { ProductService } from 'src/app/services/product.service';
 
@@ -9,15 +9,16 @@ import { ProductService } from 'src/app/services/product.service';
   styleUrls: ['./ad-management.component.css']
 })
 export class AdManagementComponent implements OnInit {
-  
-  imageurl = `${IMG_PRODUCT_URL}`
-  products:Product[] = [];
 
-  constructor(private producService: ProductService){}
+  imageurl = `${IMG_PRODUCT_URL}`
+  products: Product2[] = [];
+  page = 0;
+  constructor(private producService: ProductService) { }
 
   ngOnInit(): void {
-    this.producService.getAll().subscribe(p => {
+    this.producService.getAll(this.page).subscribe(p => {
       this.products = p;
+      this.page++;
     });
   }
 

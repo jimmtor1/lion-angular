@@ -2,10 +2,17 @@ import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
   appId: 'ba.dcl.app',
-  appName: 'lion',
+  appName: 'dcl',
   webDir: 'dist/lion',
+  bundledWebRuntime: false,
   server: {
-    androidScheme: 'https'
+    hostname: "dcl.ba",
+    cleartext: true,
+    androidScheme: 'https',
+    url: "https://dcl.ba"
+  },
+  android: {
+    "allowMixedContent": true
   }
 };
 

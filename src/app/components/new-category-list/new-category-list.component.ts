@@ -39,8 +39,7 @@ export class NewCategoryListComponent implements OnInit {
       } else {
         this.mapCategoryService.get(key, item.level)?.push(item)
       }
-    });
-
+    });    
   }
 
   showElement(element: number) {

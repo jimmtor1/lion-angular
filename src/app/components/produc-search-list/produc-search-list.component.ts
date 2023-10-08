@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductSimple } from 'src/app/models/product-simple';
-import { Product2 } from 'src/app/models/product2';
 import { FEDERATIONS, IMG_PRODUCT_URL, federation, selectListByFed } from 'src/app/services/helper';
 import { ProductService } from 'src/app/services/product.service';
 
@@ -83,49 +82,5 @@ export class ProducSearchListComponent implements OnInit {
    });
   }
 
-  filter() {
-
-    // if (this.fed > 0 && this.city == 0 && this.price2 == null) {
-
-    //   this.productService.getFilterFederationCity(this.idcategory, this.idsubcategory, this.fed, this.city).subscribe(p => {
-    //     this.products = p;
-    //     this.loading = false;
-    //   }, error => { this.loading = false });
-
-    // } else if (this.city > 0 && this.price2 == null) {
-
-    //   this.productService.getFilterFederationCity(this.idcategory, this.idsubcategory, 0, this.city).subscribe(p => {
-    //     this.products = p;
-    //     this.loading = false;
-    //   }, error => { this.loading = false });
-
-    // } else if (this.fed == 0 && this.city == 0 && (this.price2 !== undefined && this.price2 > 0)) {
-
-    //   this.productService.getFilterPrice(this.idcategory, this.idsubcategory, this.fed, this.city, this.price1 == undefined ? 0 : this.price1, this.price2).subscribe(p => {
-    //     this.products = p;
-    //     this.loading = false;
-    //   }, error => { this.loading = false });
-
-    // } else if (this.fed > 0 && this.city > 0 && (this.price2 !== undefined && this.price2 > 0)) {
-
-    //   this.productService.getFilterPrice(this.idcategory, this.idsubcategory, 0, this.city, this.price1 == undefined ? 0 : this.price1, this.price2).subscribe(p => {
-    //     this.products = p;
-    //     this.loading = false;
-    //   }, error => { this.loading = false });
-
-    // } else if (this.fed > 0 && this.city == 0 && (this.price2 !== undefined && this.price2 > 0)) {
-
-    //   this.productService.getFilterPrice(this.idcategory, this.idsubcategory, this.fed, this.city, this.price1 == undefined ? 0 : this.price1, this.price2).subscribe(p => {
-    //     this.products = p;
-    //     this.loading = false;
-    //   }, error => { this.loading = false });
-
-    // } else {
-    //   this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-    //     this.router.navigateByUrl('productCategoryList/5/' + this.idsubcategory);
-    //   }, error => { this.loading = false });
-    // }
-
-  }
 
 }

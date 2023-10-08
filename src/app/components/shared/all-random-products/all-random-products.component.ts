@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { ProductSimple } from 'src/app/models/product-simple';
 import { ProductService } from 'src/app/services/product.service';
+import { ProviousProductsService } from 'src/app/services/provious-products.service';
+
 
 @Component({
   selector: 'all-random-products',
@@ -13,97 +15,107 @@ export class AllRandomProductsComponent implements OnInit, OnChanges {
   @Input() grilla: string = "";
   @Output() procedureFinished = new EventEmitter<void>();
 
-  products: ProductSimple[] = [];
+  // products: ProductSimple[] = [];
+
   pagePromoted = -1;
   pageUnpromoted = -1;
 
   totalPagesPromoted: number;
   totalPagesUnpromoted: number;
 
-  ChargedPromotedPages: number[] = [];
-  ChargedUnpromotedPages: number[] = [];
+  // ChargedPromotedPages: number[] = [];
+  // ChargedUnpromotedPages: number[] = [];
 
   loading = false;
 
-  constructor(private productService: ProductService) { }
+
+  constructor(private productService: ProductService, public previousProd: ProviousProductsService) { }
 
   ngOnInit(): void {
     this.productList();
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(changes: SimpleChanges): void {   
     if (changes['triggerProcedure'].currentValue) {
-      //console.log("escuchado")
-      this.productList();
+      if (!this.loading) {
+        this.productList();
+      }
     }
   }
 
   productList() {
     this.loading = true;
-    // console.log("productList mothot")
-    // //verificar cual consulta realizar
-    // console.log("menor a esto")
-    // console.log("this.ChargedPromotedPages.length "+this.ChargedPromotedPages.length)
-    // console.log("this.totalPagesPromoted "+this.totalPagesPromoted)
-    // console.log("totalpagespromoted " + this.totalPagesPromoted)
-    // console.log("totalpagesunpromoted" + this.totalPagesUnpromoted) 
-    if ((!this.totalPagesPromoted && !this.totalPagesUnpromoted) || this.ChargedPromotedPages.length < this.totalPagesPromoted) {
+    // console.log("ChargedPromotedPages.length: "+this.ChargedPromotedPages.length)
+    // console.log("ChargedUnpromotedPages.length: "+this.ChargedUnpromotedPages.length)
+    // console.log("totalpagespromoted: " + this.totalPagesPromoted)
+    // console.log("totalpagesunpromoted: " + this.totalPagesUnpromoted) 
+    if ((!this.totalPagesPromoted && !this.totalPagesUnpromoted) || this.previousProd.ChargedPromotedPages.length < this.totalPagesPromoted) {
+
+      if (this.pagePromoted == -1 && this.pageUnpromoted == -1 && this.previousProd.products.length > 0) {
+       
+        if (this.previousProd.ChargedPromotedPages.length < this.totalPagesPromoted) {
+          this.pagePromoted = this.getRandomNumberInRange(0, this.totalPagesPromoted - 1, this.previousProd.ChargedPromotedPages);
+        }
+        if (this.previousProd.ChargedUnpromotedPages.length < this.totalPagesUnpromoted) {
+          this.pageUnpromoted = this.getRandomNumberInRange(0, this.totalPagesUnpromoted - 1, this.previousProd.ChargedUnpromotedPages);
+        }
+
+      }
+
 
       this.productService.getProducs2All(this.pagePromoted, this.pageUnpromoted).subscribe(data => {
-
+       
         if (data.promotedProducts.content.length > 0) {
-          this.setAllPromoted(data.promotedProducts.content);
-          this.products = this.products.concat(data.promotedProducts.content);
 
-          this.ChargedPromotedPages.push(data.promotedProducts.pageable.pageNumber)
+          this.setAllPromoted(data.promotedProducts.content);
+          this.previousProd.products = this.previousProd.products.concat(data.promotedProducts.content);
+          this.previousProd.ChargedPromotedPages.push(data.promotedProducts.pageable.pageNumber)
           this.totalPagesPromoted = data.promotedProducts.totalPages;
-          if (this.ChargedPromotedPages.length < this.totalPagesPromoted) {
-            this.pagePromoted = this.getRandomNumberInRange(0, this.totalPagesPromoted - 1, this.ChargedPromotedPages);
+          if (this.previousProd.ChargedPromotedPages.length < this.totalPagesPromoted) {
+            this.pagePromoted = this.getRandomNumberInRange(0, this.totalPagesPromoted - 1, this.previousProd.ChargedPromotedPages);
           }
 
         } else {
           this.totalPagesPromoted = 0;
         }
 
-        if (data.unpromotedProducts) {
-          this.products = this.products.concat(data.unpromotedProducts.content);
-          this.ChargedUnpromotedPages.push(data.unpromotedProducts.pageable.pageNumber)
+        if (data.unpromotedProducts.content.length > 0) {
+          this.previousProd.products = this.previousProd.products.concat(data.unpromotedProducts.content);
+          this.previousProd.ChargedUnpromotedPages.push(data.unpromotedProducts.pageable.pageNumber)
           this.totalPagesUnpromoted = data.unpromotedProducts.totalPages;
-          if (this.ChargedUnpromotedPages.length < this.totalPagesUnpromoted) {
-            this.pageUnpromoted = this.getRandomNumberInRange(0, this.totalPagesUnpromoted - 1, this.ChargedUnpromotedPages);
+          if (this.previousProd.ChargedUnpromotedPages.length < this.totalPagesUnpromoted) {
+            this.pageUnpromoted = this.getRandomNumberInRange(0, this.totalPagesUnpromoted - 1, this.previousProd.ChargedUnpromotedPages);
           }
         }
 
         this.loading = false;
+        this.triggerProcedure = false;
         this.procedureFinished.emit();
 
       })
+      // }
 
     }
-    else if (this.ChargedPromotedPages.length == this.totalPagesPromoted && (this.ChargedUnpromotedPages.length != this.totalPagesUnpromoted)) {
-
+    else if (this.previousProd.ChargedPromotedPages.length == this.totalPagesPromoted && (this.previousProd.ChargedUnpromotedPages.length != this.totalPagesUnpromoted)) {
       this.productService.getProducs2All2(this.pageUnpromoted).subscribe(data => {
 
         if (data) {
-          this.products = this.products.concat(data.content);
-          this.ChargedUnpromotedPages.push(data.pageable.pageNumber)
+          this.previousProd.products = this.previousProd.products.concat(data.content);
+          this.previousProd.ChargedUnpromotedPages.push(data.pageable.pageNumber)
           this.totalPagesUnpromoted = data.totalPages;
-          if (this.ChargedUnpromotedPages.length < this.totalPagesUnpromoted) {
-            this.pageUnpromoted = this.getRandomNumberInRange(0, this.totalPagesUnpromoted - 1, this.ChargedUnpromotedPages);
+          if (this.previousProd.ChargedUnpromotedPages.length < this.totalPagesUnpromoted) {
+            this.pageUnpromoted = this.getRandomNumberInRange(0, this.totalPagesUnpromoted - 1, this.previousProd.ChargedUnpromotedPages);
           }
         }
         this.loading = false;
+        this.triggerProcedure = false;
         this.procedureFinished.emit();
       });
 
     } else {
-
       this.loading = false;
-      //console.log("emitieondo")
-      //this.procedureFinished.emit();
-
+      this.triggerProcedure = false;
     }
-
 
   }
 

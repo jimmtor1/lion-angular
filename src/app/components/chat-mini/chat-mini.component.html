@@ -9,7 +9,6 @@
                 <!-- <button type="button" class="btn-close btn-close-white" aria-label="Close"></button> -->
             </div>
         </div>
-
     </div>
 
     <div class="card-body">
@@ -20,7 +19,7 @@
             </div>
         </div>
 
-        <div (click)="getChats(m.idchat, m.first_name+' '+m.last_name, m.idUser)" class="selectChat"
+        <div (click)="chargeChatsFromRoomList(m.idchat, m.first_name+' '+m.last_name, m.idUser)" class="selectChat"
             *ngFor="let m of LastMessageEachChat">
             <div class="row g-0" [ngClass]="(m.seen || m.sender==thisidUser)? 'row g-0' : 'row g-0 bg-info'">
                 <div class="col-2 d-flex justify-content-center" style="align-items: center;">
@@ -34,7 +33,7 @@
                     </div>
 
                     <p class="text-muted mb-0 text-start text-nowrap overflow-hidden text-truncate" scrollHeight
-                        scrollTop>
+                        scrollTop>                                              
                         <span *ngIf="m.sender==thisidUser">Tu:</span> {{m.content}}
                     </p>
                 </div>
@@ -85,7 +84,9 @@
                 date: 'dd.MM.yyyy'}}</span>
             <div *ngFor="let m of chatGroups2.get(m)" class="d-flex my-1" [ngClass]="{'justify-content-end': m.sender==thisidUser}">
                 <p [ngClass]="m.sender==thisidUser ? 'bg-dark' : 'bg-secondary'"
-                    class="p-1 text-white rounded text-break m-0" style="max-width: 85%; font-size: small;">{{m.content}} &nbsp;
+                    class="p-1 text-white rounded text-break m-0" style="max-width: 85%; font-size: small;">
+                    <img *ngIf="m.productImage" [src]="urlimage+m.productImage" class="w-100"/>
+                    {{m.content}} &nbsp;
                     <span style="font-size: smaller;">{{m.dateTime | date: 'HH:mm'}}</span>
                 </p>
             </div>

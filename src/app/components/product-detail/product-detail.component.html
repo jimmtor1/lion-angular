@@ -7,25 +7,33 @@
 </div>
 
 <div *ngIf="!loading" class="container pt-3 mb-3">
-    <!-- style="max-width: 940px;" -->
     <div class="big card mb-3">
-        <!-- <div class="mx-auto" style="max-width: 940px;"> -->
         <div class="row g-0">
             <div class="col-md-7">
-                <div class="d-flex" >
-                    <img  [src]="this.urlprod_img+product.mainImage" class="img-fluid rounded-start p-3 mx-auto"
-                        style="object-fit: contain; height: 500px;" alt="product-img">
+
+                <div class="slider-container mb-2">
+                    <div class="slider" #slider>
+                        <div class="slide" *ngFor="let image of productImageList">
+                            <img [src]="urlprod_img+image.extension" alt="Imagen"
+                                style="object-fit: contain; height: 500px;">
+                        </div>
+                    </div>
+                    <button class="prev-button" (click)="prevSlide()">
+                        <fa-icon [icon]="['fas','left-long']"></fa-icon>
+                    </button>
+                    <button class="next-button" (click)="nextSlide()">
+                        <fa-icon [icon]="['fas','right-long']"></fa-icon>
+                    </button>
                 </div>
 
-
                 <!-- thumbnail image list -->
-                <ul class="list-unstyled d-flex overflow-auto flex-nowrap"  style="margin-left: 14px;">
+                <ul class="list-unstyled d-flex overflow-auto flex-nowrap" style="margin-left: 14px;">
                     <li *ngFor="let img of productImageList, let i = index" class="flex-row"
                         style="margin-right: 6px; cursor: pointer;">
                         <div class="car" style="width: 5rem;">
-                            <a (click)="chagePrincipalImage(i);">
-                                <img src="{{urlprod_img}}{{img.extension}}"
-                                    class="card-img-top card-img-bottom" style="height: 80px;" alt="...">
+                            <a (click)="moveToIndex(i);">
+                                <img src="{{urlprod_img}}{{img.extension}}" class="card-img-top card-img-bottom"
+                                    style="height: 80px;" alt="...">
                             </a>
                         </div>
                     </li>
@@ -42,15 +50,18 @@
                         <div class="card-header fs-3">{{product.productName}}</div>
                         <div class="card-body">
 
+                            <div *ngIf="this.isTruck">
+                                <truck-detail [idtruck]="product.idproduct!"></truck-detail>
+                            </div>
+
+
                             <span *ngIf="promoted && iduser==product.iduser"
                                 class="badge rounded-pill bg-primary mb-2">Artikal izdvojen do {{product.promotedTo |
                                 date: 'dd.MM.yy HH:mm'}}</span>
                             <span *ngIf="promoted && iduser!==product.iduser"
                                 class="badge rounded-pill bg-primary mb-2">IZDVOJENO</span>
 
-                            <p class="card-text">
-                                {{product.description}}
-                            </p>
+                            <!-- class="card-text" -->
                             <p *ngIf="product.price!==0" class="h5">
                                 Cijena: {{product.price}} KM
                             </p>
@@ -62,7 +73,14 @@
                             </p>
                             <p *ngIf="seller.user.federation!=null">Grad: {{city}}</p>
 
-                            <a *ngIf="iduser!==product.iduser" (click)="emitSeller(seller.user.id);"
+                            <p>Pregledi: {{product.visits}}</p>
+                            <p style="white-space: pre-line;">
+                                {{product.description}}
+                            </p>
+
+
+
+                            <a *ngIf="iduser!==product.iduser" (click)="emitSeller(seller.user.id, product.idproduct!);"
                                 class="btn btn-danger">
                                 <fa-icon [icon]="['fas','comment']"></fa-icon>
                                 Pošaljite poruku
@@ -136,31 +154,31 @@
                 </p>
 
                 <ul>
-                    <li *ngIf="seller.facebook" class="list-group-item">                        
+                    <li *ngIf="seller.facebook" class="list-group-item">
                         <a href="{{seller.facebook}}" target="_blank">
-                            <fa-icon [icon]="['fab','facebook']" style="font-size: 50px;"></fa-icon>                            
-                        </a>                        
+                            <fa-icon [icon]="['fab','facebook']" style="font-size: 50px;"></fa-icon>
+                        </a>
                     </li>
                     <li *ngIf="seller.instagram" class="list-group-item">
                         <a href="{{seller.instagram}}" target="_blank">
-                            <fa-icon [icon]="['fab','instagram']"></fa-icon>                            
-                        </a>                         
+                            <fa-icon [icon]="['fab','instagram']"></fa-icon>
+                        </a>
                     </li>
                     <li *ngIf="seller.youtube" class="list-group-item">
                         <a href="{{seller.youtube}}" target="_blank">
                             <fa-icon [icon]="['fab','youtube']"></fa-icon>
                             <!-- {{seller.youtube}} -->
-                        </a> 
+                        </a>
                     </li>
                 </ul>
 
             </div>
 
             <div class="col-12 col-sm-6">
-                              
+
                 <b>Radno vrijeme</b>
                 <hr>
-                
+
 
                 <div class="row mb-1">
 
@@ -169,7 +187,7 @@
                         <fa-icon *ngIf="!seller.monday" [icon]="['fas', 'square-xmark']" class="text-danger"></fa-icon>
                         <label class="form-check-label" for="flexSwitchCheckDefault">Ponedjeljak</label>
                     </div>
-                    
+
                     <div class="col" style="margin-left: 20px;">
                         <span class="badge rounded-pill bg-light text-dark">{{seller.timemonday}}</span> -
                         <span class="badge rounded-pill bg-light text-dark">{{seller.endmonday}}</span>
@@ -267,35 +285,10 @@
         <p class="h5">Ostali proizvodi / usluge ovog korisnika</p>
         <hr>
 
-        <div class="d-flex overflow-auto flex-nowrap">
-
-            <div *ngFor="let product of producByProvider.slice(0,5)" class="mx-1" style="max-width: 200px;">
-                
-                <app-product-card-mini [product]="product"></app-product-card-mini>  
-
-
-                <!-- <div class="mini card h-100" style="width: 13rem;">
-
-                    <div class="position-relative">
-                        <img src="{{urlprod_img}}{{product.productImageList[0].idimage}}{{product.productImageList[0].extension}}"
-                            style="height: 200px;" class="card-img-top" alt="...">
-                        <span *ngIf="product.promoteActive"
-                            class="badge bg-primary w-50 position-absolute bottom-0 end-0">IZDVOJENO</span>
-                    </div>
-
-                    <hr class="m-0">
-                    <div class="card-body py-1">
-                        <h6 class="card-title">{{product.productName}}</h6>
-                        <a routerLink="../../addetails/{{product.idproduct}}" class="stretched-link m-0 p-0"></a>
-                    </div>
-                    <div class="d-flex card-footer bg-white justify-content-end" style="border-top: none;">
-                        <span class="badge rounded-pill bg-danger" *ngIf="product.price==0">Cijena po dogovoru</span>
-                        <span class="badge rounded-pill bg-danger" *ngIf="product.price>0">{{product.price}} KM</span>
-                    </div>
-                </div> -->
-
+        <div class="row g-2 ">
+            <div class="col-6 col-sm-4 col-md-4 col-lg-2" *ngFor="let product of producByProvider">
+                <app-product-card-mini [product]="product"></app-product-card-mini>
             </div>
-
         </div>
 
     </div>

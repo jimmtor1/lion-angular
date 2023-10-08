@@ -4,9 +4,7 @@ export class ProductImage {
     extension:string;
     idproduct:number;
     image:File;
-
-    public getName(): string {
-        return `${this.idimage}${this.extension}`;
-    }
+    
+ 
 
 }
